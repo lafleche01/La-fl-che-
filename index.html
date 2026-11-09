@@ -1024,11 +1024,11 @@ const TUTOS=[["1_qg","Le QG","ton accueil : niveau, paliers, défi, série"],["2
 function vTutos(){
   return `<div class="tag">Tutos · ${TUTOS.length} vidéos</div><h1>Comment<br><span class="g">ça marche</span></h1>
   <p class="sub">une vidéo par onglet, moins de 30 secondes chacune. touche pour regarder.</p>
-  <div class="tutogrid">${TUTOS.map(([k,n,d],i)=>`<button class="tutocard" data-tuto="${i}"><div class="tutoimg" style="background-image:url('tutos/tuto_${k}.jpg')"><span class="tutoplay">▶</span><span class="tutonum">${i+1}</span></div><b>${esc(n)}</b><span>${esc(d)}</span></button>`).join("")}</div>`}
+  <div class="tutogrid">${TUTOS.map(([k,n,d],i)=>`<button class="tutocard" data-tuto="${i}"><div class="tutoimg" style="background-image:url('tuto_${k}.jpg')"><span class="tutoplay">▶</span><span class="tutonum">${i+1}</span></div><b>${esc(n)}</b><span>${esc(d)}</span></button>`).join("")}</div>`}
 function openTuto(i){i=(i+TUTOS.length)%TUTOS.length;let o=document.getElementById("tutoPlayer");if(!o){o=document.createElement("div");o.id="tutoPlayer";document.body.appendChild(o)}
   const [k,n]=TUTOS[i];
   o.innerHTML=`<div class="tpbar"><b>${i+1}/${TUTOS.length} · ${esc(n)}</b><button id="tpX" aria-label="fermer">✕</button></div>
-  <video id="tpV" src="tutos/tuto_${k}.mp4" poster="tutos/tuto_${k}.jpg" controls autoplay playsinline preload="auto"></video>
+  <video id="tpV" src="tuto_${k}.mp4" poster="tuto_${k}.jpg" controls autoplay playsinline preload="auto"></video>
   <div class="tpnav"><button class="btn small" id="tpP">‹ précédente</button><button class="btn small main" id="tpN">suivante ›</button></div>`;
   o.classList.add("show");const v=$("#tpV");
   const close=()=>{try{v.pause()}catch(_){}o.classList.remove("show");o.innerHTML=""};
