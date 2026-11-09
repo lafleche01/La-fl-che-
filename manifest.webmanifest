@@ -1,0 +1,2 @@
+{"name":"La Flèche","short_name":"La Flèche","description":"Tes habitudes deviennent un jeu. Du plat aux Alpes.","start_url":"./","scope":"./","display":"standalone","orientation":"portrait","background_color":"#09090A","theme_color":"#09090A","lang":"fr",
+ "icons":[{"src":"icon_192.png","sizes":"192x192","type":"image/png"},{"src":"icon_512.png","sizes":"512x512","type":"image/png"},{"src":"icon_512.png","sizes":"512x512","type":"image/png","purpose":"maskable"}]}
