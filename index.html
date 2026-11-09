@@ -273,6 +273,7 @@ button.stage{width:100%;text-align:left}
 .lnk{color:var(--gold);font:inherit;text-transform:inherit;letter-spacing:inherit}
 .back{font-family:'Barlow Condensed';font-style:italic;font-weight:700;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding:2px 0 10px}
 
+.obav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}.obavb{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 8px;background:var(--panel);border:2px solid transparent;color:var(--mute);font-family:'Barlow Condensed';font-style:italic;font-weight:800;text-transform:uppercase;font-size:16px}.obavb .avsvg{width:96px;height:96px}.obavb.on{border-color:var(--gold);color:var(--gold)}
 .tutowelcome{margin-top:16px;padding:16px;background:var(--panel);border-left:3px solid var(--gold);display:flex;flex-direction:column;gap:6px}.tutowelcome b{font-family:'Barlow Condensed';font-style:italic;font-weight:800;text-transform:uppercase;font-size:20px;color:var(--gold)}.tutowelcome span{font-size:14px;color:var(--mute);line-height:1.4}.tutowelcome .actions{margin-top:8px}
 .tutogrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
 .tutocard{display:flex;flex-direction:column;align-items:flex-start;gap:4px;background:var(--panel);padding:0 0 12px;text-align:left;color:var(--txt,#f5f5f3);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
@@ -1085,11 +1086,16 @@ function publishBoard(xp,lv){
 }
 
 /* ---------- ONBOARDING (copains) ---------- */
+const isNewbie=()=>!owner&&!Object.values(days).some(d=>d&&d.done&&Object.values(d.done).some(Boolean));
+let obFace=0;const obAvCfg=f=>f?{face:1,hair:7,hairC:1,beard:0}:{face:0,hair:0,hairC:1,beard:0};
 function vOnboard(){
   const nm=(profiles[uid]&&profiles[uid].name)||"";
   return `<div class="oblogo"><img src="logo_la_fleche.png" alt="La Flèche"><span>du plat aux alpes</span></div><div class="tag">Bienvenue au QG</div><h1>Prêt à<br><span class="g">grimper ?</span></h1>
   <p class="sub">habitudes, tâches, idées, records… chaque case cochée te fait monter de niveau, du bitume jusqu'aux alpes.</p>
   <div class="field" style="margin-top:26px"><label>ton pseudo (visible par ton équipe, modifiable quand tu veux)</label><input id="obName" maxlength="24" value="${esc(nm)}" placeholder="ex. La Flèche"></div>
+  ${label("ton avatar")}
+  <div class="obav" id="obAv">${[0,1].map(f=>`<button type="button" class="obavb ${f===obFace?"on":""}" data-obface="${f}">${avatarSvg(obAvCfg(f),1)}<span>${f?"féminin":"masculin"}</span></button>`).join("")}</div>
+  <p class="sub" style="font-size:13px;margin-top:6px">tu pourras tout personnaliser ensuite dans profil.</p>
   ${label("choisis tes habitudes de départ")}
   <div class="list" id="obHabits">${STARTER.map(([n,s],i)=>`<label class="row" style="align-items:center;cursor:pointer"><input type="checkbox" data-i="${i}" ${i<5?"checked":""} style="width:20px;height:20px;accent-color:#FFC107"><span class="body"><span class="txt" style="font-size:16px">${esc(n)}</span><span class="meta">${SLOTS.find(x=>x[0]===s)[1]}</span></span></label>`).join("")}</div>
   <p class="sub" style="font-size:13px">tu pourras tout modifier ensuite dans « habitudes ».</p>
@@ -1100,7 +1106,7 @@ function finishOnboard(){
   const picks=[...document.querySelectorAll("#obHabits input:checked")].map(i=>STARTER[+i.dataset.i]);
   picks.forEach(([name,slot],i)=>saveHabit(newId(),{name,slot,order:i+1,createdAt:Date.now(),archived:false},true));
   DEFAULT_PERFS.forEach(([name,unit],i)=>savePerf(newId(),{name,unit,order:i+1,log:[],lower:false},true));
-  meDoc={onboarded:true,pseudo,startedAt:today()};dset(ROOT()+"profile/me",meDoc);
+  meDoc={onboarded:true,pseudo,startedAt:today(),avatar:{...AV_DEF,...obAvCfg(obFace)}};dset(ROOT()+"profile/me",meDoc);
   dset("board/"+uid,{pseudo,level:1,xp:0,weekXp:0,week:isoWeek(new Date()),streak:0,todayDone:0,todayTotal:picks.length,todayValid:false,day:today(),teamId:"",updatedAt:Date.now()});
   go("habitudes");toast("bienvenue "+pseudo+" !");
 }
@@ -1295,7 +1301,7 @@ function vQG(xp,lv){
   const got=nudges.filter(x=>x.to===uid&&x.day===t);
   if(got.length&&!validDay(t)) alerts+=`<div class="alert">👊 ${got.map(x=>esc(pseudoOf(x.from))).join(", ")} ${got.length>1?"te secouent":"te secoue"} : coche ta routine !</div>`;
   const hr=new Date().getHours(), soir=habitsFor(t).filter(h=>h.slot==="soir");
-  alerts+=notifAlerts();
+  if(isNewbie())alerts+=`<button class="alert gold" data-nav="habitudes">🏁 première mission : coche ta première habitude › <b>+10 xp</b></button>`;else alerts+=notifAlerts();
   if(inboxNew())alerts+=`<button class="alert gold" data-nav="reglages">📬 ${inboxNew()} nouveau${inboxNew()>1?"x":""} retour${inboxNew()>1?"s":""} des joueurs (bugs / idées) ›</button>`;
   if(dow(t)===6) alerts+=`<button class="alert gold" data-bilan>📊 c'est dimanche : ton bilan de la semaine est prêt ›</button>`;
   return `
@@ -1311,7 +1317,7 @@ function vQG(xp,lv){
     <div class="row"><span class="label">${lv.blocked?`⛔ épreuve requise pour passer niv.${lv.blocked}`:lv.need?`${lv.into} / ${lv.need} XP vers niv.${lv.L+1}`:"niveau max — t'es dans les Alpes"}</span><span class="label g">${xp.total} XP</span></div>
     <div class="bar"><div class="fill" style="width:${pct}%"></div></div>
   </div>
-  ${alerts.includes("maxr")?"":maxReminder()}
+  ${alerts.includes("maxr")||alerts.includes("première mission")?"":maxReminder()}
   ${alerts}
   ${timerStrip()}
   ${(()=>{if(!db||!uid)return "";const rows=seasonRows("saison"),k=rows.findIndex(b=>b.id===uid);return `<button class="seasoncard" data-nav="saison"><span class="label">saison ${seasonNo()} · jour ${seasonDay()}/${SEASON_DAYS}</span><b>${k>=0?`${k+1}${k?"e":"er"} <small>sur ${rows.length}</small>`:"—"}</b><span class="g">${xp.season} xp ›</span></button>`})()}
@@ -1530,7 +1536,7 @@ function vHabits(){
   </div>
   ${meDoc&&meDoc.resetFrom&&meDoc.resetFrom<=t&&ws<meDoc.resetFrom?`<div class="alert gold">🔒 tu es reparti de zéro le ${fdate(meDoc.resetFrom,{weekday:"long",day:"numeric",month:"long"})} : les jours d'avant ne peuvent plus être cochés.</div>`:""}
   ${meDoc&&meDoc.resetFrom&&meDoc.resetFrom>t?`<div class="alert">🔄 remise à zéro programmée le ${fdate(meDoc.resetFrom,{weekday:"long",day:"numeric",month:"long"})}.</div>`:""}
-  ${weekOffset===0?maxReminder()+weeklyCard():""}
+  ${weekOffset===0?(isNewbie()?"":maxReminder())+weeklyCard():""}
   <div class="weeknav"><button data-wk="-1">‹</button><span class="w">${wkLabel}</span><button data-wk="1" ${weekOffset>=8?"disabled style='opacity:.2'":""}>›</button></div>
   <div class="wkdates">${wkDates}${weekOffset!==0?` · <button class="lnk" data-wk0>revenir à aujourd'hui</button>`:""}</div>
   ${futW}
@@ -2198,6 +2204,7 @@ $("#view").addEventListener("click",e=>{
   if(b=q("[data-strava]")){if(!syncing)syncStrava();return}
   if(b=q("[data-obgo]")){finishOnboard();return}
   if(b=q("[data-logout]")){if(window.LF_logout){window.LF_logout();return}const m=$("#logoutMsg");if(m)m.style.display="block";return}
+  if(b=q("[data-obface]")){obFace=+b.dataset.obface;document.querySelectorAll("[data-obface]").forEach(x=>x.classList.toggle("on",+x.dataset.obface===obFace));return}
   if(b=q("[data-rename]")){openRename();return}
   if(b=q("[data-tuto]")){openTuto(+b.dataset.tuto);return}
   if(b=q("[data-pseudo]")){const v=($("#psIn").value||"").trim().slice(0,24);if(!v)return;saveProfile({pseudo:v});boardSent="";const mb=myBoard();if(mb)mb.pseudo=v;render();toast("pseudo mis à jour");return}
