@@ -274,6 +274,7 @@ button.stage{width:100%;text-align:left}
 .back{font-family:'Barlow Condensed';font-style:italic;font-weight:700;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding:2px 0 10px}
 
 .obav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}.obavb{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 8px;background:var(--panel);border:2px solid transparent;color:var(--mute);font-family:'Barlow Condensed';font-style:italic;font-weight:800;text-transform:uppercase;font-size:16px}.obavb .avsvg{width:96px;height:96px}.obavb.on{border-color:var(--gold);color:var(--gold)}
+.commu{display:flex;align-items:center;gap:12px;margin-top:18px;padding:14px 16px;background:#25D3661a;border:1px solid #25D36655;color:inherit;text-decoration:none}.commu .ci{font-size:24px}.commu .ct{display:flex;flex-direction:column;gap:2px;flex:1}.commu b{font-family:'Barlow Condensed';font-style:italic;font-weight:800;text-transform:uppercase;font-size:18px;color:#25D366}.commu small{font-size:12px;color:var(--mute);line-height:1.3}.commu .cg{font-size:22px;color:#25D366}
 .tutowelcome{margin-top:16px;padding:16px;background:var(--panel);border-left:3px solid var(--gold);display:flex;flex-direction:column;gap:6px}.tutowelcome b{font-family:'Barlow Condensed';font-style:italic;font-weight:800;text-transform:uppercase;font-size:20px;color:var(--gold)}.tutowelcome span{font-size:14px;color:var(--mute);line-height:1.4}.tutowelcome .actions{margin-top:8px}
 .tutogrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
 .tutocard{display:flex;flex-direction:column;align-items:flex-start;gap:4px;background:var(--panel);padding:0 0 12px;text-align:left;color:var(--txt,#f5f5f3);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
@@ -1023,11 +1024,13 @@ function openRename(){openSheet(`<h2>✏️ ton pseudo</h2><p class="sub" style=
   const i=$("#rnIn");i.focus();i.select();$("#rnX").onclick=closeSheet;
   const go=()=>{const v=(i.value||"").trim().slice(0,24);if(!v)return;saveProfile({pseudo:v});boardSent="";const mb=myBoard();if(mb)mb.pseudo=v;closeSheet();render();toast("pseudo mis à jour")};
   $("#rnGo").onclick=go;i.onkeydown=e=>{if(e.key==="Enter")go()}})}
+const COMMU="https://chat.whatsapp.com/Dy05QzTmjut3HnAVl6gLxk";
+const commuBtn=(sub="bugs, idées, défis et cordées entre membres")=>`<a class="commu" href="${COMMU}" target="_blank" rel="noopener"><span class="ci">💬</span><span class="ct"><b>rejoindre la communauté</b><small>${sub}</small></span><span class="cg">›</span></a>`;
 const TUTOS=[["1_qg","Le QG","ton accueil : niveau, paliers, défi, série"],["2_habitudes","Les habitudes","cocher, routines, ajouter les tiennes"],["3_minuteur","Le minuteur","mode bloqué et mode libre"],["4_equipe","L'équipe","cordée, mises, classement, saison"],["5_organisation","Agenda, tâches, idées","t'organiser au même endroit"],["6_perfs","Performance","kilomètres, Strava, records"],["7_profil","Le profil","avatar, badges, route, story"],["8_reglages","Les réglages","couleurs, rappels, bugs, pseudo"]];
 function vTutos(){
   return `<div class="tag">Tutos · ${TUTOS.length} vidéos</div><h1>Comment<br><span class="g">ça marche</span></h1>
   ${tutoWelcome?`<div class="tutowelcome"><b>👋 bienvenue dans la flèche !</b><span>regarde ces vidéos de 30 secondes pour tout comprendre. tu les retrouves à tout moment dans menu › tutos vidéo.</span><div class="actions"><button class="btn main" data-tuto="0">▶ lancer la 1re vidéo</button><button class="btn ghost" data-nav="qg">plus tard</button></div></div>`:`<p class="sub">une vidéo par onglet, moins de 30 secondes chacune. touche pour regarder.</p>`}
-  <div class="tutogrid">${TUTOS.map(([k,n,d],i)=>`<button class="tutocard" data-tuto="${i}"><div class="tutoimg" style="background-image:url('tuto_${k}.jpg')"><span class="tutoplay">▶</span><span class="tutonum">${i+1}</span></div><b>${esc(n)}</b><span>${esc(d)}</span></button>`).join("")}</div>`}
+  <div class="tutogrid">${TUTOS.map(([k,n,d],i)=>`<button class="tutocard" data-tuto="${i}"><div class="tutoimg" style="background-image:url('tuto_${k}.jpg')"><span class="tutoplay">▶</span><span class="tutonum">${i+1}</span></div><b>${esc(n)}</b><span>${esc(d)}</span></button>`).join("")}</div>${commuBtn("une question après les vidéos ? demande à la communauté")}`}
 function openTuto(i){i=(i+TUTOS.length)%TUTOS.length;let o=document.getElementById("tutoPlayer");if(!o){o=document.createElement("div");o.id="tutoPlayer";document.body.appendChild(o)}
   const [k,n]=TUTOS[i];
   o.innerHTML=`<div class="tpbar"><b>${i+1}/${TUTOS.length} · ${esc(n)}</b><button id="tpX" aria-label="fermer">✕</button></div>
@@ -1611,7 +1614,7 @@ function vMenu(){
   const nEv=agEventsOn(today()).length;
   const T=[["agenda","Agenda",nEv?`${nEv} événement${nEv>1?"s":""} aujourd'hui`:"ta journée"],["taches","Tâches",open?`${open} en cours`:"rien sur le feu"],["idees","Idées",`${ide} en stock`],["course","Performance","course · renfo"],["mhab","Mes habitudes",`${activeHabits().length} habitudes`],["avatar","Profil","avatar · badges · route"],["reglages","Paramètres",inboxNew()?`📬 ${inboxNew()} nouveau${inboxNew()>1?"x":""} retour${inboxNew()>1?"s":""}`:"compte, bug, remise à zéro"],["tutos","Tutos vidéo","8 vidéos · comment ça marche"]];
   return `<div class="tag">Menu</div><h1>Tout<br><span class="g">le reste</span></h1>
-  <div class="tiles">${T.map(([k,n,sub])=>`<button class="tile ${k==="mhab"||k==="reglages"?"hi":""} ${k==="tutos"?"wide":""}" data-nav="${k}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${TILE_IC[k]}</svg><b>${n}</b><span>${sub}</span></button>`).join("")}</div>`;
+  <div class="tiles">${T.map(([k,n,sub])=>`<button class="tile ${k==="mhab"||k==="reglages"?"hi":""} ${k==="tutos"?"wide":""}" data-nav="${k}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${TILE_IC[k]}</svg><b>${n}</b><span>${sub}</span></button>`).join("")}</div>${commuBtn()}`;
 }
 /* ---------- MES HABITUDES ---------- */
 function vMesHab(){
@@ -1945,6 +1948,7 @@ function vReglages(){
     <div class="srow"><span>notifications</span>${perm==="granted"?"<b class=\"g\">autorisées</b>":perm==="none"?"<small style=\"opacity:.6\">pas dispo ici</small>":`<button class="btn small" data-nfperm>autoriser</button>`}</div>
     <p class="sub" style="font-size:12px;margin:6px 0 0">chacun choisit ses horaires. le rappel s'affiche dans l'appli à l'heure choisie ; les notifications arrivent quand l'appli est ouverte (et même fermée dans la future appli installable).</p>`})()}</div>
   ${owner&&db?inboxHTML():""}
+  ${commuBtn("signale un bug ou propose une idée aux autres membres")}
   ${label("rapporter un bug")}
   <div class="set">
     ${bugSent?`<p class="sub" style="margin:0">merci ! ton message est bien arrivé. 🛠️</p><div class="actions"><button class="btn small" data-bugagain>en envoyer un autre</button></div>`:`
