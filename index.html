@@ -276,6 +276,12 @@ button.stage{width:100%;text-align:left}
 .obav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}.obavb{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 8px;background:var(--panel);border:2px solid transparent;color:var(--mute);font-family:'Barlow Condensed';font-style:italic;font-weight:800;text-transform:uppercase;font-size:16px}.obavb .avsvg{width:96px;height:96px}.obavb.on{border-color:var(--gold);color:var(--gold)}
 .commu{display:flex;align-items:center;gap:12px;margin-top:18px;padding:14px 16px;background:#25D3661a;border:1px solid #25D36655;color:inherit;text-decoration:none}.commu .ci{font-size:24px}.commu .ct{display:flex;flex-direction:column;gap:2px;flex:1}.commu b{font-family:'Barlow Condensed';font-style:italic;font-weight:800;text-transform:uppercase;font-size:18px;color:#25D366}.commu small{font-size:12px;color:var(--mute);line-height:1.3}.commu .cg{font-size:22px;color:#25D366}
 .commuqg{margin-top:14px}.commuqg .commu{margin-top:0}.commu.big{padding:16px;background:#25D36626;border:1px solid #25D366}.commu.big b{font-size:21px}.commux{display:block;margin:6px 0 0 auto;background:none;border:0;color:var(--mute);font-size:12px;text-decoration:underline;padding:4px}
+.pgform label{display:flex;flex-direction:column;gap:6px;margin:10px 0;font-size:13px;color:var(--mute);text-transform:lowercase}.pgform input,.pgform select,.pglog textarea{background:var(--panel2,#18181c);border:1px solid var(--line);color:inherit;padding:11px;font:inherit;font-size:16px;width:100%;box-sizing:border-box}.pgform .pgchk{flex-direction:row;align-items:center}.pgform .pgchk input{width:auto}
+.pgdays,.pgrow{display:flex;flex-wrap:wrap;gap:6px}.pgdays .chip,.pgrow .chip{cursor:pointer}.pgdays .chip.on,.pgrow .chip.on{background:var(--gold);color:#000}.pgrpe .chip{min-width:34px;text-align:center}
+.pglog{display:flex;flex-direction:column;gap:8px}.pglog b{font-size:13px;margin-top:6px}.pglog textarea{resize:none;min-height:70px}.pglog input[type=range]{width:100%;accent-color:var(--gold)}
+.pgchrono{margin:16px 0;padding:14px 16px;background:var(--panel);border-left:3px solid var(--gold);display:flex;flex-direction:column;gap:2px}.pgchrono small{color:var(--mute);text-transform:uppercase;letter-spacing:.1em;font-size:11px}.pgchrono b{font-family:'Barlow Condensed';font-style:italic;font-weight:900;font-size:34px;color:var(--gold)}.pgchrono span{font-size:12px;color:var(--mute)}
+.pgs{display:flex;gap:12px;align-items:center;padding:12px;background:var(--panel);border:1px solid var(--line);margin:8px 0}.pgs.today{border-color:var(--gold)}.pgs.done{opacity:.6}.pgd{width:58px;flex:none;font-size:12px;color:var(--mute);text-transform:uppercase}.pgb{flex:1;display:flex;flex-direction:column;gap:3px}.pgb b{font-size:15px}.pgb span{font-size:13px;color:var(--mute);line-height:1.35}.pgb small{font-size:12px;color:var(--gold)}
+.pgmsg p,.pgh{margin:6px 0;font-size:13px;line-height:1.4}.pgmsg small,.pgh span{color:var(--mute)}.pgh{padding:10px 12px;background:var(--panel);display:flex;flex-direction:column;gap:3px}.pgh p{margin:4px 0 0;white-space:pre-wrap}
 .instb{display:flex;align-items:center;gap:12px;width:100%;margin-top:14px;padding:14px 16px;background:color-mix(in srgb,var(--gold) 12%,transparent);border:1px solid var(--gold);color:inherit;text-align:left;cursor:pointer;font:inherit}.instb .ci{font-size:24px}.instb .ct{display:flex;flex-direction:column;gap:2px;flex:1}.instb b{font-family:'Barlow Condensed';font-style:italic;font-weight:800;text-transform:uppercase;font-size:19px;color:var(--gold)}.instb small{font-size:12px;color:var(--mute);line-height:1.3}.instb .cg{font-size:22px;color:var(--gold)}
 #instOv{position:fixed;inset:0;z-index:1200;background:rgba(0,0,0,.8);display:flex;align-items:flex-end;justify-content:center}#instOv .ib{background:#0f0f12;color:#F5F5F3;width:100%;max-width:520px;max-height:92vh;overflow:auto;padding:22px 20px max(22px,env(safe-area-inset-bottom));border-top:3px solid var(--gold,#FFC107);font-family:Barlow,sans-serif}
 #instOv h2{font-family:'Barlow Condensed';font-style:italic;font-weight:900;text-transform:uppercase;font-size:30px;margin:0 0 6px;color:var(--gold,#FFC107)}#instOv .isub{color:#9a9aa0;font-size:14px;line-height:1.4;margin:0 0 14px}
@@ -1033,7 +1039,7 @@ I.nav.equipe='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
 I.nav.agenda='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="5" width="17" height="15.5" rx="1.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="M7.5 13h3M7.5 16.5h6"/></svg>';
 I.nav.menu='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>';
 const NAV=[["qg","QG"],["habitudes","Habitudes"],["equipe","Équipe"],["menu","Menu"]];
-const MENU_VIEWS=["menu","suggest","confid","agenda","taches","idees","perfs","renfo","course","mhab","reglages","avatar","badges","route","tutos"];
+const MENU_VIEWS=["menu","suggest","confid","agenda","taches","idees","perfs","renfo","course","mhab","reglages","avatar","badges","route","tutos","prog"];
 
 /* ================= RENDER ================= */
 function openRename(){openSheet(`<h2>✏️ ton pseudo</h2><p class="sub" style="margin:0">visible par ton équipe et dans le classement. ton xp, tes niveaux et tes séries ne bougent pas.</p>
@@ -1084,6 +1090,199 @@ function openTuto(i){i=(i+TUTOS.length)%TUTOS.length;let o=document.getElementBy
   const close=()=>{try{v.pause()}catch(_){}o.classList.remove("show");o.innerHTML=""};
   $("#tpX").onclick=close;$("#tpP").onclick=()=>openTuto(i-1);$("#tpN").onclick=()=>openTuto(i+1);
   v.onended=()=>{if(i<TUTOS.length-1)openTuto(i+1)};v.onerror=()=>{toast("vidéo indisponible pour l'instant")}}
+/* ---------- PROGRAMME COURSE (bêta : visible seulement par le créateur) ---------- */
+const PROG_ON=()=>owner;
+const PRG=()=>(meDoc&&meDoc.prog)||null;
+const savePrg=p=>saveProfile({prog:p});
+const PZ={EF:[.60,.70],Z2:[.75,.80],Z3:[.85,.90],Z4:[.95,1.05]};
+const fmtPace=v=>{if(!v)return"–";const m=60/v;let mm=Math.floor(m),ss=Math.round((m-mm)*60);if(ss===60){mm++;ss=0}return mm+":"+String(ss).padStart(2,"0")};
+const fmtTime=s=>{s=Math.round(s);const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return h?`${h}h${String(m).padStart(2,"0")}`:`${m}:${String(x).padStart(2,"0")}`};
+const prgVma=p=>Math.max(6,(p.vma0||12)+(p.vmaAdj||0));
+const paceTxt=(p,z)=>{const v=prgVma(p),[a,b]=PZ[z];return `${fmtPace(v*b)}-${fmtPace(v*a)} /km`};
+/* % de VMA tenu selon la distance (repères approximatifs) */
+const VMA_PCT=[[1.5,1],[5,.93],[10,.87],[21.1,.80],[42.2,.75],[80,.68],[160,.60]];
+const pctFor=km=>{if(km<=VMA_PCT[0][0])return VMA_PCT[0][1];for(let i=1;i<VMA_PCT.length;i++){const[d1,p1]=VMA_PCT[i-1],[d2,p2]=VMA_PCT[i];if(km<=d2)return p1+(p2-p1)*(km-d1)/(d2-d1)}return VMA_PCT[VMA_PCT.length-1][1]};
+const raceKm=r=>r.type==="trail"?(+r.dist||0)+(+r.dplus||0)/100:(+r.dist||0);
+function chronoCalc(p){const r=p.race,km=raceKm(r);if(!km)return null;
+  const byVma=km/(prgVma(p)*pctFor(km))*3600;let t=byVma,src="VMA";
+  if(p.perf&&p.perf.km&&p.perf.sec&&!p.perf.used){const rg=p.perf.sec*Math.pow(km/p.perf.km,1.06);t=(rg+byVma)/2;src="record + VMA"}
+  const far=km>=30||(!p.perf||!p.perf.km)||(p.perf&&km>p.perf.km*2.5);const m=far?.05:.02;
+  return {lo:Math.round(t*(1-m)),hi:Math.round(t*(1+m)),src,date:today()}}
+function pushChrono(p,why){const c=chronoCalc(p);if(!c)return p;c.why=why||"";const h=(p.chrono||[]).slice();const last=h[h.length-1];
+  if(!last||Math.abs(last.lo-c.lo)>5)h.push(c);else h[h.length-1]={...c,why:last.why};p.chrono=h.slice(-30);return p}
+/* bibliothèque : [nom, but, texte D, I, C, type] ; {EF} {Z2} {Z3} {Z4} {AS} remplacés par les allures, {m} = minutes ajustées */
+const SESS={
+ C0:["Course / marche","reprendre sans se blesser",["8 × (2 min course + 1 min marche)","8 × (3 min course + 1 min marche)","8 × (3 min course + 1 min marche)"],"easy",[24,32,32]],
+ C1:["Footing EF","base aérobie",["{m} min à {EF}, tu peux parler","{m} min à {EF}","{m} min à {EF}"],"easy",[30,45,60]],
+ C2:["Footing récup","récupérer",["{m} min très lent, plus lent que {EF}","{m} min très lent","{m} min très lent"],"easy",[20,30,35]],
+ C3:["Footing + lignes droites","foulée, vitesse sans fatigue",["{m} min à {EF} + 4 × 15 s vite (récup en marchant)","{m} min à {EF} + 6 × 20 s vite","{m} min à {EF} + 8 × 20 s vite"],"easy",[25,40,50]],
+ C4:["Sortie longue","endurance",["{m} min à {EF}","{m} min à {EF}","{m} min à {EF}"],"long",[50,80,100]],
+ C5:["Sortie longue fin rapide","courir vite fatigué",["{m} min à {EF}","{m} min dont les 15 dernières à {Z2}","{m} min dont les 30 dernières à {Z2}"],"long",[50,75,105]],
+ C6:["Fartlek","découvrir le fractionné",["6 × (1 min vite + 2 min lent)","8 × (2 min à {Z3} + 1 min lent)","10 × (2 min à {Z3} + 1 min lent)"],"hard"],
+ C7:["VMA courte 30/30","monter la VMA",["2 × 6 × (30 s à {Z4} / 30 s trot), 3 min entre séries","2 × 10 × 30/30 à {Z4}","3 × 10 × 30/30 à {Z4}"],"hard"],
+ C8:["VMA moyenne","VMA et tolérance",["6 × 300 m à {Z4}, récup 1 min 30","10 × 400 m à {Z4}, récup 1 min 30","6 × 1 000 m à {Z4}, récup 2 min"],"hard"],
+ C9:["Seuil fractionné","tenir une allure soutenue",["4 × 4 min à {Z3}, récup 2 min","3 × 2 000 m à {Z3}, récup 2 min","3 × 3 000 m à {Z3}, récup 2 min"],"hard"],
+ C10:["Tempo continu","seuil en continu",["12 min à {Z2}","20 min à {Z3}","30 min à {Z3}"],"hard"],
+ C11:["Côtes courtes","force, foulée",["6 × 20 s en côte, retour en marchant","10 × 30 s en côte, retour trottiné","12 × 45 s en côte, retour trottiné"],"hard"],
+ C12:["Côtes longues","endurance de force",["5 × 1 min 30 en côte à {Z3}","5 × 2 min en côte à {Z3}","6 × 3 min en côte à {Z3}"],"hard"],
+ C13:["Allure spécifique","caler ton allure de course",["3 × 1 km à {AS}, récup 2 min","4 × 2 km à {AS}, récup 2 min","3 × 5 km à {AS}, récup 3 min"],"hard"],
+ C14:["Sortie trail D+","montées, descentes, terrain",["{m} min avec du dénivelé, monte en marchant vite","{m} min, 300-500 m D+","{m} min, 800 m D+ ou plus"],"long",[60,90,140]],
+ RACE:["Jour de course","",["Échauffement 10-15 min, puis ta course. Pars prudent !","",""],"race"],
+ RAPPEL:["Rappel d'allure","garder le rythme avant la course",["15 min à {EF} + 3 × 1 km à {AS}, récup 2 min + 5 min","",""],"hard"]};
+const RPE_HI={easy:6,long:7,hard:9,race:11},RPE_LO=5;
+const LVI={D:0,I:1,C:2};
+const objOf=r=>r.type==="trail"?"trail":(+r.dist<=6?"5k":+r.dist<=12?"10k":+r.dist<=25?"semi":"marathon");
+const ROT={reprise:["C3","C6","C11"],"5k":["C7","C8","C13"],"10k":["C8","C9","C13"],semi:["C9","C10","C13"],marathon:["C10","C9","C13"],trail:["C11","C12","C9"]};
+const TAPER={"5k":1,"10k":1,semi:2,marathon:3,trail:2};
+const MINW={"5k":[6,4],"10k":[8,6],semi:[12,8],marathon:[99,12],trail:[10,8]};
+function buildPlan(p){
+  const r=p.race,obj=objOf(r),lvl=p.level,t=today(),ws=ds(weekStart(new Date()));
+  const W=Math.max(1,Math.floor((parse(r.date)-parse(ws))/864e5/7)+1);
+  const T=Math.min(W-1,(obj==="trail"&&+r.dist>30)?3:TAPER[obj]);
+  const N=Math.max(0,W-T),b1=Math.round(N/3),b2=Math.round(2*N/3);
+  const days=(p.days&&p.days.length?p.days:[1,3,6]).slice().sort((a,b)=>a-b).slice(0,p.n||3);
+  const n=days.length;const longDay=days.includes(6)?6:days.includes(5)?5:days[n-1];
+  const others=days.filter(d=>d!==longDay);
+  const nHard=lvl==="C"&&n>=5?2:1;
+  const plan=[];let hi=0;
+  for(let w=0;w<W;w++){
+    const wk=addDays(ws,w*7);const phase=w<b1?"base":w<b2?"développement":w<N?"spécifique":"affûtage";
+    const cyc=Math.floor(w/4),inC=w%4;
+    let f=phase==="affûtage"?[.65,.5,.4][Math.min(2,w-N)]:(inC===3?.7:Math.min(1.5,(1+.08*inC)*Math.pow(1.06,cyc)));
+    if(w===W-1){
+      // semaine de course
+      const rd=dow(r.date);const pre=days.filter(d=>d<rd);
+      pre.forEach((d,i)=>{const dt=addDays(wk,d);if(dt>=t)plan.push({date:dt,code:i===pre.length-2?"RAPPEL":"C2",f:.7,phase:"course"})});
+      plan.push({date:r.date,code:"RACE",f:1,phase:"course"});continue}
+    const hardDays=[];if(others.length){hardDays.push(others[0]);if(nHard>1&&others.length>2)hardDays.push(others[others.length-1])}
+    days.forEach(d=>{let code;
+      if(d===longDay){code=obj==="trail"?"C14":((obj==="semi"||obj==="marathon")&&phase!=="base"&&w%2?"C5":"C4")}
+      else if(hardDays.includes(d)){
+        if(lvl==="D"&&phase==="base")code=w%2?"C6":"C3";
+        else if(phase==="base")code=ROT.reprise[hi%3];
+        else if(phase==="spécifique")code=obj==="trail"?ROT.trail[hi%3]:(hi%2?"C13":ROT[obj][hi%2]);
+        else if(phase==="affûtage")code=obj==="trail"?"C11":"C13";
+        else code=ROT[obj][hi%3];
+        if(lvl==="D"&&["C12","C5"].includes(code))code="C6";
+        hi++}
+      else code=(n>=4&&d===others[1])?"C2":"C1";
+      const date=addDays(wk,d);if(date>=t)plan.push({date,code,f:+f.toFixed(2),phase})});
+  }
+  p.plan=plan;p.weeks=W;p.obj=obj;p.short=W<(MINW[obj]||[8,6])[lvl==="D"?0:1];return p}
+const sessOf=e=>{let code=e.code;const p=PRG();if(p&&p.light&&e.date<=p.light&&e.date>=today()&&SESS[code]&&SESS[code][3]==="hard"&&code!=="RAPPEL")code="C3";return code};
+function sessText(p,e){const code=sessOf(e),s=SESS[code];if(!s)return"";const li=LVI[p.level]||0;let tx=s[2][li]||s[2][0];
+  let f=e.f||1;if(p.light&&e.date<=p.light&&e.date>=today())f*=.8;
+  const m=s[4]?Math.max(15,Math.round(s[4][li]*f/5)*5):0;
+  const c=(p.chrono||[]).slice(-1)[0],as=c?fmtPace(raceKm(p.race)/(((c.lo+c.hi)/2)/3600)):"allure course";
+  return tx.replace("{m}",m).replace("{EF}",paceTxt(p,"EF")).replace("{Z2}",paceTxt(p,"Z2")).replace("{Z3}",paceTxt(p,"Z3")).replace("{Z4}",paceTxt(p,"Z4")).replace("{AS}",as+" /km")}
+const nextSess=p=>(p.plan||[]).find(e=>e.date>=today()&&!(p.logs||{})[e.date]);
+const COND=["météo difficile","terrain difficile","pas motivé","mal dormi / malade","journée chargée"];
+function adapt(p,date){
+  const L=p.logs||{},since=p.lastAdj||"0000",msgs=[];const typ=d=>{const e=(p.plan||[]).find(x=>x.date===d);return e?SESS[sessOf(e)][3]:"easy"};
+  const lg=L[date];
+  // douleur : dès la 1re fois
+  if(lg&&lg.pain>=4){p.light=addDays(date,6);msgs.push("🩹 douleur à "+lg.pain+"/10 : les séances dures des 7 prochains jours deviennent faciles. si elle reste, consulte un pro.")}
+  const recent=Object.keys(L).sort().slice(-3);if(recent.length===3&&recent.every(d=>L[d].pain>0)){p.paused=true;msgs.push("⏸ douleur sur 3 séances de suite : plan en pause. consulte un professionnel avant de reprendre.")}
+  const ok=Object.keys(L).filter(d=>d>since&&L[d].status!=="none"&&!(L[d].cond||[]).length).sort();
+  const wk=ok.filter(d=>d>addDays(date,-7));
+  const hard=wk.filter(d=>L[d].rpe>=RPE_HI[typ(d)]);
+  if(hard.length>=2){const old=prgVma(p);p.vmaAdj=+((p.vmaAdj||0)-old*.03).toFixed(2);p.light=addDays(date,7);p.lastAdj=date;pushChrono(p,"séances trop dures");msgs.push("😮‍💨 2 séances plus dures que prévu : semaine allégée, allures ralenties de 3 %.")}
+  else{const hs=ok.filter(d=>typ(d)==="hard").slice(-3);
+    if(hs.length===3&&hs.every(d=>L[d].rpe<=RPE_LO)){p.vmaAdj=+((p.vmaAdj||0)+.3).toFixed(2);p.lastAdj=date;p.ups=(p.ups||0)+1;pushChrono(p,"séances faciles");
+      msgs.push("🚀 3 séances dures faciles : allures relevées (+0,3 km/h de VMA)."+(p.ups>=2&&p.level!=="C"?" tu peux passer au niveau supérieur dans « modifier ».":""))}
+    const ez=wk.filter(d=>typ(d)==="easy"&&L[d].rpe>=6);if(ez.length>=2&&!hard.length)msgs.push("🐢 2 footings notés durs : ralentis sur tes footings, ils doivent rester faciles.")}
+  const c=(p.chrono||[]).slice(-2);if(msgs.length&&c.length===2&&c[1].lo!==c[0].lo)msgs.push(`⏱ chrono possible : ${fmtTime(c[1].lo)} à ${fmtTime(c[1].hi)}`+(c[1].lo>c[0].lo?" (baisse liée à la fatigue, c'est temporaire)":""));
+  p.msgs=[...msgs.map(m=>({date,m})),...(p.msgs||[])].slice(0,20);return msgs}
+function vProg(){
+  if(!PROG_ON())return `<p class="sub">bientôt disponible.</p>`;
+  const p=PRG();if(!p||!p.plan||progEdit)return vProgSetup(p);
+  const r=p.race,j=Math.round((parse(r.date)-parse(today()))/864e5),c=(p.chrono||[]).slice(-1)[0],c0=(p.chrono||[])[0];
+  const nx=nextSess(p);const L=p.logs||{};const ws=ds(weekStart(new Date()));
+  const wk=(p.plan||[]).filter(e=>e.date>=ws&&e.date<addDays(ws,14));
+  const card=e=>{const s=SESS[sessOf(e)],lg=L[e.date];return `<div class="pgs ${lg?"done":""} ${e.date===today()?"today":""}"><div class="pgd">${fdate(e.date,{weekday:"short",day:"numeric",month:"short"})}</div><div class="pgb"><b>${esc(s[0])}</b><span>${esc(sessText(p,e))}</span>${lg?`<small>${lg.status==="none"?"✕ pas faite":`✓ ressenti ${lg.rpe}/10`}${lg.notes?" · 📝":""}</small>`:""}</div>${!lg&&e.date<=today()?`<button class="btn small main" data-pglog="${e.date}">valider</button>`:""}</div>`};
+  const hist=Object.keys(L).sort().reverse().slice(0,8);
+  return `<div class="tag">Programme · bêta (visible par toi seul)</div><h1>${esc(r.name)}<br><span class="g">J-${Math.max(0,j)}</span></h1>
+  <p class="sub">${r.type==="trail"?`trail ${r.dist} km · ${r.dplus||0} m D+`:`${r.dist} km`} · ${fdate(r.date,{weekday:"long",day:"numeric",month:"long"})} · niveau ${({D:"débutant",I:"intermédiaire",C:"confirmé"})[p.level]} · VMA ${prgVma(p).toFixed(1)} km/h</p>
+  ${p.short?`<div class="alert">⚠️ délai court pour cette distance : on vise « finir en forme » plutôt qu'un chrono.</div>`:""}
+  ${p.paused?`<div class="alert">⏸ plan en pause (douleurs répétées). <button class="btn small" data-pgresume>reprendre</button></div>`:""}
+  ${c?`<div class="pgchrono"><small>chrono possible</small><b>${fmtTime(c.lo)} – ${fmtTime(c.hi)}</b><span>${c0&&c0!==c?`au début : ${fmtTime(c0.lo)} · `:""}calculé avec : ${esc(c.src)}</span></div>`:""}
+  ${nx?`${label("prochaine séance")}${card(nx)}`:`<div class="alert">🏁 plan terminé ! saisis ton temps de course ci-dessous.</div>`}
+  ${(p.msgs||[]).length?label("ajustements")+`<div class="pgmsg">${p.msgs.slice(0,5).map(x=>`<p><small>${fdate(x.date)}</small> ${esc(x.m)}</p>`).join("")}</div>`:""}
+  ${label("2 semaines")}${wk.map(card).join("")||`<p class="sub">rien de prévu.</p>`}
+  ${hist.length?label("historique")+hist.map(d=>{const lg=L[d],e=(p.plan||[]).find(x=>x.date===d)||{code:"C1"};return `<div class="pgh"><b>${fdate(d)} · ${esc(SESS[e.code]?SESS[e.code][0]:"séance")}</b><span>${lg.status==="none"?"pas faite":lg.status==="part"?"en partie":"faite"} · ressenti ${lg.rpe||"–"}/10${lg.pain?` · douleur ${lg.pain}/10`:""}${(lg.cond||[]).length?` · ${esc(lg.cond.join(", "))}`:""}</span>${lg.notes?`<p>${esc(lg.notes)}</p>`:""}</div>`}).join(""):""}
+  ${label("course passée ?")}<div class="actions"><button class="btn small" data-pgresult>saisir mon temps</button><button class="btn small" data-pgedit>modifier</button><button class="btn small ghost" data-pgdel>supprimer le plan</button></div>`}
+let progEdit=false;
+function vProgSetup(p){p=p||{};const r=p.race||{};const d=p.days||[1,3,6];
+  const sel=(id,opts,v)=>`<select id="${id}">${opts.map(([k,l])=>`<option value="${k}" ${String(v)===String(k)?"selected":""}>${l}</option>`).join("")}</select>`;
+  return `<div class="tag">Programme · bêta</div><h1>Prépare<br><span class="g">ta course</span></h1><p class="sub">2 minutes. le plan se construit à rebours depuis le jour J et s'adapte à tes sensations.</p>
+  <div class="pgform">
+  ${label("ta course")}
+  <label>nom<input id="pgName" value="${esc(r.name||"")}" placeholder="semi de lille"></label>
+  <label>date<input id="pgDate" type="date" value="${esc(r.date||"")}" min="${addDays(today(),14)}"></label>
+  <label>type${sel("pgType",[["route","route"],["trail","trail"]],r.type||"route")}</label>
+  <label>distance (km)<input id="pgDist" type="number" step="0.1" value="${esc(r.dist||"")}" placeholder="21.1"></label>
+  <label>dénivelé + (m, trail)<input id="pgDplus" type="number" value="${esc(r.dplus||"")}" placeholder="0"></label>
+  ${label("ton niveau")}
+  <label>sorties par semaine ces 2 derniers mois${sel("pgFreq",[[0,"0"],[1,"1-2"],[3,"3-4"],[5,"5 ou plus"]],p.q?p.q.freq:1)}</label>
+  <label>km par semaine${sel("pgKm",[[5,"moins de 10"],[15,"10-25"],[35,"25-45"],[50,"plus de 45"]],p.q?p.q.km:15)}</label>
+  <label>sortie la plus longue ce mois-ci (min)<input id="pgLong" type="number" value="${esc(p.q?p.q.long:"")}" placeholder="60"></label>
+  ${label("ta vma")}
+  <p class="sub" style="margin-top:0">remplis au moins un des deux. avec les deux, l'estimation est plus précise.</p>
+  <label>distance au test demi-cooper (m, 6 min à fond)<input id="pgCooper" type="number" value="${esc(p.cooper||"")}" placeholder="1500"></label>
+  <label>un chrono récent : distance (km)<input id="pgPkm" type="number" step="0.1" value="${esc(p.perf?p.perf.km:"")}" placeholder="10"></label>
+  <label>… en (h:mm:ss ou mm:ss)<input id="pgPtime" value="${esc(p.perf?fmtTime(p.perf.sec):"")}" placeholder="45:30"></label>
+  ${label("tes séances")}
+  <label>séances par semaine${sel("pgN",[[2,"2"],[3,"3"],[4,"4"],[5,"5"]],p.n||3)}</label>
+  <div class="pgdays">${["L","M","M","J","V","S","D"].map((x,i)=>`<button class="chip ${d.includes(i)?"on":""}" data-pgday="${i}">${x}</button>`).join("")}</div>
+  <p class="sub" style="margin-top:6px">choisis tes jours dispo (au moins autant que de séances). la sortie longue tombe le week-end si possible.</p>
+  <label class="pgchk"><input type="checkbox" id="pgPain"> j'ai une douleur ou une blessure en ce moment</label>
+  <div class="actions"><button class="btn main" data-pgcreate>${p.plan?"recalculer mon plan":"créer mon plan"}</button>${p.plan?`<button class="btn ghost" data-pgcancel>annuler</button>`:""}</div>
+  <p class="sub" style="font-size:12px">la flèche propose des séances générales, pas un avis médical. en cas de douleur qui dure, consulte un professionnel de santé.</p></div>`}
+const parseTime=s=>{const a=String(s||"").trim().split(/[:h']/).map(x=>+x||0);if(!a.length)return 0;return a.length===3?a[0]*3600+a[1]*60+a[2]:a.length===2?a[0]*60+a[1]:a[0]*60};
+let pgDays=null;
+function progCreate(){
+  const v=id=>($("#"+id)||{}).value;const old=PRG()||{};
+  const race={name:(v("pgName")||"").trim()||"ma course",date:v("pgDate"),type:v("pgType"),dist:+v("pgDist"),dplus:+v("pgDplus")||0,prio:"A"};
+  if(!race.date||race.date<addDays(today(),7)){toast("date de course invalide");return}
+  if(!(race.dist>0)){toast("indique la distance");return}
+  const freq=+v("pgFreq"),km=+v("pgKm"),lg=+v("pgLong")||0;
+  const sc=(freq>=4)+(km>40)+(lg>90),sd=(freq<2)+(km<15)+(lg&&lg<40);const level=sc>=2?"C":sd>=2?"D":"I";
+  const coop=+v("pgCooper")||0,pkm=+v("pgPkm")||0,psec=parseTime(v("pgPtime"));
+  let vma=0;if(coop>300)vma=coop/100;else if(pkm&&psec)vma=(pkm/(psec/3600))/pctFor(pkm);else vma=level==="D"?10:level==="I"?13:15;
+  const n=+v("pgN");const days=(pgDays||old.days||[1,3,6]).slice().sort((a,b)=>a-b);
+  if(days.length<n){toast(`choisis au moins ${n} jours`);return}
+  const obj=objOf(race);if(obj==="marathon"&&level==="D"){toast("marathon déconseillé en débutant : commence par un 10 km ou un semi");return}
+  let p={...old,v:1,race,level:$("#pgPain")&&$("#pgPain").checked?"D":level,q:{freq,km,long:lg},cooper:coop||0,perf:pkm&&psec?{km:pkm,sec:psec}:null,vma0:+vma.toFixed(2),vmaAdj:0,n,days,created:old.created||today(),logs:old.logs||{},msgs:old.msgs||[],chrono:[],ups:0,lastAdj:today(),light:null,paused:false};
+  buildPlan(p);pushChrono(p,"calcul de départ");progEdit=false;pgDays=null;savePrg(p);toast("plan prêt 🏹");go("prog")}
+function openProgLog(date){const p=PRG();if(!p)return;const e=(p.plan||[]).find(x=>x.date===date)||{code:"C1"};const s=SESS[sessOf(e)];
+  let rpe=0,st="full",pain=0,cond=[];
+  openSheet(`<h2 style="margin:0 0 4px">${esc(s[0])}</h2><p class="sub" style="margin:0 0 14px">${fdate(date,{weekday:"long",day:"numeric",month:"long"})}</p>
+  <div class="pglog">
+  <b>la séance</b><div class="pgrow" id="lgSt"><button class="chip on" data-v="full">faite en entier</button><button class="chip" data-v="part">en partie</button><button class="chip" data-v="none">pas faite</button></div>
+  <b>difficulté ressentie (1 = très facile · 10 = maximum)</b><div class="pgrow pgrpe" id="lgR">${[1,2,3,4,5,6,7,8,9,10].map(i=>`<button class="chip" data-v="${i}">${i}</button>`).join("")}</div>
+  <b>douleur : <span id="lgPv">0</span>/10</b><input id="lgP" type="range" min="0" max="10" value="0">
+  <b>conditions (facultatif)</b><div class="pgrow" id="lgC">${COND.map(c=>`<button class="chip" data-v="${c}">${c}</button>`).join("")}</div>
+  <b>ce que tu as ressenti</b><textarea id="lgN" rows="3" placeholder="jambes, souffle, météo, mental… écris ce que tu veux"></textarea>
+  </div><div class="actions"><button class="btn ghost" id="lgX">annuler</button><button class="btn main" id="lgGo">enregistrer</button></div>`,()=>{
+    const grp=(id,fn)=>$("#"+id).onclick=ev=>{const b=ev.target.closest("[data-v]");if(b)fn(b,$("#"+id))};
+    grp("lgSt",(b,g)=>{st=b.dataset.v;g.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===b))});
+    grp("lgR",(b,g)=>{rpe=+b.dataset.v;g.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===b))});
+    grp("lgC",b=>{const v=b.dataset.v;cond=cond.includes(v)?cond.filter(x=>x!==v):[...cond,v];b.classList.toggle("on")});
+    $("#lgP").oninput=ev=>{pain=+ev.target.value;$("#lgPv").textContent=pain};
+    const ta=$("#lgN");ta.oninput=()=>{ta.style.height="auto";ta.style.height=ta.scrollHeight+"px"};
+    $("#lgX").onclick=closeSheet;
+    $("#lgGo").onclick=()=>{if(st!=="none"&&!rpe){toast("note la difficulté de 1 à 10");return}
+      const q=JSON.parse(JSON.stringify(PRG()));q.logs={...(q.logs||{}),[date]:{status:st,rpe:st==="none"?0:rpe,pain,cond,notes:(ta.value||"").trim(),ts:Date.now()}};
+      const m=adapt(q,date);closeSheet();savePrg(q);toast(m.length?"plan ajusté":"séance enregistrée ✓")}})}
+function openProgResult(){const p=PRG();if(!p)return;
+  openSheet(`<h2 style="margin:0 0 8px">ton temps de course</h2><p class="sub" style="margin:0 0 12px">${esc(p.race.name)} · il met ta VMA à jour.</p><div class="field"><input id="rsT" placeholder="1:41:20"></div><div class="actions"><button class="btn ghost" id="rsX">annuler</button><button class="btn main" id="rsGo">enregistrer</button></div>`,()=>{
+    $("#rsX").onclick=closeSheet;$("#rsGo").onclick=()=>{const sec=parseTime($("#rsT").value);if(!sec){toast("temps invalide");return}
+      const q=JSON.parse(JSON.stringify(p)),km=raceKm(q.race);q.result={sec,date:today()};q.perf={km,sec};const nv=(km/(sec/3600))/pctFor(km);q.vmaAdj=+(nv-q.vma0).toFixed(2);
+      q.msgs=[{date:today(),m:`🏅 finisher en ${fmtTime(sec)} ! nouvelle VMA estimée : ${nv.toFixed(1)} km/h.`},...(q.msgs||[])];closeSheet();savePrg(q);toast("bravo finisher 🏅")}})}
+function progQGCard(){if(!PROG_ON())return"";const p=PRG();if(!p||!p.plan)return `<button class="instb" data-nav="prog"><span class="ci">🏃</span><span class="ct"><b>programme course · bêta</b><small>visible par toi seul · prépare ta course</small></span><span class="cg">›</span></button>`;
+  const e=nextSess(p);if(!e)return"";const s=SESS[sessOf(e)],j=Math.round((parse(p.race.date)-parse(today()))/864e5);
+  return `<button class="instb" data-nav="prog"><span class="ci">🏃</span><span class="ct"><b>${e.date===today()?"séance du jour":"prochaine séance "+fdate(e.date,{weekday:"short"})} · ${esc(s[0])}</b><small>${esc(sessText(p,e))} · J-${j} ${esc(p.race.name)}</small></span><span class="cg">›</span></button>`}
+
 function campusUrl(){const w="https://www.campus.coach/app",ps="https://play.google.com/store/apps/details?id=campus.coach.mobileApp";return /Android/i.test(navigator.userAgent)?"intent://www.campus.coach/app#Intent;scheme=https;package=campus.coach.mobileApp;S.browser_fallback_url="+encodeURIComponent(ps)+";end":w}
 function render(){
   if(!resumeTimer._d&&allLoaded()){resumeTimer._d=1;setTimeout(resumeTimer,300)}
@@ -1098,7 +1297,7 @@ function render(){
   const showAdd=view==="taches"||view==="idees";
   $("#add").classList.toggle("show",showAdd);$("#frame").classList.toggle("withadd",showAdd);
   const needsOnboard=allLoaded()&&!owner&&uid&&!(meDoc&&meDoc.onboarded)&&!habits.length;
-  const v=needsOnboard?vOnboard:{qg:vQG,habitudes:vHabits,taches:vTasks,idees:vIdeas,perfs:vPerfs,renfo:vPerfs,course:vPerfs,badges:vBadges,route:vRoute,equipe:vTeam,agenda:vAgenda,avatar:vAvatar,menu:vMenu,mhab:vMesHab,suggest:vSuggest,confid:vConfid,saison:vSaison,reglages:vReglages,tutos:vTutos}[view];
+  const v=needsOnboard?vOnboard:{qg:vQG,habitudes:vHabits,taches:vTasks,idees:vIdeas,perfs:vPerfs,renfo:vPerfs,course:vPerfs,badges:vBadges,route:vRoute,equipe:vTeam,agenda:vAgenda,avatar:vAvatar,menu:vMenu,mhab:vMesHab,suggest:vSuggest,confid:vConfid,saison:vSaison,reglages:vReglages,tutos:vTutos,prog:vProg}[view];
   $("#view").innerHTML=(MENU_VIEWS.includes(view)&&view!=="menu"&&!needsOnboard?`<button class="back" data-nav="menu">‹ menu</button>`:"")+v(xp,lv);
   if(showAdd&&!needsOnboard) renderAdd(); else if(needsOnboard){$("#add").classList.remove("show");$("#frame").classList.remove("withadd")}
   if(fullyLoaded()){detectMilestones(lv);publishBoard(xp,lv)}
@@ -1367,6 +1566,7 @@ function vQG(xp,lv){
   </div>
   ${alerts.includes("maxr")||alerts.includes("première mission")?"":maxReminder()}
   ${alerts}
+  ${PROG_ON()?`<div class="commuqg">${progQGCard()}</div>`:""}
   ${!isStandalone()&&!(meDoc&&meDoc.instx)?`<div class="commuqg">${installBtn("mets la flèche sur ton écran d'accueil · 1 minute")}<button class="commux" data-instx aria-label="masquer">déjà installée ✓</button></div>`:""}
   ${!(meDoc&&meDoc.commu)?`<div class="commuqg"><a class="commu big" href="${COMMU}" target="_blank" rel="noopener" data-commujoin><span class="ci">💬</span><span class="ct"><b>rejoins la communauté</b><small>bugs, idées, défis et cordées · sur whatsapp</small></span><span class="cg">›</span></a><button class="commux" data-commux aria-label="masquer">déjà dedans ✓</button></div>`:""}
   ${timerStrip()}
@@ -1653,12 +1853,13 @@ const TILE_IC={
  mhab:'<path d="M2.5 20 9 9l4 6 3-4 5.5 9Z"/><path d="M15.5 11V4l4 1.5-4 1.5"/>',
  agenda:'<rect x="3.5" y="5" width="17" height="15.5" rx="1.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="M7.5 13h3M7.5 16.5h6"/>',
  avatar:'<circle cx="12" cy="8.5" r="4"/><path d="M4 21c.5-4.5 4-7 8-7s7.5 2.5 8 7"/>',
+ prog:'<path d="M4 20h16"/><path d="M6 20V12M10 20V8M14 20v-6M18 20V5"/><circle cx="18" cy="5" r="0"/>',
  tutos:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.2v5.6l4.8-2.8Z" fill="currentColor"/>',
  reglages:'<circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/>'};
 function vMenu(){
   const open=items.filter(i=>i.kind==="task"&&!i.done).length,ide=items.filter(i=>i.kind==="idea"&&i.status!=="tournée").length;
   const nEv=agEventsOn(today()).length;
-  const T=[["agenda","Agenda",nEv?`${nEv} événement${nEv>1?"s":""} aujourd'hui`:"ta journée"],["taches","Tâches",open?`${open} en cours`:"rien sur le feu"],["idees","Idées",`${ide} en stock`],["course","Performance","course · renfo"],["mhab","Mes habitudes",`${activeHabits().length} habitudes`],["avatar","Profil","avatar · badges · route"],["reglages","Paramètres",inboxNew()?`📬 ${inboxNew()} nouveau${inboxNew()>1?"x":""} retour${inboxNew()>1?"s":""}`:"compte, bug, remise à zéro"],["tutos","Tutos vidéo","8 vidéos · comment ça marche"]];
+  const T=[["agenda","Agenda",nEv?`${nEv} événement${nEv>1?"s":""} aujourd'hui`:"ta journée"],["taches","Tâches",open?`${open} en cours`:"rien sur le feu"],["idees","Idées",`${ide} en stock`],["course","Performance","course · renfo"],["mhab","Mes habitudes",`${activeHabits().length} habitudes`],["avatar","Profil","avatar · badges · route"],["reglages","Paramètres",inboxNew()?`📬 ${inboxNew()} nouveau${inboxNew()>1?"x":""} retour${inboxNew()>1?"s":""}`:"compte, bug, remise à zéro"],["tutos","Tutos vidéo","8 vidéos · comment ça marche"]];if(PROG_ON()){const pp=PRG();T.unshift(["prog","Programme · bêta",pp&&pp.plan?`${esc(pp.race.name)} · J-${Math.max(0,Math.round((parse(pp.race.date)-parse(today()))/864e5))}`:"prépare ta course"])}
   return `<div class="tag">Menu</div><h1>Tout<br><span class="g">le reste</span></h1>
   <div class="tiles">${T.map(([k,n,sub])=>`<button class="tile ${k==="mhab"||k==="reglages"?"hi":""} ${k==="tutos"?"wide":""}" data-nav="${k}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${TILE_IC[k]}</svg><b>${n}</b><span>${sub}</span></button>`).join("")}</div>${installBtn()}${commuBtn()}`;
 }
@@ -2278,6 +2479,14 @@ $("#view").addEventListener("click",e=>{
   if(b=q("[data-obface]")){obFace=+b.dataset.obface;document.querySelectorAll("[data-obface]").forEach(x=>x.classList.toggle("on",+x.dataset.obface===obFace));return}
   if(b=q("[data-rename]")){openRename();return}
   if(b=q("[data-install]")){openInstall();return}
+  if(b=q("[data-pglog]")){openProgLog(b.dataset.pglog);return}
+  if(b=q("[data-pgday]")){const i=+b.dataset.pgday;pgDays=pgDays||((PRG()||{}).days||[1,3,6]).slice();pgDays=pgDays.includes(i)?pgDays.filter(x=>x!==i):[...pgDays,i];b.classList.toggle("on");return}
+  if(b=q("[data-pgcreate]")){progCreate();return}
+  if(b=q("[data-pgedit]")){progEdit=true;pgDays=null;render();window.scrollTo(0,0);return}
+  if(b=q("[data-pgcancel]")){progEdit=false;render();return}
+  if(b=q("[data-pgresult]")){openProgResult();return}
+  if(b=q("[data-pgresume]")){const p=JSON.parse(JSON.stringify(PRG()));p.paused=false;savePrg(p);return}
+  if(b=q("[data-pgdel]")){if(confirm("supprimer ton plan et son historique ?")){saveProfile({prog:null});toast("plan supprimé")}return}
   if(b=q("[data-instx]")){saveProfile({instx:true});render();toast("ok, on ne te le propose plus");return}
   if(b=q("[data-commujoin]")){saveProfile({commu:true});setTimeout(render,600);return}
   if(b=q("[data-commux]")){saveProfile({commu:true});render();toast("ok, on ne te le propose plus");return}
