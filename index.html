@@ -276,6 +276,13 @@ button.stage{width:100%;text-align:left}
 .obav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}.obavb{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 8px;background:var(--panel);border:2px solid transparent;color:var(--mute);font-family:'Barlow Condensed';font-style:italic;font-weight:800;text-transform:uppercase;font-size:16px}.obavb .avsvg{width:96px;height:96px}.obavb.on{border-color:var(--gold);color:var(--gold)}
 .commu{display:flex;align-items:center;gap:12px;margin-top:18px;padding:14px 16px;background:#25D3661a;border:1px solid #25D36655;color:inherit;text-decoration:none}.commu .ci{font-size:24px}.commu .ct{display:flex;flex-direction:column;gap:2px;flex:1}.commu b{font-family:'Barlow Condensed';font-style:italic;font-weight:800;text-transform:uppercase;font-size:18px;color:#25D366}.commu small{font-size:12px;color:var(--mute);line-height:1.3}.commu .cg{font-size:22px;color:#25D366}
 .commuqg{margin-top:14px}.commuqg .commu{margin-top:0}.commu.big{padding:16px;background:#25D36626;border:1px solid #25D366}.commu.big b{font-size:21px}.commux{display:block;margin:6px 0 0 auto;background:none;border:0;color:var(--mute);font-size:12px;text-decoration:underline;padding:4px}
+.instb{display:flex;align-items:center;gap:12px;width:100%;margin-top:14px;padding:14px 16px;background:color-mix(in srgb,var(--gold) 12%,transparent);border:1px solid var(--gold);color:inherit;text-align:left;cursor:pointer;font:inherit}.instb .ci{font-size:24px}.instb .ct{display:flex;flex-direction:column;gap:2px;flex:1}.instb b{font-family:'Barlow Condensed';font-style:italic;font-weight:800;text-transform:uppercase;font-size:19px;color:var(--gold)}.instb small{font-size:12px;color:var(--mute);line-height:1.3}.instb .cg{font-size:22px;color:var(--gold)}
+#instOv{position:fixed;inset:0;z-index:1200;background:rgba(0,0,0,.8);display:flex;align-items:flex-end;justify-content:center}#instOv .ib{background:#0f0f12;color:#F5F5F3;width:100%;max-width:520px;max-height:92vh;overflow:auto;padding:22px 20px max(22px,env(safe-area-inset-bottom));border-top:3px solid var(--gold,#FFC107);font-family:Barlow,sans-serif}
+#instOv h2{font-family:'Barlow Condensed';font-style:italic;font-weight:900;text-transform:uppercase;font-size:30px;margin:0 0 6px;color:var(--gold,#FFC107)}#instOv .isub{color:#9a9aa0;font-size:14px;line-height:1.4;margin:0 0 14px}
+#instOv .itabs{display:flex;gap:8px;margin-bottom:14px}#instOv .itabs button{flex:1;padding:11px;background:#18181c;border:1px solid #333;color:#ccc;font:inherit;font-weight:700;cursor:pointer}#instOv .itabs button.on{background:var(--gold,#FFC107);color:#000;border-color:var(--gold,#FFC107)}
+#instOv .isteps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}#instOv .isteps li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.4}#instOv .isn{flex:none;width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:var(--gold,#FFC107);color:#000;font-weight:900;font-family:'Barlow Condensed';font-size:17px}
+#instOv .isteps b{color:#fff}#instOv .ico{display:inline-block;padding:0 6px;border:1px solid #555;border-radius:4px;font-weight:700}#instOv .inote{color:#9a9aa0;font-size:13px;line-height:1.45;margin:14px 0 0}#instOv .iwarn{background:#3a1d0a;border-left:3px solid #ff9800;padding:10px 12px;font-size:14px;line-height:1.4;margin-bottom:14px}
+#instOv .iact{display:flex;gap:10px;margin-top:18px}#instOv .iact button{flex:1;padding:13px;font-family:'Barlow Condensed';font-style:italic;font-weight:900;font-size:18px;text-transform:uppercase;cursor:pointer;border:1px solid var(--gold,#FFC107)}#instOv .iact .g1{background:none;color:var(--gold,#FFC107)}#instOv .iact .g2{background:var(--gold,#FFC107);color:#000}#instOv .inow{width:100%;padding:15px;margin:0 0 6px;background:var(--gold,#FFC107);color:#000;border:0;font-family:'Barlow Condensed';font-style:italic;font-weight:900;font-size:21px;text-transform:uppercase;cursor:pointer}
 .tutowelcome{margin-top:16px;padding:16px;background:var(--panel);border-left:3px solid var(--gold);display:flex;flex-direction:column;gap:6px}.tutowelcome b{font-family:'Barlow Condensed';font-style:italic;font-weight:800;text-transform:uppercase;font-size:20px;color:var(--gold)}.tutowelcome span{font-size:14px;color:var(--mute);line-height:1.4}.tutowelcome .actions{margin-top:8px}
 .tutogrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
 .tutocard{display:flex;flex-direction:column;align-items:flex-start;gap:4px;background:var(--panel);padding:0 0 12px;text-align:left;color:var(--txt,#f5f5f3);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
@@ -1037,11 +1044,37 @@ function openRename(){openSheet(`<h2>✏️ ton pseudo</h2><p class="sub" style=
   $("#rnGo").onclick=go;i.onkeydown=e=>{if(e.key==="Enter")go()}})}
 const COMMU="https://chat.whatsapp.com/Dy05QzTmjut3HnAVl6gLxk";
 const commuBtn=(sub="bugs, idées, défis et cordées entre membres")=>`<a class="commu" href="${COMMU}" target="_blank" rel="noopener"><span class="ci">💬</span><span class="ct"><b>rejoindre la communauté</b><small>${sub}</small></span><span class="cg">›</span></a>`;
+const APP_URL="https://lafleche-seven.vercel.app";
+const isStandalone=()=>{try{return matchMedia("(display-mode: standalone)").matches||navigator.standalone===true}catch(_){return false}};
+const isIOS=()=>/iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+const inAppBrowser=()=>/Instagram|FBAN|FBAV|FB_IAB|WhatsApp|Snapchat|TikTok|musical_ly|Line\//i.test(navigator.userAgent);
+let deferredInstall=null;
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstall=e});
+window.addEventListener("appinstalled",()=>{deferredInstall=null;const o=document.getElementById("instOv");if(o)o.remove();try{toast("✅ appli installée ! ouvre-la depuis ton écran d'accueil")}catch(_){}});
+const installBtn=(sub)=>isStandalone()?"":`<button class="instb" data-install><span class="ci">📲</span><span class="ct"><b>installer l'appli</b><small>${sub||"sur ton écran d'accueil, comme une vraie appli · iphone et android"}</small></span><span class="cg">›</span></button>`;
+function openInstall(p){p=p||(isIOS()?"ios":"android");
+  let o=document.getElementById("instOv");if(!o){o=document.createElement("div");o.id="instOv";document.body.appendChild(o)}
+  const st=(n,t)=>`<li><span class="isn">${n}</span><span>${t}</span></li>`,iab=inAppBrowser();
+  const ios=`${iab?`<div class="iwarn">⚠️ tu es dans le navigateur d'une appli (instagram, whatsapp…). touche <b>⋯</b> en haut à droite → <b>ouvrir dans le navigateur</b>, ou copie le lien et colle-le dans <b>safari</b>.</div>`:""}
+  <ol class="isteps">${st(1,"ouvre <b>lafleche-seven.vercel.app</b> dans <b>safari</b>")}${st(2,"touche le bouton <b>partager</b> <span class='ico'>⬆︎</span> en bas de l'écran (en haut sur ipad)")}${st(3,"fais défiler et touche <b>sur l'écran d'accueil</b> <span class='ico'>＋</span>")}${st(4,"touche <b>ajouter</b> en haut à droite")}${st(5,"ouvre la flèche depuis l'icône 🏹 de ton écran d'accueil")}</ol>
+  <p class="inote">📩 <b>important sur iphone :</b> l'appli installée a sa propre connexion. connecte-toi <b>depuis l'icône</b> : tape ton e-mail, puis entre le <b>code reçu par mail</b> directement dans l'appli (ne clique pas sur le lien, il ouvrirait safari).</p>`;
+  const and=`${iab?`<div class="iwarn">⚠️ tu es dans le navigateur d'une appli (instagram, whatsapp…). touche <b>⋮</b> en haut à droite → <b>ouvrir dans chrome</b>, ou copie le lien et colle-le dans <b>chrome</b>.</div>`:""}
+  ${deferredInstall&&!iab?`<button class="inow" data-doinstall>📲 installer maintenant</button><p class="inote" style="margin:0 0 14px">un seul appui. si rien ne se passe, suis les étapes ci-dessous.</p>`:""}
+  <ol class="isteps">${st(1,"ouvre <b>lafleche-seven.vercel.app</b> dans <b>chrome</b>")}${st(2,"touche les <b>⋮</b> en haut à droite")}${st(3,"touche <b>installer l'application</b> (ou <b>ajouter à l'écran d'accueil</b>)")}${st(4,"confirme avec <b>installer</b>")}${st(5,"ouvre la flèche depuis l'icône 🏹 de ton écran d'accueil")}</ol>
+  <p class="inote">sur <b>samsung internet</b> : menu <b>≡</b> → <b>ajouter page à</b> → <b>écran d'accueil</b>. ta connexion est gardée, pas besoin de te reconnecter.</p>`;
+  o.innerHTML=`<div class="ib"><h2>📲 installer la flèche</h2><p class="isub">1 minute, et l'appli s'ouvre en plein écran depuis ton écran d'accueil, comme une vraie appli. c'est gratuit et ça ne prend presque pas de place.</p>
+  <div class="itabs"><button class="${p==="ios"?"on":""}" data-itab="ios">🍎 iphone</button><button class="${p==="android"?"on":""}" data-itab="android">🤖 android</button></div>
+  ${p==="ios"?ios:and}<div class="iact"><button class="g1" data-icopy>copier le lien</button><button class="g2" data-iclose>compris</button></div></div>`;
+  o.onclick=async e=>{const t=e.target;if(t===o||t.closest("[data-iclose]")){o.remove();return}
+    const tb=t.closest("[data-itab]");if(tb){openInstall(tb.dataset.itab);return}
+    if(t.closest("[data-icopy]")){try{await navigator.clipboard.writeText(APP_URL);t.closest("[data-icopy]").textContent="lien copié ✓"}catch(_){prompt("copie ce lien :",APP_URL)}return}
+    if(t.closest("[data-doinstall]")&&deferredInstall){const d=deferredInstall;deferredInstall=null;d.prompt();try{const r=await d.userChoice;if(r&&r.outcome==="accepted")o.remove()}catch(_){}}}}
+window.openInstall=openInstall;
 const TUTOS=[["1_qg","Le QG","ton accueil : niveau, paliers, défi, série"],["2_habitudes","Les habitudes","cocher, routines, ajouter les tiennes"],["3_minuteur","Le minuteur","mode bloqué et mode libre"],["4_equipe","L'équipe","cordée, mises, classement, saison"],["5_organisation","Agenda, tâches, idées","t'organiser au même endroit"],["6_perfs","Performance","kilomètres, Strava, records"],["7_profil","Le profil","avatar, badges, route, story"],["8_reglages","Les réglages","couleurs, rappels, bugs, pseudo"]];
 function vTutos(){
   return `<div class="tag">Tutos · ${TUTOS.length} vidéos</div><h1>Comment<br><span class="g">ça marche</span></h1>
   ${tutoWelcome?`<div class="tutowelcome"><b>👋 bienvenue dans la flèche !</b><span>regarde ces vidéos de 30 secondes pour tout comprendre. tu les retrouves à tout moment dans menu › tutos vidéo.</span><div class="actions"><button class="btn main" data-tuto="0">▶ lancer la 1re vidéo</button><button class="btn ghost" data-nav="qg">plus tard</button></div></div>`:`<p class="sub">une vidéo par onglet, moins de 30 secondes chacune. touche pour regarder.</p>`}
-  <div class="tutogrid">${TUTOS.map(([k,n,d],i)=>`<button class="tutocard" data-tuto="${i}"><div class="tutoimg" style="background-image:url('tuto_${k}.jpg')"><span class="tutoplay">▶</span><span class="tutonum">${i+1}</span></div><b>${esc(n)}</b><span>${esc(d)}</span></button>`).join("")}</div>${commuBtn("une question après les vidéos ? demande à la communauté")}`}
+  ${installBtn("1re étape conseillée : mets la flèche sur ton écran d'accueil")}<div class="tutogrid">${TUTOS.map(([k,n,d],i)=>`<button class="tutocard" data-tuto="${i}"><div class="tutoimg" style="background-image:url('tuto_${k}.jpg')"><span class="tutoplay">▶</span><span class="tutonum">${i+1}</span></div><b>${esc(n)}</b><span>${esc(d)}</span></button>`).join("")}</div>${commuBtn("une question après les vidéos ? demande à la communauté")}`}
 function openTuto(i){i=(i+TUTOS.length)%TUTOS.length;let o=document.getElementById("tutoPlayer");if(!o){o=document.createElement("div");o.id="tutoPlayer";document.body.appendChild(o)}
   const [k,n]=TUTOS[i];
   o.innerHTML=`<div class="tpbar"><b>${i+1}/${TUTOS.length} · ${esc(n)}</b><button id="tpX" aria-label="fermer">✕</button></div>
@@ -1334,6 +1367,7 @@ function vQG(xp,lv){
   </div>
   ${alerts.includes("maxr")||alerts.includes("première mission")?"":maxReminder()}
   ${alerts}
+  ${!isStandalone()&&!(meDoc&&meDoc.instx)?`<div class="commuqg">${installBtn("mets la flèche sur ton écran d'accueil · 1 minute")}<button class="commux" data-instx aria-label="masquer">déjà installée ✓</button></div>`:""}
   ${!(meDoc&&meDoc.commu)?`<div class="commuqg"><a class="commu big" href="${COMMU}" target="_blank" rel="noopener" data-commujoin><span class="ci">💬</span><span class="ct"><b>rejoins la communauté</b><small>bugs, idées, défis et cordées · sur whatsapp</small></span><span class="cg">›</span></a><button class="commux" data-commux aria-label="masquer">déjà dedans ✓</button></div>`:""}
   ${timerStrip()}
   ${(()=>{if(!db||!uid)return "";const rows=seasonRows("saison"),k=rows.findIndex(b=>b.id===uid);return `<button class="seasoncard" data-nav="saison"><span class="label">saison ${seasonNo()} · jour ${seasonDay()}/${SEASON_DAYS}</span><b>${k>=0?`${k+1}${k?"e":"er"} <small>sur ${rows.length}</small>`:"—"}</b><span class="g">${xp.season} xp ›</span></button>`})()}
@@ -1626,7 +1660,7 @@ function vMenu(){
   const nEv=agEventsOn(today()).length;
   const T=[["agenda","Agenda",nEv?`${nEv} événement${nEv>1?"s":""} aujourd'hui`:"ta journée"],["taches","Tâches",open?`${open} en cours`:"rien sur le feu"],["idees","Idées",`${ide} en stock`],["course","Performance","course · renfo"],["mhab","Mes habitudes",`${activeHabits().length} habitudes`],["avatar","Profil","avatar · badges · route"],["reglages","Paramètres",inboxNew()?`📬 ${inboxNew()} nouveau${inboxNew()>1?"x":""} retour${inboxNew()>1?"s":""}`:"compte, bug, remise à zéro"],["tutos","Tutos vidéo","8 vidéos · comment ça marche"]];
   return `<div class="tag">Menu</div><h1>Tout<br><span class="g">le reste</span></h1>
-  <div class="tiles">${T.map(([k,n,sub])=>`<button class="tile ${k==="mhab"||k==="reglages"?"hi":""} ${k==="tutos"?"wide":""}" data-nav="${k}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${TILE_IC[k]}</svg><b>${n}</b><span>${sub}</span></button>`).join("")}</div>${commuBtn()}`;
+  <div class="tiles">${T.map(([k,n,sub])=>`<button class="tile ${k==="mhab"||k==="reglages"?"hi":""} ${k==="tutos"?"wide":""}" data-nav="${k}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${TILE_IC[k]}</svg><b>${n}</b><span>${sub}</span></button>`).join("")}</div>${installBtn()}${commuBtn()}`;
 }
 /* ---------- MES HABITUDES ---------- */
 function vMesHab(){
@@ -1945,6 +1979,7 @@ function vReglages(){
     <div class="srow"><span>déconnexion</span><button class="btn small" data-logout>se déconnecter / changer de compte</button></div>
     <div id="logoutMsg" class="sub" style="font-size:13px;display:none;margin-top:4px">la connexion passe par ton compte claude.ai : déconnecte-toi depuis claude.ai, puis rouvre l'appli avec l'autre compte. dans la future appli autonome, ce bouton te déconnectera directement.</div>
   </div>
+  ${installBtn()}
   ${label("préférences")}
   <div class="set">
     <div class="srow"><span>vibrations${SND.supported?"":" <small style=\"opacity:.6\">(pas dispo sur iPhone)</small>"}</span><button class="btn small ${SND.on?"main":""}" data-sound>${SND.on?"📳 activées":"🔕 coupées"}</button></div>
@@ -2242,6 +2277,8 @@ $("#view").addEventListener("click",e=>{
   if(b=q("[data-logout]")){if(window.LF_logout){window.LF_logout();return}const m=$("#logoutMsg");if(m)m.style.display="block";return}
   if(b=q("[data-obface]")){obFace=+b.dataset.obface;document.querySelectorAll("[data-obface]").forEach(x=>x.classList.toggle("on",+x.dataset.obface===obFace));return}
   if(b=q("[data-rename]")){openRename();return}
+  if(b=q("[data-install]")){openInstall();return}
+  if(b=q("[data-instx]")){saveProfile({instx:true});render();toast("ok, on ne te le propose plus");return}
   if(b=q("[data-commujoin]")){saveProfile({commu:true});setTimeout(render,600);return}
   if(b=q("[data-commux]")){saveProfile({commu:true});render();toast("ok, on ne te le propose plus");return}
   if(b=q("[data-tuto]")){openTuto(+b.dataset.tuto);return}

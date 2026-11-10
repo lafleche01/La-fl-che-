@@ -24,12 +24,22 @@ function showLogin(){
   #lfLogin button{width:100%;padding:15px;background:#FFC107;border:0;color:#000;font-family:'Barlow Condensed';font-style:italic;font-weight:900;font-size:20px;text-transform:uppercase}#lfLogin .m{margin-top:14px;color:#FFC107;min-height:20px}</style>
   <img src="logo_la_fleche.png" alt="La Flèche"><h1>Entre dans<br><b>ton QG.</b></h1>
   <p>ton e-mail, et on t'envoie un lien de connexion. pas de mot de passe.</p>
-  <input id="lfMail" type="email" autocomplete="email" placeholder="ton@email.com"><button id="lfGo">recevoir mon lien</button><div class="m" id="lfMsg"></div>`;
+  <input id="lfMail" type="email" autocomplete="email" placeholder="ton@email.com"><button id="lfGo">recevoir mon lien</button><div class="m" id="lfMsg"></div>
+  <div id="lfCodeBox" style="display:none;margin-top:6px"><p style="margin:0 0 10px">📲 sur iphone, dans l'appli installée : tape ici le <b style="color:#FFC107">code</b> reçu dans le mail (au lieu de cliquer sur le lien).</p><input id="lfCode" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="code à 6 chiffres"><button id="lfCodeGo">valider le code</button></div>
+  <a id="lfInst" href="#" style="display:block;margin-top:22px;text-align:center;color:#FFC107;font-size:15px;text-decoration:underline">📲 comment installer l'appli sur mon téléphone ?</a>`;
   document.body.appendChild(d);
   const go=async()=>{const email=(document.getElementById("lfMail").value||"").trim();const m=document.getElementById("lfMsg");
     if(!/^\S+@\S+\.\S+$/.test(email)){m.textContent="e-mail invalide.";return}
     m.textContent="envoi…";const {error}=await sb.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname}});
-    m.textContent=error?"erreur : "+error.message:"📩 regarde tes mails (et les spams) et clique sur le lien.";};
+    m.textContent=error?"erreur : "+error.message:"📩 regarde tes mails (et les spams) : clique sur le lien, ou tape le code ci-dessous.";
+    if(!error){document.getElementById("lfCodeBox").style.display="block"}};
+  const goCode=async()=>{const email=(document.getElementById("lfMail").value||"").trim(),token=(document.getElementById("lfCode").value||"").replace(/\D/g,""),m=document.getElementById("lfMsg");
+    if(token.length<6){m.textContent="le code fait 6 chiffres.";return}
+    m.textContent="vérification…";let {error}=await sb.auth.verifyOtp({email,token,type:"email"});
+    if(error){const r=await sb.auth.verifyOtp({email,token,type:"signup"});error=r.error}
+    m.textContent=error?"code incorrect ou expiré. redemande un lien.":"✅ connecté !"};
+  document.getElementById("lfCodeGo").onclick=goCode;document.getElementById("lfCode").onkeydown=e=>{if(e.key==="Enter")goCode()};
+  document.getElementById("lfInst").onclick=e=>{e.preventDefault();if(window.openInstall)window.openInstall()};
   document.getElementById("lfGo").onclick=go;document.getElementById("lfMail").onkeydown=e=>{if(e.key==="Enter")go()};
 }
 function hideLogin(){const d=document.getElementById("lfLogin");if(d)d.remove()}
