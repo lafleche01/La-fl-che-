@@ -626,9 +626,11 @@ const habitXP=(s,n)=>s>=RULES2?Math.round(n*DAY_POOL/Math.max(habitsFor(s).lengt
 const caseXP=s=>s>=RULES2?Math.round(DAY_POOL/Math.max(habitsFor(s).length,POOL_MIN)):XP.habit;
 const XP = {habit:10, slotBonus:15, task:20, taskPrio:10, idea:5, ideaShot:25, perfFirst:10, perfRecord:40, km:8, d10:1, duel:60};
 const VALID_RATIO = 1;            // mode normal = hardcore : une habitude ratée et la série tombe
-const MAX_LEVEL = 50;
-const need = L => Math.round(50 + 25*Math.pow(L-1,1.35));   // XP pour passer du niveau L à L+1 : facile au début, dur à la fin
-const STAGES = [[1,"Bitume"],[5,"Pavés"],[10,"Pont"],[15,"Terril"],[20,"Mont Noir"],[25,"Colline"],[30,"Ballon"],[35,"Col"],[40,"Haute montagne"],[45,"Sommet"],[50,"Alpes"]];
+const MAX_LEVEL = 100;
+const need = L => Math.round(40 + 0.4739*Math.pow(L-1,1.7));   // XP pour passer du niveau L à L+1 : facile au début, dur à la fin
+const STAGES = [[1,"Bitume"],[10,"Pavés"],[20,"Pont"],[30,"Terril"],[40,"Mont Noir"],[50,"Colline"],[60,"Ballon"],[70,"Col"],[80,"Haute montagne"],[90,"Sommet"],[100,"Alpes"]];
+const LEAGUES=["Alpes","Kilimandjaro","Aconcagua","Everest"];
+const LEAGUE_XP=(()=>{let t=0;for(let L=1;L<=100;L++)t+=Math.round(40+0.4739*Math.pow(L-1,1.7));return t})();
 const STRAVA_TYPES = [["Fastest1k","1 km","dist",1000],["Fastest5k","5 km","dist",5000],["Fastest10k","10 km","dist",10000],["FastestHalfMarathon","Semi","dist",21097.5],["FastestMarathon","Marathon","dist",42195],["BiggestClimb","Plus grosse montée","m"],["LongestActivity","Plus longue sortie","km"]];
 
 /* défis spéciaux : un par semaine, en rotation. en équipe, le choix vaut pour toute la cordée */
@@ -664,33 +666,33 @@ let items=[], habits=[], days={}, perfs=[], strava=null;
 let inbox=[],myEv=[];
 let uid=null, owner=false, userApi=null, meDoc=null, board=[], teams=[], boardSent="", profiles={};
 let pendingPick=null;
-let curL=1;          // niveau effectif (après épreuves de passage)
+let curLg=0,curL=1;          // niveau effectif (après épreuves de passage)
 /* ---------- progression : titres km, déblocages, épreuves, avatar ---------- */
 const KM_TITLES=[[0,"Promeneur"],[25,"Joggeur"],[50,"Coureur du dimanche"],[100,"Bitumeur"],[200,"Pavéman"],[350,"Grimpeur de terril"],[500,"Traileur"],[750,"Chamois"],[1000,"Bouquetin"],[1500,"Alpiniste"]];
 const kmTitle=km=>KM_TITLES.filter(x=>x[0]<=km).pop()[1];
 const nextKmTitle=km=>KM_TITLES.find(x=>x[0]>km);
 const FEAT={bilan:1,rewards:1,duel:1,nudge:1,teamCreate:1,theme:1};   // toutes les fonctions sont ouvertes dès le départ
-const PALIERS=[5,10,15,20,25,30,35,40,45,50];
+const PALIERS=[10,20,30,40,50,60,70,80,90,100];
 const STAGE_COL=["#4A4A52","#9A7350","#4A86C5","#3B3B3B","#2F7A45","#7BAF4F","#3E9A9A","#7B68D8","#9FC9EE","#DDE7F2","#FFC107"];
 const stageIdx=L=>STAGES.filter(x=>x[0]<=L).length-1;
 /* contenu débloqué à chaque niveau (affiché dans la route) */
 const AV={
  face:{n:"visage",o:[["masculin",1],["féminin",1]]},
  skin:{n:"peau",o:[["#F6D3B8",1],["#E9B58F",1],["#C98F63",1],["#9C6641",1],["#6A4229",1]]},
- hair:{n:"coiffure",o:[["courts",1],["rasés",1],["longs",1],["chauve",1],["chignon",1],["bouclés",18],["crête",18],["queue de cheval",1],["carré",1],["tresse",1]]},
- hairC:{n:"couleur cheveux",o:[["#1F1A17",1],["#5A3A22",1],["#A0662F",1],["#D9B26F",1],["#B9B9B9",1],["#E04E2C",25],["#FFC107",25]]},
+ hair:{n:"coiffure",o:[["courts",1],["rasés",1],["longs",1],["chauve",1],["chignon",1],["bouclés",36],["crête",36],["queue de cheval",1],["carré",1],["tresse",1]]},
+ hairC:{n:"couleur cheveux",o:[["#1F1A17",1],["#5A3A22",1],["#A0662F",1],["#D9B26F",1],["#B9B9B9",1],["#E04E2C",50],["#FFC107",50]]},
  beard:{n:"barbe",o:[["aucune",1],["légère",1],["fournie",1]]},
- head:{n:"sur la tête",o:[["rien",1],["bandeau",2],["casquette",5],["buff",7],["frontale",10],["bonnet",35]]},
- eyes:{n:"lunettes",o:[["aucune",1],["rondes",1],["sport",3]]},
- top:{n:"haut",o:[["tee-shirt",1],["débardeur",10],["coupe-vent",20]]},
- topC:{n:"couleur du haut",o:[["#26262B",1],["#F2F2EE",1],["#2F6FDE",1],["#E04E2C",4],["#2BB673",4],["#7B68D8",14],["#FFC107",25]]},
- acc:{n:"équipement",o:[["rien",1],["écouteurs",12],["sac de trail",15]]},
+ head:{n:"sur la tête",o:[["rien",1],["bandeau",4],["casquette",10],["buff",14],["frontale",20],["bonnet",70]]},
+ eyes:{n:"lunettes",o:[["aucune",1],["rondes",1],["sport",6]]},
+ top:{n:"haut",o:[["tee-shirt",1],["débardeur",20],["coupe-vent",40]]},
+ topC:{n:"couleur du haut",o:[["#26262B",1],["#F2F2EE",1],["#2F6FDE",1],["#E04E2C",8],["#2BB673",8],["#7B68D8",28],["#FFC107",50]]},
+ acc:{n:"équipement",o:[["rien",1],["écouteurs",24],["sac de trail",30]]},
 };
 const AV_DEF={face:0,skin:0,hair:0,hairC:0,beard:0,head:0,eyes:0,top:0,topC:0,acc:0};
 const UNLOCK_LIST=(()=>{const m={};const add=(L,x)=>(m[L]=m[L]||[]).push(x);
   Object.values(AV).forEach(c=>c.o.forEach(([v,L])=>{if(L>1)add(L,`avatar : ${c.n.startsWith("couleur")?c.n+" "+(v.startsWith("#")?"spéciale":v):v}`)}));
   PALIERS.forEach(L=>add(L,`contour ${STAGES.find(x=>x[0]===L)?STAGES.find(x=>x[0]===L)[1]:""}`));
-  add(20,"médaille de bronze");add(30,"médaille d'argent");add(45,"médaille d'or");add(50,"couronne de laurier");
+  add(40,"médaille de bronze");add(60,"médaille d'argent");add(90,"médaille d'or");add(100,"couronne de laurier");
   return m})();
 const unlocked=f=>curL>=FEAT[f];
 const lockMsg=f=>toast(`🔒 se débloque au niveau ${FEAT[f]}`);
@@ -699,9 +701,9 @@ function jokersPerMonth(){return 1}
 function trialPerfs(){return [...perfs].filter(p=>p.unit!=="kg").sort((a,b)=>(a.order||0)-(b.order||0))}
 function baseOf(p){const l=logs(p);return l.length?l[0].v:null}
 function trialOf(P){const list=trialPerfs();if(!list.length)return null;const p=list[(P/5-1)%list.length],base=baseOf(p);
-  const pct=P*2;const target=base==null?null:p.lower?Math.max(1,Math.round(base*(1-pct/200))):Math.ceil(base*(1+pct/100));
+  const pct=P;const target=base==null?null:p.lower?Math.max(1,Math.round(base*(1-pct/200))):Math.ceil(base*(1+pct/100));
   return{P,p,base,pct:p.lower?pct/2:pct,target}}
-function applyTrials(lv){const all=(meDoc&&meDoc.trials)||{},rs=(meDoc&&meDoc.resetFrom&&meDoc.resetFrom<=today())?meDoc.resetFrom:"0000",done={};Object.entries(all).forEach(([k,v])=>{if(!v||!v.at||v.at>=rs)done[k]=v});for(const P of PALIERS){if(lv.L>=P&&!done[P]){const L=P-1;return{L,into:need(L),need:need(L),blocked:P,raw:lv.L}}}return lv}
+function applyTrials(lv){const all=(meDoc&&meDoc.trials)||{},rs=(meDoc&&meDoc.resetFrom&&meDoc.resetFrom<=today())?meDoc.resetFrom:"0000",done={};Object.entries(all).forEach(([k,v])=>{if(!v||!v.at||v.at>=rs)done[k]=v});for(const P of PALIERS){if(lv.L>=P&&!done[P]){const L=P-1;return{L,lg:lv.lg||0,into:need(L),need:need(L),blocked:P,raw:lv.L}}}return lv}
 const kmTotal=()=>Math.round(runs.filter(r=>r.date>=startDay()).reduce((a,r)=>a+(r.km||0),0)*10)/10;
 let agDay=null, agWeeks={}, agLoading={}, agErr=null;
 let runs=[], nudges=[], challenges=[], events=[], eventsInit=false, prevBadges=null, prevStreak=null;
@@ -888,7 +890,9 @@ function weeklyResolve(wk,w){ // {xp, state, at}
     if(km>=goal)return{xp:KM_REWARD[w.o],state:"gagné",at:t>end?end:t,km,goal};if(t>end)return{xp:-50,state:"perdu",at:end,km,goal};return{xp:0,state:"en cours",km,goal}}
   return{xp:0,state:"en cours"};
 }
-function levelOf(xp){let L=1,acc=0;while(L<MAX_LEVEL&&xp>=acc+need(L)){acc+=need(L);L++}return {L,into:xp-acc,need:L<MAX_LEVEL?need(L):0}}
+function levelOf(xp){const lg=Math.min(LEAGUES.length-1,Math.floor(xp/LEAGUE_XP));xp-=lg*LEAGUE_XP;let L=1,acc=0;while(L<MAX_LEVEL&&xp>=acc+need(L)){acc+=need(L);L++}
+  const last=lg>=LEAGUES.length-1;return {L,lg,into:xp-acc,need:L<MAX_LEVEL||!last?need(L):0}}
+const leagueTag=lg=>lg>0?`ligue ${LEAGUES[lg]} · `:"";
 const stageOf=L=>STAGES.filter(s=>s[0]<=L).pop()[1];
 /* saisons de 4 semaines, communes à tout le monde */
 const SEASON0="2026-11-02",SEASON_DAYS=28;
@@ -920,7 +924,7 @@ function avatarSvg(cfg,L,cls=""){
   const sd=mix(skin,"#3a1d10",78),sl=mix(skin,"#fff",82),hd=mix(hairC,"#000",65),hl=mix(hairC,"#fff",72),td=mix(topC,"#000",70),tl=mix(topC,"#fff",85);
   const lip=mix(skin,"#a8423a",60),lipF=mix(skin,"#c2414f",45),gold="#FFC107";
   const capOn=head==="casquette"||head==="bonnet";
-  let s=`<svg viewBox="0 0 120 120" class="avsvg ${cls} ${L>=50?"legend":""}"><defs>
+  let s=`<svg viewBox="0 0 120 120" class="avsvg ${cls} ${L>=100?"legend":""}"><defs>
    <radialGradient id="${id}bg" cx="50%" cy="30%" r="75%"><stop offset="0" stop-color="${sc}" stop-opacity=".55"/><stop offset="1" stop-color="#101012"/></radialGradient>
    <linearGradient id="${id}sk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${sl}"/><stop offset=".55" stop-color="${skin}"/><stop offset="1" stop-color="${sd}"/></linearGradient>
    <linearGradient id="${id}hr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${hl}"/><stop offset=".5" stop-color="${hairC}"/><stop offset="1" stop-color="${hd}"/></linearGradient>
@@ -949,7 +953,7 @@ function avatarSvg(cfg,L,cls=""){
   if(acc==="sac de trail")s+=`<path d="M39 90 C41 100 42 112 42 124M81 90 C79 100 78 112 78 124" stroke="#1d1d22" stroke-width="6.5" stroke-linecap="round"/><path d="M40 106 h7 v12 h-7z M73 106 h7 v12 h-7z" fill="#8fd6f5" opacity=".85"/><path d="M42 108 h42" stroke="#1d1d22" stroke-width="2"/>`;
   // dossard + médaille
   s+=`<g transform="rotate(-3 60 112)"><rect x="47" y="103" width="26" height="16" rx="1.5" fill="#F4F4EF"/><rect x="47" y="103" width="26" height="3.2" fill="${gold}"/><text x="60" y="117" text-anchor="middle" font-family="Barlow Condensed" font-style="italic" font-weight="900" font-size="11" fill="#151515">${L}</text></g>`;
-  const med=L>=45?gold:L>=30?"#C9CED6":L>=20?"#CD7F32":null;
+  const med=L>=90?gold:L>=60?"#C9CED6":L>=40?"#CD7F32":null;
   if(med)s+=`<path d="M52 86 L58 101 M68 86 L62 101" stroke="#B83227" stroke-width="3.4"/><circle cx="60" cy="102" r="6" fill="${med}" stroke="${mix(med,"#000",60)}" stroke-width="1.3"/><circle cx="58.3" cy="100.3" r="1.6" fill="#fff" opacity=".55"/>`;
   // cou
   s+=`<path d="M51 64 C51 73 52 80 49 86 C53 91 67 91 71 86 C68 80 69 73 69 64 Z" fill="url(#${id}sk)"/><path d="M51 70 C55 76 65 76 69 70 L69 76 C64 80 56 80 51 76Z" fill="${sd}" opacity=".45"/>`;
@@ -996,7 +1000,7 @@ function avatarSvg(cfg,L,cls=""){
   if(eyes==="rondes")s+=`<circle cx="52" cy="50.5" r="5.6" fill="#fff" fill-opacity=".06" stroke="#1d1a18" stroke-width="1.5"/><circle cx="68" cy="50.5" r="5.6" fill="#fff" fill-opacity=".06" stroke="#1d1a18" stroke-width="1.5"/><path d="M57.6 50 Q60 48.8 62.4 50M46.4 49.5 L41.5 48M73.6 49.5 L78.5 48" stroke="#1d1a18" stroke-width="1.3" fill="none"/>`;
   if(eyes==="sport")s+=`<path d="M41 47 C53 43.5 67 43.5 79 47 L78.4 53.5 C74 56.5 66 56.5 61.5 53 L60 52 L58.5 53 C54 56.5 46 56.5 41.6 53.5Z" fill="#141416"/><path d="M44 48 C52 45.8 60 45.6 68 46.2" stroke="${gold}" stroke-width="1.5" fill="none" opacity=".85"/><path d="M66 48.5 C70 48.3 74 48.8 76.5 49.5" stroke="#7FD3F7" stroke-width="1.2" fill="none" opacity=".6"/>`;
   if(acc==="écouteurs")s+=`<ellipse cx="38.6" cy="55" rx="2.6" ry="3.2" fill="#f2f2ee"/><ellipse cx="81.4" cy="55" rx="2.6" ry="3.2" fill="#f2f2ee"/>`;
-  if(L>=50)s+=[...Array(14)].map((_,i)=>{const side=i<7?-1:1,k=i%7,a=(side<0?(-170+k*18):(-10-k*18))*Math.PI/180,x=60+24*Math.cos(a),y=40+21*Math.sin(a),rot=(side<0?(-170+k*18):(-10-k*18))+90;return `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="4.6" ry="2.2" fill="${gold}" transform="rotate(${rot} ${x.toFixed(1)} ${y.toFixed(1)})"/>`}).join("");
+  if(L>=100)s+=[...Array(14)].map((_,i)=>{const side=i<7?-1:1,k=i%7,a=(side<0?(-170+k*18):(-10-k*18))*Math.PI/180,x=60+24*Math.cos(a),y=40+21*Math.sin(a),rot=(side<0?(-170+k*18):(-10-k*18))+90;return `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="4.6" ry="2.2" fill="${gold}" transform="rotate(${rot} ${x.toFixed(1)} ${y.toFixed(1)})"/>`}).join("");
   s+=`</g></g><circle cx="60" cy="60" r="56" fill="none" stroke="${sc}" stroke-width="${L>=5?3:1.5}"/>`;
   if(L>=5)s+=`<circle cx="60" cy="60" r="59" fill="none" stroke="${sc}" stroke-width="1" opacity=".55"/>`;
   if(L>=25)s+=`<circle cx="60" cy="60" r="59" fill="none" stroke="${gold}" stroke-width="1.8" stroke-dasharray="2.5 6" opacity=".8"/>`;
@@ -1051,7 +1055,7 @@ function campusUrl(){const w="https://www.campus.coach/app",ps="https://play.goo
 function render(){
   if(!resumeTimer._d&&allLoaded()){resumeTimer._d=1;setTimeout(resumeTimer,300)}
   if(!showTuto._d&&allLoaded()&&loaded.profile&&meDoc&&!meDoc.tuto&&(owner||meDoc.onboarded)&&!readOnly&&!window.__TEASE){showTuto._d=1;setTimeout(showTuto,500)}
-  const xp=computeXP(), lv=applyTrials(levelOf(xp.total));curL=lv.L;
+  const xp=computeXP(), lv=applyTrials(levelOf(xp.total));curL=lv.L;curLg=lv.lg||0;
   if(meDoc&&meDoc.theme)document.documentElement.style.setProperty('--gold',meDoc.theme);
   if(meDoc&&meDoc.mode&&meDoc.mode!==curMode())setMode(meDoc.mode,true);
   if(prevLevel!==null&&lv.L>prevLevel) showLevelUp(lv.L);
@@ -1282,9 +1286,9 @@ function badgeList(lv){
     {id:"strava",n:"Connecté",d:"synchroniser ses sorties",i:"signal",on:runs.length>0||!!(strava&&strava.efforts)},
     {id:"km100",n:"Cent bornes",d:"100 km courus depuis le début",i:"route",t:"100",on:km>=100},
     {id:"d1000",n:"Grimpeur",d:"1 000 m D+ cumulés",i:"montee",on:dp>=1000},
-    {id:"n5",n:"Pavés",d:"atteindre le niveau 5",i:"paves",on:lv.L>=5},
-    {id:"n15",n:"Terril",d:"atteindre le niveau 15",i:"terril",on:lv.L>=15},
-    {id:"n50",n:"Les Alpes",d:"atteindre le niveau 50",i:"alpes",on:lv.L>=50},
+    {id:"n5",n:"Pavés",d:"atteindre le niveau 10",i:"paves",on:lv.L>=10||(lv.lg||0)>0},
+    {id:"n15",n:"Terril",d:"atteindre le niveau 30",i:"terril",on:lv.L>=30||(lv.lg||0)>0},
+    {id:"n50",n:"Les Alpes",d:"atteindre le niveau 100",i:"alpes",on:lv.L>=100||(lv.lg||0)>0},
     {id:"team",n:"Cordée",d:"rejoindre une équipe",i:"cordee",on:!!(mb&&mb.teamId)},
     {id:"duel",n:"Duelliste",d:"gagner un défi 1 contre 1",i:"fleches",on:wins>=1},
     {id:"nudge",n:"Coach",d:"secouer 10 fois un pote",i:"megaphone",on:sent>=10},
@@ -1321,7 +1325,7 @@ function vQG(xp,lv){
     <div class="ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#222226" stroke-width="9"/><circle cx="60" cy="60" r="52" fill="none" style="stroke:var(--gold)" stroke-width="9" stroke-linecap="round" stroke-dasharray="${(326.7*pct/100).toFixed(1)} 400" transform="rotate(-90 60 60)"/></svg>
       <button class="rav" data-goav aria-label="mon avatar">${myAvatar()}</button><div class="rlv">NIV.${lv.L}</div></div>
     <div class="hinfo">${(()=>{const nm=(myName()||"Coureur").trim().split(/\s+/);return `<h1 class="hname1" data-rename style="cursor:pointer" title="changer de pseudo">${esc(nm[0])}<br><span class="g">${esc(nm.slice(1).join(" ")||"·")}</span></h1>`})()}
-      <div class="stg"><span>${stageOf(lv.L)}</span>${nextStage?` → ${nextStage[1]} niv.${nextStage[0]}`:""}</div>
+      <div class="stg"><span>${leagueTag(lv.lg||0)}${stageOf(lv.L)}</span>${nextStage?` → ${nextStage[1]} niv.${nextStage[0]}`:""}</div>
       <div class="kmt">🏃 ${kmTitle(kmTotal())} · ${String(kmTotal()).replace(".",",")} km</div></div>
   </div>
   <div class="xpbar">
@@ -1366,7 +1370,7 @@ function vRoute(){
   <div class="xplegend">journée complète <b>+${DAY_POOL}</b> (partagés entre tes habitudes, à partir de ${POOL_MIN}) · routine complète <b>+${XP.slotBonus}</b> · tâche faite <b>+${XP.task}</b> (prioritaire <b>+${XP.task+XP.taskPrio}</b>, 5/jour) · nouveau record <b>+${XP.perfRecord}</b> (1/semaine par perf) · duel gagné <b>+${XP.duel}</b> (1/semaine)</div>
   <div class="xplegend"><b>série</b> : une seule habitude ratée et elle tombe. chaque jour ajoute <b>+2 %</b> à l'XP des habitudes, jusqu'à <b>×1,5</b>. un <b>joker par mois</b>.</div>
   <div class="xplegend"><b>cordée</b> : en équipe, si un seul membre rate, le bonus retombe à zéro pour tous. le défi de la semaine vaut pour toute la cordée. le dimanche, le <b>purgatoire</b> transforme les habitudes ratées en répétitions à faire ensemble (semaine parfaite <b>+${PURG_CLEAN}</b>, pas payé lundi soir <b>${PURG_MISSED}</b>).</div>
-  <div class="xplegend"><b>paliers</b> : tous les 5 niveaux, une épreuve calculée sur ton test de départ (+10 % au palier 5 … +100 % au palier 50).</div>`;
+  <div class="xplegend"><b>paliers</b> : tous les 10 niveaux, une épreuve calculée sur ton test de départ (+10 % au palier 10 … +100 % au palier 100).</div>`;
 }
 function profileExtras(lv){
   const nextStage=STAGES.find(s=>s[0]>lv.L),rw=(meDoc&&meDoc.rewards)||{},bl=badgeList(lv);
@@ -1380,7 +1384,7 @@ function profileExtras(lv){
   <div class="xplegend">journée complète <b>+${DAY_POOL}</b> (partagés entre tes habitudes, à partir de ${POOL_MIN}) · routine complète <b>+${XP.slotBonus}</b> · tâche faite <b>+${XP.task}</b> (prioritaire <b>+${XP.task+XP.taskPrio}</b>, 5/jour) · nouveau record <b>+${XP.perfRecord}</b> (1/semaine par perf) · duel gagné <b>+${XP.duel}</b> (1/semaine)</div>
   <div class="xplegend"><b>série</b> : une seule habitude ratée et elle tombe. chaque jour ajoute <b>+2 %</b> à l'XP des habitudes, jusqu'à <b>×1,5</b>. un <b>joker par mois</b>.</div>
   <div class="xplegend"><b>cordée</b> : en équipe, si un seul membre rate, le bonus retombe à zéro pour tous. le défi de la semaine vaut pour toute la cordée. le dimanche, le <b>purgatoire</b> transforme les habitudes ratées en répétitions à faire ensemble (semaine parfaite <b>+${PURG_CLEAN}</b>, pas payé lundi soir <b>${PURG_MISSED}</b>).</div>
-  <div class="xplegend"><b>paliers</b> : tous les 5 niveaux, une épreuve calculée sur ton test de départ (+10 % au palier 5 … +100 % au palier 50).</div>`;
+  <div class="xplegend"><b>paliers</b> : tous les 10 niveaux, une épreuve calculée sur ton test de départ (+10 % au palier 10 … +100 % au palier 100).</div>`;
 }
 const pseudoOf=id=>(board.find(b=>b.id===id)||{}).pseudo||"un pote";
 function bilanData(){
@@ -1989,18 +1993,18 @@ function openReset(day){
 /* ---------- AVATAR ---------- */
 function vAvatar(xp,lv){
   const cfg={...AV_DEF,...((meDoc&&meDoc.avatar)||{})},km=kmTotal(),nt=nextKmTitle(km);
-  const cats=Object.entries(AV).map(([k,c])=>`<div class="avcat"><div class="label">${c.n}</div><div class="avopts">${c.o.map(([v,L],i)=>{const lock=L>curL,on=cfg[k]===i;
+  const cats=Object.entries(AV).map(([k,c])=>`<div class="avcat"><div class="label">${c.n}</div><div class="avopts">${c.o.map(([v,L],i)=>{const lock=!curLg&&L>curL,on=cfg[k]===i;
     return `<button class="avo ${on?"on":""} ${lock?"lock":""}" data-av="${k}" data-i="${i}" ${lock?`data-lock="${L}"`:""}>${v.startsWith("#")?`<i style="background:${v}"></i>`:esc(v)}${lock?`<small>🔒 ${L}</small>`:""}</button>`}).join("")}</div></div>`).join("");
   const themes=THEMES;
   const allL=Object.keys(UNLOCK_LIST).map(Number).sort((a,b)=>a-b);
   return subnav([["avatar","avatar"],["badges","badges"],["route","route"]])+`<button class="btn small storybtn" data-story style="float:right;margin-top:-4px">📸 story</button><div class="tag">Avatar · ${stageOf(curL)}</div>
   <div class="avhero"><div class="avbig">${myAvatar()}</div>
    <div class="avinfo"><h1 data-rename style="font-size:clamp(38px,10vw,62px);cursor:pointer" title="changer de pseudo">${esc((myName()||"Coureur").split(" ")[0])} <span style="font-size:.4em;opacity:.6">✏️</span></h1>
-    <div class="stg"><span>NIV.${curL}</span>${stageOf(curL)}</div>
+    <div class="stg"><span>NIV.${curL}</span>${leagueTag(curLg)}${stageOf(curL)}</div>
     <div class="kmt big">🏃 ${kmTitle(km)}</div>
     <div class="label" style="margin-top:6px">${String(km).replace(".",",")} km courus${nt?` · ${nt[1]} à ${nt[0]} km`:""}</div>
     ${nt?`<div class="kmbar"><div style="width:${Math.min(100,Math.round(km/nt[0]*100))}%"></div></div>`:""}</div></div>
-  <p class="sub" style="font-size:14px">contour qui change à chaque palier, dossard à ton niveau, médailles aux niveaux 20, 30 et 45. les éléments 🔒 arrivent en montant.</p>
+  <p class="sub" style="font-size:14px">contour qui change à chaque palier, dossard à ton niveau, médailles aux niveaux 40, 60 et 90. les éléments 🔒 arrivent en montant.</p>
   ${label("personnaliser")}${cats}
   ${""}
   ${label("titres de coureur")}
@@ -2133,10 +2137,10 @@ function vPerfs(){
   const wsS=ds(weekStart(new Date()));const wk=[...Array(5)].map((_,i)=>{const a=addDays(wsS,-7*(4-i)),b=addDays(a,7);const rr=runs.filter(r=>r.date>=a&&r.date<b);return{a,km:rr.reduce((x,r)=>x+(r.km||0),0),dp:rr.reduce((x,r)=>x+(r.dplus||0),0),n:rr.length}});
   const cur=wk[4],mx=Math.max(1,...wk.map(w=>w.km));
   h+=label("volume de la semaine",` <button class="btn small" data-runadd style="margin-left:auto">+ sortie</button>`);
-  h+=`<div class="kpis" style="margin-top:12px"><div class="kpi"><b>${cur.km.toFixed(1).replace(".",",")}</b><span>km</span></div><div class="kpi"><b>${Math.round(cur.dp)}</b><span>m D+</span></div><div class="kpi"><b>+${runs.filter(r=>r.date>=wsS&&r.date>=startDay()).reduce((x,r)=>x+runXP(r),0)}</b><span>xp course</span></div></div>
+  h+=`<div class="kpis" style="margin-top:12px"><div class="kpi"><b>${cur.km.toFixed(1).replace(".",",")}</b><span>km</span></div><div class="kpi"><b>${Math.round(cur.dp)}</b><span>m D+</span></div><div class="kpi"><b>${runs.filter(r=>r.date>=wsS&&r.date>=startDay()).length}</b><span>sorties</span></div></div>
   <div class="vol">${wk.map((w,i)=>`<div class="vb"><div class="bar2"><div style="height:${Math.round(w.km/mx*100)}%" class="${i===4?"cur":""}"></div></div><span>${Math.round(w.km)}</span><small>S${isoWeek(parse(w.a))}</small></div>`).join("")}</div>`;
   const recent=[...runs].sort((a,b)=>b.date.localeCompare(a.date)).filter(r=>r.date>=wsS);
-  if(recent.length)h+=`<div class="strava">${recent.map(r=>`<div class="sr"><span class="d">${esc(r.name||"sortie")}</span><span class="v">${(r.km||0).toFixed(1).replace(".",",")}<small style="font-size:13px"> km</small></span><span class="w">${fdate(r.date,{weekday:"short",day:"numeric",month:"short"})} · ${Math.round(r.dplus||0)} m D+ · +${runXP(r)} xp${r.manual?` · <button data-rundel="${esc(r.id)}" style="color:var(--mute)">retirer</button>`:""}</span></div>`).join("")}</div>`;
+  if(recent.length)h+=`<div class="strava">${recent.map(r=>`<div class="sr"><span class="d">${esc(r.name||"sortie")}</span><span class="v">${(r.km||0).toFixed(1).replace(".",",")}<small style="font-size:13px"> km</small></span><span class="w">${fdate(r.date,{weekday:"short",day:"numeric",month:"short"})} · ${Math.round(r.dplus||0)} m D+${r.date<RULES2?` · +${runXP(r)} xp`:""}${r.manual?` · <button data-rundel="${esc(r.id)}" style="color:var(--mute)">retirer</button>`:""}</span></div>`).join("")}</div>`;
   h+=label("records course · strava");
   const sync=strava&&strava.syncedAt?`synchro ${new Date(strava.syncedAt).toLocaleDateString("fr-FR",{day:"numeric",month:"short"})} à ${new Date(strava.syncedAt).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}`:"jamais synchronisé";
   h+=`<div class="stravahead"><span class="label">${sync}</span><button class="btn small main" data-strava ${syncing?"disabled":""}>${syncing?"synchro…":"synchroniser strava"}</button></div><div id="stravaMsg" class="label" style="margin-top:8px;color:var(--gold)"></div>`;
@@ -2190,7 +2194,7 @@ function openRun(){
    $("#rSave").onclick=()=>{const km=parseFloat(($("#rKm").value||"").replace(",","."));if(!km||km<=0||km>400)return;
      const dp=Math.max(0,parseInt($("#rDp").value||"0")||0),date=$("#rDate").value||today();const id="m"+newId().slice(0,12);
      const doc={date,name:($("#rName").value||"sortie").trim().slice(0,60),km:Math.round(km*10)/10,dplus:dp,sport:"Run",manual:true};
-     runs.push({id,...doc});dset(P("runs",id),doc);closeSheet();render();toast(`+${runXP(doc)} xp`);pushEvent(`a couru ${doc.km.toString().replace(".",",")} km`)};
+     runs.push({id,...doc});dset(P("runs",id),doc);closeSheet();render();toast(`sortie ajoutée · ${doc.km.toString().replace(".",",")} km`);pushEvent(`a couru ${doc.km.toString().replace(".",",")} km`)};
   });
 }
 
@@ -2372,7 +2376,7 @@ function nextBadge(){if(badgeQ.length)SND.badge();
 }
 function showLevelUp(L){SND.level();const el=$("#levelup");const st=stageOf(L),newStage=STAGES.some(s=>s[0]===L);const rw=newStage&&meDoc&&meDoc.rewards&&meDoc.rewards[L];
   setTimeout(()=>pushEvent(`passe niveau ${L}${newStage?" · "+st:""}`),0);
-  el.innerHTML=`<div class="lulogo">${LOGO}</div><div class="k">niveau supérieur</div><div class="big">${L}</div><div class="nm">${newStage?"nouveau palier · ":""}${st}</div>${rw?`<p style="color:var(--gold);font-size:18px">🎁 tu as gagné : ${esc(rw)}</p>`:""}<p>${L<MAX_LEVEL?`encore ${MAX_LEVEL-L} niveaux avant les Alpes.`:"t'es arrivé. du plat aux alpes."}</p><button class="btn main" style="margin-top:26px">continuer</button>`;
+  el.innerHTML=`<div class="lulogo">${LOGO}</div><div class="k">niveau supérieur</div><div class="big">${L}</div><div class="nm">${newStage?"nouveau palier · ":""}${st}</div>${rw?`<p style="color:var(--gold);font-size:18px">🎁 tu as gagné : ${esc(rw)}</p>`:""}<p>${L<MAX_LEVEL?`encore ${MAX_LEVEL-L} niveaux avant ${curLg>0?"le sommet de la ligue":"les Alpes"}.`:curLg<LEAGUES.length-1?`les alpes sont à toi. prochaine étape : la ligue ${LEAGUES[curLg+1]}.`:"t'es arrivé. du plat aux alpes."}</p><button class="btn main" style="margin-top:26px">continuer</button>`;
   el.classList.add("show");el.querySelector("button").onclick=()=>el.classList.remove("show")}
 
 /* ================= BOOT ================= */
