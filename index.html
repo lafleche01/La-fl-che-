@@ -621,6 +621,9 @@ const SLOTS = [["matin","Matin"],["journee","Journée"],["soir","Soir"]];
 const TASK_CATS = ["Études","Insta","Entraînement","Perso"];
 const IDEA_CATS = ["Vidéo","La Flèche TV","Humour","Carrousel","Marque","Autre"];
 const IDEA_STATUS = ["brute","à creuser","prête","tournée"];
+const RULES2="2026-11-10",DAY_POOL=100,POOL_MIN=5; // règles anti-triche à partir du lancement public
+const habitXP=(s,n)=>s>=RULES2?Math.round(n*DAY_POOL/Math.max(habitsFor(s).length,POOL_MIN)):n*XP.habit;
+const caseXP=s=>s>=RULES2?Math.round(DAY_POOL/Math.max(habitsFor(s).length,POOL_MIN)):XP.habit;
 const XP = {habit:10, slotBonus:15, task:20, taskPrio:10, idea:5, ideaShot:25, perfFirst:10, perfRecord:40, km:8, d10:1, duel:60};
 const VALID_RATIO = 1;            // mode normal = hardcore : une habitude ratée et la série tombe
 const MAX_LEVEL = 50;
@@ -838,7 +841,7 @@ function computeXP(){
     if(team){tv=teamValid(s);if(tv===false)cs=0;else if(tv===true)cs++}
     const n=dayCount(s);let bonus=0;SLOTS.forEach(([k])=>{if(slotFull(s,k))bonus+=XP.slotBonus});
     const m=team?mult(cs+(tv===null&&v?1:0)):mult(streak);
-    let x=Math.round((n*XP.habit+bonus)*(v?m:1));
+    let x=Math.round((habitXP(s,n)+bonus)*(v?m:1));
     const wk=ds(weekStart(parse(s))),w=getW(wk);let adj=0;
     if(w){
       const S=wst[wk]||(wst[wk]={ok:true});const off=days[s]&&days[s].off,past=s<t,fail=groupFail(s),mm=past?myMiss(s):0;
@@ -854,16 +857,19 @@ function computeXP(){
   // purgatoire : semaine immaculée = bonus, purgatoire pas fait avant lundi soir = malus
   for(let wk=ds(weekStart(parse(st)));addDays(wk,8)<=t;wk=addDays(wk,7)){if(wk<chStart())continue;const p=purgOf(wk);const x=p.total===0?PURG_CLEAN:(p.members[0].done?0:PURG_MISSED);br.purg+=x;if(addDays(wk,8)>=wsS)week+=x;if(addDays(wk,8)>=ssS)season+=x}
   wstateCache=wst;
-  items.forEach(i=>{
-    if(i.kind==="task"&&i.done&&(i.doneAt||0)>=resetT()){const x=XP.task+(i.prio?XP.taskPrio:0);br.tasks+=x;if((i.doneAt||0)>=wsT)week+=x;if((i.doneAt||0)>=ssT)season+=x}
-    if(i.kind==="idea"&&(i.createdAt||0)>=resetT()){br.ideas+=XP.idea+(i.status==="tournée"?XP.ideaShot:0);if((i.createdAt||0)>=wsT)week+=XP.idea;if((i.createdAt||0)>=ssT)season+=XP.idea}
+  const R2T=parse(RULES2).getTime(),tDay={};
+  items.slice().sort((a,b)=>(a.doneAt||0)-(b.doneAt||0)).forEach(i=>{
+    if(i.kind==="task"&&i.done&&(i.doneAt||0)>=resetT()){let x=XP.task+(i.prio?XP.taskPrio:0);
+      if((i.doneAt||0)>=R2T){const dk=ds(new Date(i.doneAt));if((i.doneAt-(i.createdAt||0))<36e5||(tDay[dk]=(tDay[dk]||0)+1)>5)x=0}br.tasks+=x;if((i.doneAt||0)>=wsT)week+=x;if((i.doneAt||0)>=ssT)season+=x}
+    if(i.kind==="idea"&&(i.createdAt||0)>=resetT()&&(i.createdAt||0)<R2T){br.ideas+=XP.idea+(i.status==="tournée"?XP.ideaShot:0);if((i.createdAt||0)>=wsT)week+=XP.idea;if((i.createdAt||0)>=ssT)season+=XP.idea}
   });
-  perfs.forEach(p=>{let best=null;logs(p).forEach(e=>{
+  perfs.forEach(p=>{let best=null;const recW={};logs(p).forEach(e=>{
     const better=best===null?true:(p.lower?e.v<best:e.v>best);
-    const x=best===null?XP.perfFirst:(better?XP.perfRecord:0);br.perfs+=x;if(e.d>=wsS)week+=x;if(e.d>=ssS)season+=x;
+    let x=best===null?XP.perfFirst:(better?XP.perfRecord:0);
+    if(e.d>=RULES2){if(best===null)x=0;else if(better){const w=ds(weekStart(parse(e.d)));if(recW[w])x=0;recW[w]=1}}br.perfs+=x;if(e.d>=wsS)week+=x;if(e.d>=ssS)season+=x;
     if(better)best=e.v;})});
-  runs.forEach(r=>{if(r.date>=st){const x=runXP(r);br.runs+=x;if(r.date>=wsS)week+=x;if(r.date>=ssS)season+=x}});
-  challenges.forEach(c=>{const r=duelResult(c);if(r.done&&r.winner===uid&&c.end>=st){br.duels+=XP.duel;if(c.end>=addDays(wsS,-1))week+=XP.duel;if(c.end>=ssS)season+=XP.duel}});
+  runs.forEach(r=>{if(r.date>=st){const x=r.date>=RULES2?0:runXP(r);br.runs+=x;if(r.date>=wsS)week+=x;if(r.date>=ssS)season+=x}});
+  const duelW={};challenges.slice().sort((a,b)=>a.end<b.end?-1:1).forEach(c=>{const r=duelResult(c);if(r.done&&r.winner===uid&&c.end>=st){if(c.end>=RULES2){const w=ds(weekStart(parse(c.end)));if(duelW[w])return;duelW[w]=1}br.duels+=XP.duel;if(c.end>=addDays(wsS,-1))week+=XP.duel;if(c.end>=ssS)season+=XP.duel}});
   const total=Math.max(0,Object.values(br).reduce((a,b)=>a+b,0));
   return {total,br,perDay,week,cs,season:Math.max(0,season)};
 }
@@ -1306,7 +1312,7 @@ function vQG(xp,lv){
   const got=nudges.filter(x=>x.to===uid&&x.day===t);
   if(got.length&&!validDay(t)) alerts+=`<div class="alert">👊 ${got.map(x=>esc(pseudoOf(x.from))).join(", ")} ${got.length>1?"te secouent":"te secoue"} : coche ta routine !</div>`;
   const hr=new Date().getHours(), soir=habitsFor(t).filter(h=>h.slot==="soir");
-  if(isNewbie())alerts+=`<button class="alert gold" data-nav="habitudes">🏁 première mission : coche ta première habitude › <b>+10 xp</b></button>`;else alerts+=notifAlerts();
+  if(isNewbie())alerts+=`<button class="alert gold" data-nav="habitudes">🏁 première mission : coche ta première habitude › <b>+${caseXP(today())} xp</b></button>`;else alerts+=notifAlerts();
   if(inboxNew())alerts+=`<button class="alert gold" data-nav="reglages">📬 ${inboxNew()} nouveau${inboxNew()>1?"x":""} retour${inboxNew()>1?"s":""} des joueurs (bugs / idées) ›</button>`;
   if(dow(t)===6) alerts+=`<button class="alert gold" data-bilan>📊 c'est dimanche : ton bilan de la semaine est prêt ›</button>`;
   return `
@@ -1357,7 +1363,7 @@ function vRoute(){
   <p class="sub">${nextStage?`prochain palier : <b class="g">${nextStage[1]}</b> au niveau ${nextStage[0]}. `:""}touche un palier pour te fixer une récompense.</p>
   <div class="road" style="margin-top:20px">${road}</div>
   ${label("règles du jeu")}
-  <div class="xplegend">habitude cochée <b>+${XP.habit}</b> · routine complète <b>+${XP.slotBonus}</b> · tâche faite <b>+${XP.task}</b> (prioritaire <b>+${XP.task+XP.taskPrio}</b>) · idée notée <b>+${XP.idea}</b>, tournée <b>+${XP.ideaShot}</b> · nouveau record <b>+${XP.perfRecord}</b> · course <b>+${XP.km}/km</b> et <b>+${XP.d10}</b> par 10 m D+ · défi gagné <b>+${XP.duel}</b></div>
+  <div class="xplegend">journée complète <b>+${DAY_POOL}</b> (partagés entre tes habitudes, à partir de ${POOL_MIN}) · routine complète <b>+${XP.slotBonus}</b> · tâche faite <b>+${XP.task}</b> (prioritaire <b>+${XP.task+XP.taskPrio}</b>, 5/jour) · nouveau record <b>+${XP.perfRecord}</b> (1/semaine par perf) · duel gagné <b>+${XP.duel}</b> (1/semaine)</div>
   <div class="xplegend"><b>série</b> : une seule habitude ratée et elle tombe. chaque jour ajoute <b>+2 %</b> à l'XP des habitudes, jusqu'à <b>×1,5</b>. un <b>joker par mois</b>.</div>
   <div class="xplegend"><b>cordée</b> : en équipe, si un seul membre rate, le bonus retombe à zéro pour tous. le défi de la semaine vaut pour toute la cordée. le dimanche, le <b>purgatoire</b> transforme les habitudes ratées en répétitions à faire ensemble (semaine parfaite <b>+${PURG_CLEAN}</b>, pas payé lundi soir <b>${PURG_MISSED}</b>).</div>
   <div class="xplegend"><b>paliers</b> : tous les 5 niveaux, une épreuve calculée sur ton test de départ (+10 % au palier 5 … +100 % au palier 50).</div>`;
@@ -1371,7 +1377,7 @@ function profileExtras(lv){
   <p class="sub" style="font-size:13px;margin-top:8px">touche un palier pour te fixer une récompense.</p>
   <div class="road">${road}</div>
   ${label("règles du jeu")}
-  <div class="xplegend">habitude cochée <b>+${XP.habit}</b> · routine complète <b>+${XP.slotBonus}</b> · tâche faite <b>+${XP.task}</b> (prioritaire <b>+${XP.task+XP.taskPrio}</b>) · idée notée <b>+${XP.idea}</b>, tournée <b>+${XP.ideaShot}</b> · nouveau record <b>+${XP.perfRecord}</b> · course <b>+${XP.km}/km</b> et <b>+${XP.d10}</b> par 10 m D+ · défi gagné <b>+${XP.duel}</b></div>
+  <div class="xplegend">journée complète <b>+${DAY_POOL}</b> (partagés entre tes habitudes, à partir de ${POOL_MIN}) · routine complète <b>+${XP.slotBonus}</b> · tâche faite <b>+${XP.task}</b> (prioritaire <b>+${XP.task+XP.taskPrio}</b>, 5/jour) · nouveau record <b>+${XP.perfRecord}</b> (1/semaine par perf) · duel gagné <b>+${XP.duel}</b> (1/semaine)</div>
   <div class="xplegend"><b>série</b> : une seule habitude ratée et elle tombe. chaque jour ajoute <b>+2 %</b> à l'XP des habitudes, jusqu'à <b>×1,5</b>. un <b>joker par mois</b>.</div>
   <div class="xplegend"><b>cordée</b> : en équipe, si un seul membre rate, le bonus retombe à zéro pour tous. le défi de la semaine vaut pour toute la cordée. le dimanche, le <b>purgatoire</b> transforme les habitudes ratées en répétitions à faire ensemble (semaine parfaite <b>+${PURG_CLEAN}</b>, pas payé lundi soir <b>${PURG_MISSED}</b>).</div>
   <div class="xplegend"><b>paliers</b> : tous les 5 niveaux, une épreuve calculée sur ton test de départ (+10 % au palier 5 … +100 % au palier 50).</div>`;
@@ -1531,7 +1537,7 @@ function vHabits(){
   return `
   <div class="tag">Habitudes · routine</div>
   <h1>Tes<br><span class="g">habitudes</span></h1>
-  <p class="sub">une case cochée = +${XP.habit} xp. une routine complète = bonus.</p>
+  <p class="sub">100 xp par jour à se partager entre tes habitudes (à partir de 5). une routine complète = bonus.</p>
   ${timerStrip()}
   <div class="today-strip">
     <span class="label">aujourd'hui <b class="g" style="font-size:16px">${todayN}/${n}</b> ${td&&td.off?"· joker utilisé":""}</span>
@@ -1557,7 +1563,7 @@ function filters(cats,pool){const used=["Tout",...cats.filter(c=>pool.some(i=>i.
 const fil=a=>filter==="Tout"?a:a.filter(i=>i.cat===filter);
 function vTasks(){
   const tasks=items.filter(i=>i.kind==="task"), open=tasks.filter(t=>!t.done), ws=weekStart(new Date()).getTime(), t=today();
-  let h=`<div class="tag">Tâches · ${open.length} en cours</div><h1>À faire<br><span class="g">cette semaine</span></h1><p class="sub">coche, avance, recommence. +${XP.task} xp par tâche.</p>
+  let h=`<div class="tag">Tâches · ${open.length} en cours</div><h1>À faire<br><span class="g">cette semaine</span></h1><p class="sub">coche, avance, recommence. +${XP.task} xp par tâche (5 par jour, créée au moins 1 h avant).</p>
   <div class="subtabs"><button class="subtab ${taskSub==="todo"?"on":""}" data-sub="todo">à faire</button><button class="subtab ${taskSub==="fait"?"on":""}" data-sub="fait">fait</button></div>`;
   h+=filters(TASK_CATS,tasks);
   if(taskSub==="todo"){
@@ -1720,10 +1726,10 @@ function tickTimer(){if(!TM)return;const left=Math.max(0,TM.dur-(Date.now()-TM.s
 function endTimer(why){if(!TM)return;const T0=TM;TM=null;clearInterval(startTimer._i);try{localStorage.removeItem("lf_timer")}catch(_){}
   try{T0.wl&&T0.wl.release()}catch(_){}try{document.fullscreenElement&&document.exitFullscreen()}catch(_){}
   const el=$("#focus"),h=habits.find(x=>x.id===T0.id);
-  TALARM.clear();if(why==="ok"){TALARM.ring();if(document.hidden)TALARM.show(`✅ ${h?h.name:"minuteur"} : terminé !`,`c'est validé · +${XP.habit} xp`,true)}
+  TALARM.clear();if(why==="ok"){TALARM.ring();if(document.hidden)TALARM.show(`✅ ${h?h.name:"minuteur"} : terminé !`,`c'est validé · +${caseXP(T0.day)} xp`,true)}
   if(why==="ok"&&h){const d=dayDoc(T0.day),done={...d.done,[h.id]:true};saveDay(T0.day,{done,off:!!d.off});
     if(slotFull(T0.day,h.slot)){SND.slot();pushEvent(`a bouclé sa routine ${SLOTS.find(x=>x[0]===h.slot)[1].toLowerCase()}`)}else SND.level();
-    el.innerHTML=`<div class="fdone">✓</div><div class="fname">${esc(h.name)}</div><div class="fmsg">validée · +${XP.habit} xp</div><button class="btn main" id="fX">continuer</button>`}
+    el.innerHTML=`<div class="fdone">✓</div><div class="fname">${esc(h.name)}</div><div class="fmsg">validée · +${caseXP(T0.day)} xp</div><button class="btn main" id="fX">continuer</button>`}
   else{SND.thud();el.innerHTML=`<div class="fdone ko">✕</div><div class="fname">séance ratée</div><div class="fmsg">${why==="quit"?"tu as quitté l'appli pendant le minuteur.":"minuteur abandonné."} la case n'est pas cochée. tu peux relancer quand tu veux.</div><button class="btn main" id="fX">fermer</button>`}
   $("#fX").onclick=()=>el.classList.remove("show")}
 document.addEventListener("visibilitychange",()=>{if(!TM)return;if(document.hidden&&TM.mode==="bloque")endTimer("quit");else if(!document.hidden)tickTimer()});
@@ -1805,7 +1811,7 @@ async function openStory(){toast("je prépare ta story…");const cv=await makeS
      toast("fais un appui long sur l'image pour l'enregistrer")},"image/png")})}
 /* ---------- TUTO : 4 écrans au premier lancement ---------- */
 const TUTO=[
- ["⚡","Coche,<br><span class=\"g\">monte.</span>",`chaque habitude cochée = <b>+${XP.habit} xp</b>. une routine complète (matin, journée ou soir) = <b>+${XP.slotBonus} xp</b> bonus. tâches, idées et records rapportent aussi.<br><br>l'xp te fait monter de niveau, du <b>bitume</b> jusqu'aux <b>alpes</b>. à chaque nouveau palier, une épreuve : battre ton max de départ.`],
+ ["⚡","Coche,<br><span class=\"g\">monte.</span>",`ta journée vaut <b>100 xp</b>, partagés entre tes habitudes (à partir de 5) : tout coché = 100 xp, peu importe combien tu en as. une routine complète (matin, journée ou soir) = <b>+${XP.slotBonus} xp</b> bonus. tâches et records rapportent aussi.<br><br>l'xp te fait monter de niveau, du <b>bitume</b> jusqu'aux <b>alpes</b>. à chaque nouveau palier, une épreuve : battre ton max de départ.`],
  ["🔥","La série,<br><span class=\"g\">ton turbo.</span>",`une journée est validée quand <b>toutes</b> tes cases du jour sont cochées. chaque jour validé d'affilée augmente ton multiplicateur : <b>+2 % par jour</b>, jusqu'à <b>×1,5</b>.<br><br>tu rates une journée ? tu perds juste le multiplicateur. <b>ton xp et ton niveau ne bougent pas.</b> et tu as <b>1 joker par mois</b> pour protéger ta série.`],
  ["🧗","En <span class=\"g\">cordée.</span>",`monte une équipe de 2 à 4 avec un code. la série devient commune : <b>si un seul lâche, toute la cordée perd le bonus.</b><br><br>dès ta 2e semaine, un <b>défi de la semaine</b> se choisit à l'avance (pilules, vœu, km, dé…). et chaque saison de 4 semaines a son classement.`],
  ["⛓️","Le <span class=\"g\">purgatoire.</span>",`le dimanche, chaque habitude ratée de la semaine se paie en répétitions (pompes, squats, gainage…), à partager avec ta cordée.<br><br>semaine parfaite = <b>+${PURG_CLEAN} xp</b>. purgatoire pas payé avant lundi soir = <b>${PURG_MISSED} xp</b>.<br><br><b class="g">c'est parti. du plat aux alpes.</b>`]];
@@ -2113,7 +2119,7 @@ function vPerfs(){
   const mode=view==="course"?"course":"renfo";
   const ps=[...perfs].sort((a,b)=>(a.order||0)-(b.order||0));
   let h=subnav([["course","course à pied"],["renfo","autres perfs"]])+(mode==="renfo"?`<div class="tag">Renfo · tes max</div><h1>Tes<br><span class="g">records</span></h1><p class="sub">teste-toi, note le chiffre. chaque record battu = +${XP.perfRecord} xp.</p>`
-    :`<div class="tag">Course à pied</div><h1>Tes<br><span class="g">kilomètres</span></h1><p class="sub">volume, sorties et records. chaque km = +${XP.km} xp, chaque 10 m D+ = +${XP.d10} xp.</p>`);
+    :`<div class="tag">Course à pied</div><h1>Tes<br><span class="g">kilomètres</span></h1><p class="sub">volume, sorties et records. tes km comptent pour les défis de la semaine.</p>`);
   if(mode==="renfo"){h+=label("renfo · max",` <button class="btn small" data-padd style="margin-left:auto">+ exercice</button>`);
   h+= ps.length?`<div class="perfs">${ps.map(p=>{const b=perfBest(p);return `<div class="perf">
     <button class="nm" data-pedit="${p.id}"><span>${esc(p.name)}</span><span>›</span></button>
@@ -2287,7 +2293,7 @@ $("#view").addEventListener("submit",e=>{const tf=e.target.closest("[data-trial]
   const f=e.target.closest("[data-plog]");if(!f)return;e.preventDefault();
   const p=perfs.find(x=>x.id===f.dataset.plog),inp=f.querySelector("input"),v=parsePerf(p,inp.value);if(!v||isNaN(v)||v<=0){inp.value="";return}
   const prev=perfBest(p),rec=!prev||(p.lower?v<prev.v:v>prev.v);
-  savePerf(p.id,{log:[...(p.log||[]),{d:today(),v}]});inp.value="";if(prev&&rec)pushEvent(`bat son record : ${p.name.toLowerCase()} ${fmtPerf(p,v)}`);toast(prev?(rec?`nouveau record ! +${XP.perfRecord} xp`:"noté — record toujours à "+fmtPerf(p,prev.v)):`premier test · +${XP.perfFirst} xp`)});
+  savePerf(p.id,{log:[...(p.log||[]),{d:today(),v}]});inp.value="";if(prev&&rec)pushEvent(`bat son record : ${p.name.toLowerCase()} ${fmtPerf(p,v)}`);toast(prev?(rec?`nouveau record !`:"noté — record toujours à "+fmtPerf(p,prev.v)):`premier test · +${XP.perfFirst} xp`)});
 
 /* ================= SHEETS ================= */
 document.addEventListener("change",e=>{if(e.target&&(e.target.id==="nfR"||e.target.id==="nfB")){const c=notifCfg();c.remind.time=$("#nfR").value||c.remind.time;c.bilan.time=$("#nfB").value||c.bilan.time;saveProfile({notif:c});toast("horaire enregistré")}});
