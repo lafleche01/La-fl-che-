@@ -802,7 +802,8 @@ function getW(wk){
   return ((meDoc&&meDoc.weekly)||{})[wk]||null;
 }
 const missingMax=()=>trialPerfs().filter(p=>baseOf(p)==null);
-function dayBlocked(s){if(s>today())return true;const rs=meDoc&&meDoc.resetFrom;if(rs&&rs<=today()&&s<rs)return true;return weekLocked(ds(weekStart(parse(s))))}
+function pastLocked(s){const t=today();if(s>=ds(weekStart(parse(t))))return false;return !(dow(t)===0&&s===addDays(t,-1))}
+function dayBlocked(s){if(s>today())return true;if(pastLocked(s))return true;const rs=meDoc&&meDoc.resetFrom;if(rs&&rs<=today()&&s<rs)return true;return weekLocked(ds(weekStart(parse(s))))}
 function weekLocked(wk){ // cases bloquées tant que le défi n'est pas choisi (plus jamais à cause des max)
   if(!activeHabits().length)return false;
   if(missingMax().length)return false; // max manquants : on ne bloque plus, on rappelle
@@ -1671,10 +1672,25 @@ let TM=null;
 function timerHabitsToday(){const t=today(),d=dayDoc(t);return habitsFor(t).filter(h=>h.timer&&h.timer.min&&!d.done[h.id])}
 function timerStrip(){const hs=timerHabitsToday();if(!hs.length)return "";
   return `<div class="tmstrip">${hs.map(h=>`<button class="tmchip" data-timer="${h.id}">⏱ ${esc(h.name)} · ${h.timer.min} min</button>`).join("")}</div>`}
+/* ---------- ALARME + NOTIFICATIONS DU MINUTEUR ---------- */
+const TALARM={ctx:null,
+  unlock(){try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;if(!this.ctx)this.ctx=new C();if(this.ctx.state==="suspended")this.ctx.resume();
+    const o=this.ctx.createOscillator(),g=this.ctx.createGain();g.gain.value=0.0001;o.connect(g);g.connect(this.ctx.destination);o.start();o.stop(this.ctx.currentTime+.05)}catch(_){}},
+  ring(){try{const c=this.ctx;if(!c)return;if(c.state==="suspended")c.resume();const t0=c.currentTime+.05;
+    [[0,880],[.22,1175],[.44,1568],[.9,880],[1.12,1175],[1.34,1568]].forEach(([d,f])=>{const o=c.createOscillator(),g=c.createGain();o.type="triangle";o.frequency.value=f;
+      g.gain.setValueAtTime(0,t0+d);g.gain.linearRampToValueAtTime(.35,t0+d+.02);g.gain.exponentialRampToValueAtTime(.001,t0+d+.2);o.connect(g);g.connect(c.destination);o.start(t0+d);o.stop(t0+d+.22)})}catch(_){}
+    try{navigator.vibrate&&navigator.vibrate([400,120,400,120,700])}catch(_){}},
+  async reg(){try{return navigator.serviceWorker?await navigator.serviceWorker.getRegistration():null}catch(_){return null}},
+  async ask(){try{if("Notification" in window&&Notification.permission==="default")await Notification.requestPermission()}catch(_){}},
+  async show(title,body,loud){try{if(!("Notification" in window)||Notification.permission!=="granted")return;const o={body,tag:"lf-timer",icon:"icon_192.png",badge:"icon_192.png",renotify:!!loud,silent:!loud,requireInteraction:!!loud};if(loud)o.vibrate=[400,120,400,120,700];
+    const r=await this.reg();if(r&&r.showNotification)await r.showNotification(title,o);else new Notification(title,o)}catch(_){}},
+  async clear(){try{const r=await this.reg();if(r&&r.getNotifications)(await r.getNotifications({tag:"lf-timer"})).forEach(n=>n.close())}catch(_){}},
+  last:""};
 function startTimer(id,resume){
   const h=habits.find(x=>x.id===id);if(!h||!h.timer)return;const t=today();
   if(!resume&&dayBlocked(t)){toast("🔒 jour verrouillé");return}
   TM=resume||{id,start:Date.now(),dur:h.timer.min*60000,mode:h.timer.mode==="libre"?"libre":"bloque",day:t};
+  TALARM.unlock();TALARM.last="";if(TM.mode==="libre")TALARM.ask();
   try{localStorage.setItem("lf_timer",JSON.stringify(TM))}catch(_){}
   const el=$("#focus");el.classList.add("show");el.classList.toggle("libre",TM.mode==="libre");
   el.innerHTML=`<div class="fk">${TM.mode==="libre"?"mode libre · tu peux changer d'appli":"mode bloqué · ne quitte pas l'appli"}</div>
@@ -1693,10 +1709,13 @@ function startTimer(id,resume){
 function tickTimer(){if(!TM)return;const left=Math.max(0,TM.dur-(Date.now()-TM.start)),sec=Math.ceil(left/1000);
   const ft=$("#fTime");if(ft)ft.textContent=Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0");
   const a=$("#fArc");if(a)a.setAttribute("stroke-dasharray",(553*left/TM.dur).toFixed(1)+" 600");
+  if(TM.mode==="libre"&&document.hidden&&left>0&&TALARM.last!==TM.start+""){TALARM.last=TM.start+"";const h=habits.find(x=>x.id===TM.id),end=new Date(TM.start+TM.dur);
+    TALARM.show(`⏱ ${h?h.name:"minuteur"} · fin à ${end.getHours()}h${String(end.getMinutes()).padStart(2,"0")}`,`minuteur en cours (${Math.round(TM.dur/60000)} min) · touche pour revenir`,false)}
   if(left<=0)endTimer("ok")}
 function endTimer(why){if(!TM)return;const T0=TM;TM=null;clearInterval(startTimer._i);try{localStorage.removeItem("lf_timer")}catch(_){}
   try{T0.wl&&T0.wl.release()}catch(_){}try{document.fullscreenElement&&document.exitFullscreen()}catch(_){}
   const el=$("#focus"),h=habits.find(x=>x.id===T0.id);
+  TALARM.clear();if(why==="ok"){TALARM.ring();if(document.hidden)TALARM.show(`✅ ${h?h.name:"minuteur"} : terminé !`,`c'est validé · +${XP.habit} xp`,true)}
   if(why==="ok"&&h){const d=dayDoc(T0.day),done={...d.done,[h.id]:true};saveDay(T0.day,{done,off:!!d.off});
     if(slotFull(T0.day,h.slot)){SND.slot();pushEvent(`a bouclé sa routine ${SLOTS.find(x=>x[0]===h.slot)[1].toLowerCase()}`)}else SND.level();
     el.innerHTML=`<div class="fdone">✓</div><div class="fname">${esc(h.name)}</div><div class="fmsg">validée · +${XP.habit} xp</div><button class="btn main" id="fX">continuer</button>`}
@@ -1728,13 +1747,14 @@ function openEvening(){const t=today();let note=0;const prev=(meDoc&&meDoc.eveni
    ${rest.length?`<div class="field"><label>encore à cocher</label><div class="list">${rest.map(h=>`<button class="row evh" data-evtick="${h.id}"><span class="txt">${esc(h.name)}</span><span class="chev">✓</span></button>`).join("")}</div></div>`:`<p class="sub" style="margin:0">✅ tout est coché aujourd'hui.</p>`}
    ${missingMax().length&&trialPerfs().length?`<p class="sub" style="margin:0;color:var(--gold)">📏 pense à noter ton max sur ${missingMax().map(p=>esc(p.name.toLowerCase())).join(", ")} dans perfs.</p>`:""}
    <div class="field"><label>ta journée sur 5</label><div class="chips" id="evNote" style="margin-top:0">${[1,2,3,4,5].map(i=>`<button class="chip" data-c="${i}" style="min-width:44px">${["😫","😕","😐","🙂","🔥"][i-1]} ${i}</button>`).join("")}</div></div>
-   <div class="field"><label>une phrase sur ta journée</label><input id="evTx" maxlength="140" placeholder="ce qui a marché, ce qui a coincé…"></div>
+   <div class="field"><label>ta journée en quelques mots</label><textarea id="evTx" rows="3" placeholder="ce qui a marché, ce qui a coincé… écris autant que tu veux." style="resize:none;overflow:hidden;min-height:84px">${esc(((prev[t]||{}).txt)||"")}</textarea></div>
    <div class="evweek">${last.map(x=>`<div><i style="height:${x.n*8+4}px;${x.n?"":"opacity:.25"}"></i><span>${"LMMJVSD"[dow(x.s)]}</span></div>`).join("")}</div>
    <div class="actions"><button class="btn main" id="evOk">valider le bilan</button><button class="btn ghost" id="evX">plus tard</button></div>`,()=>{
    chipPick("#evNote","",v=>note=+v);$("#evX").onclick=closeSheet;
+   const tx=$("#evTx"),grow=()=>{tx.style.height="auto";tx.style.height=Math.min(tx.scrollHeight,320)+"px";tx.style.overflow=tx.scrollHeight>320?"auto":"hidden";};tx.oninput=grow;grow();
    document.querySelectorAll("[data-evtick]").forEach(b=>b.onclick=()=>{if(dayBlocked(t))return toast("🔒 jour verrouillé");const d=dayDoc(t);saveDay(t,{done:{...d.done,[b.dataset.evtick]:true},off:!!d.off});SND.tick();b.remove()});
    $("#evOk").onclick=()=>{if(!note){$("#evNote").style.outline="1px solid #FF4D3A";return}
-     saveProfile({evening:{...prev,[t]:{note,txt:($("#evTx").value||"").trim().slice(0,140)}}});closeSheet();SND.ok();toast("bilan enregistré · à demain")};});
+     saveProfile({evening:{...prev,[t]:{note,txt:($("#evTx").value||"").trim()}}});closeSheet();SND.ok();toast("bilan enregistré · à demain")};});
 }
 let notifTimer=null;
 function notifLoop(){clearInterval(notifTimer);notifTimer=setInterval(()=>{try{
@@ -2186,7 +2206,7 @@ $("#view").addEventListener("click",e=>{
   if(b=q("[data-wk0]")){weekOffset=0;render();return}
   if(b=q("[data-hmode]")){editHabits=!editHabits;render();return}
   if(b=q("[data-joker]")){const t=today(),d=dayDoc(t);saveDay(t,{done:{...d.done},off:!d.off});toast(d.off?"joker retiré":"joker posé · la série tient");return}
-  if(b=q("[data-tick]")){if(b.disabled||dayBlocked(b.dataset.d)){toast("🔒 jour verrouillé");return}const s=b.dataset.d,id=b.dataset.tick,d=dayDoc(s),done={...d.done};done[id]=!done[id];if(!done[id])delete done[id];
+  if(b=q("[data-tick]")){if(b.disabled||dayBlocked(b.dataset.d)){toast(pastLocked(b.dataset.d)?"🔒 semaine terminée : on ne peut plus la modifier":"🔒 jour verrouillé");return}const s=b.dataset.d,id=b.dataset.tick,d=dayDoc(s),done={...d.done};done[id]=!done[id];if(!done[id])delete done[id];
     saveDay(s,{done,off:!!d.off});if(done[id]){toast(`+${XP.habit} xp`);const h=habits.find(x=>x.id===id);if(h&&s===today()&&slotFull(s,h.slot)){SND.slot();pushEvent(`a bouclé sa routine ${SLOTS.find(x=>x[0]===h.slot)[1].toLowerCase()}`)}else SND.tick()}else SND.untick();return}
   if(b=q("[data-timer]")){startTimer(b.dataset.timer);return}
   if(b=q("[data-sgadd]")){addSuggestion(b.dataset.sgadd);return}

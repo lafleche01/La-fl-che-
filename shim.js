@@ -77,6 +77,7 @@ const mcp={async callTool(server,tool,args){
   if(tool==="list_activities"){const d=await fn({action:"activities",after:args&&args.range_start});return{payload:{activities:d.activities||[]}}}
   if(tool==="get_athlete_best_efforts"){let seen=[];try{seen=JSON.parse(localStorage.getItem(SEEN)||"[]")}catch(_){}
     const d=await fn({action:"best",seen});
+    if(d.left>0)setTimeout(()=>typeof toast==="function"&&toast(`records : encore ${d.left} sorties à analyser, relance la synchro`),2500);else if(d.total)setTimeout(()=>typeof toast==="function"&&toast(`records : ${d.total} sorties analysées ✅`),2500);
     try{localStorage.setItem(SEEN,JSON.stringify([...new Set([...seen,...(d.analysed||[])])].slice(-2000)))}catch(_){}
     const old=(typeof strava!=="undefined"&&strava&&strava.efforts)||[],k=e=>e.best_effort_type+"|"+e.activity_id,m=new Map();
     [...old,...(d.efforts||[])].forEach(e=>m.set(k(e),e));return{payload:{efforts:[...m.values()]}}}
