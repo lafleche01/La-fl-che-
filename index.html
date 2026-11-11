@@ -763,8 +763,10 @@ a.btn{color:inherit;text-decoration:none;display:inline-flex;align-items:center}
 .eqgrid .eqc.on .eqic{color:#000}
 .pgopt .eqic{width:30px;height:30px;vertical-align:middle;margin-right:8px;color:var(--gold)}.pgopt.on .eqic{color:inherit}
 .eqtag{display:inline-flex;align-items:center;gap:6px;margin:2px 8px 2px 0}.eqtag .eqic{width:24px;height:24px;color:var(--gold)}
-.hdrag .hrow{touch-action:pan-y;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;transition:box-shadow .15s}
-.hdrag .grip{display:flex;flex-direction:column;gap:3px;padding:0 10px 0 2px;opacity:.45}.hdrag .grip i{display:block;width:14px;height:2px;background:currentColor}
+.hdrag,.hdrag *{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important}
+.hdrag .hrow{touch-action:pan-y;transition:box-shadow .15s}
+html.hlock,html.hlock body{overflow:hidden;touch-action:none;overscroll-behavior:none}
+.hdrag .grip{display:flex;flex-direction:column;justify-content:center;gap:4px;align-self:stretch;width:44px;margin:-14px 6px -14px -14px;padding-left:14px;touch-action:none;opacity:.55;cursor:grab}.hdrag .grip i{display:block;width:16px;height:2px;background:currentColor}
 .hdrag .hrow.dragging{position:relative;z-index:5;background:var(--panel2);box-shadow:0 10px 30px rgba(0,0,0,.45),inset 3px 0 0 var(--gold);transition:none}
 .hdrag.dragon .hrow:not(.dragging){transition:transform .15s}
 .tperr{max-width:520px;margin:10px auto 0;padding:10px 12px;font-size:14px;color:#ddd;background:rgba(255,255,255,.06)}.tperr .lnk,.tperr a{color:var(--gold)}
@@ -942,24 +944,35 @@ function saveHabit(id,data,isNew){
   if(isNew) habits.push({id,...data}); else if(h) Object.assign(h,data);
   render(); isNew?dset(P("habits",id),data):dupd(P("habits",id),data);
 }
-/* déplacer une habitude : appui long puis glisser (liste « mes habitudes ») */
-(function(){let st=null,tm=null,swallow=false;
-  const end=()=>{clearTimeout(tm);tm=null;if(!st)return;const {el,list}=st;el.classList.remove("dragging");el.style.transform="";list.classList.remove("dragon");
-    const ids=[...list.querySelectorAll(".hrow[data-hedit]")].map(x=>x.dataset.hedit);ids.forEach((id,i)=>{const h=habits.find(x=>x.id===id);if(h&&(h.order||0)!==i+1){h.order=i+1;dupd(P("habits",id),{order:i+1})}});
-    st=null;swallow=true;setTimeout(()=>swallow=false,350);render();toast("ordre enregistré")};
-  document.addEventListener("pointerdown",e=>{const el=e.target.closest(".hdrag .hrow[data-hedit]");if(!el)return;const x0=e.clientX,y0=e.clientY;
-    tm=setTimeout(()=>{tm=null;const list=el.parentElement;st={el,list,y0,id:e.pointerId};el.classList.add("dragging");list.classList.add("dragon");try{navigator.vibrate&&navigator.vibrate(15)}catch(_){}},380);
-    const mv=ev=>{if(!st&&tm&&(Math.abs(ev.clientX-x0)>8||Math.abs(ev.clientY-y0)>8)){clearTimeout(tm);tm=null}};document.addEventListener("pointermove",mv,{once:false});
-    const up=()=>{document.removeEventListener("pointermove",mv);document.removeEventListener("pointerup",up);document.removeEventListener("pointercancel",up);if(tm){clearTimeout(tm);tm=null}};document.addEventListener("pointerup",up);document.addEventListener("pointercancel",up)});
-  document.addEventListener("touchmove",e=>{if(!st)return;e.preventDefault();const y=e.touches[0].clientY;drag(y)},{passive:false});
-  document.addEventListener("pointermove",e=>{if(st&&e.pointerType!=="touch")drag(e.clientY)});
-  function drag(y){const {el,list}=st;el.style.transform=`translateY(${y-st.y0}px)`;const rows=[...list.querySelectorAll(".hrow[data-hedit]")].filter(r=>r!==el);
-    for(const r of rows){const b=r.getBoundingClientRect();const mid=b.top+b.height/2;const elb=el.getBoundingClientRect(),c=elb.top+elb.height/2;
-      if(c<mid&&el.compareDocumentPosition(r)&Node.DOCUMENT_POSITION_PRECEDING){const before=el.getBoundingClientRect().top;list.insertBefore(el,r);st.y0+=el.getBoundingClientRect().top-before;el.style.transform=`translateY(${y-st.y0}px)`;break}
-      if(c>mid&&el.compareDocumentPosition(r)&Node.DOCUMENT_POSITION_FOLLOWING&&r.nextElementSibling!==el){const before=el.getBoundingClientRect().top;list.insertBefore(el,r.nextElementSibling);st.y0+=el.getBoundingClientRect().top-before;el.style.transform=`translateY(${y-st.y0}px)`}}}
-  document.addEventListener("touchend",()=>{if(st)end()});document.addEventListener("pointerup",()=>{if(st)end()});document.addEventListener("pointercancel",()=>{if(st)end()});
-  document.addEventListener("click",e=>{if(swallow&&e.target.closest(".hrow")){e.preventDefault();e.stopPropagation();swallow=false}},true);
-  document.addEventListener("contextmenu",e=>{if(e.target.closest(".hdrag"))e.preventDefault()});})();
+/* déplacer une habitude : poignée = tout de suite, ailleurs = appui long, puis glisser (liste « mes habitudes ») */
+(function(){let st=null,tm=null,swallow=false,start=null;
+  const rows=list=>[...list.querySelectorAll(".hrow[data-hedit]")];
+  function begin(el,y){const list=el.parentElement;st={el,list,y0:y};renderHeld=true;document.documentElement.classList.add("hlock");el.classList.add("dragging");list.classList.add("dragon");try{window.getSelection().removeAllRanges()}catch(_){}try{navigator.vibrate&&navigator.vibrate(15)}catch(_){}}
+  function drag(y){const {el,list}=st;el.style.transform=`translateY(${y-st.y0}px)`;const c=el.getBoundingClientRect(),cy=c.top+c.height/2;
+    for(const r of rows(list)){if(r===el)continue;const b=r.getBoundingClientRect(),mid=b.top+b.height/2;
+      const after=el.compareDocumentPosition(r)&Node.DOCUMENT_POSITION_FOLLOWING;
+      if((!after&&cy<mid)||(after&&cy>mid)){const before=el.getBoundingClientRect().top-(parseFloat((el.style.transform.match(/-?[\d.]+/)||[0])[0])||0);
+        if(after)list.insertBefore(r,el);else list.insertBefore(r,el.nextElementSibling);el.style.transform="";const now=el.getBoundingClientRect().top;st.y0+=now-before;el.style.transform=`translateY(${y-st.y0}px)`;break}}}
+  function finish(){clearTimeout(tm);tm=null;start=null;if(!st)return;const {el,list}=st;el.classList.remove("dragging");el.style.transform="";list.classList.remove("dragon");
+    rows(list).forEach((r,i)=>{const id=r.dataset.hedit,h=habits.find(x=>x.id===id);if(h&&(h.order||0)!==i+1){h.order=i+1;dupd(P("habits",id),{order:i+1})}});
+    st=null;renderHeld=false;renderPend=false;document.documentElement.classList.remove("hlock");swallow=true;setTimeout(()=>swallow=false,400);render();toast("ordre enregistré")}
+  // tactile
+  document.addEventListener("touchstart",e=>{const el=e.target.closest(".hdrag .hrow[data-hedit]");if(!el||e.touches.length>1)return;const t=e.touches[0];start={x:t.clientX,y:t.clientY};
+    if(e.target.closest(".grip")){e.preventDefault();begin(el,t.clientY);return}
+    tm=setTimeout(()=>{tm=null;if(start)begin(el,start.y)},350)},{passive:false});
+  document.addEventListener("touchmove",e=>{const t=e.touches[0];if(st){e.preventDefault();drag(t.clientY);return}
+    if(tm&&start&&(Math.abs(t.clientX-start.x)>8||Math.abs(t.clientY-start.y)>8)){clearTimeout(tm);tm=null}},{passive:false});
+  document.addEventListener("touchend",()=>{if(st)finish();else{clearTimeout(tm);tm=null;start=null}});
+  document.addEventListener("touchcancel",()=>{if(st)finish();else{clearTimeout(tm);tm=null}});
+  // souris (ordinateur)
+  document.addEventListener("mousedown",e=>{const el=e.target.closest(".hdrag .hrow[data-hedit]");if(!el||e.button)return;start={x:e.clientX,y:e.clientY};
+    if(e.target.closest(".grip")){e.preventDefault();begin(el,e.clientY);return}tm=setTimeout(()=>{tm=null;if(start)begin(el,start.y)},350)});
+  document.addEventListener("mousemove",e=>{if(st){e.preventDefault();drag(e.clientY);return}if(tm&&start&&(Math.abs(e.clientX-start.x)>6||Math.abs(e.clientY-start.y)>6)){clearTimeout(tm);tm=null}});
+  document.addEventListener("mouseup",()=>{if(st)finish();else{clearTimeout(tm);tm=null;start=null}});
+  // pas de sélection de texte, pas de menu, pas d'ouverture de fiche après un glisser
+  document.addEventListener("selectstart",e=>{if(e.target.closest&&e.target.closest(".hdrag"))e.preventDefault()});
+  document.addEventListener("contextmenu",e=>{if(e.target.closest(".hdrag"))e.preventDefault()});
+  document.addEventListener("click",e=>{if(swallow&&e.target.closest(".hrow")){e.preventDefault();e.stopPropagation();swallow=false}},true);})();
 function delHabit(id){habits=habits.filter(h=>h.id!==id);render();ddel(P("habits",id))}
 function savePerf(id,data,isNew){
   const p=perfs.find(x=>x.id===id);
@@ -2372,7 +2385,8 @@ function progQGCard(){if(!PROG_ON())return"";const p=PRG();if(!p||!p.plan)return
   return `<button class="instb" data-nav="prog"><span class="ci">🏃</span><span class="ct"><b>${e.date===today()?"séance du jour":"prochaine séance "+fdate(e.date,{weekday:"short"})} · ${esc(s[0])}</b><small>${esc(sessText(p,e))} · J-${j} ${esc(p.race.name)}</small></span><span class="cg">›</span></button>`}
 
 function campusUrl(){const w="https://www.campus.coach/app",ps="https://play.google.com/store/apps/details?id=campus.coach.mobileApp";return /Android/i.test(navigator.userAgent)?"intent://www.campus.coach/app#Intent;scheme=https;package=campus.coach.mobileApp;S.browser_fallback_url="+encodeURIComponent(ps)+";end":w}
-function render(){
+let renderHeld=false,renderPend=false;
+function render(){if(renderHeld){renderPend=true;return}
   if(!resumeTimer._d&&allLoaded()){resumeTimer._d=1;setTimeout(resumeTimer,300)}
   if(!showTuto._d&&allLoaded()&&loaded.profile&&meDoc&&!meDoc.tuto&&(owner||meDoc.onboarded)&&!readOnly&&!window.__TEASE){showTuto._d=1;setTimeout(showTuto,500)}
   const xp=computeXP(), lv=applyTrials(levelOf(xp.total));curL=lv.L;curLg=lv.lg||0;
@@ -2964,7 +2978,7 @@ function vMenu(){
 function vMesHab(){
   const hs=activeHabits();
   return subnav([["mhab","mes habitudes"],["suggest","suggestions"]])+`<div class="tag">Mes habitudes · ${hs.length}</div><h1>Ta<br><span class="g">routine</span></h1>
-  <p class="sub">touche une habitude pour la modifier. <b>appuie longuement puis glisse</b> pour changer sa place.</p>
+  <p class="sub">touche une habitude pour la modifier. pour changer sa place, <b>glisse-la par les trois traits</b> à gauche (ou appui long puis glisse).</p>
   ${SLOTS.map(([k,lab])=>{const sh=hs.filter(h=>h.slot===k);return `${label(lab)}<div class="list hdrag" data-slot="${k}">${sh.map(h=>{const dl=pwN(h)?pwN(h)+" fois / semaine":Array.isArray(h.days)&&h.days.length&&h.days.length<7?h.days.map(i=>"LMMJVSD"[i]).join(" "):"tous les jours";const st=habitStreak(h.id);
      return `<button class="row hrow" data-hedit="${h.id}"><span class="grip" aria-hidden="true"><i></i><i></i><i></i></span><div class="body"><div class="txt">${esc(h.name)}</div><div class="meta"><span>${dl}</span>${h.timer&&h.timer.min?`<span>⏱ ${h.timer.min} min${h.timer.mode==="libre"?" · libre":""}</span>`:""}${st>1?`<span class="hot">🔥 ${st} j</span>`:""}</div></div><span class="chev">›</span></button>`}).join("")}
      <button class="row hadd" data-hadd="${k}">+ ajouter une habitude ${lab.toLowerCase()}</button></div>`}).join("")}`;
@@ -3983,7 +3997,7 @@ document.addEventListener("input",e=>{const t=e.target;if(!t||!t.id)return;
 TILE_IC.news='<path d="M12 3l2.5 5.5L20 9.5l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1z"/>';TILE_IC.admin='<path d="M12 3 4 7v5c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V7z"/><path d="m9 12 2 2 4-4"/>';
 
 /* ---------- NOUVEAUTÉS ---------- */
-const NEWS=[{v:"2026-11-12",t:"Habitudes plus libres, renfo sur mesure",items:[["↕️","Déplace tes habitudes","dans « modifier » : appuie longuement sur une habitude, puis glisse-la"],["📆","x fois par semaine","une habitude peut se faire 3 fois par semaine, les jours que tu veux"],["⏱","Renfo de 15, 30 ou 45 min","choisis la durée dans les réglages du programme"],["🧰","Le matériel en dessin","plus besoin de connaître les noms"],["🌗","Thème automatique","l'appli suit le mode clair ou sombre de ton téléphone"]]},
+const NEWS=[{v:"2026-11-12",t:"Habitudes plus libres, renfo sur mesure",items:[["↕️","Déplace tes habitudes","dans « modifier » : glisse une habitude par les trois traits à gauche"],["📆","x fois par semaine","une habitude peut se faire 3 fois par semaine, les jours que tu veux"],["⏱","Renfo de 15, 30 ou 45 min","choisis la durée dans les réglages du programme"],["🧰","Le matériel en dessin","plus besoin de connaître les noms"],["🌗","Thème automatique","l'appli suit le mode clair ou sombre de ton téléphone"]]},
  {v:"2026-11-11d",t:"Tes données, sous ton contrôle",items:[["🔒","Page confidentialité complète","qui voit quoi, où c'est stocké, pourquoi : tout est écrit noir sur blanc dans les paramètres"],["📦","Télécharge tes données","un bouton pour récupérer une copie de tout ce que l'appli sait de toi"],["🗑","Supprime ton compte","en un geste, sans rien demander à personne : tout est effacé"]]},
  {v:"2026-11-11c",t:"Allures plus justes et courbe de progression",items:[["🧍","Un vrai coach en 3D","les exercices de renfo sont montrés par un personnage réaliste, sous tous les angles"],["🐢","Allures recalées","endurance plus lente, seuil long, seuil vif, VO2max : 8 allures au lieu de 4"],["📉","Courbe de chrono","ton temps au départ, aujourd'hui et la projection en fin de prépa"],["⏱","Tes records à la main","entre tes chronos 5 km, 10 km, semi ou marathon pour caler tes allures"],["🧍","Mannequin 3D amélioré","des gestes plus clairs, avec des flèches sur le mouvement"]]},
  {v:"2026-11-11b",t:"Des plans construits par cycles",items:[["🎯","Note de confiance sur 10","avant de lancer un plan, le coach te dit si le délai et ta base suffisent. tu peux toujours le lancer"],["🧱","Un cycle = une qualité","seuil long, VO2max, seuil vif, spécifique, affûtage : chaque bloc de 3 à 5 semaines travaille une chose à fond"],["📈","La séance clé monte chaque semaine","plus de répétitions ou des répétitions plus longues, puis une semaine d'assimilation"],["⏱","Des intervalles plus longs","2 à 4 min à la place de certains 30/30 : c'est ce qui fait le plus progresser"],["🏋️","Renfo lourd","avec haltères ou salle et l'objectif performance : moins de répétitions, plus de charge"]]},
