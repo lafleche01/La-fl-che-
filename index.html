@@ -771,6 +771,11 @@ html.hlock,html.hlock body{overflow:hidden;touch-action:none;overscroll-behavior
 .hdrag.dragon .hrow:not(.dragging){transition:transform .15s}
 .tperr{max-width:520px;margin:10px auto 0;padding:10px 12px;font-size:14px;color:#ddd;background:rgba(255,255,255,.06)}.tperr .lnk,.tperr a{color:var(--gold)}
 .commusheet{text-align:center}.commusheet .cbig{font-size:54px}.commusheet h2{margin:6px 0 8px}
+
+.hname{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.hname.hdragsrc{opacity:.35}
+.hghost{position:fixed;left:0;top:0;z-index:400;pointer-events:none;padding:12px 16px;background:var(--gold);color:#000;font-family:'Barlow Condensed';font-style:italic;font-weight:900;font-size:18px;text-transform:uppercase;box-shadow:0 12px 30px rgba(0,0,0,.45);max-width:70vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hline{position:fixed;z-index:399;height:3px;background:var(--gold);pointer-events:none;box-shadow:0 0 0 3px rgba(255,193,7,.25)}
 </style>
 <script>try{var m=localStorage.getItem("lf_mode")||"auto";if(m==="clair"||(m==="auto"&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.classList.add("light")}catch(_){}</script>
 <meta name="description" content="Coche tes habitudes, monte de niveau avec tes potes et suis ton plan de course. Gratuit, sans mot de passe.">
@@ -973,6 +978,33 @@ function saveHabit(id,data,isNew){
   document.addEventListener("selectstart",e=>{if(e.target.closest&&e.target.closest(".hdrag"))e.preventDefault()});
   document.addEventListener("contextmenu",e=>{if(e.target.closest(".hdrag"))e.preventDefault()});
   document.addEventListener("click",e=>{if(swallow&&e.target.closest(".hrow")){e.preventDefault();e.stopPropagation();swallow=false}},true);})();
+/* déplacer depuis la grille des habitudes : appui long sur le nom, puis glisser */
+(function(){let d=null,tm=null,start=null,swallow=false;
+  const sibs=sl=>[...document.querySelectorAll(`.hname[data-hslot="${sl}"]`)];
+  function begin(el,x,y){const sl=el.dataset.hslot,list=sibs(sl);if(list.length<2)return;renderHeld=true;document.documentElement.classList.add("hlock");
+    const gh=document.createElement("div");gh.className="hghost";gh.textContent=el.textContent.replace(/\d+ j d'affilée|\d+\/\d+ cette sem\.|[LMJVSD ]+$/g,"").trim();document.body.appendChild(gh);
+    const ln=document.createElement("div");ln.className="hline";document.body.appendChild(ln);el.classList.add("hdragsrc");
+    d={el,sl,list,gh,ln,idx:list.indexOf(el),to:list.indexOf(el)};try{window.getSelection().removeAllRanges()}catch(_){}try{navigator.vibrate&&navigator.vibrate(15)}catch(_){}move(x,y)}
+  function move(x,y){const {gh,ln,list,el}=d;gh.style.transform=`translate(${x-60}px,${y-26}px)`;
+    let to=list.length;for(let i=0;i<list.length;i++){const b=list[i].getBoundingClientRect();if(y<b.top+b.height/2){to=i;break}}d.to=to;
+    const g=el.closest(".hgrid").getBoundingClientRect();const ref=to<list.length?list[to].getBoundingClientRect().top-3:list[list.length-1].getBoundingClientRect().bottom+1;
+    ln.style.cssText=`left:${g.left}px;width:${g.width}px;top:${ref}px`}
+  function finish(){clearTimeout(tm);tm=null;start=null;if(!d)return;const {el,gh,ln,list,idx}=d;let to=d.to;gh.remove();ln.remove();el.classList.remove("hdragsrc");
+    const ids=list.map(x=>x.dataset.hedit);const [id]=ids.splice(idx,1);if(to>idx)to--;ids.splice(to,0,id);
+    ids.forEach((hid,i)=>{const h=habits.find(x=>x.id===hid);if(h&&(h.order||0)!==i+1){h.order=i+1;dupd(P("habits",hid),{order:i+1})}});
+    d=null;renderHeld=false;renderPend=false;document.documentElement.classList.remove("hlock");swallow=true;setTimeout(()=>swallow=false,400);render();if(to!==idx)toast("ordre enregistré")}
+  const cancel=()=>{clearTimeout(tm);tm=null;start=null};
+  document.addEventListener("touchstart",e=>{const el=e.target.closest(".hname[data-hslot]");if(!el||e.touches.length>1)return;const t=e.touches[0];start={x:t.clientX,y:t.clientY};
+    tm=setTimeout(()=>{tm=null;if(start)begin(el,start.x,start.y)},380)},{passive:true});
+  document.addEventListener("touchmove",e=>{const t=e.touches[0];if(d){e.preventDefault();move(t.clientX,t.clientY);return}
+    if(tm&&start&&(Math.abs(t.clientX-start.x)>8||Math.abs(t.clientY-start.y)>8))cancel()},{passive:false});
+  document.addEventListener("touchend",()=>{d?finish():cancel()});document.addEventListener("touchcancel",()=>{d?finish():cancel()});
+  document.addEventListener("mousedown",e=>{const el=e.target.closest(".hname[data-hslot]");if(!el||e.button)return;start={x:e.clientX,y:e.clientY};tm=setTimeout(()=>{tm=null;if(start)begin(el,start.x,start.y)},380)});
+  document.addEventListener("mousemove",e=>{if(d){e.preventDefault();move(e.clientX,e.clientY);return}if(tm&&start&&(Math.abs(e.clientX-start.x)>6||Math.abs(e.clientY-start.y)>6))cancel()});
+  document.addEventListener("mouseup",()=>{d?finish():cancel()});
+  document.addEventListener("contextmenu",e=>{if(e.target.closest(".hname"))e.preventDefault()});
+  document.addEventListener("selectstart",e=>{if(e.target.closest&&e.target.closest(".hname"))e.preventDefault()});
+  document.addEventListener("click",e=>{if(swallow&&e.target.closest(".hname")){e.preventDefault();e.stopPropagation();swallow=false}},true);})();
 function delHabit(id){habits=habits.filter(h=>h.id!==id);render();ddel(P("habits",id))}
 function savePerf(id,data,isNew){
   const p=perfs.find(x=>x.id===id);
@@ -2873,7 +2905,7 @@ function vHabits(){
     sh.forEach(h=>{
       const st=habitStreak(h.id);
       const dl=pwN(h)?`${pwWeek(h,dates[0])}/${pwN(h)} cette sem.`:Array.isArray(h.days)&&h.days.length&&h.days.length<7?h.days.map(i=>"LMMJVSD"[i]).join(" "):"";
-      g+=`<button class="hname" data-hedit="${h.id}">${esc(h.name)}${pwN(h)?`<small class="m">${dl}</small>`:st>1?`<small>${st} j d'affilée</small>`:dl?`<small class="m">${dl}</small>`:""}</button>`;
+      g+=`<button class="hname" data-hedit="${h.id}" data-hslot="${k}">${esc(h.name)}${pwN(h)?`<small class="m">${dl}</small>`:st>1?`<small>${st} j d'affilée</small>`:dl?`<small class="m">${dl}</small>`:""}</button>`;
       g+=dates.map(s=>{if(!sched(h,s))return `<div class="box rest">·</div>`;const on=days[s]&&days[s].done&&days[s].done[h.id];if(pwN(h)&&!on&&pwWeek(h,s)>=pwN(h)&&s<=t)return `<div class="box rest">✓</div>`;const fut=dayBlocked(s);const off=days[s]&&days[s].off;
         const rw=getW(ds(weekStart(parse(s))));const rl=rw&&rw.c==="roulette"&&rw.o==="oui"&&rouletteHabit(s)===h&&s<=t;
         return `<button class="box ${on?"on":""} ${s===t?"today":""} ${fut?"fut":""} ${off?"offd":""} ${rl?"roul":""}" ${fut?"disabled":""} data-tick="${h.id}" data-d="${s}" aria-label="${esc(h.name)} ${s}">${I.check}</button>`}).join("");
@@ -2884,7 +2916,7 @@ function vHabits(){
   return `
   <div class="tag">Habitudes · routine</div>
   <h1>Tes<br><span class="g">habitudes</span></h1>
-  <p class="sub">100 xp par jour à se partager entre tes habitudes (à partir de 5). une routine complète = bonus.</p>
+  <p class="sub">100 xp par jour à se partager entre tes habitudes (à partir de 5). une routine complète = bonus. <b>appui long sur un nom</b> puis glisse pour changer l'ordre.</p>
   ${timerStrip()}
   <div class="today-strip">
     <span class="label">aujourd'hui <b class="g" style="font-size:16px">${todayN}/${n}</b> ${td&&td.off?"· joker utilisé":""}</span>
@@ -3997,7 +4029,7 @@ document.addEventListener("input",e=>{const t=e.target;if(!t||!t.id)return;
 TILE_IC.news='<path d="M12 3l2.5 5.5L20 9.5l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1z"/>';TILE_IC.admin='<path d="M12 3 4 7v5c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V7z"/><path d="m9 12 2 2 4-4"/>';
 
 /* ---------- NOUVEAUTÉS ---------- */
-const NEWS=[{v:"2026-11-12",t:"Habitudes plus libres, renfo sur mesure",items:[["↕️","Déplace tes habitudes","dans « modifier » : glisse une habitude par les trois traits à gauche"],["📆","x fois par semaine","une habitude peut se faire 3 fois par semaine, les jours que tu veux"],["⏱","Renfo de 15, 30 ou 45 min","choisis la durée dans les réglages du programme"],["🧰","Le matériel en dessin","plus besoin de connaître les noms"],["🌗","Thème automatique","l'appli suit le mode clair ou sombre de ton téléphone"]]},
+const NEWS=[{v:"2026-11-12",t:"Habitudes plus libres, renfo sur mesure",items:[["↕️","Déplace tes habitudes","appui long sur le nom d'une habitude, puis glisse-la"],["📆","x fois par semaine","une habitude peut se faire 3 fois par semaine, les jours que tu veux"],["⏱","Renfo de 15, 30 ou 45 min","choisis la durée dans les réglages du programme"],["🧰","Le matériel en dessin","plus besoin de connaître les noms"],["🌗","Thème automatique","l'appli suit le mode clair ou sombre de ton téléphone"]]},
  {v:"2026-11-11d",t:"Tes données, sous ton contrôle",items:[["🔒","Page confidentialité complète","qui voit quoi, où c'est stocké, pourquoi : tout est écrit noir sur blanc dans les paramètres"],["📦","Télécharge tes données","un bouton pour récupérer une copie de tout ce que l'appli sait de toi"],["🗑","Supprime ton compte","en un geste, sans rien demander à personne : tout est effacé"]]},
  {v:"2026-11-11c",t:"Allures plus justes et courbe de progression",items:[["🧍","Un vrai coach en 3D","les exercices de renfo sont montrés par un personnage réaliste, sous tous les angles"],["🐢","Allures recalées","endurance plus lente, seuil long, seuil vif, VO2max : 8 allures au lieu de 4"],["📉","Courbe de chrono","ton temps au départ, aujourd'hui et la projection en fin de prépa"],["⏱","Tes records à la main","entre tes chronos 5 km, 10 km, semi ou marathon pour caler tes allures"],["🧍","Mannequin 3D amélioré","des gestes plus clairs, avec des flèches sur le mouvement"]]},
  {v:"2026-11-11b",t:"Des plans construits par cycles",items:[["🎯","Note de confiance sur 10","avant de lancer un plan, le coach te dit si le délai et ta base suffisent. tu peux toujours le lancer"],["🧱","Un cycle = une qualité","seuil long, VO2max, seuil vif, spécifique, affûtage : chaque bloc de 3 à 5 semaines travaille une chose à fond"],["📈","La séance clé monte chaque semaine","plus de répétitions ou des répétitions plus longues, puis une semaine d'assimilation"],["⏱","Des intervalles plus longs","2 à 4 min à la place de certains 30/30 : c'est ce qui fait le plus progresser"],["🏋️","Renfo lourd","avec haltères ou salle et l'objectif performance : moins de répétitions, plus de charge"]]},
