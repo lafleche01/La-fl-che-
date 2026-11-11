@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>La Flèche · deviens régulier en course</title>
+<meta name="description" content="L'appli gratuite pour courir régulièrement : habitudes à cocher, cordée avec tes potes, plan de course qui s'adapte, renfo montré en 3D.">
+<meta property="og:title" content="La Flèche · deviens régulier en course">
+<meta property="og:description" content="Habitudes, cordée, plan de course et renfo en 3D. Gratuit, en bêta ouverte.">
+<meta property="og:image" content="https://lafleche-seven.vercel.app/og.png">
+<meta property="og:url" content="https://lafleche-seven.vercel.app/rejoindre.html">
+<meta name="theme-color" content="#08080A">
+<link rel="icon" href="favicon.png">
+<link rel="stylesheet" href="fonts.css"><link rel="preload" href="font_bc_900i.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+:root{--nuit:#08080A;--graphite:#141417;--ardoise:#26262C;--or:#FFC107;--craie:#F5F5F3;--brume:#9A9AA0;--alerte:#FF5A47;--rail:132px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--nuit);color:var(--craie);font:400 17px/1.6 Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video,canvas{display:block;max-width:100%}
+a{color:var(--or)}
+:focus-visible{outline:3px solid var(--or);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+@media (min-width:1100px){.wrap{padding-right:calc(var(--rail) + 24px)}}
+h1,h2,h3{font-family:"Barlow Condensed",sans-serif;font-style:italic;font-weight:900;line-height:.92;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(64px,10.5vw,138px);text-transform:uppercase}
+h2{font-size:clamp(44px,7.4vw,96px);text-transform:uppercase}
+h3{font-size:clamp(28px,3.4vw,38px);font-weight:800}
+p{margin:0 0 1em;max-width:62ch}
+.lead{font-size:clamp(18px,2vw,21px);color:#cfcfd4}
+.stage{font-family:"Barlow Condensed",sans-serif;font-style:italic;font-weight:700;font-size:20px;color:var(--or);margin:0 0 14px;display:flex;align-items:center;gap:12px}
+.stage svg{width:34px;height:16px;flex:none}
+section{padding:120px 0;position:relative}
+@media (max-width:760px){section{padding:84px 0}.stagehero{height:540px}}
+.dim{color:var(--brume)}
+
+/* ---------- boutons ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;font:900 italic 24px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;text-decoration:none;color:var(--nuit);background:var(--or);padding:20px 34px;border:0;cursor:pointer;clip-path:polygon(4% 0,100% 0,96% 100%,0 100%);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--craie);box-shadow:inset 0 0 0 2px var(--ardoise);clip-path:none}
+.btn[disabled]{opacity:.6;cursor:wait}
+
+/* ---------- jauge d'altitude ---------- */
+.rail{position:fixed;right:0;top:0;bottom:0;width:var(--rail);z-index:20;display:none;pointer-events:none}
+@media (min-width:1100px){.rail{display:block}}
+.rail svg{position:absolute;inset:0;width:100%;height:100%}
+.rail .lab{position:absolute;right:22px;font:700 italic 15px/1.1 "Barlow Condensed",sans-serif;color:#5d5d64;text-align:right;transform:translateY(-50%);transition:color .3s}
+.rail .lab b{display:block;font-size:12px;font-weight:600;font-style:normal;font-family:Barlow;letter-spacing:.02em}
+.rail .lab.on{color:var(--or)}
+.rail .lab.past{color:#8a8a90}
+.mbar{position:fixed;left:0;right:0;top:0;height:46px;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:rgba(8,8,10,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #1d1d22;transform:translateY(-100%);transition:transform .3s}
+.mbar.show{transform:none}
+.mbar i{position:absolute;left:0;bottom:-1px;height:2px;background:var(--or);width:0}
+.mbar span{font:800 italic 18px "Barlow Condensed";color:var(--or)}
+.mbar a{font:800 italic 16px "Barlow Condensed";text-transform:uppercase;color:var(--nuit);background:var(--or);padding:6px 12px;text-decoration:none}
+@media (min-width:1100px){.mbar{display:none}}
+
+/* ---------- hero ---------- */
+.hero{min-height:100svh;padding:28px 0 60px;display:flex;flex-direction:column;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 45% at 70% 30%,rgba(255,193,7,.16),transparent 70%);pointer-events:none}
+.top{display:flex;justify-content:space-between;align-items:center}
+.top img{width:150px}
+.top a{color:var(--craie);text-decoration:none;font-weight:600;font-size:15px}
+.hgrid{flex:1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:center;margin-top:30px}
+@media (max-width:860px){.hgrid{grid-template-columns:1fr;gap:10px}}
+.hero h1{margin:6px 0 22px}
+.hero h1 span{display:block}
+.hero h1 .g{color:var(--or)}
+.hcta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:30px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:22px;color:var(--brume);font-size:15px}
+.facts b{color:var(--craie);font-weight:600}
+.stagehero{position:relative;height:min(78vh,700px);min-height:520px}
+@media (max-width:860px){.stagehero{height:600px;min-height:0;margin-top:20px}}
+.phone{position:absolute;width:min(300px,62vw);aspect-ratio:9/19.5;border-radius:44px;background:#121215;padding:10px;box-shadow:0 40px 90px rgba(0,0,0,.7),inset 0 0 0 2px #2b2b31}
+.phone .scr{width:100%;height:100%;border-radius:34px;overflow:hidden;position:relative;background:#0c0c0e}
+.phone .scr img{position:absolute;inset:0;width:100%;height:auto;opacity:0;transition:opacity .8s}
+.phone .scr img.on{opacity:1}
+.stagehero .phone{right:6%;top:2%;transform:rotate(4deg)}
+@media (max-width:860px){.stagehero .phone{right:4%;width:58vw}}
+.coach{position:absolute;left:0;bottom:4%;width:min(330px,64vw);background:linear-gradient(180deg,#19191d,#111114);border:1px solid #2a2a30;padding:14px 14px 16px;box-shadow:0 30px 70px rgba(0,0,0,.6);transform:rotate(-3deg)}
+.coach canvas{width:100%;aspect-ratio:1/1}
+.coach p{margin:8px 4px 0;font-size:14px;color:var(--brume);line-height:1.4}
+.coach p b{color:var(--craie);font:800 italic 22px/1 "Barlow Condensed";display:block;margin-bottom:4px;text-transform:uppercase}
+
+/* ---------- saison ---------- */
+.season{display:grid;grid-template-columns:repeat(3,1fr);margin-top:56px;border-top:2px solid var(--ardoise)}
+@media (max-width:760px){.season{grid-template-columns:1fr;border-top:0;border-left:2px solid var(--ardoise);margin-left:8px}}
+.season div{padding:26px 20px 0 0;position:relative}
+@media (max-width:760px){.season div{padding:0 0 28px 26px}}
+.season div::before{content:"";position:absolute;top:-9px;left:0;width:16px;height:16px;border-radius:50%;background:var(--ardoise)}
+@media (max-width:760px){.season div::before{top:4px;left:-9px}}
+.season .here::before{background:var(--or);box-shadow:0 0 0 8px rgba(255,193,7,.18)}
+.season .here{color:var(--craie)}
+.season h3{margin-bottom:8px}
+.season .here h3{color:var(--or)}
+.season small{display:block;color:var(--brume);font-size:14px;margin-bottom:6px}
+.season p{color:var(--brume);font-size:16px}
+
+/* ---------- piliers ---------- */
+.pill{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.pill.rev .shot{order:2}
+@media (max-width:860px){.pill{grid-template-columns:1fr;gap:34px}.pill.rev .shot{order:0}}
+.shot{position:relative;display:flex;justify-content:center}
+.shot .phone{position:relative;width:min(290px,72vw)}
+.shot .phone .scr img{opacity:1;position:static}
+.shot .tag{position:absolute;left:4%;bottom:12%;background:var(--or);color:var(--nuit);font:900 italic 22px "Barlow Condensed";padding:8px 14px;transform:rotate(-4deg);text-transform:uppercase}
+.list{list-style:none;padding:0;margin:26px 0 0}
+.list li{padding:14px 0 14px 34px;border-top:1px solid #1f1f24;position:relative;color:#d4d4d9}
+.list li::before{content:"";position:absolute;left:4px;top:23px;width:14px;height:8px;border-left:3px solid var(--or);border-bottom:3px solid var(--or);transform:rotate(-45deg)}
+.list li b{color:var(--craie);font-weight:600}
+
+/* ---------- cordée ---------- */
+.duo{display:grid;grid-template-columns:1fr 1fr 300px;gap:0;margin-top:56px;align-items:stretch}
+@media (max-width:980px){.duo{grid-template-columns:1fr 1fr}.duo .vid{grid-column:1/-1;justify-self:center;margin-top:30px}}
+@media (max-width:620px){.duo{grid-template-columns:1fr}}
+.side{padding:30px 28px;background:var(--graphite)}
+.side.solo{background:transparent;border:2px dashed #2b2b31;border-right:0}
+@media (max-width:620px){.side.solo{border-right:2px dashed #2b2b31;border-bottom:0}}
+.side h3{margin-bottom:16px}
+.side.solo h3{color:var(--brume)}
+.side.team h3{color:var(--or)}
+.side ul{list-style:none;margin:0;padding:0}
+.side li{padding:10px 0;border-top:1px solid #222228;font-size:16px}
+.side.solo li{color:var(--brume)}
+.vid{width:300px;margin-left:34px;position:relative}
+@media (max-width:980px){.vid{margin-left:0}}
+.vid video{width:100%;aspect-ratio:9/16;object-fit:cover;background:#000;border:2px solid var(--ardoise)}
+.vid small{display:block;color:var(--brume);font-size:13px;margin-top:8px}
+
+/* ---------- renfo 3D ---------- */
+.lab3d{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;margin-top:40px}
+@media (max-width:860px){.lab3d{grid-template-columns:1fr}}
+.stage3d{position:relative;background:radial-gradient(70% 60% at 50% 40%,#1d1a10,#0b0b0d 70%);border:1px solid #232328;aspect-ratio:1/1}
+.stage3d canvas{width:100%;height:100%}
+.stage3d .ang{position:absolute;left:12px;bottom:12px;display:flex;gap:6px}
+.chip{font:700 italic 16px "Barlow Condensed";background:#1b1b20;color:var(--brume);border:1px solid #2c2c33;padding:7px 12px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--or);color:var(--nuit);border-color:var(--or)}
+.exos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:24px 0}
+.exos button{text-align:left;font:800 italic 24px/1 "Barlow Condensed";text-transform:uppercase;color:var(--craie);background:var(--graphite);border:1px solid #24242a;padding:16px;cursor:pointer}
+.exos button small{display:block;font:500 14px Barlow;text-transform:none;color:var(--brume);margin-top:6px}
+.exos button[aria-pressed="true"]{border-color:var(--or);box-shadow:inset 4px 0 0 var(--or)}
+.how3d{background:var(--graphite);padding:18px 20px;border-left:4px solid var(--or)}
+.how3d ol{margin:0;padding-left:20px}
+.how3d li{margin:4px 0}
+.how3d .err{color:#ff8a7a;font-size:15px;margin-top:8px}
+
+/* ---------- pour qui ---------- */
+.who{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:50px;background:var(--ardoise);border:2px solid var(--ardoise)}
+@media (max-width:860px){.who{grid-template-columns:1fr}}
+.who div{background:var(--nuit);padding:34px 28px}
+.who h3{margin-bottom:12px}
+.who p{color:var(--brume);font-size:16px;margin:0}
+
+/* ---------- étapes ---------- */
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px}
+@media (max-width:860px){.steps{grid-template-columns:1fr;gap:30px}}
+.steps div{counter-increment:s;position:relative;padding-top:86px}
+.steps div::before{content:counter(s);position:absolute;top:0;left:0;font:900 italic 110px/.8 "Barlow Condensed";color:transparent;-webkit-text-stroke:2px var(--or)}
+.steps p{color:var(--brume);font-size:16px}
+
+/* ---------- FAQ ---------- */
+.faq{margin-top:40px;max-width:820px}
+.faq details{border-top:1px solid #222228}
+.faq details:last-child{border-bottom:1px solid #222228}
+.faq summary{list-style:none;cursor:pointer;padding:22px 44px 22px 0;font:800 italic 26px/1.1 "Barlow Condensed";position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:8px;top:30px;width:14px;height:14px;border-right:3px solid var(--or);border-bottom:3px solid var(--or);transform:rotate(45deg);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(-135deg);top:36px}
+.faq details p{color:#c9c9cf;padding-bottom:16px}
+
+/* ---------- inscription ---------- */
+.summit{background:linear-gradient(180deg,var(--nuit),#15130b 60%,#1d1a0c);overflow:hidden}
+.summit svg.mt{position:absolute;left:0;right:0;bottom:0;width:100%;height:46%;opacity:.5}
+.form{position:relative;max-width:620px;margin-top:40px;background:rgba(14,14,16,.92);border:1px solid #2c2a22;padding:32px}
+.form label.f{display:block;font-weight:600;margin-bottom:8px}
+.form input[type=email]{width:100%;font:500 19px Barlow;color:var(--craie);background:#0a0a0c;border:2px solid #2d2d34;padding:16px;margin-bottom:16px}
+.form input[type=email]:focus{border-color:var(--or);outline:none}
+.ok{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:#c9c9cf;margin-bottom:22px;line-height:1.45}
+.ok input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--or)}
+.msg{min-height:24px;margin-top:16px;font-weight:600}
+.msg.err{color:var(--alerte)}
+.msg.good{color:var(--or)}
+.after{display:none;margin-top:18px;padding-top:18px;border-top:1px solid #2a2a30}
+.after.show{display:block}
+.after p{font-size:15px;color:#c9c9cf}
+
+
+/* ---------- défiler ---------- */
+.scrollcue{display:flex;align-items:center;gap:10px;margin-top:34px;color:var(--brume);font-size:14px;text-decoration:none}
+.scrollcue i{width:22px;height:34px;border:2px solid #3a3a42;border-radius:12px;position:relative}
+.scrollcue i::after{content:"";position:absolute;left:50%;top:6px;width:4px;height:7px;margin-left:-2px;border-radius:2px;background:var(--or);animation:cue 1.6s infinite}
+@keyframes cue{0%{transform:translateY(0);opacity:1}70%{transform:translateY(10px);opacity:0}100%{opacity:0}}
+/* ---------- tracker interactif ---------- */
+.trk{background:var(--graphite);border:1px solid #24242a;padding:22px 20px 20px;position:relative;max-width:520px;width:100%}
+.trk .lv{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.trk .lv b{font:900 italic 30px/1 "Barlow Condensed";color:var(--or);text-transform:uppercase}
+.trk .lv span{font-size:14px;color:var(--brume)}
+.trk .xpb{height:8px;background:#26262c;margin-bottom:18px;overflow:hidden}.trk .xpb i{display:block;height:100%;background:var(--or);width:0;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.trk table{width:100%;border-collapse:separate;border-spacing:5px}
+.trk th{font:700 13px Barlow;color:var(--brume);text-align:center}.trk th.td{color:var(--or)}
+.trk td.n{font-size:14px;color:#d8d8dd;padding-right:6px;white-space:nowrap}
+.trk td.n small{display:block;color:var(--brume);font-size:11px}
+.trk button.b{width:100%;aspect-ratio:1;border:0;background:#26262c;cursor:pointer;position:relative;padding:0}
+.trk button.b.on{background:var(--or)}
+.trk button.b.on::after{content:"";position:absolute;left:32%;top:24%;width:30%;height:42%;border-right:3px solid #08080A;border-bottom:3px solid #08080A;transform:rotate(45deg)}
+.trk button.b.td{box-shadow:inset 0 0 0 2px var(--or)}
+.trk button.b:disabled{cursor:default;opacity:.55}
+.trk .hint{font-size:13px;color:var(--brume);margin:12px 0 0}
+.fxp{position:absolute;font:900 italic 22px "Barlow Condensed";color:var(--or);pointer-events:none;animation:fxp 1.1s forwards;white-space:nowrap}
+@keyframes fxp{0%{opacity:0;transform:translateY(6px)}15%{opacity:1}100%{opacity:0;transform:translateY(-46px)}}
+.ladder{display:flex;gap:4px;margin-top:16px;flex-wrap:wrap}
+.ladder span{font:700 italic 13px "Barlow Condensed";padding:4px 8px;background:#1d1d22;color:#6d6d74}
+.ladder span.on{background:var(--or);color:var(--nuit)}
+/* ---------- cordée en schéma ---------- */
+.rope{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:50px;align-items:center;margin-top:50px}
+@media (max-width:860px){.rope{grid-template-columns:1fr;gap:26px}}
+.rope svg{width:100%;height:auto;max-width:520px}
+.rope .serie{font:900 italic 80px/.9 "Barlow Condensed";color:var(--or)}
+.rope .serie small{display:block;font:600 16px Barlow;color:var(--brume);margin-top:8px}
+/* ---------- cycles ---------- */
+.cyc{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:50px;background:var(--ardoise);border:2px solid var(--ardoise)}
+@media (max-width:860px){.cyc{grid-template-columns:1fr 1fr}}
+.cyc div{background:var(--nuit);padding:24px 20px 22px;position:relative}
+.cyc small{display:block;color:var(--brume);font-size:13px;margin-bottom:10px}
+.cyc h3{font-size:30px;margin-bottom:10px}
+.cyc p{color:var(--brume);font-size:15px;margin:0 0 16px}
+.cyc .int{display:flex;gap:3px}.cyc .int i{width:22px;height:6px;background:#2a2a30}.cyc .int i.on{background:var(--or)}
+/* ---------- durées de renfo ---------- */
+.dur{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:46px}
+@media (max-width:860px){.dur{grid-template-columns:1fr 1fr}}
+.dur div{border:1px solid #26262c;padding:22px 18px;background:linear-gradient(180deg,#121215,#0b0b0d)}
+.dur svg{width:44px;height:44px;margin-bottom:14px}
+.dur b{display:block;font:900 italic 46px/.9 "Barlow Condensed";color:var(--craie)}
+.dur b em{font-style:italic;color:var(--or)}
+.dur span{display:block;margin-top:8px;color:var(--brume);font-size:15px}
+/* ---------- semaine type + compteurs ---------- */
+.wk{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:46px}
+@media (max-width:760px){.wk{grid-template-columns:1fr}}
+.wk div{background:var(--graphite);padding:14px 12px;min-height:118px;border-top:3px solid #2a2a30}
+@media (max-width:760px){.wk div{min-height:0;display:flex;gap:14px;align-items:baseline}}
+.wk div.k{border-top-color:var(--or)}
+.wk h4{margin:0 0 8px;font:800 italic 20px "Barlow Condensed";text-transform:uppercase;color:var(--brume)}
+.wk div.k h4{color:var(--or)}
+.wk p{margin:0;font-size:14px;color:#d4d4d9;line-height:1.35}
+.cnt{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px}
+@media (max-width:760px){.cnt{grid-template-columns:1fr 1fr}}
+.cnt b{display:block;font:900 italic clamp(54px,8vw,92px)/.85 "Barlow Condensed";color:var(--craie);font-variant-numeric:tabular-nums}
+.cnt span{color:var(--brume);font-size:15px}
+.cnt+small{display:block;margin-top:16px;color:#6d6d74;font-size:13px}
+.wa{display:inline-flex;align-items:center;gap:10px;margin-top:12px;color:var(--craie);text-decoration:none;font-weight:600;border-bottom:2px solid var(--or);padding-bottom:3px}
+footer{padding:60px 0 50px;border-top:1px solid #1d1d22;color:var(--brume);font-size:14px}
+footer .cols{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:30px}
+@media (max-width:760px){footer .cols{grid-template-columns:1fr}}
+footer b{color:var(--craie);display:block;margin-bottom:6px}
+footer img{width:120px;margin-bottom:14px}
+</style>
+</head>
+<body>
+
+<!-- jauge d'altitude (ordinateur) -->
+<div class="rail" aria-hidden="true"><svg id="railSvg" preserveAspectRatio="none"></svg><div id="railLabs"></div></div>
+<!-- barre de palier (téléphone) -->
+<div class="mbar" id="mbar" aria-hidden="true"><span id="mstage">Bitume</span><a href="#inscription">s'inscrire</a><i id="mprog"></i></div>
+
+<header class="hero" data-stage="0" id="top">
+ <div class="wrap top"><img src="logo_la_fleche.png" alt="La Flèche"><a href="./">j'ai déjà un compte</a></div>
+ <div class="wrap hgrid">
+  <div>
+   <p class="stage"><svg viewBox="0 0 34 16"><path d="M1 15 L12 3 L18 10 L24 5 L33 15" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>Niveau 1, le bitume</p>
+   <h1><span>Deviens</span><span class="g">régulier.</span></h1>
+   <p class="lead">L'appli gratuite pour courir sans lâcher : tu coches tes habitudes, tu cours en cordée avec tes potes, et ton plan s'adapte à ce que tu ressens.</p>
+   <div class="hcta"><a class="btn" href="#inscription">Créer mon compte</a><a class="btn ghost" href="#habitudes">Voir l'appli</a></div>
+   <div class="facts"><span><b>Gratuit</b>, sans pub</span><span><b>30 secondes</b> pour t'inscrire</span><span><b>Pas de mot de passe</b></span></div>
+   <a class="scrollcue" href="#saison"><i></i>fais défiler pour grimper</a>
+  </div>
+  <div class="stagehero">
+   <div class="phone"><div class="scr" id="heroScr">
+     <img src="lp_habitudes.jpg" alt="Liste d'habitudes cochées dans l'appli" class="on">
+     <img src="lp_cordee.jpg" alt="Page de la cordée Les Terrils">
+     <img src="lp_plan.jpg" alt="Semaine du plan de course">
+     <img src="lp_objectif.jpg" alt="Courbe de l'objectif de temps">
+   </div></div>
+   <div class="coach"><canvas data-mq="squat" data-yaw="48" width="600" height="600" aria-label="Personnage 3D qui fait un squat"></canvas><p><b>Ton coach renfo</b>chaque exercice montré en 3D, sous tous les angles.</p></div>
+  </div>
+ </div>
+</header>
+
+<section data-stage="1" id="saison">
+ <div class="wrap">
+  <p class="stage">Niveau 10, les pavés</p>
+  <h2>La saison 1<br>a commencé.</h2>
+  <div class="season">
+   <div><small>10 novembre 2026</small><h3>Lancement</h3><p>Les premiers coureurs cochent leurs habitudes et montent leurs cordées.</p></div>
+   <div class="here"><small>Tu es ici</small><h3>Bêta ouverte</h3><p>Le programme de course arrive. On cherche des testeurs, débutants comme confirmés, pour l'ajuster.</p></div>
+   <div><small>Ensuite</small><h3>Tes retours</h3><p>Chaque semaine, l'appli change avec ce que les testeurs remontent. Ton avis compte vraiment.</p></div>
+  </div>
+ </div>
+</section>
+
+<section data-stage="2" id="habitudes">
+ <div class="wrap pill">
+  <div class="shot"><div class="trk" id="trk"><div class="lv"><b id="trkL">Niveau 1</b><span id="trkX">0 / 100 xp</span></div><div class="xpb"><i id="trkB"></i></div>
+     <table><thead><tr><th></th><th>L</th><th>M</th><th>M</th><th>J</th><th>V</th><th>S</th><th class="td">D</th></tr></thead><tbody id="trkT"></tbody></table>
+     <p class="hint">Essaie : coche la colonne d'aujourd'hui.</p><div class="ladder" id="trkLd"></div></div></div>
+  <div>
+   <p class="stage">Niveau 20, le pont</p>
+   <h2>Une case,<br>un pas.</h2>
+   <p class="lead">Choisis tes habitudes du matin au soir. Chaque case cochée te fait gagner de l'XP et monter de niveau, du bitume jusqu'aux Alpes.</p>
+   <ul class="list">
+    <li><b>100 niveaux</b> à grimper, avec une épreuve à chaque palier</li>
+    <li><b>Ta série</b> grandit chaque jour où tu tiens tout</li>
+    <li><b>Tâches, idées, records</b> : tout ton entraînement au même endroit</li>
+   </ul>
+  </div>
+ </div>
+</section>
+
+<section data-stage="3" id="cordee">
+ <div class="wrap">
+  <p class="stage">Niveau 30, le terril</p>
+  <h2>Si un seul lâche,<br>tout le monde perd.</h2>
+  <p class="lead" style="margin-top:22px">Monte une cordée avec tes potes. Vous partagez une série : si l'un de vous oublie ses habitudes, toute l'équipe retombe à zéro. Tu ne cours plus seulement pour toi.</p>
+  <div class="rope">
+   <svg viewBox="0 0 520 300" role="img" aria-label="Schéma d'une cordée de quatre coureurs reliés par une corde">
+    <path id="ropeP" d="M70 230 C150 120 200 260 260 150 S380 60 450 90" fill="none" stroke="#FFC107" stroke-width="4" stroke-dasharray="10 8"/>
+    <g font-family="Barlow Condensed" font-style="italic" font-weight="900" text-anchor="middle">
+     <circle cx="70" cy="230" r="34" fill="#141417" stroke="#FFC107" stroke-width="4"/><text x="70" y="241" font-size="30" fill="#FFC107">TOI</text>
+     <circle cx="200" cy="200" r="30" fill="#141417" stroke="#3a3a42" stroke-width="3"/><text x="200" y="210" font-size="28" fill="#5ec2ff">L</text>
+     <circle cx="330" cy="105" r="30" fill="#141417" stroke="#3a3a42" stroke-width="3"/><text x="330" y="115" font-size="28" fill="#ff7b6b">M</text>
+     <circle cx="450" cy="90" r="30" fill="#141417" stroke="#3a3a42" stroke-width="3"/><text x="450" y="100" font-size="28" fill="#9be15d">N</text>
+     <text x="70" y="290" font-size="18" fill="#9A9AA0">toi</text><text x="200" y="256" font-size="18" fill="#9A9AA0">Léa</text><text x="330" y="160" font-size="18" fill="#9A9AA0">Max</text><text x="450" y="145" font-size="18" fill="#9A9AA0">Nina</text>
+    </g></svg>
+   <div><div class="serie"><span data-count="12">0</span> jours<small>de série commune. 2 à 4 coureurs, une seule série : elle avance quand tout le monde a tenu sa journée.</small></div></div>
+  </div>
+  <div class="duo">
+   <div class="side solo"><h3>Tout seul</h3><ul><li>Motivé le lundi, disparu le jeudi</li><li>Personne ne voit quand tu sautes une séance</li><li>Tu repousses à demain, puis à lundi</li><li>Tes progrès, tu es le seul à les fêter</li></ul></div>
+   <div class="side team"><h3>En cordée</h3><ul><li>Une série commune qui vous tient tous</li><li>Un chat d'équipe pour se secouer</li><li>Des défis collectifs chaque semaine</li><li>Un classement pour se tirer vers le haut</li></ul></div>
+   <div class="vid"><video src="lp_cordee.mp4" poster="lp_cordee_poster.jpg" muted loop playsinline preload="none" aria-label="Animation : la série de la cordée retombe à zéro quand Max oublie sa séance"></video><small>13 jours de série. Et Max oublie sa séance.</small></div>
+  </div>
+ </div>
+</section>
+
+<section data-stage="4" id="programme">
+ <div class="wrap pill rev">
+  <div class="shot"><div class="phone"><div class="scr"><img src="lp_plan.jpg" alt="Semaine de plan avec la sortie longue marquée séance clé"></div></div><span class="tag">Route ou trail</span></div>
+  <div>
+   <p class="stage">Niveau 40, le mont Noir</p>
+   <h2>Un plan qui<br>t'écoute.</h2>
+   <p class="lead">Donne ta course, ta date et ton niveau. L'appli construit ton plan par cycles, puis l'ajuste après chaque séance selon ton ressenti.</p>
+   <ul class="list">
+    <li><b>Du 5 km à l'ultra</b>, sur route ou en trail au ressenti</li>
+    <li><b>Tes allures</b> calculées depuis ta VMA ou tes records</li>
+    <li><b>Ta courbe de chrono</b> : au départ, aujourd'hui, en fin de prépa</li>
+    <li><b>Strava</b> pour valider tes séances en un geste</li>
+   </ul>
+  </div>
+ </div>
+ <div class="wrap">
+  <div class="cyc">
+   <div><small>Semaines 1 à 3</small><h3>Seuil long</h3><p>De longs blocs à allure contrôlée pour construire le moteur.</p><div class="int"><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+   <div><small>Semaines 4 à 6</small><h3>VO2max</h3><p>Des fractions courtes et intenses pour lever ton plafond.</p><div class="int"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div>
+   <div><small>Semaines 7 à 9</small><h3>Spécifique</h3><p>Ton allure de course, répétée jusqu'à devenir naturelle.</p><div class="int"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div>
+   <div><small>Dernière semaine</small><h3>Affûtage</h3><p>Moins de volume, un peu de vitesse : tu arrives frais.</p><div class="int"><i class="on"></i><i></i><i></i><i></i></div></div>
+  </div>
+  <p class="dim" style="margin-top:14px;font-size:14px">Exemple pour un semi en 10 semaines. Chaque cycle finit par une semaine plus légère pour assimiler.</p>
+ </div>
+</section>
+
+<section data-stage="5" id="renfo">
+ <div class="wrap">
+  <p class="stage">Niveau 50, la colline</p>
+  <h2>Le renfo,<br>montré en 3D.</h2>
+  <p class="lead" style="margin-top:22px">Deux séances de 20 minutes par semaine, c'est ce qui éloigne les blessures. Choisis un exercice et tourne autour du personnage.</p>
+  <div class="lab3d">
+   <div class="stage3d"><canvas id="lab" width="900" height="900" aria-label="Personnage 3D qui montre l'exercice choisi"></canvas>
+    <div class="ang" role="group" aria-label="Angle de vue"><button class="chip" data-yaw="48" aria-pressed="false">3/4</button><button class="chip" data-yaw="90" aria-pressed="false">face</button><button class="chip" data-yaw="0" aria-pressed="false">profil</button><button class="chip" data-yaw="spin" aria-pressed="true">360°</button></div></div>
+   <div>
+    <div class="exos" role="group" aria-label="Exercice">
+     <button data-ex="squat" aria-pressed="true">Squat<small>jambes et fessiers</small></button>
+     <button data-ex="fente" aria-pressed="false">Fentes<small>force sur une jambe</small></button>
+     <button data-ex="pont" aria-pressed="false">Pont fessier<small>moteur de la foulée</small></button>
+     <button data-ex="lateral" aria-pressed="false">Gainage latéral<small>bassin stable</small></button>
+    </div>
+    <div class="how3d" id="how3d" aria-live="polite"></div>
+   </div>
+  </div>
+  <div class="dur">
+   <div><svg viewBox="0 0 48 48" fill="none" stroke="#FFC107" stroke-width="3" stroke-linecap="round"><circle cx="24" cy="26" r="16"/><path d="M24 26V18M20 6h8"/><path d="M24 26 30 22" stroke-width="0"/><path d="M24 10a16 16 0 0 1 13.9 8" stroke-width="5"/></svg><b>15<em>'</em></b><span>L'essentiel : 3 ou 4 exercices, parfait les jours chargés.</span></div>
+   <div><svg viewBox="0 0 48 48" fill="none" stroke="#FFC107" stroke-width="3" stroke-linecap="round"><circle cx="24" cy="26" r="16"/><path d="M24 26V18M20 6h8"/><path d="M24 10a16 16 0 0 1 0 32" stroke-width="5"/></svg><b>30<em>'</em></b><span>Le bon équilibre pour la plupart des coureurs.</span></div>
+   <div><svg viewBox="0 0 48 48" fill="none" stroke="#FFC107" stroke-width="3" stroke-linecap="round"><circle cx="24" cy="26" r="16"/><path d="M24 26V18M20 6h8"/><path d="M24 10a16 16 0 1 1 -16 16" stroke-width="5"/></svg><b>45<em>'</em></b><span>La séance complète, avec plus de séries.</span></div>
+   <div><svg viewBox="0 0 48 48" fill="none" stroke="#FFC107" stroke-width="3" stroke-linecap="round"><path d="M8 34h32M12 34V20M36 34V20M8 20h32"/><path d="M18 14l6-6 6 6"/></svg><b>1<em>×</em> ou 2<em>×</em></b><span>Par semaine, au choix. Tu changes quand tu veux dans les réglages.</span></div>
+  </div>
+ </div>
+</section>
+
+<section data-stage="6" id="pourqui">
+ <div class="wrap">
+  <p class="stage">Niveau 60, le ballon</p>
+  <h2>Pour qui ?</h2>
+  <div class="who">
+   <div><h3>Tu reprends</h3><p>Tu veux juste courir deux fois par semaine sans lâcher au bout de dix jours. L'appli démarre doucement et te protège des blessures.</p></div>
+   <div><h3>Tu prépares une course</h3><p>10 km, semi, marathon : un plan par cycles, des séances clés et une estimation de chrono qui bouge avec toi.</p></div>
+   <div><h3>Tu vis pour le trail</h3><p>Dénivelé, sorties longues au ressenti, renfo des descentes : tout est pensé pour la montagne.</p></div>
+  </div>
+ </div>
+</section>
+
+<section data-stage="6" id="semaine">
+ <div class="wrap">
+  <p class="stage">Toujours au ballon</p>
+  <h2>Une semaine<br>dans la cordée.</h2>
+  <div class="wk">
+   <div><h4>Lun</h4><p>Renfo 30 min, guidé en 3D</p></div>
+   <div><h4>Mar</h4><p>Footing tranquille</p></div>
+   <div><h4>Mer</h4><p>Repos, habitudes cochées</p></div>
+   <div class="k"><h4>Jeu</h4><p>Séance clé du cycle</p></div>
+   <div><h4>Ven</h4><p>Repos ou renfo 15 min</p></div>
+   <div><h4>Sam</h4><p>Footing avec la cordée</p></div>
+   <div class="k"><h4>Dim</h4><p>Sortie longue, puis le purgatoire des cases ratées</p></div>
+  </div>
+  <div class="cnt" id="cnt">
+   <div><b data-count="34">0</b><span>km dans la semaine</span></div>
+   <div><b data-count="5">0</b><span>séances validées</span></div>
+   <div><b data-count="12">0</b><span>jours de série</span></div>
+   <div><b data-count="740">0</b><span>xp gagnés</span></div>
+  </div>
+  <small>Exemple d'une semaine type pour un coureur qui prépare un semi.</small>
+ </div>
+</section>
+
+<section data-stage="7" id="etapes">
+ <div class="wrap">
+  <p class="stage">Niveau 70, le col</p>
+  <h2>Trois gestes<br>pour démarrer.</h2>
+  <div class="steps">
+   <div><h3>Ton e-mail</h3><p>Tu reçois un lien de connexion. Pas de mot de passe à retenir.</p></div>
+   <div><h3>L'appli sur ton écran</h3><p>Ajoute La Flèche à ton écran d'accueil, iPhone ou Android. Elle s'ouvre comme une vraie appli.</p></div>
+   <div><h3>Ta première case</h3><p>Choisis tes habitudes, coche la première, et invite tes potes dans ta cordée.</p></div>
+  </div>
+ </div>
+</section>
+
+<section data-stage="8" id="faq">
+ <div class="wrap">
+  <p class="stage">Niveau 80, la haute montagne</p>
+  <h2>Tes questions</h2>
+  <div class="faq">
+   <details><summary>C'est vraiment gratuit ?</summary><p>Oui. Pas d'abonnement, pas de pub, pas de carte bancaire. La Flèche est un projet de coureur, construit avec les retours de ceux qui l'utilisent.</p></details>
+   <details><summary>Je dois la télécharger sur l'App Store ?</summary><p>Non. C'est une appli web : tu l'ouvres dans ton navigateur, puis tu l'ajoutes à ton écran d'accueil. Elle marche sur iPhone comme sur Android, et se met à jour toute seule.</p></details>
+   <details><summary>Je débute, c'est pour moi ?</summary><p>Oui. Les habitudes marchent pour tout le monde, et le plan de course part de ton niveau réel, même si tu ne cours pas encore.</p></details>
+   <details><summary>Est-ce que ça marche avec Strava ?</summary><p>Oui, si tu le connectes. Tes sorties servent à valider tes séances et à suivre tes kilomètres. Elles ne sont jamais montrées aux autres membres.</p></details>
+   <details><summary>Que deviennent mes données ?</summary><p>Elles servent uniquement à faire marcher l'appli. Elles sont stockées en Europe, jamais revendues. Tu peux télécharger une copie ou supprimer ton compte à tout moment depuis les paramètres.</p></details>
+   <details><summary>Je n'ai pas reçu l'e-mail.</summary><p>Regarde dans tes spams et attends une minute. Toujours rien ? Redemande un lien, ou écris à @la.fleche_01 sur Instagram.</p></details>
+  </div>
+ </div>
+</section>
+
+<section data-stage="9" id="inscription" class="summit">
+ <svg class="mt" viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true"><path d="M0 400 L0 300 L170 210 L260 260 L420 120 L520 190 L640 40 L760 170 L860 110 L1010 230 L1200 150 L1200 400Z" fill="#141209"/><path d="M0 300 L170 210 L260 260 L420 120 L520 190 L640 40 L760 170 L860 110 L1010 230 L1200 150" fill="none" stroke="#FFC107" stroke-width="3" opacity=".7"/></svg>
+ <div class="wrap">
+  <p class="stage">Niveau 90, le sommet</p>
+  <h2>À toi de<br>grimper.</h2>
+  <form class="form" id="lfForm" novalidate>
+   <label class="f" for="mail">Ton e-mail</label>
+   <input id="mail" type="email" autocomplete="email" inputmode="email" placeholder="prenom@exemple.fr" required>
+   <label class="ok"><input type="checkbox" id="consent"><span>J'ai 15 ans ou plus et j'accepte que mes données servent à faire marcher l'appli. Elles sont stockées en Europe et jamais revendues.</span></label>
+   <button class="btn" type="submit" id="go">Recevoir mon lien</button>
+   <div class="msg" id="msg" role="status" aria-live="polite"></div>
+   <div class="after" id="after"><p>Ouvre le mail sur ce téléphone et touche le lien : tu arrives directement dans l'appli. Sur iPhone avec l'appli déjà installée, tape plutôt le code à 6 chiffres dans l'appli.</p><a class="btn ghost" href="./">Ouvrir l'appli</a><br><a class="wa" href="https://chat.whatsapp.com/Dy05QzTmjut3HnAVl6gLxk" target="_blank" rel="noopener">Rejoindre la communauté WhatsApp</a></div>
+  </form>
+ </div>
+</section>
+
+<footer data-stage="10">
+ <div class="wrap cols">
+  <div><img src="logo_la_fleche.png" alt="La Flèche"><p>Du bitume aux Alpes, une case après l'autre.</p><a href="https://www.instagram.com/la.fleche_01/">@la.fleche_01</a></div>
+  <div><b>Mentions légales</b>Édité par Théo Berger, particulier, projet étudiant non commercial (France). Contact : <a href="mailto:laflecherun@gmail.com">laflecherun@gmail.com</a>.<br>Hébergement : Vercel Inc., Covina, Californie, États-Unis.</div>
+  <div><b>Tes données</b>Base de données Supabase, serveurs en Irlande. Aucune pub, aucun cookie de suivi. Le détail complet est dans l'appli, rubrique Paramètres, « tes données ».</div>
+ </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
+<script>
+/* ---------- MANNEQUIN 3D : exercices de renfo animés ---------- */
+const MQ=(()=>{const D2R=Math.PI/180;
+const SEG={torso:.5,neck:.06,head:.12,sh:.17,hip:.095,ua:.29,fa:.27,th:.43,sk:.42,ft:.17};
+const N={sup:0,x:0,lift:0,gy:0,pitch:0,roll:0,tp:0,tr:0,hd:0,L:{h:0,k:0,a:0,ab:4},R:{h:0,k:0,a:0,ab:4},aL:{s:6,e:12,ab:8},aR:{s:6,e:12,ab:8}};
+const P=o=>{const r=JSON.parse(JSON.stringify(N));for(const k in o){if(typeof o[k]==="object")Object.assign(r[k],o[k]);else r[k]=o[k]}return r};
+const st=(o={})=>P(o);
+// keyframes : [pose, durée de transition (s), pause (s)]
+const SQ=st({tp:42,L:{h:96,k:112},R:{h:96,k:112},aL:{s:85,e:0,ab:6},aR:{s:85,e:0,ab:6}});
+const PL=P({pitch:-90,L:{a:-30},R:{a:-30},aL:{s:90,e:90,ab:4},aR:{s:90,e:90,ab:4}});
+const BR0=P({pitch:90,L:{h:52,k:105,a:10},R:{h:52,k:105,a:10},aL:{s:0,e:0,ab:12},aR:{s:0,e:0,ab:12}});
+const LUN=(fr,dp)=>{const f=fr==="R"?"R":"L",b=f==="R"?"L":"R";const o={tp:4};o[f]={h:dp?82:28,k:dp?88:26,ab:3};o[b]={h:dp?-18:-22,k:dp?95:8,a:dp?-45:-20,ab:3};o.aL={s:dp?10:0,e:30};o.aR={s:dp?10:0,e:30};return P(o)};
+const EX={
+ squat:{k:[[st(),1,.3],[SQ,1.1,.25]],props:["mat"]},
+ pont:{custom:t=>C_pont(wave(t,1,.6,.9,.3)),T:2.8,gT:1.2,props:["mat"],yaw:-22},
+ mollet:{k:[[st({aL:{s:5,e:10},aR:{s:5,e:10}}),.9,.15],[st({lift:.075,L:{a:38},R:{a:38},aL:{s:5,e:10},aR:{s:5,e:10}}),.6,.6]],props:[]},
+ soleaire:{k:[[st({tp:8,L:{h:30,k:45},R:{h:30,k:45}}),.9,.15],[st({tp:8,lift:.07,L:{h:30,k:45,a:38},R:{h:30,k:45,a:38}}),.6,.6]],props:[]},
+ planche:{custom:t=>C_plank(.5+.5*Math.sin(t*1.6),0),T:3.9,gT:0,props:["mat"],hold:1,yaw:-16},
+ lateral:{custom:t=>C_side(wave(t,1,.6,1,.3)),T:2.9,gT:1.2,props:["mat"],yaw:-10},
+ fente:{k:[[LUN("R",0),1,.2],[LUN("R",1),1.1,.3]],props:[]},
+ stepup:{k:[[st({sup:"L",R:{h:72,k:92,a:0},L:{h:-6,k:6,a:-10},tp:16,aL:{s:-15,e:20},aR:{s:25,e:30}}),1,.15],[st({sup:"R",gy:.4,R:{h:2,k:4},L:{h:30,k:75,a:-25},tp:0,aL:{s:20,e:30},aR:{s:-10,e:20}}),1,.4]],props:["box"],boxFoot:"R",boxH:.4,yaw:28},
+ bulgare:{k:[[P({R:{h:22,k:20},L:{h:-38,k:62,a:-50},tp:6,aL:{s:0,e:25},aR:{s:0,e:25}}),1,.2],[P({R:{h:80,k:92},L:{h:-12,k:118,a:-50},tp:14,aL:{s:10,e:25},aR:{s:10,e:25}}),1.1,.3]],props:["chair"],chairFoot:"L",chairH:.45},
+ sdt1:{k:[[st({R:{h:0,k:4},L:{h:0,k:8},aL:{s:4,e:6},aR:{s:4,e:6}}),1.1,.2],[st({sup:"R",tp:80,L:{h:-76,k:6,a:-25},R:{h:4,k:10},aL:{s:4,e:4},aR:{s:4,e:4}}),1.2,.4]],props:[]},
+ equilibre:{k:[[st({R:{h:68,k:92},L:{h:2,k:8},aL:{s:5,e:5,ab:55},aR:{s:5,e:5,ab:55}}),1.5,0],[st({x:.01,tr:2,R:{h:72,k:95},L:{h:2,k:10},aL:{s:5,e:5,ab:62},aR:{s:5,e:5,ab:48}}),1.5,0]],props:[],hold:1},
+ chaise:{k:[[st({tp:-2,L:{h:90,k:90},R:{h:90,k:90},aL:{s:70,e:100,ab:8},aR:{s:70,e:100,ab:8}}),1.5,0],[st({tp:-1,L:{h:89,k:89},R:{h:89,k:89},aL:{s:72,e:104,ab:8},aR:{s:72,e:104,ab:8}}),1.5,0]],props:["wall"],hold:1},
+ sauts:{k:[[st({L:{h:4,k:10,a:20},R:{h:4,k:10,a:20},aL:{s:12,e:60,ab:28},aR:{s:12,e:60,ab:28}}),.22,0],[st({lift:.09,L:{h:2,k:4,a:35},R:{h:2,k:4,a:35},aL:{s:12,e:60,ab:28},aR:{s:12,e:60,ab:28}}),.22,0]],props:["rope"]},
+ squatsaute:{k:[[SQ,.7,.15],[st({lift:.32,L:{h:-4,k:4,a:30},R:{h:-4,k:4,a:30},aL:{s:165,e:5,ab:12},aR:{s:165,e:5,ab:12}}),.45,0],[st({tp:20,L:{h:45,k:60},R:{h:45,k:60},aL:{s:40,e:10},aR:{s:40,e:10}}),.35,.1]],props:[]},
+ fentesautee:{k:[[LUN("R",1),.6,.15],[P({lift:.3,R:{h:30,k:40},L:{h:-10,k:40,a:-10},aL:{s:30,e:30},aR:{s:-20,e:30}}),.4,0],[LUN("L",1),.6,.15],[P({lift:.3,L:{h:30,k:40},R:{h:-10,k:40,a:-10},aR:{s:30,e:30},aL:{s:-20,e:30}}),.4,0]],props:[]},
+ bonds:{k:[[P({lift:.22,tp:10,R:{h:70,k:80},L:{h:-30,k:30,a:-30},aL:{s:60,e:70},aR:{s:-45,e:40}}),.35,0],[P({lift:0,tp:8,R:{h:20,k:20},L:{h:-25,k:60,a:-30},aL:{s:30,e:60},aR:{s:-20,e:50}}),.25,0],[P({lift:.22,tp:10,L:{h:70,k:80},R:{h:-30,k:30,a:-30},aR:{s:60,e:70},aL:{s:-45,e:40}}),.35,0],[P({lift:0,tp:8,L:{h:20,k:20},R:{h:-25,k:60,a:-30},aR:{s:30,e:60},aL:{s:-20,e:50}}),.25,0]],props:[],yaw:22},
+ stepdown:{k:[[st({sup:"L",gy:.38,L:{h:4,k:6},R:{h:14,k:8,a:5},aL:{s:30,e:20},aR:{s:30,e:20}}),1.6,.2],[st({sup:"L",gy:.38,tp:16,L:{h:66,k:96},R:{h:22,k:2,a:20},aL:{s:45,e:20},aR:{s:45,e:20}}),.9,.4]],props:["box"],boxFoot:"L",boxH:.38,boxSupport:1,yaw:24},
+ gainage:{custom:t=>{const c=t%3.2,s=c<1.6?"R":"L",u=wave(c%1.6,.55,.3,.55,.2);return C_plank(0,1,s,u)},T:3.2,gT:.7,props:["mat"],yaw:-20}};
+// ---------- maths ----------
+const lerp=(a,b,t)=>a+(b-a)*t,ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+function mix(a,b,t){const r={};for(const k in a){if(k==="sup"){r.sup=t<.5?a.sup:b.sup;continue}if(typeof a[k]==="object"){r[k]={};for(const j in a[k])r[k][j]=lerp(a[k][j],b[k][j],t)}else r[k]=lerp(a[k],b[k],t)}return r}
+function poseAt(ex,time){const K=ex.k;let tot=0;K.forEach(k=>tot+=k[1]+k[2]);let t=time%tot;
+  for(let i=0;i<K.length;i++){const [p,d,h]=K[i];const nx=K[(i+1)%K.length][0];if(t<h)return{p,i};t-=h;if(t<d)return{p:mix(p,nx,ease(t/d)),i};t-=d}return{p:K[0][0],i:0}}
+const v=(x,y,z)=>({x,y,z}),add=(a,b)=>v(a.x+b.x,a.y+b.y,a.z+b.z),mul=(a,s)=>v(a.x*s,a.y*s,a.z*s);
+const dirS=(ang,ab)=>{const a=ang*D2R,b=ab*D2R;return v(Math.sin(a)*Math.cos(b),-Math.cos(a)*Math.cos(b),Math.sin(b))};
+function skel(p){const J={};const tp=p.tp*D2R,tr=p.tr*D2R;
+  J.pelvis=v(0,0,0);const up=v(Math.sin(tp)*Math.cos(tr),Math.cos(tp)*Math.cos(tr),Math.sin(tr));
+  J.neck=mul(up,SEG.torso);J.fwd=v(Math.cos(tp),-Math.sin(tp),0);J.chest=mul(up,SEG.torso*.62);J.head=add(J.neck,add(mul(up,SEG.neck+SEG.head*.85),v(Math.cos(tp)*.02,0,0)));
+  const side=v(0,0,1),shc=add(J.neck,mul(up,-.04));
+  [["L",-1],["R",1]].forEach(([s,sg])=>{
+    const sh=add(shc,mul(side,sg*SEG.sh));J["sh"+s]=sh;const a=p["a"+s];const d1=dirS(a.s,sg*a.ab);const el=add(sh,mul(d1,SEG.ua));J["el"+s]=el;const d2=dirS(a.s+a.e,sg*a.ab*.6);J["ha"+s]=add(el,mul(d2,SEG.fa));
+    const hp=v(0,-.02,sg*SEG.hip);J["hp"+s]=hp;const l=p[s];const t1=dirS(l.h,sg*l.ab);const kn=add(hp,mul(t1,SEG.th));J["kn"+s]=kn;const t2=dirS(l.h-l.k,sg*l.ab*.5);const an=add(kn,mul(t2,SEG.sk));J["an"+s]=an;
+    const fa=(l.h-l.k+90-(l.a||0))*D2R;J["to"+s]=add(an,v(Math.sin(fa)*SEG.ft,-Math.cos(fa)*SEG.ft,0));J["he"+s]=add(an,v(-Math.sin(fa)*.05,-.045+Math.cos(fa)*.05,0))});
+  // orientation globale : bascule (pitch, autour de z) puis roulis (autour de x)
+  const pc=Math.cos(p.pitch*D2R),ps=Math.sin(p.pitch*D2R),rc=Math.cos(p.roll*D2R),rs=Math.sin(p.roll*D2R);
+  J.face=add(J.head,mul(J.fwd,SEG.head*.82));delete J.fwd;for(const k in J){let{x,y,z}=J[k];[x,y]=[x*pc-y*ps,x*ps+y*pc];[y,z]=[y*rc-z*rs,y*rs+z*rc];J[k]=v(x,y,z)}
+  return J}
+function place(ex,p){const J=skel(p);let minY=1e9,R=.045;
+  if(p.sup){const s=p.sup;minY=Math.min(J["he"+s].y,J["to"+s].y)-R}else for(const k in J){if(k==="face")continue;const r=k==="head"?SEG.head:R;minY=Math.min(minY,J[k].y-r)}
+  const dy=(p.gy||0)-minY+p.lift;const anc=!p.pitch&&!p.roll&&!(ex.props||[]).some(x=>x==="box"||x==="chair"),ax=anc?(p.sup?J["an"+p.sup].x:(J.anL.x+J.anR.x)/2):0;for(const k in J)J[k]=v(J[k].x+p.x-ax,J[k].y+dy,J[k].z);return J}
+// ---------- exercices au sol : articulations posées directement ----------
+function wave(t,up,hold,down,rest){const T=up+hold+down+rest;t=((t%T)+T)%T;const e=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;if(t<up)return e(t/up);t-=up;if(t<hold)return 1;t-=hold;if(t<down)return 1-e(t/down);return 0}
+const V=(x,y,z)=>({x,y,z:z||0}),mixV=(a,b,u)=>V(a.x+(b.x-a.x)*u,a.y+(b.y-a.y)*u,a.z+(b.z-a.z)*u);
+function ik2(A,B,l1,l2,sg){const dx=B.x-A.x,dy=B.y-A.y,d=Math.min(l1+l2-.002,Math.max(.05,Math.hypot(dx,dy))),a=(l1*l1-l2*l2+d*d)/(2*d),h=Math.sqrt(Math.max(0,l1*l1-a*a));return V(A.x+a*dx/d-sg*h*dy/d,A.y+a*dy/d+sg*h*dx/d,(A.z+B.z)/2)}
+function fin(J,faceDir){J.pelvis=mixV(J.hpL,J.hpR,.5);const sc=mixV(J.shL,J.shR,.5);J.neck=sc;J.chest=mixV(J.pelvis,sc,.62);J.face=V(J.head.x+faceDir.x*SEG.head*.82,J.head.y+faceDir.y*SEG.head*.82,J.head.z+faceDir.z*SEG.head*.82);return J}
+function C_pont(u){const J={},hy=.11+u*.3,px=Math.sqrt(.25-Math.pow(hy-.09,2));["L","R"].forEach(s=>{const z=s==="R"?1:-1;
+  J["sh"+s]=V(0,.09,z*SEG.sh);J["el"+s]=V(.28,.05,z*(SEG.sh+.06));J["ha"+s]=V(.55,.04,z*(SEG.sh+.07));J["hp"+s]=V(px,hy,z*SEG.hip);
+  const an=V(1.0,.06,z*.12);J["an"+s]=an;J["kn"+s]=ik2(J["hp"+s],an,SEG.th,SEG.sk,1);J["to"+s]=V(an.x+.16,.03,an.z);J["he"+s]=V(an.x-.04,.02,an.z)});
+  J.head=V(-.2,.11,0);return fin(J,V(0,1,0))}
+function C_plank(u,high,tap,tu){const J={},sy=high?.52:.32,An=V(1.24,.1,0),S=V(0,sy,0),P=mixV(S,An,.38);P.y+=.012*u+(high?.02:0);["L","R"].forEach(s=>{const z=s==="R"?1:-1;
+  J["sh"+s]=V(0,sy,z*SEG.sh);J["hp"+s]=V(P.x,P.y,z*SEG.hip);const an=V(An.x,An.y,z*.1);J["an"+s]=an;J["kn"+s]=mixV(J["hp"+s],an,.5);J["to"+s]=V(an.x+.02,.02,an.z);J["he"+s]=V(an.x+.05,.2,an.z);
+  if(high){const base=V(0,.03,z*SEG.sh),tgt=V(.03,sy-.04,-z*SEG.sh*.8),h=tap===s?mixV(base,tgt,tu||0):base;J["ha"+s]=h;const e=mixV(J["sh"+s],h,.5);e.z+=z*(tap===s?.16*(tu||0):0);e.x-=tap===s?.08*(tu||0):0;J["el"+s]=e}
+  else{J["el"+s]=V(0,.045,z*SEG.sh);J["ha"+s]=V(-.26,.04,z*(SEG.sh-.03))}});
+  J.head=V(-.21,sy+.03,0);return fin(J,V(-.25,-.95,0))}
+function C_side(u){const J={},S=V(0,.34,0),hy=.13+u*.13,px=Math.sqrt(.25-Math.pow(S.y-hy,2)),ax=px+Math.sqrt(Math.pow(.85,2)-Math.pow(hy-.06,2));
+  J.shL=V(0,.34,0);J.shR=V(0,.66,0);J.elL=V(0,.045,0);J.haL=V(0,.04,.26);J.elR=V(0,.94,0);J.haR=V(.02,1.2,0);
+  J.hpL=V(px,hy,0);J.hpR=V(px,hy+.19,0);J.anL=V(ax,.06,-.02);J.anR=V(ax,.15,.02);J.knL=mixV(J.hpL,J.anL,.5);J.knR=mixV(J.hpR,J.anR,.5);
+  J.toL=V(ax+.03,.05,.16);J.heL=V(ax+.03,.03,-.05);J.toR=V(ax+.03,.14,.17);J.heR=V(ax+.03,.14,-.05);J.head=V(-.19,.58,0);return fin(J,V(0,0,1))}
+const exT=ex=>ex.custom?ex.T:ex.k.reduce((a,k)=>a+k[1]+k[2],0);
+const jAt=(ex,t)=>ex.custom?ex.custom(t):place(ex,poseAt(ex,t).p);
+const ghostT=ex=>ex.custom?ex.gT:ex.k[0][2]+ex.k[0][1]+Math.min(.01,ex.k[1][2]);
+// ---------- caméra & dessin ----------
+const FIT={};
+function fitFor(id,ex,yaw0,spin,c0){const key=id+"|"+yaw0+"|"+spin+"|"+c0.W+"x"+c0.H;if(FIT[key])return FIT[key];
+  let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9,cx=0,n=0;const yaws=spin?[-.6,-.3,0,.3,.6]:[0];
+  const poses=[],tot=exT(ex);for(let t=0;t<tot;t+=tot/24)poses.push(jAt(ex,t));
+  poses.forEach(J=>{for(const k in J){cx+=J[k].x;n++}});cx/=n;
+  yaws.forEach(dy=>{const c={...c0,yaw:yaw0*Math.PI/180+dy,f:1,ox:0,oy:0,cx};poses.forEach(J=>{const pts=Object.values(J);pts.push(v(cx-.5,0,0),v(cx+.5,0,0));if(ex.props&&ex.props.includes("wall"))pts.push(v(J.pelvis.x-.16,1.5,0));
+    pts.forEach(P0=>{const q=proj(c,P0);x0=Math.min(x0,q.x);x1=Math.max(x1,q.x);y0=Math.min(y0,q.y);y1=Math.max(y1,q.y)})})});
+  const pad=.16;const w=x1-x0+pad*2,h=y1-y0+pad*2;const f=Math.min(c0.W/w,c0.H/h);
+  return FIT[key]={cx,f,ox:c0.W/2-((x0+x1)/2)*f,oy:c0.H/2-((y0+y1)/2)*f}}
+function proj(c,P){const cy=Math.cos(c.yaw),sy=Math.sin(c.yaw),ce=Math.cos(c.el),se=Math.sin(c.el);let x=P.x-c.cx,y=P.y-c.cyy,z=P.z;
+  [x,z]=[x*cy-z*sy,x*sy+z*cy];[y,z]=[y*ce-z*se,y*se+z*ce];const f=c.f*c.d/(c.d-z);return{x:c.ox+x*f,y:c.oy-y*f,z,f}}
+function colorFor(base,z,dz){const k=Math.max(.55,Math.min(1.12,.84+z*.55+dz));return `rgb(${Math.min(255,base[0]*k)|0},${Math.min(255,base[1]*k)|0},${Math.min(255,base[2]*k)|0})`}
+function draw(cv,id,time,o={}){const ex=EX[id];if(!ex||!cv.getContext)return;const g=cv.getContext("2d"),W=cv.width,H=cv.height;g.clearRect(0,0,W,H);
+  const J=jAt(ex,time);
+  let mnx=1e9,mxx=-1e9,mxy=0;for(const k in J){mnx=Math.min(mnx,J[k].x);mxx=Math.max(mxx,J[k].x);mxy=Math.max(mxy,J[k].y)}
+  const yaw0=o.yaw!=null?o.yaw:(ex.yaw!=null?ex.yaw:48);
+  const c={yaw:yaw0*D2R+(o.spin?Math.sin(time*.35)*.6:0),el:(o.el||14)*D2R,d:6,W,H,cx:0,cyy:0,f:1,ox:0,oy:0};
+  const fit=fitFor(id,ex,yaw0,!!o.spin,c);Object.assign(c,fit);
+  const gold=o.gold||[255,193,7],gray=[150,150,158],dark=[70,70,78];
+  // sol
+  const fl=[];for(let i=-4;i<=4;i++){fl.push([v(i*.3,0,-1.2),v(i*.3,0,1.2)]);fl.push([v(-1.2,0,i*.3),v(1.2,0,i*.3)])}
+  g.lineWidth=1;g.strokeStyle="rgba(255,255,255,.06)";fl.forEach(([a,b])=>{const A=proj(c,add(a,v(c.cx,0,0))),B=proj(c,add(b,v(c.cx,0,0)));if(A.z>c.d-.5||B.z>c.d-.5)return;g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.stroke()});
+  // ombre
+  const pc=proj(c,v((mnx+mxx)/2,0,0));g.fillStyle="rgba(0,0,0,.45)";g.beginPath();g.ellipse(pc.x,pc.y,(mxx-mnx+.3)*pc.f*.5,.12*pc.f*.5,0,0,7);g.fill();
+  const items=[];const quad=(pts,fill,stroke)=>items.push({z:pts.reduce((a,q)=>a+proj(c,q).z,0)/pts.length-.4,fn:()=>{g.beginPath();pts.forEach((q,i)=>{const P2=proj(c,q);i?g.lineTo(P2.x,P2.y):g.moveTo(P2.x,P2.y)});g.closePath();g.fillStyle=fill;g.fill();if(stroke){g.strokeStyle=stroke;g.lineWidth=1;g.stroke()}}});
+  const box=(x0,x1,h,z0,z1,col)=>{const y=h;[[v(x0,y,z0),v(x1,y,z0),v(x1,y,z1),v(x0,y,z1)],[v(x0,0,z1),v(x1,0,z1),v(x1,y,z1),v(x0,y,z1)],[v(x1,0,z0),v(x1,0,z1),v(x1,y,z1),v(x1,y,z0)],[v(x0,0,z0),v(x0,0,z1),v(x0,y,z1),v(x0,y,z0)]].forEach((f,i)=>quad(f,col[i]||col[0],"rgba(0,0,0,.35)"))};
+  // fantôme : la position à atteindre
+  if(!ex.hold&&o.ghost!==false){const G=jAt(ex,ghostT(ex));const gl=[["pelvis","neck"],["shL","shR"],["hpL","hpR"],["neck","head"]];["L","R"].forEach(s=>gl.push(["sh"+s,"el"+s],["el"+s,"ha"+s],["hp"+s,"kn"+s],["kn"+s,"an"+s],["he"+s,"to"+s]));
+    items.push({z:-90,fn:()=>{g.strokeStyle="rgba(255,255,255,.16)";g.lineCap="round";gl.forEach(([a,b])=>{const A=proj(c,G[a]),B=proj(c,G[b]);g.lineWidth=.05*A.f;g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.stroke()});const H=proj(c,G.head);g.beginPath();g.arc(H.x,H.y,SEG.head*H.f,0,7);g.lineWidth=1.5;g.stroke()}})}
+  // accessoires
+  const props=ex.props||[];
+  if(props.includes("mat")){const x0=mnx-.25,x1=mxx+.25;items.push({z:-99,fn:()=>{g.beginPath();[v(x0,.004,-.36),v(x1,.004,-.36),v(x1,.004,.36),v(x0,.004,.36)].forEach((q,i)=>{const P2=proj(c,q);i?g.lineTo(P2.x,P2.y):g.moveTo(P2.x,P2.y)});g.closePath();g.fillStyle="rgba(255,193,7,.13)";g.fill();g.strokeStyle="rgba(255,193,7,.35)";g.stroke()}})}
+  if(props.includes("box")){const f=J["to"+ex.boxFoot];const bx=ex.boxSupport?f.x-.2:f.x-.1;box(bx-.26,bx+(ex.boxSupport?.22:.26),ex.boxH,-.42,.42,["#3a3a40","#2c2c31","#34343a","#26262b"])}
+  if(props.includes("chair")){const f=J["to"+ex.chairFoot];const bx=f.x;box(bx-.32,bx+.14,ex.chairH,-.26,.26,["#3a3a40","#2c2c31","#34343a","#26262b"]);quad([v(bx-.32,ex.chairH,-.26),v(bx-.32,ex.chairH+.42,-.26),v(bx-.32,ex.chairH+.42,.26),v(bx-.32,ex.chairH,.26)],"#303036","rgba(0,0,0,.35)")}
+  if(props.includes("wall")){const wx=J.pelvis.x-.16;items.push({z:-98,fn:()=>{g.beginPath();[v(wx,0,-.6),v(wx,1.75,-.6),v(wx,1.75,.6),v(wx,0,.6)].forEach((q,i)=>{const P2=proj(c,q);i?g.lineTo(P2.x,P2.y):g.moveTo(P2.x,P2.y)});g.closePath();g.fillStyle="rgba(255,255,255,.07)";g.fill();g.strokeStyle="rgba(255,255,255,.18)";g.stroke()}})}
+  // corps : silhouette humaine (peau, vêtements, muscles), triée par profondeur
+  const SK=o.skin||[224,168,128],SH=o.shirt||gold,SO=[40,40,47],SHOE=[238,238,242],HAIR=[52,36,28];
+  const rgb=(c,k=1)=>`rgb(${Math.max(0,Math.min(255,c[0]*k))|0},${Math.max(0,Math.min(255,c[1]*k))|0},${Math.max(0,Math.min(255,c[2]*k))|0})`;
+  const LX=-.55,LY=-.83,px=Math.max(1,W/260);
+  // membre galbé : largeur w(t) = base + renflement musculaire
+  const limbPath=(A,B,wa,wb,bp,bw,t0=0,t1=1)=>{const dx=B.x-A.x,dy=B.y-A.y,L=Math.hypot(dx,dy)||1e-6,ux=dx/L,uy=dy/L,nx=-uy,ny=ux;
+    const W2=t=>{const base=wa*A.f+(wb*B.f-wa*A.f)*t;const b=bw?bw*((A.f+B.f)/2)*Math.exp(-Math.pow((t-bp)/.22,2)):0;return(base+b)/2};
+    const pl=[],pr=[];for(let k=0;k<=14;k++){const t=t0+(t1-t0)*k/14,x=A.x+dx*t,y=A.y+dy*t,w=W2(t);pl.push([x+nx*w,y+ny*w]);pr.push([x-nx*w,y-ny*w])}
+    const p=new Path2D();p.moveTo(pl[0][0],pl[0][1]);pl.forEach(q=>p.lineTo(q[0],q[1]));const we=W2(t1),wsx=W2(t0),ex2=A.x+dx*t1,ey2=A.y+dy*t1,sx=A.x+dx*t0,sy=A.y+dy*t0;
+    const a0=Math.atan2(ny,nx);p.arc(ex2,ey2,we,a0,a0+Math.PI,true);for(let k=14;k>=0;k--)p.lineTo(pr[k][0],pr[k][1]);p.arc(sx,sy,wsx,a0+Math.PI,a0+2*Math.PI,true);p.closePath();
+    return{p,nx,ny,w:Math.max(W2(t0),W2(t1)),cx:(sx+ex2)/2,cy:(sy+ey2)/2}};
+  const shade=(q,col,dz)=>{const lit=(q.nx*LX+q.ny*LY)>0?1:-1,k=.92+dz;const gr=g.createLinearGradient(q.cx+q.nx*q.w*lit,q.cy+q.ny*q.w*lit,q.cx-q.nx*q.w*lit,q.cy-q.ny*q.w*lit);
+    gr.addColorStop(0,rgb(col,k*1.18));gr.addColorStop(.45,rgb(col,k));gr.addColorStop(1,rgb(col,k*.62));return gr};
+  const paint=(q,col,dz,ns)=>{g.lineJoin="round";if(!ns){g.strokeStyle="rgba(0,0,0,.5)";g.lineWidth=1.6*px;g.stroke(q.p)}g.fillStyle=shade(q,col,dz);g.fill(q.p)};
+  const zOf=(...P)=>P.reduce((a,q)=>a+proj(c,q).z,0)/P.length;
+  const depthK=z=>Math.max(-.16,Math.min(.1,z*.35));
+  // bras, jambes, pieds
+  ["L","R"].forEach(s=>{
+    const S=proj(c,J["sh"+s]),E=proj(c,J["el"+s]),Hn=proj(c,J["ha"+s]),Hp=proj(c,J["hp"+s]),K=proj(c,J["kn"+s]),An=proj(c,J["an"+s]),He=proj(c,J["he"+s]),To=proj(c,J["to"+s]);
+    items.push({z:(Hp.z+K.z)/2,fn:()=>{const dz=depthK((Hp.z+K.z)/2);paint(limbPath(Hp,K,.15,.1,.32,.035),SK,dz);paint(limbPath(Hp,K,.165,.13,.3,.03,0,.46),SO,dz)}});
+    items.push({z:(K.z+An.z)/2,fn:()=>{const dz=depthK((K.z+An.z)/2);paint(limbPath(K,An,.1,.06,.28,.035),SK,dz);paint(limbPath(K,An,.068,.064,0,0,.9,1),[245,245,248],dz,1)}});
+    items.push({z:(He.z+To.z)/2+.01,fn:()=>{const dz=depthK((He.z+To.z)/2);const q=limbPath(He,To,.072,.05,.3,.012);paint(q,SHOE,dz);const sole=q;g.save();g.clip(sole.p);g.strokeStyle=rgb(gold,1);g.lineWidth=.022*He.f;g.beginPath();g.moveTo(He.x+sole.nx*sole.w*.55,He.y+sole.ny*sole.w*.55);g.lineTo(To.x+sole.nx*sole.w*.45,To.y+sole.ny*sole.w*.45);g.stroke();g.restore()}});
+    items.push({z:(S.z+E.z)/2,fn:()=>{const dz=depthK((S.z+E.z)/2);paint(limbPath(S,E,.095,.07,.38,.025),SK,dz);paint(limbPath(S,E,.108,.092,0,0,0,.4),SH,dz,1)}});
+    items.push({z:(E.z+Hn.z)/2,fn:()=>{const dz=depthK((E.z+Hn.z)/2);paint(limbPath(E,Hn,.075,.05,.25,.018),SK,dz);const r=.048*Hn.f;g.fillStyle=rgb(SK,.95+dz);g.strokeStyle="rgba(0,0,0,.5)";g.lineWidth=1.4*px;g.beginPath();g.ellipse(Hn.x,Hn.y,r,r*.85,Math.atan2(Hn.y-E.y,Hn.x-E.x),0,7);g.fill();g.stroke()}})});
+  // cou
+  {const Nk=proj(c,J.neck),Hd0=proj(c,J.head);items.push({z:(Nk.z+Hd0.z)/2-.02,fn:()=>paint(limbPath(Nk,Hd0,.085,.08,0,0,0,.6),SK,depthK(Nk.z))})}
+  // buste : t-shirt (épaules → bassin) + short sur le bassin
+  {const sL=J.shL,sR=J.shR,hL=J.hpL,hR=J.hpR,ch=J.chest,pv=J.pelvis;
+   const out=(a,b,k)=>add(a,v((a.x-b.x)*k,(a.y-b.y)*k,(a.z-b.z)*k));
+   const ring=[out(sL,sR,.22),out(mixV(sL,hL,.35),mixV(sR,hR,.35),.2),out(mixV(sL,hL,.7),mixV(sR,hR,.7),.05),out(hL,hR,.35),out(hR,hL,.35),out(mixV(sR,hR,.7),mixV(sL,hL,.7),.05),out(mixV(sR,hR,.35),mixV(sL,hL,.35),.2),out(sR,sL,.22)];
+   const zt=zOf(sL,sR,hL,hR);
+   items.push({z:zt,fn:()=>{const dz=depthK(zt);const P=ring.map(q=>proj(c,q));
+     const body=new Path2D();body.moveTo(P[0].x,P[0].y);for(let i=1;i<=P.length;i++){const a=P[i%P.length],b=P[(i+1)%P.length];body.quadraticCurveTo(a.x,a.y,(a.x+b.x)/2,(a.y+b.y)/2)}body.closePath();
+     const Pv=proj(c,pv),Ch=proj(c,ch),Nk=proj(c,J.neck);const core=limbPath(Pv,Nk,.27,.24,.55,.04);
+     const all=new Path2D();all.addPath(body);all.addPath(core.p);
+     g.lineJoin="round";g.strokeStyle="rgba(0,0,0,.5)";g.lineWidth=2*px;g.stroke(body);g.stroke(core.p);g.fillStyle=shade({...core,w:core.w*1.5},SH,dz);g.fill(body);g.fill(core.p);
+     // short
+     const ax=v(ch.x-pv.x,ch.y-pv.y,ch.z-pv.z),lat=v(hR.x-hL.x,hR.y-hL.y,hR.z-hL.z);let fd=v(ax.y*lat.z-ax.z*lat.y,ax.z*lat.x-ax.x*lat.z,ax.x*lat.y-ax.y*lat.x);const fl=Math.hypot(fd.x,fd.y,fd.z)||1;fd=v(fd.x/fl*.2,fd.y/fl*.2,fd.z/fl*.2);
+     const hp=[];[out(hL,hR,.6),out(hR,hL,.6)].forEach(h=>[-.45,.3].forEach(t=>[-1,1].forEach(k=>{const q=proj(c,add(add(h,mul(ax,t)),mul(fd,k)));hp.push([q.x,q.y])})));
+     hp.sort((p1,p2)=>p1[0]-p2[0]||p1[1]-p2[1]);const cr=(o,a2,b2)=>(a2[0]-o[0])*(b2[1]-o[1])-(a2[1]-o[1])*(b2[0]-o[0]);const lo=[],hi=[];hp.forEach(q=>{while(lo.length>1&&cr(lo[lo.length-2],lo[lo.length-1],q)<=0)lo.pop();lo.push(q)});hp.slice().reverse().forEach(q=>{while(hi.length>1&&cr(hi[hi.length-2],hi[hi.length-1],q)<=0)hi.pop();hi.push(q)});
+     const hull=lo.slice(0,-1).concat(hi.slice(0,-1));const sh={p:new Path2D()};hull.forEach((q,i)=>i?sh.p.lineTo(q[0],q[1]):sh.p.moveTo(q[0],q[1]));sh.p.closePath();const hips={p:new Path2D()};
+     g.save();g.clip(all);g.fillStyle=shade({...core,w:core.w*1.5},SO,dz);g.fill(sh.p);g.fill(hips.p);
+     // couture et logo flèche
+     g.strokeStyle="rgba(0,0,0,.35)";g.lineWidth=1.2*px;const m=proj(c,mixV(sL,sR,.5)),ct=proj(c,mixV(ch,pv,.25));g.beginPath();g.moveTo(m.x,m.y);g.quadraticCurveTo(Ch.x,Ch.y,ct.x,ct.y);g.globalAlpha=.25;g.stroke();g.globalAlpha=1;g.restore();
+     }})}
+  // tête : peau, cheveux, visage
+  const Hd=proj(c,J.head);items.push({z:Hd.z,fn:()=>{const R=SEG.head*.95,r=R*Hd.f;
+    const nrm=a=>{const l=Math.hypot(a.x,a.y,a.z)||1;return v(a.x/l,a.y/l,a.z/l)},sub=(a,b)=>v(a.x-b.x,a.y-b.y,a.z-b.z),dot=(a,b)=>a.x*b.x+a.y*b.y+a.z*b.z,crs=(a,b)=>v(a.y*b.z-a.z*b.y,a.z*b.x-a.x*b.z,a.x*b.y-a.y*b.x);
+    const up=nrm(sub(J.head,J.neck));let fw=sub(J.face,J.head);fw=nrm(sub(fw,mul(up,dot(fw,up))));const rt=crs(fw,up);
+    const S=d=>proj(c,add(J.head,mul(nrm(d),R)));const vis=q=>q.z>Hd.z+R*.12;
+    const head=new Path2D();head.arc(Hd.x,Hd.y,r,0,7);
+    g.strokeStyle="rgba(0,0,0,.55)";g.lineWidth=2*px;g.stroke(head);g.fillStyle=rgb(HAIR,1);g.fill(head);
+    // zone de peau (visage + côtés) : calotte sphérique projetée, ramenée au contour quand elle passe derrière
+    const capD=nrm(add(mul(fw,.8),mul(up,-.6))),th=80*D2R,u1=nrm(crs(capD,up.x||up.z?up:v(1,0,0))),u2=crs(capD,u1);
+    const skin=new Path2D();for(let k=0;k<=36;k++){const a=k/36*Math.PI*2;const d=add(mul(capD,Math.cos(th)),add(mul(u1,Math.sin(th)*Math.cos(a)),mul(u2,Math.sin(th)*Math.sin(a))));let q=S(d);
+      if(q.z<Hd.z){const dx=q.x-Hd.x,dy=q.y-Hd.y,l=Math.hypot(dx,dy)||1;q={x:Hd.x+dx/l*r,y:Hd.y+dy/l*r}}k?skin.lineTo(q.x,q.y):skin.moveTo(q.x,q.y)}
+    skin.closePath();g.save();g.clip(head);const cq=S(capD);const gr=g.createRadialGradient(cq.x-r*.25,cq.y-r*.3,r*.1,Hd.x,Hd.y,r*1.15);gr.addColorStop(0,rgb(SK,1.15));gr.addColorStop(1,rgb(SK,.7));g.fillStyle=gr;
+    if(vis(cq)||S(fw).z>Hd.z-R*.4)g.fill(skin);
+    // oreilles
+    [-1,1].forEach(k=>{const q=S(add(mul(rt,k),mul(up,-.08)));if(q.z<Hd.z-R*.25)return;g.fillStyle=rgb(SK,.85);g.strokeStyle="rgba(0,0,0,.35)";g.lineWidth=px;g.beginPath();g.ellipse(q.x,q.y,r*.13,r*.2,0,0,7);g.fill();g.stroke()});
+    g.restore();
+    // yeux, sourcils, nez, bouche
+    const ink="#2a1b12";
+    [-1,1].forEach(k=>{const e=S(add(add(fw,mul(rt,k*.38)),mul(up,.06)));if(!vis(e))return;g.fillStyle=ink;g.beginPath();g.ellipse(e.x,e.y,r*.065,r*.08,0,0,7);g.fill();
+      const b1=S(add(add(fw,mul(rt,k*.25)),mul(up,.3))),b2=S(add(add(fw,mul(rt,k*.52)),mul(up,.27)));g.strokeStyle=rgb(HAIR,1);g.lineWidth=Math.max(1,r*.06);g.lineCap="round";g.beginPath();g.moveTo(b1.x,b1.y);g.lineTo(b2.x,b2.y);g.stroke()});
+    const no=proj(c,add(J.head,mul(nrm(add(fw,mul(up,-.12))),R*1.1))),nb=S(add(fw,mul(up,-.12)));if(vis(nb)){g.fillStyle=rgb(SK,.88);g.strokeStyle="rgba(0,0,0,.3)";g.lineWidth=px;g.beginPath();g.ellipse((no.x+nb.x)/2,(no.y+nb.y)/2,r*.09,r*.11,0,0,7);g.fill();g.stroke()}
+    const m1=S(add(add(fw,mul(rt,-.2)),mul(up,-.45))),m2=S(add(add(fw,mul(rt,.2)),mul(up,-.45))),m0=S(add(fw,mul(up,-.52)));if(vis(m0)){g.strokeStyle="rgba(125,48,38,.85)";g.lineWidth=Math.max(1,r*.045);g.beginPath();g.moveTo(m1.x,m1.y);g.quadraticCurveTo(m0.x,m0.y,m2.x,m2.y);g.stroke()}
+    }});
+  // haltères
+  const db=o.db&&!(ex.noDb);if(db)["L","R"].forEach(s=>{const h=J["ha"+s];const a=add(h,v(0,0,-.09)),b=add(h,v(0,0,.09));const A=proj(c,a),B=proj(c,b);items.push({z:(A.z+B.z)/2+.05,fn:()=>{g.lineCap="butt";g.strokeStyle="#8d8d95";g.lineWidth=.03*A.f;g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.stroke();[A,B].forEach(Q=>{g.fillStyle="#3b3b42";g.strokeStyle="#9a9aa2";g.lineWidth=1.2;g.beginPath();g.arc(Q.x,Q.y,.065*Q.f,0,7);g.fill();g.stroke()})}})});
+  // élastique
+  if(o.band&&(id==="squat"||id==="pont")){const A=proj(c,J.knL),B=proj(c,J.knR);items.push({z:Math.max(A.z,B.z)+.01,fn:()=>{g.strokeStyle="#e5484d";g.lineWidth=.035*A.f;g.lineCap="round";g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.stroke()}})}
+  // corde à sauter
+  if(props.includes("rope")){const {i}=poseAt(ex,time);const ph=(time%((ex.k[0][1]+ex.k[1][1])*1))/(ex.k[0][1]+ex.k[1][1])*Math.PI*2;const hl=J.haL,hr=J.haR;const mid=v((hl.x+hr.x)/2,(hl.y+hr.y)/2,0);
+    const pts=[];for(let k=0;k<=24;k++){const u=k/24;const z=lerp(hl.z,hr.z,u),bow=Math.sin(u*Math.PI);const ang=ph;const rx=Math.cos(ang)*.32*bow,ry=-(Math.sin(ang)*.5+.52)*bow;pts.push(v(mid.x+rx,Math.max(.01,lerp(hl.y,hr.y,u)+ry*1.9),z))}
+    const zs=pts.reduce((a,q)=>a+proj(c,q).z,0)/pts.length;items.push({z:Math.cos(ph)>0?zs+.3:zs-.3,fn:()=>{g.strokeStyle="#cfcfd6";g.lineWidth=1.6;g.beginPath();pts.forEach((q,k)=>{const P2=proj(c,q);k?g.lineTo(P2.x,P2.y):g.moveTo(P2.x,P2.y)});g.stroke()}})}
+  items.sort((a,b)=>a.z-b.z).forEach(it=>it.fn());
+}
+// ---------- animation des vignettes visibles ----------
+const live=new Set();let raf=0;const t0=performance.now();
+const io=typeof IntersectionObserver!=="undefined"?new IntersectionObserver(es=>es.forEach(e=>{e.isIntersecting?live.add(e.target):live.delete(e.target)}),{rootMargin:"60px"}):null;
+function loop(){raf=requestAnimationFrame(loop);const t=(performance.now()-t0)/1000;live.forEach(cv=>{if(!cv.isConnected){live.delete(cv);return}const off=+cv.dataset.off||0;draw(cv,cv.dataset.mq,t+off,{db:cv.dataset.db==="1",band:cv.dataset.band==="1",yaw:cv.dataset.yaw?+cv.dataset.yaw:null,spin:cv.dataset.spin==="1"})})}
+function scan(root){(root||document).querySelectorAll("canvas[data-mq]:not([data-mqon])").forEach((cv,i)=>{cv.dataset.mqon="1";const r=window.devicePixelRatio||1;const w=cv.clientWidth||cv.width,h=cv.clientHeight||cv.height;cv.width=Math.round(w*r);cv.height=Math.round(h*r);cv.dataset.off=String(i*.37);io?io.observe(cv):live.add(cv)});if(!raf)loop()}
+return{draw,scan,EX,poseAt}})();
+
+</script>
+<script>
+(function(){
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+/* ---------- paliers (les vrais niveaux de l'appli) ---------- */
+const ST=[["Bitume",1],["Pavés",10],["Pont",20],["Terril",30],["Mont Noir",40],["Colline",50],["Ballon",60],["Col",70],["Haute montagne",80],["Sommet",90],["Alpes",100]];
+const secs=$$("[data-stage]");
+const svg=$("#railSvg"),labs=$("#railLabs");
+function drawRail(){const h=innerHeight,w=132,top=70,bot=h-60,n=ST.length;let d="",pts=[];
+  ST.forEach((s,i)=>{const y=bot-(bot-top)*i/(n-1),x=w-34-(i%2?18:0)-Math.sin(i*1.7)*6;pts.push([x,y])});
+  d="M"+pts.map(p=>p.join(" ")).join(" L");
+  svg.setAttribute("viewBox",`0 0 ${w} ${h}`);
+  svg.innerHTML=`<path d="${d}" fill="none" stroke="#2a2a30" stroke-width="3"/><path id="railOn" d="${d}" fill="none" stroke="#FFC107" stroke-width="3"/><circle id="railDot" r="8" fill="#FFC107" stroke="#08080A" stroke-width="3"/>`;
+  labs.innerHTML=ST.map((s,i)=>`<div class="lab" style="top:${pts[i][1]}px;right:${w-pts[i][0]+16}px">${s[0]}<b>niv. ${s[1]}</b></div>`).join("");
+  const p=$("#railOn"),L=p.getTotalLength();p.style.strokeDasharray=L;p.dataset.len=L;update()}
+function update(){const max=document.documentElement.scrollHeight-innerHeight,f=max>0?Math.min(1,Math.max(0,scrollY/max)):0;
+  const p=$("#railOn");if(p){const L=+p.dataset.len;p.style.strokeDashoffset=L*(1-f);const q=p.getPointAtLength(L*f);const dot=$("#railDot");dot.setAttribute("cx",q.x);dot.setAttribute("cy",q.y)}
+  let cur=0;secs.forEach(s=>{if(s.getBoundingClientRect().top<innerHeight*.55)cur=+s.dataset.stage});
+  $$(".rail .lab").forEach((l,i)=>{l.classList.toggle("on",i===cur);l.classList.toggle("past",i<cur)});
+  $("#mstage").textContent=ST[cur][0]+", niveau "+ST[cur][1];$("#mprog").style.width=(f*100)+"%";$("#mbar").classList.toggle("show",scrollY>innerHeight*.7)}
+addEventListener("scroll",update,{passive:true});addEventListener("resize",drawRail);drawRail();
+
+/* ---------- écrans du téléphone ---------- */
+const hs=$$("#heroScr img");let hi=0;if(!reduce)setInterval(()=>{hs[hi].classList.remove("on");hi=(hi+1)%hs.length;hs[hi].classList.add("on")},2800);
+
+/* ---------- vidéo de la cordée : joue quand elle est visible ---------- */
+const v=$(".vid video");new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!reduce){v.play().catch(()=>{})}else v.pause()}),{threshold:.4}).observe(v);
+
+/* ---------- personnages 3D ---------- */
+const HOW={squat:[["pieds largeur d'épaules, pointes un peu ouvertes","descends les fesses en arrière, poids sur les talons","remonte en poussant le sol"],"les genoux qui rentrent vers l'intérieur"],
+ fente:[["grand pas en avant, buste droit","descends le genou arrière presque au sol","repousse sur le talon avant pour revenir"],"le genou avant qui part vers l'intérieur"],
+ pont:[["allongé, talons près des fesses","pousse dans les talons pour monter le bassin","serre les fessiers 1 s en haut"],"creuser le bas du dos"],
+ lateral:[["coude sous l'épaule, pieds l'un sur l'autre","monte le bassin : épaule, hanche, cheville alignées","tiens sans bouger, puis change de côté"],"la hanche qui redescend vers le sol"]};
+let ex="squat",yaw="spin";const lab=$("#lab"),hero=$(".coach canvas"),t0=performance.now();
+const DEF={squat:48,fente:60,pont:-22,lateral:-10};
+function how(){const h=HOW[ex];$("#how3d").innerHTML=`<ol>${h[0].map(x=>`<li>${x}</li>`).join("")}</ol><div class="err">À éviter : ${h[1]}</div>`}how();
+$$(".exos button").forEach(b=>b.onclick=()=>{ex=b.dataset.ex;$$(".exos button").forEach(x=>x.setAttribute("aria-pressed",x===b));how()});
+$$(".ang .chip").forEach(b=>b.onclick=()=>{yaw=b.dataset.yaw;$$(".ang .chip").forEach(x=>x.setAttribute("aria-pressed",x===b))});
+let vis=new Set();const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?vis.add(e.target):vis.delete(e.target)));[lab,hero].forEach(c=>io.observe(c));
+function loop(){requestAnimationFrame(loop);if(typeof MQ==="undefined")return;const t=reduce?1.2:(performance.now()-t0)/1000;
+  if(vis.has(hero))MQ.draw(hero,"squat",t,{yaw:48+Math.sin(t*.4)*18,ghost:false});
+  if(vis.has(lab)){const base=DEF[ex];MQ.draw(lab,ex,t,yaw==="spin"?{yaw:base,spin:!reduce,ghost:false}:{yaw:+yaw,ghost:false})}}
+loop();
+
+/* ---------- tracker d'habitudes interactif ---------- */
+const HAB=[["Faire son lit","matin"],["Gainage 2 min","matin"],["Footing ou renfo","journée"],["Pas d'écran au lit","soir"]];
+const PRE=[[1,1,1,0,1,1],[1,0,1,1,1,0],[1,1,0,1,1,1],[0,1,1,1,0,1]];
+const STG=["Bitume","Pavés","Pont","Terril","Mont Noir","Colline","Ballon","Col","Haute montagne","Sommet","Alpes"];
+let xp=60;const tb=$("#trkT");
+tb.innerHTML=HAB.map((h,i)=>`<tr><td class="n">${h[0]}<small>${h[1]}</small></td>${PRE[i].map(v=>`<td><button class="b ${v?"on":""}" disabled aria-label="${h[0]}, jour passé${v?", fait":""}"></button></td>`).join("")}<td><button class="b td" data-h="${i}" aria-pressed="false" aria-label="${h[0]}, aujourd'hui"></button></td></tr>`).join("");
+$("#trkLd").innerHTML=STG.slice(0,6).map((n,i)=>`<span class="${i===0?"on":""}">${n}</span>`).join("")+"<span>… Alpes</span>";
+function trk(){const L=Math.floor(xp/100)+1,r=xp%100;$("#trkL").textContent="Niveau "+L;$("#trkX").textContent=r+" / 100 xp";$("#trkB").style.width=r+"%";
+  }
+trk();
+tb.addEventListener("click",e=>{const b=e.target.closest("button[data-h]");if(!b)return;const on=!b.classList.contains("on");b.classList.toggle("on",on);b.setAttribute("aria-pressed",on);
+  const all=$$("#trkT button[data-h]").every(x=>x.classList.contains("on"));const gain=25+(on&&all?15:0);xp=Math.max(0,xp+(on?gain:-25));trk();
+  if(on&&!reduce){const f=document.createElement("span");f.className="fxp";f.textContent="+"+gain+" xp"+(all?" · journée validée":"");const r=b.getBoundingClientRect(),t=$("#trk").getBoundingClientRect();f.style.left=Math.min(r.left-t.left-20,t.width-190)+"px";f.style.top=(r.top-t.top-10)+"px";$("#trk").appendChild(f);setTimeout(()=>f.remove(),1200)}});
+
+/* ---------- compteurs ---------- */
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;cio.unobserve(e.target);const el=e.target,to=+el.dataset.count;if(reduce){el.textContent=to;return}
+  const t0=performance.now(),d=1400;const step=t=>{const k=Math.min(1,(t-t0)/d),v=Math.round(to*(1-Math.pow(1-k,3)));el.textContent=v;if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)}),{threshold:.6});
+$$("[data-count]").forEach(x=>cio.observe(x));
+
+/* ---------- inscription par lien e-mail ---------- */
+const C=window.LF_CONFIG||{};let sb=null;try{sb=window.supabase.createClient(C.SUPABASE_URL,C.SUPABASE_ANON_KEY,{auth:{persistSession:true,detectSessionInUrl:false}})}catch(e){}
+const msg=$("#msg");const say=(t,k)=>{msg.textContent=t;msg.className="msg "+(k||"")};
+$("#lfForm").addEventListener("submit",async e=>{e.preventDefault();const email=$("#mail").value.trim();
+  if(!/^\S+@\S+\.\S+$/.test(email)){say("Cette adresse e-mail n'a pas l'air complète. Vérifie-la.","err");$("#mail").focus();return}
+  if(!$("#consent").checked){say("Coche la case pour continuer.","err");return}
+  if(!sb){say("Connexion impossible pour l'instant. Réessaie dans un moment.","err");return}
+  const b=$("#go");b.disabled=true;b.textContent="Envoi…";
+  const day=new Date().toISOString();try{localStorage.setItem("lf_consent",day)}catch(_){}
+  const {error}=await sb.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+"/",data:{consent:day.slice(0,10),age15:true,src:"rejoindre"}}});
+  b.disabled=false;b.textContent="Recevoir mon lien";
+  if(error){say(/rate|limit|sending|smtp/i.test(error.message)?"L'e-mail n'a pas pu partir, trop de demandes en même temps. Réessaie dans quelques minutes.":"Erreur : "+error.message,"err");return}
+  say("Lien envoyé à "+email+". Regarde tes mails, et tes spams.","good");$("#after").classList.add("show")});
+})();
+</script>
+</body>
+</html>
