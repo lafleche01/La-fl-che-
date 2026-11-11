@@ -279,6 +279,19 @@ button.stage{width:100%;text-align:left}
 .pgform label{display:flex;flex-direction:column;gap:6px;margin:10px 0;font-size:13px;color:var(--mute);text-transform:lowercase}.pgform input,.pgform select,.pglog textarea{background:var(--panel2,#18181c);border:1px solid var(--line);color:inherit;padding:11px;font:inherit;font-size:16px;width:100%;box-sizing:border-box}.pgform .pgchk{flex-direction:row;align-items:center}.pgform .pgchk input{width:auto}
 .pgdays,.pgrow{display:flex;flex-wrap:wrap;gap:6px}.pgdays .chip,.pgrow .chip{cursor:pointer}.pgdays .chip.on,.pgrow .chip.on{background:var(--gold);color:#000}.pgrpe .chip{min-width:34px;text-align:center}
 .pglog{display:flex;flex-direction:column;gap:8px}.pglog b{font-size:13px;margin-top:6px}.pglog textarea{resize:none;min-height:70px}.pglog input[type=range]{width:100%;accent-color:var(--gold)}
+#pgLoad{position:fixed;inset:0;z-index:1300;display:none;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 35%,rgba(255,193,7,.18),transparent 60%),#09090A;opacity:0;transition:opacity .25s}#pgLoad.on{opacity:1}
+.pgld{width:min(86vw,420px);display:flex;flex-direction:column;gap:10px}.pgldm{width:130px;margin:0 auto 30px;animation:pgfl 1.6s ease-in-out infinite}@keyframes pgfl{50%{transform:translateY(-8px)}}
+.pgld small{font-family:'Barlow Condensed';font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}.pgdots:after{content:"";animation:pgdt 1.2s steps(4) infinite}@keyframes pgdt{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}}
+.pgld h2{font-family:'Barlow Condensed';font-style:italic;font-weight:900;text-transform:uppercase;font-size:clamp(30px,9vw,46px);overflow-wrap:anywhere;line-height:.95;margin:0;color:#F5F5F3}.pgld p{margin:0;color:var(--gold);font-size:16px;min-height:22px}.pgldb{height:4px;background:#222;margin-top:14px}.pgldb i{display:block;height:100%;width:0;background:var(--gold)}
+.pgwl{display:flex;gap:8px;overflow-x:auto;margin:0 0 12px;padding-bottom:2px}.pgwl button{flex:none;min-width:120px;text-align:left;padding:9px 11px;background:var(--panel);border:1px solid var(--line);color:inherit;font:inherit;cursor:pointer;display:flex;flex-direction:column;gap:2px}.pgwl button.on{border-color:var(--gold)}.pgwl button.done{opacity:.6}.pgwl small{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}.pgwl b{font-size:13px}.pgwl span{font-size:12px;color:var(--gold)}
+.pginstr{display:flex;flex-direction:column;gap:8px;margin-top:4px}.pgprof{display:flex;align-items:flex-end;gap:1px;height:46px;background:var(--panel2);padding:4px}.pgprof i{display:block;min-width:2px}
+.pgstp{position:relative;border:1px solid var(--line);padding:10px 12px;display:flex;flex-direction:column;gap:6px}.pgstp>small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}.pgrep{position:absolute;top:8px;right:10px;font-family:'Barlow Condensed';font-style:italic;font-weight:900;font-size:20px;color:var(--gold)}
+.pgsi{display:flex;gap:10px;align-items:stretch}.pgsi>i{width:4px;flex:none}.pgsi b{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute)}.pgsi span{font-size:15px}.pgsi em{font-style:normal;font-weight:700;color:var(--txt)}
+.pgexos{display:flex;flex-direction:column;gap:8px}.pgexo{display:flex;gap:12px;padding:10px;background:var(--panel2);align-items:flex-start}.pgpic{width:62px;height:62px;flex:none;background:#0d0d0f;stroke:var(--gold);stroke-width:3.2;stroke-linecap:round;fill:none}.pgpic circle{fill:var(--gold)}.pgexo b{display:block;font-family:'Barlow Condensed';font-style:italic;font-weight:900;text-transform:uppercase;font-size:18px}.pgexo em{display:block;font-style:normal;font-weight:800;color:var(--gold);font-size:15px}.pgexo span{display:block;font-size:13px;color:var(--mute);line-height:1.35}.pgexo small{display:block;font-size:12px;color:#ffd666;margin-top:3px}
+.pgfun{padding:12px 14px;background:color-mix(in srgb,#FF9F43 14%,var(--panel));border-left:3px solid #FF9F43;font-size:14px;line-height:1.45;margin-bottom:10px}
+.pgeq{display:flex;flex-wrap:wrap;gap:6px}.pgeq .pgchip{flex:none;font-size:15px;padding:10px 12px;min-width:0}
+.pgsug{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:44px}.pgsug .pgchip{width:100%;min-width:0;padding:16px 4px;font-size:28px}.pgsug small{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.06em}
+.pgconn{display:grid;grid-template-columns:1fr 1fr;gap:6px}.pgcn{padding:11px;background:var(--panel);border:1px solid var(--line);color:inherit;font:inherit;text-align:left;display:flex;flex-direction:column;gap:2px}.pgcn.ok{border-color:#FC4C02;cursor:pointer}.pgcn[disabled]{opacity:.5}.pgcn span{font-size:12px;color:var(--mute)}
 .pgcav{position:relative;width:42px;height:42px;flex:none;background:var(--gold);display:flex;align-items:center;justify-content:center;clip-path:polygon(7px 0,100% 0,calc(100% - 7px) 100%,0 100%);overflow:hidden}.pgcav img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}.pgcav i{font-style:normal;font-size:20px}
 .pgcoachb{display:flex;gap:12px;align-items:flex-start;margin:10px 0}.pgcoachb p{margin:0;flex:1;padding:10px 13px;background:var(--panel2);font-size:14px;line-height:1.45;position:relative}.pgcoachb small{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
 .pgbravo{display:flex;flex-direction:column;gap:14px;padding:6px 0}.pgbtop{display:flex;align-items:center;gap:12px}.pgbtop .pgcav{width:56px;height:56px}.pgbtop small{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.pgbtop b{display:block;font-family:'Barlow Condensed';font-style:italic;font-weight:900;text-transform:uppercase;font-size:34px;line-height:1;color:var(--gold)}
@@ -1160,7 +1173,7 @@ const VMA_PCT=[[1.5,1],[5,.93],[10,.87],[21.1,.80],[42.2,.75],[80,.68],[160,.60]
 const pctFor=km=>{if(km<=VMA_PCT[0][0])return VMA_PCT[0][1];for(let i=1;i<VMA_PCT.length;i++){const[d1,p1]=VMA_PCT[i-1],[d2,p2]=VMA_PCT[i];if(km<=d2)return p1+(p2-p1)*(km-d1)/(d2-d1)}return VMA_PCT[VMA_PCT.length-1][1]};
 const raceKm=r=>r.type==="trail"?(+r.dist||0)+(+r.dplus||0)/100:(+r.dist||0);
 function chronoCalc(p){const r=p.race,km=raceKm(r);if(!km)return null;
-  const byVma=km/(prgVma(p)*pctFor(km))*3600;let t=byVma,src="VMA";
+  const TF={roulant:1,mixte:1.07,technique:1.15,alpin:1.28}[r.tech]||1;const byVma=km/(prgVma(p)*pctFor(km))*3600*(r.type==="trail"?TF:1);let t=byVma,src="VMA"+(r.type==="trail"&&TF>1?" + terrain "+r.tech:"");
   if(p.perf&&p.perf.km&&p.perf.sec&&!p.perf.used){const rg=p.perf.sec*Math.pow(km/p.perf.km,1.06);t=(rg+byVma)/2;src="record + VMA"}
   const far=km>=30||(!p.perf||!p.perf.km)||(p.perf&&km>p.perf.km*2.5);const m=far?.05:.02;
   return {lo:Math.round(t*(1-m)),hi:Math.round(t*(1+m)),src,date:today()}}
@@ -1186,6 +1199,7 @@ const SESS={
  RACE:["Jour de course","",["Échauffement 10-15 min, puis ta course. Pars prudent !","",""],"race"],
  C15:["Marche active en côte","monter vite en marchant, comme en course",["4 × 4 min de marche active en côte, redescente tranquille","5 × 5 min de marche active en côte","6 × 6 min de marche active en côte"],"hard"],
  C16:["Descentes","habituer tes cuisses à la descente",["{m} min facile avec 4 × 30 s de descente contrôlée sur pente douce, remontée en marchant","{m} min facile avec 6 × 1 min de descente, remontée en marchant","{m} min facile avec 8 × 1 min 30 de descente, un peu plus vite"],"easy",[30,40,50]],
+ R1:["Renfo · fondations","jambes et gainage",["","",""],"renfo"],R2:["Renfo · force 1 jambe","stabilité et puissance",["","",""],"renfo"],R3:["Renfo · explosivité","réactivité et ressort",["","",""],"renfo"],
  VMATEST:["Test VMA (6 min)","mesurer ta VMA pour caler toutes tes allures",["20 min très facile + 3 accélérations. Puis 6 min le plus loin possible, à allure régulière (sur piste ou un tour connu). Note la distance en mètres.","",""],"hard"],
  TEST:["Test chrono","mesurer tes progrès",["Échauffement 20 min + 3 accélérations, puis ton test à fond, allure régulière. Note ton temps !","",""],"race"],
  RACEB:["Course secondaire","objectif B : une bonne perf, sans tout casser",["Échauffement 15 min, puis ta course. Cours fort mais garde un peu de marge.","",""],"race"],
@@ -1204,16 +1218,17 @@ const DPLUS_BASE={court:{D:300,I:600,C:900},long:{D:800,I:1500,C:2200},ultra:{D:
 function dplusTarget(p,wsDate){const c=trailCat(p)||((p.race||{}).type==="trail"?"court":"");if(!c)return 0;const base=DPLUS_BASE[c][p.level||"I"];
   const st=p.start||wsDate,W=p.weeks||1,w=Math.floor((parse(wsDate)-parse(st))/864e5/7),N=Math.max(1,W-(c==="ultra"?3:2));
   let f=w>=N?[.6,.45,.35][Math.min(2,w-N)]:(w%4===3?.7:Math.min(1,.5+.5*w/Math.max(1,N-1)));if(p.mode==="forme")f=Math.min(f,.7);return Math.round(base*f/50)*50}
+function autoDays(n,pref){const D={2:[2,6],3:[1,3,6],4:[1,3,5,6],5:[0,1,3,5,6],6:[0,1,2,4,5,6],7:[0,1,2,3,4,5,6]};let d=(pref||[]).slice();for(const x of D[Math.min(7,Math.max(2,n))])if(d.length<n&&!d.includes(x))d.push(x);return d.sort((a,b)=>a-b).slice(0,n)}
 function buildPlan(p){
   const mode=p.mode||"course",r=p.race,obj=mode==="forme"?(r.type==="trail"?"formetrail":"forme"):objOf(r),lvl=p.level,t=today(),ws=p.start||ds(weekStart(new Date()));p.start=ws;
   const W=Math.max(1,Math.floor((parse(r.date)-parse(ws))/864e5/7)+1);
   const cat=trailCat(p),trailish=obj==="trail"||obj==="formetrail",rot=obj==="trail"&&cat!=="court"?ROT.traillong:ROT[obj];let descW=-1;
   const T=mode==="forme"?0:Math.min(W-1,(obj==="trail"&&cat==="ultra")?3:TAPER[obj]);
   const N=Math.max(0,W-T),b1=Math.round(N/3),b2=Math.round(2*N/3);
-  const days=(p.days&&p.days.length?p.days:[1,3,6]).slice().sort((a,b)=>a-b).slice(0,p.n||3);
+  const days=autoDays(p.n||3,p.days||[]);
   const n=days.length;const longDay=days.includes(6)?6:days.includes(5)?5:days[n-1];
   const others=days.filter(d=>d!==longDay);
-  const nHard=lvl==="C"&&n>=5?2:1;
+  const nHard=n>=5&&lvl!=="D"?2:1;
   const plan=[];let hi=0;
   for(let w=0;w<W;w++){
     const wk=addDays(ws,w*7);const phase=mode==="forme"?"entretien":w<b1?"base":w<b2?"développement":w<N?"spécifique":"affûtage";
@@ -1236,10 +1251,15 @@ function buildPlan(p){
         else code=rot[hi%rot.length];
         if(lvl==="D"&&["C12","C5"].includes(code))code=trailish?"C11":"C6";
         hi++}
-      else{code=(n>=4&&d===others[1])?"C2":"C1";if(trailish&&code==="C1"&&w>=2&&w%2===0&&descW!==w&&!["affûtage","course"].includes(phase)){code="C16";descW=w}}
+      else{code=((n>=4&&d===others[1])||(n>=6&&d===others[3]))?"C2":"C1";if(trailish&&code==="C1"&&w>=2&&w%2===0&&descW!==w&&!["affûtage","course"].includes(phase)){code="C16";descW=w}}
       const date=addDays(wk,d);if(date>=t)plan.push({date,code,f:+f.toFixed(2),phase})});
+    // renfo
+    const nr=+p.renfo||0;if(nr&&phase!=="course"){const free=[0,1,2,3,4,5,6].filter(x=>!days.includes(x));const rc=lvl==="D"?["R1","R2"]:phase==="base"?["R1","R2"]:["R1","R2","R3"];
+      const used=[];for(let k=0;k<nr;k++){const code=nr===2?(k===0?"R1":rc[1+(w%(rc.length-1))]):rc[w%rc.length];
+        let d=free.find(x=>!used.some(u=>Math.abs(u-x)<2))??free.find(x=>!used.includes(x))??others.filter(x=>!hardDays.includes(x)&&!used.includes(x))[0]??days.find(x=>!used.includes(x))??days[0];used.push(d);const date=addDays(wk,d);
+        if(date>=t)plan.push({date,code,f:1,phase,key:days.includes(d)?date+"#r"+k:undefined})}}
   }
-  p.plan=[...(p.plan||[]).filter(e=>e.date<t),...plan];p.weeks=W;p.obj=obj;p.short=mode==="course"&&W<(obj==="trail"?TRAIL_MINW[cat]:(MINW[obj]||[8,6]))[lvl==="D"?0:1];applySecs(p);return p}
+  p.plan=[...(p.plan||[]).filter(e=>e.date<t),...plan].sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:(a.key?1:-1));p.weeks=W;p.obj=obj;p.short=mode==="course"&&W<(obj==="trail"?TRAIL_MINW[cat]:(MINW[obj]||[8,6]))[lvl==="D"?0:1];applySecs(p);return p}
 function applySecs(p){const t=today();(p.secs||[]).forEach(sc=>{if(sc.date<t)return;let pl=p.plan.filter(e=>e.date!==sc.date);
     const rec=+sc.dist<=12?4:+sc.dist<=25?7:14;
     pl=pl.map(e=>{const h=SESS[e.code]&&SESS[e.code][3]==="hard";if(sc.prio==="B"&&h&&((e.date<sc.date&&e.date>=addDays(sc.date,-3))||(e.date>sc.date&&e.date<=addDays(sc.date,rec))))return {...e,code:"C2"};return e});
@@ -1251,7 +1271,7 @@ function sessText(p,e){const code=sessOf(e),s=SESS[code];if(!s)return"";const li
   const c=(p.chrono||[]).slice(-1)[0],as=c?fmtPace(raceKm(p.race)/(((c.lo+c.hi)/2)/3600)):"allure course";
   const dpw=dplusTarget(p,ds(weekStart(parse(e.date))));const dpt=dpw?"≈ "+Math.max(100,Math.round(dpw*.45/50)*50)+" m D+":"du dénivelé";
   return tx.replace("{DP}",dpt).replace("{m}",m).replace("{EF}",paceTxt(p,"EF")).replace("{Z2}",paceTxt(p,"Z2")).replace("{Z3}",paceTxt(p,"Z3")).replace("{Z4}",paceTxt(p,"Z4")).replace("{AS}",as+" /km")}
-const nextSess=p=>(p.plan||[]).find(e=>e.date>=today()&&!(p.logs||{})[e.date]);
+const nextSess=p=>{const ws=ds(weekStart(new Date()));return (p.plan||[]).find(e=>e.date>=ws&&!(p.logs||{})[ek(e)])};
 const COND=["météo difficile","terrain difficile","pas motivé","mal dormi / malade","journée chargée"];
 function adapt(p,date){
   const L=p.logs||{},since=p.lastAdj||"0000",msgs=[];const typ=d=>{const e=(p.plan||[]).find(x=>x.date===d);return e?SESS[sessOf(e)][3]:"easy"};
@@ -1287,6 +1307,7 @@ function terrText(p,code,body){const t=p.terrain;if(!t||!isTrail(p))return body;
   if(code==="C14"&&(flat||short))return body+" · ajoute du relief : toutes les 15 min, 3 à 5 passages dans une côte, un pont ou des escaliers"+(t.tread?" · ou termine par 20-30 min de marche active à 12-15 % sur tapis":"");
   if(code==="C16"&&flat)return (t.stairs?"5 à 10 volées d'escaliers en descente lente et contrôlée, puis ":"")+"3 × 10 step-downs lents par jambe (descente d'une marche en 3 s) + 3 × 10 squats lents (3 s en descente) + 3 × 8 fentes arrière lentes";
   return body}
+function pgNotes(p,e){const code=sessOf(e);if(RENFO[code])return[];const base=sessText(p,e),tt=terrText(p,code,base);const out=pgBlocks(p,e).filter(([k])=>k==="pré-fatigue"||k==="sensations");if(tt!==base)out.unshift(["sur ton terrain",tt]);return out}
 function pgBlocks(p,e){const code=sessOf(e),s=SESS[code],ty=s[3];let body=sessText(p,e);
   if(isTrail(p)&&(code==="C11"||code==="C12"))body=body.replace(/ à \d+:\d+-\d+:\d+ \/km/g," aux sensations");
   body=terrText(p,code,body);
@@ -1296,10 +1317,121 @@ function pgBlocks(p,e){const code=sessOf(e),s=SESS[code],ty=s[3];let body=sessTe
   if(ty==="hard"&&code!=="RAPPEL")return [["échauffement",`15-20 min à ${paceTxt(p,"EF")} + 5 min de gammes + 3 lignes droites`],...pfm,["corps de séance",body],...sens,["retour au calme",`10 min à ${paceTxt(p,"EF")}`]];
   if(ty==="race")return [["avant",`échauffement 10-15 min très facile + 3 accélérations`],["la course",`${p.race.name} · pars prudent les 2 premiers km`],["après","marche, hydrate-toi, saisis ton temps dans l'appli"]];
   return [["séance",body],...sens]}
-const pgDur=(p,e)=>{const s=SESS[sessOf(e)];if(s[3]==="hard")return"≈ 50-60 min";if(s[3]==="race")return p.race.dist+" km";const m=(sessText(p,e).match(/^(\d+) min/)||[])[1];return m?m+" min":""};
+const pgDur=(p,e)=>{const c=sessOf(e);if(RENFO[c])return renfoMin(p,c)+" min max";return fmtDur(sessTotals(p,e).sec)};
 function pgSpark(h){if(h.length<2)return"";const v=h.map(c=>(c.lo+c.hi)/2),mx=Math.max(...v),mn=Math.min(...v),r=mx-mn||1,W=120,H=34;
   const pts=v.map((x,i)=>`${(i/(v.length-1)*W).toFixed(1)},${(4+(x-mn)/r*(H-8)).toFixed(1)}`).join(" ");
   return `<svg class="pgspark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><polyline points="${pts}" fill="none" stroke="var(--gold)" stroke-width="2"/></svg>`}
+/* ---------- séances structurées (durée réelle, blocs, export) ---------- */
+const ZP={REC:.58,EF:.65,Z2:.775,Z3:.875,Z4:1,Z5:1.08,MAX:1,COTE:.62,HIKE:.38,DESC:.72,WALK:.3};
+const ZN={REC:"récup",EF:"endurance",Z2:"active",Z3:"seuil",Z4:"vma",Z5:"vitesse",MAX:"à fond",AS:"allure course",COTE:"côte",HIKE:"marche active",DESC:"descente",WALK:"marche"};
+const ZC={REC:"#4a4a50",WALK:"#3a3a40",EF:"#6b5a1e",Z2:"#97771a",Z3:"#c99a12",Z4:"#FFC107",Z5:"#FFD54F",MAX:"#FFC107",AS:"#ffb300",COTE:"#e0a800",HIKE:"#b8860b",DESC:"#8d6e1a"};
+const ZI={REC:1,WALK:.6,EF:2,Z2:3,Z3:4,Z4:5,Z5:5.5,MAX:5,AS:4.3,COTE:4.5,HIKE:3.3,DESC:2.6};
+function zSpeed(p,z){if(z==="AS"){const c=(p.chrono||[]).slice(-1)[0];if(c)return raceKm(p.race)/(((c.lo+c.hi)/2)/3600)}return prgVma(p)*(ZP[z]||.65)}
+function easyMin(p,e,code){const s=SESS[code],li=LVI[p.level]||0;let f=e.f||1;if(p.light&&e.date<=p.light&&e.date>=today())f*=.8;const tc=code==="C14"?({long:1.4,ultra:1.8}[trailCat(p)]||1):1;return s&&s[4]?Math.max(15,Math.round(s[4][li]*f*tc/5)*5):30}
+function sessSteps(p,e){const code=sessOf(e),L=LVI[p.level]||0,pick=a=>a[Math.min(L,a.length-1)],m=easyMin(p,e,code);
+  const W={label:"échauffement",reps:1,items:[{sec:pick([15,20,20])*60,z:"EF"}]},C={label:"retour au calme",reps:1,items:[{sec:10*60,z:"EF"}]};
+  const B=(label,reps,items)=>({label,reps,items});const run=(sec,z,txt)=>({sec,z,txt}),dist=(m,z,txt)=>({m,z,txt});
+  switch(code){
+   case"C0":return[B("course / marche",8,[run(pick([2,3,3])*60,"EF"),run(60,"WALK")])];
+   case"C1":return[B("footing",1,[run(m*60,"EF")])];
+   case"C2":return[B("footing récup",1,[run(m*60,"REC")])];
+   case"C3":return[B("footing",1,[run(m*60,"EF")]),B("lignes droites",pick([4,6,8]),[run(pick([15,20,20]),"Z5"),run(45,"WALK","récup en marchant")])];
+   case"C4":case"C14":return[B(code==="C14"?"sortie trail":"sortie longue",1,[run(m*60,"EF")])];
+   case"C5":{const fin=pick([0,15,30]);return fin?[B("sortie longue",1,[run((m-fin)*60,"EF")]),B("fin rapide",1,[run(fin*60,"Z2")])]:[B("sortie longue",1,[run(m*60,"EF")])]}
+   case"C6":return[W,B("fartlek",pick([6,8,10]),[run(pick([60,120,120]),pick(["Z3","Z3","Z3"])),run(pick([120,60,60]),"REC")]),C];
+   case"C7":{const n=pick([6,10,10]),s=pick([2,2,3]);const it=[];for(let i=0;i<s;i++){it.push(B(`série ${i+1}`,n,[run(30,"Z4"),run(30,"REC","trot")]));if(i<s-1)it.push(B("récup entre séries",1,[run(180,"REC")]))}return[W,...it,C]}
+   case"C8":return[W,B("vma",pick([6,10,6]),[dist(pick([300,400,1000]),"Z4"),run(pick([90,90,120]),"REC")]),C];
+   case"C9":return[W,B("seuil",pick([4,3,3]),[L?dist(pick([0,2000,3000]),"Z3"):run(240,"Z3"),run(120,"REC")]),C];
+   case"C10":return[W,B("tempo",1,[run(pick([12,20,30])*60,L?"Z3":"Z2")]),C];
+   case"C11":return[W,B("côtes courtes",pick([6,10,12]),[run(pick([20,30,45]),"COTE","en côte, effort 8/10"),run(pick([60,90,90]),"WALK","redescente")]),C];
+   case"C12":return[W,B("côtes longues",pick([5,5,6]),[run(pick([90,120,180]),"COTE","en côte, effort 7/10"),run(pick([90,120,150]),"REC","redescente trottinée")]),C];
+   case"C13":return[W,B("allure spécifique",pick([3,4,3]),[dist(pick([1000,2000,5000]),"AS"),run(pick([120,120,180]),"REC")]),C];
+   case"C15":return[{label:"échauffement",reps:1,items:[{sec:15*60,z:"EF"}]},B("marche active",pick([4,5,6]),[run(pick([4,5,6])*60,"HIKE","en côte"),run(150,"WALK","redescente")]),C];
+   case"C16":{const n=pick([4,6,8]),d=pick([30,60,90]);return[B("footing",1,[run(Math.max(10,m-Math.round(n*d*2/60))*60,"EF")]),B("descentes",n,[run(d,"DESC","descente contrôlée"),run(d*1.5,"WALK","remontée en marchant")])]}
+   case"RAPPEL":return[{label:"échauffement",reps:1,items:[{sec:15*60,z:"EF"}]},B("rappel d'allure",3,[dist(1000,"AS"),run(120,"REC")]),{label:"retour au calme",reps:1,items:[{sec:5*60,z:"EF"}]}];
+   case"VMATEST":return[W,B("test 6 min",1,[run(360,"MAX","le plus loin possible, allure régulière")]),C];
+   case"TEST":case"RACE":case"RACEB":return[{label:"échauffement",reps:1,items:[{sec:15*60,z:"EF"}]},B(code==="TEST"?"test chrono":"la course",1,[dist(Math.round((+(e.sec?((p.secs||[]).find(x=>x.date===e.date)||{}).dist:p.race.dist)||10)*1000),code==="RACE"&&p.race.type==="trail"?"EF":"AS",code==="RACE"?"ta course":"")])];
+   case"RACEC":return[B("course plaisir",1,[dist(Math.round((((p.secs||[]).find(x=>x.date===e.date)||{}).dist||10)*1000),"Z2")])];
+   default:return[B("séance",1,[run(m*60,"EF")])]}}
+function stepSec(p,it){return it.sec||Math.round((it.m/1000)/zSpeed(p,it.z)*3600)}
+function stepKm(p,it){return it.m?it.m/1000:zSpeed(p,it.z)*it.sec/3600}
+function sessTotals(p,e){let sec=0,km=0;sessSteps(p,e).forEach(b=>b.items.forEach(it=>{sec+=stepSec(p,it)*b.reps;km+=stepKm(p,it)*b.reps}));return{sec,km}}
+const fmtDur=s=>{s=Math.round(s/60);return s>=60?Math.floor(s/60)+"h"+String(s%60).padStart(2,"0"):s+" min"};
+const fmtSD=s=>s>=60?(s%60?Math.floor(s/60)+" min "+String(s%60).padStart(2,"0"):s/60+" min"):s+" s";
+function zoneTxt(p,z){if(["COTE","HIKE","DESC","WALK","MAX"].includes(z)||isTrail(p)&&!["EF","REC","AS"].includes(z)&&z!=="Z2")return"";if(z==="AS")return fmtPace(zSpeed(p,"AS"))+" /km";const v=prgVma(p),r={REC:[.55,.6],EF:[.6,.7],Z2:[.75,.8],Z3:[.85,.9],Z4:[.95,1.05],Z5:[1.05,1.12]}[z];return r?`${fmtPace(v*r[1])}-${fmtPace(v*r[0])} /km`:""}
+function pgInstr(p,e){const bl=sessSteps(p,e);const flat=[];bl.forEach(b=>{for(let i=0;i<b.reps;i++)b.items.forEach(it=>flat.push(it))});
+  const tot=flat.reduce((a,it)=>a+stepSec(p,it),0)||1;
+  const prof=`<div class="pgprof">${flat.map(it=>`<i style="flex:${stepSec(p,it)};height:${Math.round((ZI[it.z]||2)/5.5*100)}%;background:${ZC[it.z]||"#777"}"></i>`).join("")}</div>`;
+  return prof+bl.map(b=>`<div class="pgstp">${b.reps>1?`<span class="pgrep">× ${b.reps}</span>`:""}<small>${esc(b.label)}</small>${b.items.map(it=>`<div class="pgsi"><i style="background:${ZC[it.z]||"#777"}"></i><div><b>${esc(ZN[it.z]||it.z)}</b><span>${it.m?(it.m>=1000?(it.m/1000).toString().replace(".",",")+" km":it.m+" m"):fmtSD(stepSec(p,it))}${zoneTxt(p,it.z)?` à <em>${zoneTxt(p,it.z)}</em>`:""}${it.txt?` · ${esc(it.txt)}`:""}</span></div></div>`).join("")}</div>`).join("")}
+
+/* ---------- renfo : exercices illustrés ---------- */
+const PIC={
+ squat:[[32,10,"c"],[32,16,28,33],[28,33,43,35],[43,35,41,52],[28,33,30,52],[30,21,48,21],[16,54,52,54]],
+ fente:[[30,9,"c"],[30,15,30,32],[30,32,42,36],[42,36,42,52],[30,32,22,44],[22,44,12,50],[30,20,36,28],[8,54,52,54]],
+ pont:[[12,40,"c"],[16,42,30,34],[30,34,42,36],[42,36,46,50],[16,44,24,50],[8,52,56,52]],
+ mollet:[[32,8,"c"],[32,14,32,34],[32,34,32,48],[32,48,36,50],[32,20,24,30],[32,20,40,30],[24,54,44,54],[44,54,44,50]],
+ soleaire:[[30,10,"c"],[30,16,32,32],[32,32,40,40],[40,40,38,50],[38,50,42,51],[32,22,24,28],[20,54,48,54]],
+ planche:[[10,30,"c"],[14,32,48,38],[48,38,54,40],[16,34,16,44],[16,44,22,44],[6,46,58,46]],
+ lateral:[[12,26,"c"],[15,30,50,42],[18,32,18,44],[14,44,22,44],[30,34,32,22],[6,46,58,46]],
+ stepup:[[28,8,"c"],[28,14,28,32],[28,32,38,34],[38,34,38,42],[28,32,26,52],[28,20,20,28],[34,42,52,42],[52,42,52,54],[10,54,52,54]],
+ bulgare:[[26,9,"c"],[26,15,26,32],[26,32,34,40],[34,40,34,52],[26,32,40,30],[40,30,48,28],[44,30,54,30],[54,30,54,54],[12,54,56,54]],
+ sdt1:[[14,22,"c"],[18,24,34,30],[34,30,34,52],[34,30,50,26],[22,26,22,38],[12,54,48,54]],
+ chaise:[[24,10,"c"],[24,16,24,34],[24,34,38,34],[38,34,38,52],[18,6,18,54],[24,22,32,30],[16,54,50,54]],
+ equilibre:[[32,8,"c"],[32,14,32,34],[32,34,32,52],[32,34,42,40],[32,20,22,22],[32,20,42,22],[22,54,42,54]],
+ sauts:[[32,8,"c"],[32,14,32,32],[32,32,28,44],[32,32,36,44],[32,20,24,16],[32,20,40,16],[14,52,50,52],[26,48,38,48]],
+ squatsaute:[[32,6,"c"],[32,12,32,28],[32,28,26,38],[32,28,38,38],[32,16,22,8],[32,16,42,8],[12,52,52,52],[24,44,28,48],[40,44,36,48]],
+ fentesautee:[[30,6,"c"],[30,12,30,28],[30,28,40,34],[40,34,40,42],[30,28,20,38],[20,38,12,40],[30,18,40,12],[8,52,52,52]],
+ bonds:[[24,10,"c"],[24,16,30,30],[30,30,44,32],[44,32,50,40],[30,30,18,40],[24,20,34,18],[8,52,56,52]],
+ stepdown:[[30,8,"c"],[30,14,30,32],[30,32,30,42],[30,32,40,44],[22,42,22,54],[22,42,36,42],[30,20,38,26],[10,54,52,54]],
+ gainage:[[10,26,"c"],[14,28,50,38],[50,38,54,46],[14,30,10,42],[6,46,58,46]]};
+function pic(id){const s=PIC[id]||PIC.squat;return `<svg viewBox="0 0 64 64" class="pgpic">${s.map(a=>a[2]==="c"?`<circle cx="${a[0]}" cy="${a[1]}" r="5"/>`:`<line x1="${a[0]}" y1="${a[1]}" x2="${a[2]}" y2="${a[3]}"/>`).join("")}</svg>`}
+const EXO={
+ squat:["Squat","pieds largeur d'épaules, descends comme pour t'asseoir, dos droit, genoux dans l'axe des pieds"],
+ pont:["Pont fessier","allongé, pieds au sol, monte le bassin en serrant les fessiers, tiens 1 s en haut"],
+ mollet:["Mollets debout","monte sur la pointe des pieds, jambe tendue, redescends lentement en 3 s"],
+ soleaire:["Mollets genou fléchi","genou un peu fléchi, monte sur la pointe : ça cible le soléaire, clé pour la course"],
+ planche:["Planche","sur les avant-bras, corps aligné des épaules aux chevilles, ne creuse pas le dos"],
+ lateral:["Gainage latéral","sur un avant-bras, bassin levé, corps bien aligné, sans laisser tomber la hanche"],
+ fente:["Fentes avant","grand pas en avant, genou arrière vers le sol, buste droit, pousse sur le talon avant"],
+ stepup:["Montées sur marche","monte sur une chaise ou une marche en poussant sur la jambe du haut, redescends lentement"],
+ bulgare:["Squat bulgare","pied arrière posé sur une chaise, descends sur la jambe avant, genou dans l'axe"],
+ sdt1:["Soulevé de terre 1 jambe","penche le buste en tendant une jambe derrière toi, dos droit, remonte en serrant le fessier"],
+ equilibre:["Équilibre 1 jambe","tiens sur une jambe, genou souple, regard fixe ; ferme les yeux pour corser"],
+ chaise:["Chaise contre un mur","dos au mur, cuisses à l'horizontale, tiens sans bouger"],
+ sauts:["Petits sauts / corde","sauts rapides sur la pointe des pieds, chevilles toniques, peu de hauteur"],
+ squatsaute:["Squat sauté","descends en squat puis saute le plus haut possible, réception souple"],
+ fentesautee:["Fentes sautées","en fente, saute et change de jambe en l'air, réception amortie"],
+ bonds:["Bonds alternés","foulées bondissantes, cherche la distance et le temps de vol, sur 20-30 m"],
+ stepdown:["Step-down lent","sur une marche, descends un pied vers le sol en 3 s, sans t'écraser : travail excentrique pour les descentes"],
+ gainage:["Gainage dynamique","en planche, touche ton épaule opposée avec une main, sans bouger le bassin"]};
+const RENFO={
+ R1:["Renfo · fondations","jambes et gainage, la base du coureur",[["squat",["2 × 12","3 × 15","3 × 20 lents"]],["pont",["2 × 12","3 × 15","3 × 12 / jambe"]],["mollet",["2 × 15","3 × 15","3 × 15 / jambe"]],["soleaire",["2 × 12","3 × 15","3 × 15 / jambe"]],["planche",["3 × 20 s","3 × 40 s","3 × 60 s"]],["lateral",["2 × 15 s / côté","3 × 30 s","3 × 45 s"]]]],
+ R2:["Renfo · force sur une jambe","stabilité et puissance, comme en course",[["fente",["2 × 8 / jambe","3 × 10","3 × 12"]],["stepup",["2 × 8 / jambe","3 × 10","3 × 12"]],["bulgare",["2 × 6 / jambe","3 × 8","4 × 10"]],["sdt1",["2 × 8 / jambe","3 × 10","3 × 12"]],["equilibre",["3 × 30 s","3 × 30 s yeux fermés","3 × 45 s"]],["chaise",["2 × 30 s","3 × 45 s","3 × 60 s"]]]],
+ R3:["Renfo · explosivité","réactivité et ressort",[["sauts",["3 × 20 s","3 × 30 s","4 × 45 s"]],["squatsaute",["2 × 5","3 × 6","4 × 8"]],["fentesautee",["2 × 4 / jambe","3 × 6","3 × 10"]],["bonds",["2 × 15 m","3 × 20 m","4 × 30 m"]],["gainage",["2 × 20 s","3 × 30 s","3 × 45 s"]]]]};
+const EQUIP=[["none","rien (poids du corps)"],["mat","tapis de sol"],["band","élastiques"],["db","haltères / kettlebell"],["chair","chaise ou banc"],["bar","barre de traction"],["gym","salle de sport"]];
+function renfoList(p,code){const r=RENFO[code],L=LVI[p.level]||0,eq=p.equip||[];let list=r[2].map(([id,s])=>[id,s[L]]);
+  if(isTrail(p)&&code!=="R3")list.push(["stepdown",["2 × 8 / jambe","3 × 8","3 × 10"][L]]);
+  return list.map(([id,s])=>{let v="";if(eq.includes("db")&&["squat","fente","bulgare","sdt1","stepup","mollet"].includes(id))v="avec haltères (charge modérée)";else if(eq.includes("band")&&["pont","squat"].includes(id))v="élastique au-dessus des genoux";
+    if(!eq.includes("chair")&&!eq.includes("gym")&&["stepup","bulgare"].includes(id))v=(v?v+" · ":"")+"utilise une marche d'escalier ou un muret";if(eq.includes("gym")&&id==="squat")v="presse à cuisses possible à la place";return{id,s,v}})}
+function renfoMin(p,code){const l=renfoList(p,code);let s=5*60;l.forEach(x=>{const m=x.s.match(/(\d+)\s*×\s*(\d+)\s*(s|m)?/);if(m){const sets=+m[1],n=+m[2];s+=sets*((m[3]==="s"?n:m[3]==="m"?10:n*3)+50)*(x.s.includes("/ jambe")||x.s.includes("/ côté")?2:1)}});return Math.min(45,Math.round(s/60/5)*5)}
+function pgRenfo(p,e){const l=renfoList(p,e.code);return `<div class="pgexos">${l.map(x=>`<div class="pgexo">${pic(x.id)}<div><b>${EXO[x.id][0]}</b><em>${x.s}</em><span>${EXO[x.id][1]}</span>${x.v?`<small>${esc(x.v)}</small>`:""}</div></div>`).join("")}</div><p class="pghint">récup 45 s à 1 min entre les séries. échauffe-toi 5 min avant (jumping jacks, montées de genoux).</p>`}
+/* ---------- écran de chargement ---------- */
+function pgLoading(title,lines,ms,then){let o=document.getElementById("pgLoad");if(!o){o=document.createElement("div");o.id="pgLoad";document.body.appendChild(o)}
+  o.innerHTML=`<div class="pgld"><svg viewBox="0 0 120 70" class="pgldm"><path d="M5 65 L45 15 L62 38 L80 22 L115 65" fill="none" stroke="#FFC107" stroke-width="5" stroke-linejoin="round"/></svg><small>chargement<span class="pgdots"></span></small><h2>${esc(title)}</h2><p id="pgldl">${esc(lines[0]||"")}</p><div class="pgldb"><i></i></div></div>`;
+  o.style.display="flex";requestAnimationFrame(()=>o.classList.add("on"));const bar=o.querySelector(".pgldb i");bar.style.transition=`width ${ms}ms linear`;requestAnimationFrame(()=>requestAnimationFrame(()=>bar.style.width="100%"));
+  let i=0;const iv=setInterval(()=>{i++;const el=document.getElementById("pgldl");if(el&&lines[i])el.textContent=lines[i]},ms/Math.max(1,lines.length));
+  setTimeout(()=>{clearInterval(iv);o.classList.remove("on");setTimeout(()=>{o.style.display="none"},250);then&&then()},ms)}
+/* ---------- alertes drôles ---------- */
+function pgFun(W){const out=[],k=(+W.dist||0)+(W.type==="trail"?(+W.dplus||0)/100:0),nopast=W.freq===0||(W.freq<=1&&W.km<10);
+  if(W.mode==="course"&&nopast&&(k>=60||+W.dist>=42))out.push("😅 du canapé à "+Math.round(W.dist)+" km… on adore l'ambition ! Mais tes jambes n'ont pas encore signé le contrat. Un objectif plus court d'abord serait plus sage. Tu peux quand même continuer.");
+  if(W.mode==="course"&&W.type==="trail"&&(+W.dist>=170||+W.dplus>=10000))out.push("🏔 plus de 170 km ou 10 000 m D+ ? Tu prépares l'UTMB ? Respect. Prévois au moins 6 mois de préparation et écoute bien ton corps.");
+  let v=0;if(W.vsrc==="vma")v=+W.vma;else if(W.vsrc==="test"&&W.vtest==="done")v=W.cooper/100;else if(W.vsrc==="chrono"){const s=parseTime(W.ptime);if(s)v=(W.pkm/(s/3600))/pctFor(+W.pkm)}
+  if(v>=22)out.push(`🚀 ${v.toFixed(1)} km/h de VMA ? À ce niveau, tu cours avec les meilleurs du monde… ou ton test était en descente avec le vent dans le dos 😏 Vérifie avant de lancer le plan.`);
+  else if(v>=20)out.push(`🇰🇪 ${v.toFixed(1)} km/h de VMA : sauf si tu t'entraînes sur les hauts plateaux kényans, refais peut-être le test 😉`);
+  else if(v&&v<8)out.push("🐢 VMA sous 8 km/h : pas de souci, tout le monde commence quelque part ! Le plan démarre tout en douceur.");
+  return out}
+
+const ek=e=>e.key||e.date;
 function vProg(){
   if(!PROG_ON())return `<p class="sub">bientôt disponible.</p>`;
   const p=PRG();if(!p||!p.plan||progEdit)return vProgSetup(p);
@@ -1313,23 +1445,23 @@ function vProg(){
   const pos=Math.min(100,Math.round(plan.filter(e=>e.date<t).length/tot*100));
   // semaine
   const ws=ds(weekStart(new Date()));const wk=[0,1,2,3,4,5,6].map(i=>addDays(ws,i));
-  const nx=nextSess(p);if(!pgSel||!plan.find(e=>e.date===pgSel))pgSel=(plan.find(e=>e.date===t)||nx||{}).date;
-  const strip=wk.map(d=>{const e=plan.find(x=>x.date===d),lg=L[d];const ty=e?SESS[sessOf(e)][3]:"";const st=lg?(lg.status==="none"?"miss":"done"):e&&d<t?"miss":"";
-    return `<button class="pgday ${d===t?"today":""} ${d===pgSel?"sel":""} ${st}" ${e?`data-pgsel="${d}"`:"disabled"}><small>${["L","M","M","J","V","S","D"][dow(d)]}</small><b>${parse(d).getDate()}</b><span class="dot ${e?(PG_TYPE[ty]||[])[1]||"ez":"none"}">${st==="done"?"✓":st==="miss"&&lg?"✕":""}</span></button>`}).join("");
-  const se=plan.find(e=>e.date===pgSel);
+  const nx=nextSess(p);if(!pgSel||!plan.find(e=>ek(e)===pgSel))pgSel=ek(plan.find(e=>e.date===t&&!L[ek(e)])||nx||plan.find(e=>e.date===t)||{});
+  const strip=wk.map(d=>{const e=plan.find(x=>x.date===d),lg=e?L[ek(e)]:null;const ty=e?SESS[sessOf(e)][3]:"";const st=lg?(lg.status==="none"?"miss":"done"):"";
+    return `<button class="pgday ${d===t?"today":""} ${e&&ek(e)===pgSel?"sel":""} ${st}" ${e?`data-pgsel="${ek(e)}"`:"disabled"}><small>${["L","M","M","J","V","S","D"][dow(d)]}</small><b>${parse(d).getDate()}</b><span class="dot ${e?(PG_TYPE[ty]||[])[1]||"ez":"none"}">${st==="done"?"✓":st==="miss"&&lg?"✕":""}</span></button>`}).join("");
+  const se=plan.find(e=>ek(e)===pgSel);const wkList=plan.filter(e=>e.date>=ws&&e.date<=addDays(ws,6));
   let hero="";
-  if(se){const code=sessOf(se),s=SESS[code],ty=PG_TYPE[s[3]]||PG_TYPE.easy,lg=L[se.date];
+  if(se){const code=sessOf(se),s=SESS[code],ty=PG_TYPE[s[3]]||PG_TYPE.easy,lg=L[ek(se)];
     hero=`<div class="pghero ${ty[1]}"><div class="pghtop"><span class="pgtag ${ty[1]}">${ty[0]}</span><span class="pgwhen">${se.date===t?"aujourd'hui":fdate(se.date,{weekday:"long",day:"numeric",month:"short"})}</span></div>
-    <h2>${esc(se.sec||s[0])}</h2>${s[1]?`<p class="pgbut">${esc(s[1])}</p>`:""}<div class="pgstat"><div><small>durée</small><b>${esc(pgDur(p,se))}</b></div><div><small>distance</small><b>≈ ${pgKm(p,se).toFixed(1)} km</b></div><div><small>difficulté</small>${pgDiff(code)}</div></div><div class="pgmeta"><span>${(()=>{const w0=ds(weekStart(parse(se.date))),wl=plan.filter(x=>x.date>=w0&&x.date<=addDays(w0,6));return `séance ${wl.findIndex(x=>x.date===se.date)+1} sur ${wl.length}`})()}</span><span>phase ${esc(se.phase)}</span>${p.light&&se.date<=p.light&&se.date>=t?`<span class="lt">semaine allégée</span>`:""}</div>
-    ${se.date>=t&&!lg?`<div class="pgcoachb">${coachAv()}<p><small>le mot du coach</small>${esc(coachToday(p,se))}</p></div>`:""}<div class="pgblocks">${pgBlocks(p,se).map(([k,v])=>`<div class="pgblk"><small>${k}</small><p>${esc(v)}</p></div>`).join("")}</div>
+    <h2>${esc(se.sec||s[0])}</h2>${s[1]?`<p class="pgbut">${esc(s[1])}</p>`:""}<div class="pgstat"><div><small>durée</small><b>${esc(pgDur(p,se))}</b></div><div><small>${RENFO[code]?"exercices":"distance"}</small><b>${RENFO[code]?renfoList(p,code).length:"≈ "+pgKm(p,se).toFixed(1)+" km"}</b></div><div><small>difficulté</small>${pgDiff(code)}</div></div><div class="pgmeta"><span>${(()=>{const w0=ds(weekStart(parse(se.date))),wl=plan.filter(x=>x.date>=w0&&x.date<=addDays(w0,6));return `séance ${wl.findIndex(x=>x.date===se.date)+1} sur ${wl.length}`})()}</span><span>phase ${esc(se.phase)}</span>${p.light&&se.date<=p.light&&se.date>=t?`<span class="lt">semaine allégée</span>`:""}</div>
+    ${se.date>=t&&!lg?`<div class="pgcoachb">${coachAv()}<p><small>le mot du coach</small>${esc(coachToday(p,se))}</p></div>`:""}${RENFO[code]?pgRenfo(p,se):`<div class="pginstr"><small class="pglab" style="margin-top:0">instructions · ${isTrail(p)?"trail":"route"}</small>${pgInstr(p,se)}</div>`}<div class="pgblocks">${pgNotes(p,se).map(([k,v])=>`<div class="pgblk"><small>${k}</small><p>${esc(v)}</p></div>`).join("")}</div>
     ${lg?`<div class="pgfb"><b>${lg.status==="none"?"✕ pas faite":lg.status==="part"?"◐ en partie":"✓ faite"}</b>${lg.rpe?`<span class="rpe" style="--r:${lg.rpe}">${(f=>lg.rpe>=f[2]?"difficile à tenir":lg.rpe<=f[0]?"trop facile":"facile")(FEEL[s[3]]||FEEL.easy)} · ${lg.rpe}/10</span>`:""}${lg.pain?`<span>douleur ${lg.pain}/10</span>`:""}${(lg.cond||[]).map(x=>`<span>${esc(x)}</span>`).join("")}${lg.notes?`<p>« ${esc(lg.notes)} »</p>`:""}</div>`
-      :se.date<=t?`<button class="btn main pgval" data-pglog="${se.date}">valider ma séance</button>`:`<p class="pgsoon">à faire ${fdate(se.date,{weekday:"long"})}</p>`}</div>`}
+      :ds(weekStart(parse(se.date)))<=ds(weekStart(new Date()))?`<button class="btn main pgval" data-pglog="${ek(se)}">valider ma séance</button><button class="pgx" data-pgskip="${ek(se)}" style="width:100%;color:#ff6b6b">passer la séance</button>`:`<p class="pgsoon">semaine du ${fdate(ds(weekStart(parse(se.date))),{day:"numeric",month:"long"})}</p>`}</div>`}
   // journal : 5 dernières semaines
-  const js=addDays(ws,-28);let cal="";for(let i=0;i<35;i++){const d=addDays(js,i),lg=L[d],e=plan.find(x=>x.date===d);
+  const js=addDays(ws,-28);let cal="";for(let i=0;i<35;i++){const d=addDays(js,i),e=plan.find(x=>x.date===d),lg=L[d]||Object.keys(L).filter(k=>k.startsWith(d)).map(k=>L[k])[0];
     cal+=`<i class="${d===t?"t":""} ${lg&&lg.status!=="none"?"r":""} ${lg&&lg.status==="none"?"x":""} ${!lg&&e&&d>t?"f":""}" ${lg&&lg.rpe?`style="--r:${lg.rpe}"`:""} title="${fdate(d)}${lg&&lg.rpe?" · "+lg.rpe+"/10":""}"></i>`}
   const hd=Object.keys(L).sort().reverse().slice(0,6);
-  const done=Object.keys(L).filter(d=>L[d].status!=="none"),past=plan.filter(e=>e.date<t||L[e.date]);const reg=past.length?Math.round(done.length/past.length*100):100;
-  const vol=done.reduce((a,d)=>{const e=plan.find(x=>x.date===d);return a+(e?pgKm(p,e)*(L[d].status==="part"?.5:1):0)},0);
+  const done=Object.keys(L).filter(d=>L[d].status!=="none"),past=plan.filter(e=>e.date<ws||L[ek(e)]);const reg=past.length?Math.round(done.length/past.length*100):100;
+  const vol=done.reduce((a,d)=>{const e=plan.find(x=>ek(x)===d);return a+(e?pgKm(p,e)*(L[d].status==="part"?.5:1):0)},0);
   const md=p.mode||"course";
   return `<div class="tag">Programme · bêta${owner?" (toi + testeurs)":""}</div>${pgObjBar(p)}
   <div class="pgrace"><div class="pgrl"><small>${md==="course"?"objectif principal":md==="forme"?"programme forme · cycle de 8 sem.":"programme progression"}</small><h1>${esc(r.name)}</h1><span>${md==="forme"?"fin du cycle "+fdate(r.date,{day:"numeric",month:"long"}):md==="perf"?"test chrono "+fdate(r.date,{weekday:"short",day:"numeric",month:"long"}):fdate(r.date,{weekday:"short",day:"numeric",month:"long"})+" · "+(r.type==="trail"?`trail ${r.dist} km · ${r.dplus||0} m D+`:r.dist+" km")}</span></div><div class="pgj"><b>J-${j}</b><small>${md==="forme"?"fin du cycle":md==="perf"?"avant le test":"avant la course"}</small></div>
@@ -1340,18 +1472,20 @@ function vProg(){
   ${c?`<div class="pgchr"><div><small>chrono possible · ${r.type==="trail"?"trail "+r.dist+" km":r.dist>=42?"marathon":r.dist>=21?"semi":r.dist+" km"}</small><b>${fmtTime(c.lo)} – ${fmtTime(c.hi)}</b>${c0&&c0!==c?`<span class="${c.lo<c0.lo?"up":"dn"}">${c.lo<c0.lo?"▲":"▼"} ${Math.max(1,Math.round(Math.abs(c0.lo-c.lo)/60))} min depuis le début</span>`:`<span>calculé avec : ${esc(c.src)}</span>`}</div>${pgSpark(hist)}</div>`:""}
   ${!plan.find(e=>e.date===t)?`<div class="pgcoachb">${coachAv()}<p><small>le mot du coach</small>${esc(coachMilestone(p)||pickMsg(CM.rest,t))}</p></div>`:""}
   <div class="pgweek">${strip}</div>
+  <div class="pgwl">${wkList.map((e,i)=>{const lg=L[ek(e)];return `<button class="${ek(e)===pgSel?"on":""} ${lg?(lg.status==="none"?"miss":"done"):""}" data-pgsel="${ek(e)}"><small>séance ${i+1}</small><b>${esc(e.sec||SESS[sessOf(e)][0])}</b><span>${lg?(lg.status==="none"?"✕ passée":"✓ faite"):esc(pgDur(p,e))}</span></button>`}).join("")}</div>
   ${hero||(md==="forme"?`<div class="alert">🌿 cycle terminé, bravo ! <button class="btn small main" data-pgcycle>lancer un nouveau cycle</button></div>`:`<div class="alert">🏁 plan terminé ! saisis ton temps ci-dessous.</div>`)}
   ${(p.secs||[]).length?label("objectifs secondaires")+(p.secs||[]).map((x,i)=>`<div class="pgsec"><span class="pgbadge sec">${x.prio}</span><div><b>${esc(x.name)}</b><small>${fdate(x.date,{weekday:"short",day:"numeric",month:"long"})} · ${x.dist} km</small></div><button class="pgx" data-pgsecdel="${i}">✕</button></div>`).join(""):""}
   <div class="pgzones">${[["EF","endurance"],["Z2","active"],["Z3","seuil"],["Z4","vma"]].map(([z,n])=>`<div><small>${n}</small><b>${paceTxt(p,z).replace(" /km","")}</b></div>`).join("")}<p>allures en min/km · allure VMA ${fmtPace(prgVma(p))} /km</p></div>
   ${(p.msgs||[]).length?label("le coach")+`<div class="pgcoach">${p.msgs.slice(0,4).map(x=>`<div><span>🏹</span><p>${esc(x.m)}<small>${fdate(x.date)}</small></p></div>`).join("")}</div>`:""}
   ${label("journal")}<div class="pgcal">${["L","M","M","J","V","S","D"].map(x=>`<u>${x}</u>`).join("")}${cal}</div>
-  ${hd.map(d=>{const lg=L[d],e=plan.find(x=>x.date===d)||{code:"C1"};return `<div class="pgh"><div><b>${esc(SESS[e.code]?SESS[e.code][0]:"séance")}</b><small>${fdate(d,{weekday:"short",day:"numeric",month:"short"})}</small></div>${lg.rpe?`<span class="rpe" style="--r:${lg.rpe}">${lg.rpe}</span>`:`<span class="rpe x">✕</span>`}${lg.notes?`<p>${esc(lg.notes)}</p>`:""}</div>`}).join("")||`<p class="sub">tes séances validées et tes notes apparaîtront ici.</p>`}
+  ${hd.map(d=>{const lg=L[d],e=plan.find(x=>ek(x)===d)||{code:"C1"};return `<div class="pgh"><div><b>${esc(SESS[e.code]?SESS[e.code][0]:"séance")}</b><small>${fdate(d.slice(0,10),{weekday:"short",day:"numeric",month:"short"})}</small></div>${lg.rpe?`<span class="rpe" style="--r:${lg.rpe}">${lg.rpe}</span>`:`<span class="rpe x">✕</span>`}${lg.notes?`<p>${esc(lg.notes)}</p>`:""}</div>`}).join("")||`<p class="sub">tes séances validées et tes notes apparaîtront ici.</p>`}
+  ${label("mes connexions")}<div class="pgconn">${[["Strava",strava&&strava.syncedAt?"connecté · synchro "+new Date(strava.syncedAt).toLocaleDateString("fr-FR",{day:"numeric",month:"short"}):"à connecter",1],["Garmin Connect","bientôt",0],["Coros","bientôt",0],["Suunto","bientôt",0],["Polar","bientôt",0]].map(([n,st,ok])=>`<button class="pgcn ${ok?"ok":""}" ${ok?`data-nav="course"`:"disabled"}><b>${n}</b><span>${st}</span></button>`).join("")}</div>
   <div class="actions pgact">${md!=="forme"?`<button class="btn small" data-pgresult>${md==="perf"?"saisir mon temps au test":"saisir mon temps de course"}</button>`:""}${md==="course"?`<button class="btn small" data-pgsecadd>+ objectif secondaire</button>`:""}<button class="btn small" data-pgedit>modifier le plan</button><button class="btn small ghost" data-pgdel>supprimer</button></div>`}
 let progEdit=false,pgW=null;
 const PG_MODES=[["course","Préparer une course","un plan construit à rebours pour ton prochain dossard, route ou trail","🏁"],["forme","Rester en forme","des séances régulières et variées, sans date ni pression","🌿"],["perf","Progresser","un cycle de 8 à 12 semaines pour faire tomber ton chrono, test à la fin","🚀"]];
-const PGW_STEPS={course:["type","disc","race","freq","km","long","vma","sess","pain","recap"],perf:["type","perf","freq","km","long","vma","sess","pain","recap"],forme:["type","disc","freq","km","long","vma","sess","pain","recap"]};
+const PGW_STEPS={course:["type","disc","race","freq","km","long","vma","sess","renfo","pain","recap"],perf:["type","perf","freq","km","long","vma","sess","renfo","pain","recap"],forme:["type","disc","freq","km","long","vma","sess","renfo","pain","recap"]};
 function pgWInit(p){p=p||{};const r=p.race||{};pgW={step:0,mode:p.mode||null,name:r.virtual?"":r.name||"",date:r.virtual?"":r.date||"",type:r.type||"route",dist:r.virtual?(p.mode==="perf"?r.dist:21.1):(r.dist||21.1),dplus:r.dplus||0,focus:p.mode==="perf"?r.dist:10,weeks:p.cycle||10,
-  freq:p.q?p.q.freq:null,km:p.q?p.q.km:20,long:p.q?p.q.long||60:60,vsrc:p.perf?"chrono":p.cooper?"cooper":null,pkm:p.perf?p.perf.km:10,ptime:p.perf?fmtTime(p.perf.sec):"",vma:p.vma0?+(p.vma0+(p.vmaAdj||0)).toFixed(1):14,hill:p.terrain?p.terrain.hill:null,tread:p.terrain?!!p.terrain.tread:false,stairs:p.terrain?!!p.terrain.stairs:false,pfm:p.terrain?p.terrain.pfm!==false:true,vtest:null,cooper:p.cooper||1500,n:p.n||3,days:(p.days||[1,3,6]).slice(),pain:null,dir:1}}
+  freq:p.q?p.q.freq:null,km:p.q?p.q.km:20,long:p.q?p.q.long||60:60,vsrc:p.perf?"chrono":p.cooper?"cooper":null,pkm:p.perf?p.perf.km:10,ptime:p.perf?fmtTime(p.perf.sec):"",vma:p.vma0?+(p.vma0+(p.vmaAdj||0)).toFixed(1):14,renfo:p.renfo!=null?String(p.renfo):null,equip:(p.equip||[]).slice(),tech:r.tech||"mixte",hill:p.terrain?p.terrain.hill:null,tread:p.terrain?!!p.terrain.tread:false,stairs:p.terrain?!!p.terrain.stairs:false,pfm:p.terrain?p.terrain.pfm!==false:true,vtest:null,cooper:p.cooper||1500,n:p.n||3,days:(p.days||[]).slice(),pain:null,dir:1}}
 const pgSteps=()=>{const s=PGW_STEPS[pgW.mode||"course"].slice();if(pgW.type==="trail"&&pgW.mode!=="perf"){const i=s.indexOf(pgW.mode==="course"?"race":"disc");s.splice(i+1,0,"terrain")}return s};
 function pgRange(key,min,max,step,unit,fmt){const v=pgW[key];return `<div class="pgbigval"><b id="pgv-${key}">${fmt?fmt(v):v}</b><span>${unit}</span></div><input class="pgslider" type="range" min="${min}" max="${max}" step="${step}" value="${v}" data-pgw="${key}" style="--p:${((v-min)/(max-min)*100).toFixed(1)}%"><div class="pgscale"><span>${fmt?fmt(min):min}</span><span>${fmt?fmt(max):max}${max>=100&&key==="km"?"+":""}</span></div>`}
 function vProgSetup(p){if(!pgW)pgWInit(p);const W=pgW,steps=pgSteps(),k=steps[W.step],tot=steps.length;
@@ -1366,7 +1500,7 @@ function vProgSetup(p){if(!pgW)pgWInit(p);const W=pgW,steps=pgSteps(),k=steps[W.
     <label class="pgfld"><small>nom de la course</small><input data-pgw="name" value="${esc(W.name)}" placeholder="semi de lille"></label>
     <label class="pgfld"><small>date</small><input data-pgw="date" type="date" value="${esc(W.date)}" min="${addDays(today(),14)}"></label>
     ${W.type==="route"?`<small class="pglab">distance</small><div class="pgchips">${[[5,"5K"],[10,"10K"],[21.1,"21K"],[42.2,"42K"]].map(([v,l])=>chip("dist",v,l)).join("")}</div>`
-      :`<small class="pglab">distance</small>${pgRange("dist",5,170,1,"km")}<small class="pglab">dénivelé positif</small>${pgRange("dplus",0,10000,50,"m D+")}`}`}
+      :`<small class="pglab">distance</small>${pgRange("dist",5,350,1,"km")}<small class="pglab">dénivelé positif</small>${pgRange("dplus",0,30000,100,"m D+")}<small class="pglab">terrain de la course</small><div class="pgchips">${[["roulant","roulant"],["mixte","mixte"],["technique","technique"],["alpin","très technique"]].map(([v,l])=>chip("tech",v,l)).join("")}</div><p class="pghint">roulant : larges chemins · technique : racines, rochers, single · très technique : pierriers, passages alpins. ça change ton chrono possible.</p>`}`}
   else if(k==="terrain"){q="quelle côte as-tu près de chez toi ?";sub="le temps qu'il te faut pour la monter en courant. on adapte tes séances à ce que tu as.";
     body=`${opt("hill","none","aucune côte","c'est plat autour de chez moi","🏙")}${opt("hill","short","une petite côte","moins d'1 min de montée","〽️")}${opt("hill","mid","une côte moyenne","1 à 3 min de montée","⛰")}${opt("hill","long","une longue côte","3 à 10 min de montée","🏔")}${opt("hill","mtn","de la vraie montagne","plus de 10 min de montée","🗻")}
     <small class="pglab">tu as aussi accès à…</small><div class="pgseg"><button class="pgchip ${W.tread?"on":""}" data-pgtog="tread">🏃 un tapis</button><button class="pgchip ${W.stairs?"on":""}" data-pgtog="stairs">🪜 escaliers, pont, parking</button></div>
@@ -1386,13 +1520,17 @@ function vProgSetup(p){if(!pgW)pgWInit(p);const W=pgW,steps=pgSteps(),k=steps[W.
       ${W.vtest==="done"?pgRange("cooper",800,2400,10,"m en 6 min"):""}${W.vtest==="plan"?`<p class="pghint">on démarre avec une estimation, et le test est placé dans ta première séance de qualité. tes allures se recalculent dès que tu le valides.</p>`:""}</div>`:""}
     ${W.vsrc==="chrono"?`<div class="pgsubf"><div class="pgchips">${[[5,"5K"],[10,"10K"],[21.1,"21K"],[42.2,"42K"]].map(([v,l])=>chip("pkm",v,l)).join("")}</div><label class="pgfld"><small>ton temps</small><input data-pgw="ptime" value="${esc(W.ptime)}" placeholder="45:30 ou 1:42:00" inputmode="numeric"></label></div>`:""}
 `}
-  else if(k==="sess"){q="combien de séances par semaine ?";sub="puis touche tes jours disponibles.";
-    body=`<div class="pgchips big">${[2,3,4,5].map(v=>chip("n",v,v)).join("")}</div><small class="pglab">tes jours dispo · ${W.days.length} choisi${W.days.length>1?"s":""}</small><div class="pgweekpick">${["lun","mar","mer","jeu","ven","sam","dim"].map((x,i)=>`<button class="${W.days.includes(i)?"on":""}" data-pgwday="${i}">${x}</button>`).join("")}</div><p class="pghint">la sortie longue tombe le week-end si possible.</p>`}
+  else if(k==="sess"){const sug={0:3,1:3,3:4,5:5}[W.freq]||3;q="combien de séances de course par semaine ?";sub=`d'après ce que tu fais en ce moment, on te conseille ${sug}.`;
+    body=`<div class="pgchips big">${[2,3,4,5,6,7].map(v=>`<div class="pgsug">${chip("n",v,v)}${v===sug?"<small>conseillé</small>":""}</div>`).join("")}</div>${W.n>=sug+2?`<p class="pghint" style="color:#FF9F43">⚠️ c'est bien plus que ce que tu fais aujourd'hui : monte progressivement pour éviter la blessure.</p>`:""}
+    <small class="pglab">jours préférés · facultatif ${W.days.length?"· "+W.days.length+" choisi"+(W.days.length>1?"s":""):""}</small><p class="pghint" style="margin:0 0 6px">pas obligé : tes séances se font quand tu veux dans la semaine. ça sert juste à proposer un ordre.</p><div class="pgweekpick">${["lun","mar","mer","jeu","ven","sam","dim"].map((x,i)=>`<button class="${W.days.includes(i)?"on":""}" data-pgwday="${i}">${x}</button>`).join("")}</div>`}
+  else if(k==="renfo"){q="du renfo en plus ?";sub="séances de 45 min max, à la maison ou en salle. ça te rend plus solide et plus efficace.";const rec=W.type==="trail"?2:1;
+    body=`${opt("renfo","0","pas de renfo","que de la course","🏃")}${opt("renfo","1","1 séance par semaine",rec===1?"conseillé":"","💪")}${opt("renfo","2","2 séances par semaine",rec===2?"conseillé pour le trail":"","🔥")}
+    ${+W.renfo?`<small class="pglab">ton matériel</small><div class="pgeq">${EQUIP.map(([k,l])=>`<button class="pgchip ${W.equip.includes(k)?"on":""}" data-pgeq="${k}">${l}</button>`).join("")}</div><p class="pghint">les exercices s'adaptent à ce que tu as.</p>`:""}`}
   else if(k==="pain"){q="une douleur ou une blessure en ce moment ?";sub="on adapte le départ pour te protéger.";body=`${opt("pain","0","non, tout va bien","","💪")}${opt("pain","1","oui, une gêne","le plan démarre en douceur","🩹")}`;auto=true}
   else if(k==="recap"){const m=PG_MODES.find(x=>x[0]===W.mode);q="c'est parti ?";sub="voici ce qu'on a retenu.";
-    const rows=[["programme",m[1]],...(W.mode==="course"?[["course",`${W.name||"ma course"} · ${W.type==="trail"?W.dist+" km · "+W.dplus+" m D+":W.dist+" km"}`],["date",W.date?fdate(W.date,{weekday:"short",day:"numeric",month:"long",year:"numeric"}):"–"]]:W.mode==="perf"?[["objectif",(W.focus>20?"semi":W.focus+" km")+" · "+W.weeks+" semaines"]]:[["cycle","8 semaines"]]),
-      ["en ce moment",`${["0","1-2","","3-4","","5+"][W.freq]||"–"} sorties · ${W.km} km/sem.`],["allures",W.vsrc==="chrono"?`chrono ${W.pkm} km en ${W.ptime}`:W.vsrc==="vma"?`allure VMA ${fmtPace(+W.vma)} /km`:W.vtest==="done"?`test 6 min : ${W.cooper} m`:"test VMA en 1re séance"],...(W.type==="trail"&&W.mode!=="perf"?[["terrain",`${({none:"pas de côte",short:"petite côte (< 1 min)",mid:"côte moyenne (1-3 min)",long:"longue côte (3-10 min)",mtn:"montagne"})[W.hill]||"–"}${W.tread?" · tapis":""}${W.stairs?" · escaliers":""}${(W.hill==="none"||W.hill==="short")&&W.pfm?" · pré-fatigue":""}`]]:[]),["séances",`${W.n} par semaine · ${W.days.slice().sort((a,b)=>a-b).map(d=>["lun","mar","mer","jeu","ven","sam","dim"][d]).join(", ")}`]];
-    body=`<div class="pgrecap">${rows.map(([a,b])=>`<div><small>${a}</small><b>${esc(b)}</b></div>`).join("")}</div><p class="pghint">la flèche propose des séances générales, pas un avis médical. en cas de douleur qui dure, consulte un professionnel.</p>`}
+    const rows=[["programme",m[1]],...(W.mode==="course"?[["course",`${W.name||"ma course"} · ${W.type==="trail"?W.dist+" km · "+W.dplus+" m D+ · terrain "+({roulant:"roulant",mixte:"mixte",technique:"technique",alpin:"très technique"})[W.tech]:W.dist+" km"}`],["date",W.date?fdate(W.date,{weekday:"short",day:"numeric",month:"long",year:"numeric"}):"–"]]:W.mode==="perf"?[["objectif",(W.focus>20?"semi":W.focus+" km")+" · "+W.weeks+" semaines"]]:[["cycle","8 semaines"]]),
+      ["en ce moment",`${["0","1-2","","3-4","","5+"][W.freq]||"–"} sorties · ${W.km} km/sem.`],["allures",W.vsrc==="chrono"?`chrono ${W.pkm} km en ${W.ptime}`:W.vsrc==="vma"?`allure VMA ${fmtPace(+W.vma)} /km`:W.vtest==="done"?`test 6 min : ${W.cooper} m`:"test VMA en 1re séance"],...(W.type==="trail"&&W.mode!=="perf"?[["terrain",`${({none:"pas de côte",short:"petite côte (< 1 min)",mid:"côte moyenne (1-3 min)",long:"longue côte (3-10 min)",mtn:"montagne"})[W.hill]||"–"}${W.tread?" · tapis":""}${W.stairs?" · escaliers":""}${(W.hill==="none"||W.hill==="short")&&W.pfm?" · pré-fatigue":""}`]]:[]),["séances",`${W.n} de course par semaine${W.days.length?" · "+W.days.slice().sort((a,b)=>a-b).map(d=>["lun","mar","mer","jeu","ven","sam","dim"][d]).join(", "):" · jours libres"}`],["renfo",+W.renfo?`${W.renfo} × 45 min max · ${W.equip.length?W.equip.map(k=>(EQUIP.find(x=>x[0]===k)||["",""])[1]).join(", "):"poids du corps"}`:"aucun"]];
+    body=`${pgFun(W).map(t=>`<div class="pgfun">${esc(t)}</div>`).join("")}<div class="pgrecap">${rows.map(([a,b])=>`<div><small>${a}</small><b>${esc(b)}</b></div>`).join("")}</div><p class="pghint">la flèche propose des séances générales, pas un avis médical. en cas de douleur qui dure, consulte un professionnel.</p>`}
   const last=k==="recap";
   return `<div class="pgwiz" style="--dir:${W.dir}"><div class="pgwtop">${W.step>0?`<button class="pgwback" data-pgwprev>‹</button>`:(PRG()&&PRG().plan?`<button class="pgwback" data-pgcancel>✕</button>`:"<span></span>")}<div class="pgprog">${steps.map((_,i)=>`<i class="${i<=W.step?"on":""}"></i>`).join("")}</div><span class="pgwn">${W.step+1}/${tot}</span></div>
   <div class="pgstep" key="${k}"><h1 class="pgq">${q}</h1><p class="pgqs">${sub}</p><div class="pgbody">${body}</div></div>
@@ -1403,7 +1541,7 @@ function pgWNext(){const W=pgW,k=pgSteps()[W.step];
   if(k==="terrain"&&!W.hill){toast("choisis ta côte");return}
   if(k==="freq"&&W.freq===null){toast("choisis une réponse");return}
   if(k==="vma"){if(!W.vsrc){toast("choisis une option");return}if(W.vsrc==="chrono"&&!parseTime(W.ptime)){toast("indique ton temps");return}if(W.vsrc==="test"&&!W.vtest){toast("dis-nous si tu as déjà fait le test");return}}
-  if(k==="sess"&&W.days.length<W.n){toast(`choisis au moins ${W.n} jours`);return}
+  if(k==="renfo"&&W.renfo===null){toast("choisis une option");return}
   if(k==="pain"&&W.pain===null){toast("choisis une réponse");return}
   W.step=Math.min(pgSteps().length-1,W.step+1);W.dir=1;render();window.scrollTo(0,0)}
 const parseTime=s=>{const a=String(s||"").trim().split(/[:h']/).map(x=>+x||0);if(!a.length)return 0;return a.length===3?a[0]*3600+a[1]*60+a[2]:a.length===2?a[0]*60+a[1]:a[0]*60};
@@ -1418,12 +1556,12 @@ function progCreate(){const W=pgW;if(!W)return;const old=PRG()||{};const mode=W.
   const psec=W.vsrc==="chrono"?parseTime(W.ptime):0,pkm=W.vsrc==="chrono"?+W.pkm:0,coop=W.vsrc==="test"&&W.vtest==="done"?+W.cooper:0;
   let vma=W.vsrc==="vma"?+W.vma:coop>300?coop/100:pkm&&psec?(pkm/(psec/3600))/pctFor(pkm):level==="D"?10:level==="I"?13:15;
   if(mode==="course"&&objOf(race)==="marathon"&&level==="D"){toast("marathon déconseillé en débutant : commence par un 10 km ou un semi");return}
-  const same=old.mode===mode&&old.plan;const days=W.days.slice().sort((a,b)=>a-b);
+  const same=old.mode===mode&&old.plan;const days=autoDays(+W.n,W.days);
   const terrain=race.type==="trail"?{hill:W.hill||"mid",tread:!!W.tread,stairs:!!W.stairs,pfm:(W.hill==="none"||W.hill==="short")&&W.pfm!==false}:null;
-  let p={...old,v:4,terrain,mode,cycle,race,level:W.pain==="1"?"D":level,q:{freq,km,long:lg},cooper:coop||0,perf:pkm&&psec?{km:pkm,sec:psec}:null,vma0:+vma.toFixed(2),vmaAdj:0,n:+W.n,days,start:same?old.start:null,created:same?old.created:today(),plan:same?old.plan:[],logs:old.logs||{},msgs:old.msgs||[],secs:mode==="course"?old.secs||[]:[],chrono:[],ups:0,lastAdj:today(),light:null,paused:false};
+  race.tech=race.type==="trail"?W.tech:undefined;let p={...old,v:5,renfo:+W.renfo||0,equip:W.equip.slice(),terrain,mode,cycle,race,level:W.pain==="1"?"D":level,q:{freq,km,long:lg},cooper:coop||0,perf:pkm&&psec?{km:pkm,sec:psec}:null,vma0:+vma.toFixed(2),vmaAdj:0,n:+W.n,days,start:same?old.start:null,created:same?old.created:today(),plan:same?old.plan:[],logs:old.logs||{},msgs:old.msgs||[],secs:mode==="course"?old.secs||[]:[],chrono:[],ups:0,lastAdj:today(),light:null,paused:false};
   p.vmaTest=W.vsrc==="test"&&W.vtest==="plan";buildPlan(p);
   if(p.vmaTest){const e=p.plan.find(x=>x.date>today()&&SESS[x.code]&&!["long","race"].includes(SESS[x.code][3]));if(e)e.code="VMATEST"}
-  pushChrono(p,"calcul de départ");progEdit=false;pgW=null;savePrg(p);toast("plan prêt 🏹");go("prog")}
+  pushChrono(p,"calcul de départ");progEdit=false;pgW=null;pgSel=null;pgLoading("on construit ton plan",["on analyse ton niveau","on calcule tes allures","on place tes séances","on prépare ton coach"],2600,()=>{savePrg(p);go("prog");window.scrollTo(0,0)})}
 
 function openSecAdd(){
   openSheet(`<div class="pgnote"><h2>objectif secondaire</h2><p>une course en plus de ton objectif principal. le plan s'adapte autour.</p><div class="pgform">
@@ -1443,20 +1581,19 @@ function pgObjBar(p){const t=today(),r=p.race,all=[{d:t,l:"aujourd'hui",k:"now"}
   const badge=x=>x.k==="now"?"":`<span class="pgbadge ${x.k}">${p.mode==="forme"&&x.k==="main"?"fin":(Math.abs(+x.dist-42.2)<.5?"42K":Math.abs(+x.dist-21.1)<.5?"21K":Math.round(+x.dist)+"K")}</span>`;
   return `<div class="pgobjs"><div class="pgline">${all.map(x=>`<div class="pgpt ${x.k}" title="${esc(x.n||"")}">${badge(x)}<i></i><small>${x.l}</small></div>`).join("")}</div>${p.mode==="course"?`<button class="pgplus" data-pgsecadd title="ajouter un objectif secondaire">+</button>`:""}</div>`}
 
-const DIFF={C15:3,C16:2,VMATEST:5,TEST:5,RACEB:5,RACEC:3,C0:1,C1:1,C2:1,C3:2,C4:2,C5:3,C14:3,C6:3,C10:4,C9:4,C11:4,C13:4,RAPPEL:3,C7:5,C8:5,C12:5,RACE:5};
+const DIFF={R1:2,R2:3,R3:4,C15:3,C16:2,VMATEST:5,TEST:5,RACEB:5,RACEC:3,C0:1,C1:1,C2:1,C3:2,C4:2,C5:3,C14:3,C6:3,C10:4,C9:4,C11:4,C13:4,RAPPEL:3,C7:5,C8:5,C12:5,RACE:5};
 const pgDiff=code=>{const n=DIFF[code]||1;return `<span class="pgdiff" title="difficulté ${n}/5">${[1,2,3,4,5].map(i=>`<svg viewBox="0 0 24 24" class="${i<=n?"on":""}"><path d="M2 20 9 7l4 6 3-4 6 11Z"/></svg>`).join("")}</span>`};
-const pgKm=(p,e)=>{const s=SESS[sessOf(e)];if(!s)return 0;if(s[3]==="race")return +p.race.dist||0;const v=prgVma(p);
-  if(s[3]==="hard")return v*.75*50/60;const m=+((sessText(p,e).match(/^(\d+) min/)||[])[1]||0);return v*.65*m/60};
-const FEEL={easy:[2,4,7],long:[3,5,8],hard:[5,7,9],race:[6,8,10]};
+const pgKm=(p,e)=>{const c=sessOf(e);if(RENFO[c]||!SESS[c])return 0;return sessTotals(p,e).km};
+const FEEL={renfo:[3,5,8],easy:[2,4,7],long:[3,5,8],hard:[5,7,9],race:[6,8,10]};
 function pgRing(p){const ws=ds(weekStart(new Date())),we=addDays(ws,6),L=p.logs||{};
-  const wk=(p.plan||[]).filter(e=>e.date>=ws&&e.date<=we);const done=wk.filter(e=>L[e.date]&&L[e.date].status!=="none");
-  const kmP=wk.reduce((a,e)=>a+pgKm(p,e),0),kmD=done.reduce((a,e)=>a+pgKm(p,e)*(L[e.date].status==="part"?.5:1),0);
+  const wk=(p.plan||[]).filter(e=>e.date>=ws&&e.date<=we);const done=wk.filter(e=>L[ek(e)]&&L[ek(e)].status!=="none");
+  const kmP=wk.reduce((a,e)=>a+pgKm(p,e),0),kmD=done.reduce((a,e)=>a+pgKm(p,e)*(L[ek(e)].status==="part"?.5:1),0);
   const pct=kmP?Math.min(1,kmD/kmP):0,R=52,C=2*Math.PI*R;
   const plan=p.plan||[];const ws0=plan.length?ds(weekStart(parse(p.created||plan[0].date))):ws;const W=p.weeks||1;const wNow=Math.min(W,Math.max(1,Math.floor((parse(ws)-parse(ws0))/864e5/7)+1));
   return `<div class="pgring"><div class="pgst"><b>${done.length}<small>/${wk.length}</small></b><span>séances</span></div>
   <div class="pgr"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="${R}" class="bg"/><circle cx="60" cy="60" r="${R}" class="fg" stroke-dasharray="${(pct*C).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 60 60)"/></svg><div><b>${Math.round(kmD)}</b><span>/ ≈${Math.round(kmP)} km</span></div></div>
   <div class="pgst"><b>${wNow}<small>/${W}</small></b><span>semaines</span></div></div>${(()=>{const dp=dplusTarget(p,ws);if(!dp)return"";const t=p.terrain||{};return `<div class="pgdp"><b>⛰ ≈ ${dp} m D+</b><span>visé cette semaine${t.hill==="none"||t.hill==="short"?(t.tread?" · sur tapis : 10 % pendant 1 km = 100 m D+":" · escaliers, ponts et parkings comptent"):""}</span></div>`})()}`}
-function openProgLog(date){const p=PRG();if(!p)return;const e=(p.plan||[]).find(x=>x.date===date)||{code:"C1"};const code=sessOf(e),s=SESS[code],ty=s[3];
+function openProgLog(key){const p=PRG();if(!p)return;const date=String(key).slice(0,10);const e=(p.plan||[]).find(x=>ek(x)===key)||{code:"C1"};const code=sessOf(e),s=SESS[code],ty=s[3];
   const f=FEEL[ty]||FEEL.easy;
   openSheet(`<div class="pgfeel"><div class="pgfi">${pgDiff(code)}</div><span class="pgfn">${esc(s[0])}</span><h2>comment as-tu trouvé l'effort ?</h2><p>ton ressenti fait évoluer ton plan.</p>
   <button class="pgbig" data-f="0">trop facile</button><button class="pgbig" data-f="1">facile</button><button class="pgbig" data-f="2">difficile à tenir</button>
@@ -1479,9 +1616,11 @@ function openProgLog(date){const p=PRG();if(!p)return;const e=(p.plan||[]).find(
       $("#lgC").onclick=ev=>{const b=ev.target.closest("[data-v]");if(!b)return;const v=b.dataset.v;cond=cond.includes(v)?cond.filter(x=>x!==v):[...cond,v];b.classList.toggle("on")};
       $("#lgP").oninput=ev=>{pain=+ev.target.value;$("#lgPv").textContent=pain};
       const r=$("#lgR");if(r)r.onclick=ev=>{const b=ev.target.closest("[data-v]");if(!b)return;rpe=+b.dataset.v;r.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===b))};
-      const save=withNote=>{const q=JSON.parse(JSON.stringify(PRG()));q.logs={...(q.logs||{}),[date]:{status:st,rpe:st==="none"?0:rpe,pain:withNote?pain:0,cond:withNote?cond:[],notes:withNote?(ta.value||"").trim():"",ts:Date.now()}};
+      const save=withNote=>{const q=JSON.parse(JSON.stringify(PRG()));q.logs={...(q.logs||{}),[key]:{status:st,rpe:st==="none"?0:rpe,pain:withNote?pain:0,cond:withNote?cond:[],notes:withNote?(ta.value||"").trim():"",ts:Date.now()}};
         let m=[];if(code==="VMATEST"&&tdist&&st!=="none"){q.vma0=tdist/100;q.vmaAdj=0;q.vmaTest=false;q.lastAdj=date;pushChrono(q,"test VMA");m=[`🎯 test VMA : ${tdist} m en 6 min, ton allure VMA est de ${fmtPace(tdist/100)} /km. toutes tes allures sont recalculées.`];q.msgs=[...m.map(x=>({date,m:x})),...(q.msgs||[])]}
-        else m=adapt(q,date);closeSheet();savePrg(q);setTimeout(()=>coachAfter(q,date,code,m),250)};
+        else m=adapt(q,date);closeSheet();savePrg(q);const lg=q.logs[key],ty2=SESS[code]?SESS[code][3]:"easy",f2=FEEL[ty2]||FEEL.easy;
+        const lt=lg.status==="none"?"on réorganise ta semaine":lg.pain>=4?"on te protège":lg.rpe>=f2[2]?"on adapte ton entraînement":lg.rpe<=f2[0]?"on muscle un peu la suite":"on garde le cap";
+        pgLoading(lt,["on analyse ton ressenti","on regarde tes dernières séances","on met à jour ton plan"],1700,()=>coachAfter(q,key,code,m))};
       $("#lgGo").onclick=()=>save(true);$("#lgSkip").onclick=()=>save(false)}})}
 
 /* ---------- messages du coach ---------- */
@@ -1511,12 +1650,12 @@ function coachMilestone(p){const t=today(),j=Math.round((parse(p.race.date)-pars
   if([1,5,10,25,50,100].includes(n)&&(p.logs||{})[t])return n===1?"première séance validée ! le plus dur, c'est de commencer, et c'est fait.":`${n} séances validées ! la régularité, c'est ton super-pouvoir.`;
   return""}
 function coachToday(p,e){const ms=coachMilestone(p);if(ms)return ms;if(!e)return pickMsg(CM.rest,today());const s=SESS[sessOf(e)];const ty=sessOf(e)==="TEST"||sessOf(e)==="VMATEST"?"test":s[3];return pickMsg(CM[ty]||CM.easy,e.date+e.code)}
-function coachAfter(q,date,code,m){const lg=q.logs[date],L=q.logs,n=Object.values(L).filter(l=>l.status!=="none").length;const e=(q.plan||[]).find(x=>x.date===date)||{code};const ty=SESS[code]?SESS[code][3]:"easy";
-  let key=lg.status==="none"?"none":lg.status==="part"?"part":lg.pain>=4?"pain":(()=>{const f=FEEL[ty]||FEEL.easy;return lg.rpe>=f[2]?2:lg.rpe<=f[0]?0:1})();
-  let msg=pickMsg(CM_AFTER[key],date+key);const ms=coachMilestone(q);if(ms&&lg.status!=="none")msg=ms+" "+msg;
-  const ws=ds(weekStart(parse(date))),wk=(q.plan||[]).filter(x=>x.date>=ws&&x.date<=addDays(ws,6));const allDone=wk.length&&wk.every(x=>L[x.date]&&L[x.date].status!=="none");
-  const km=Object.keys(L).filter(d=>L[d].status!=="none").reduce((a,d)=>{const x=(q.plan||[]).find(y=>y.date===d);return a+(x?pgKm(q,x)*(L[d].status==="part"?.5:1):0)},0);
-  openSheet(`<div class="pgbravo"><div class="pgbtop">${coachAv()}<div><small>ton coach</small><b>${lg.status==="none"?"pas grave":key===2?"bien tenu":"bravo !"}</b></div></div>
+function coachAfter(q,key,code,m){const date=String(key).slice(0,10),lg=q.logs[key],L=q.logs,n=Object.values(L).filter(l=>l.status!=="none").length;const e=(q.plan||[]).find(x=>x.date===date)||{code};const ty=SESS[code]?SESS[code][3]:"easy";
+  let fk=lg.status==="none"?"none":lg.status==="part"?"part":lg.pain>=4?"pain":(()=>{const f=FEEL[ty]||FEEL.easy;return lg.rpe>=f[2]?2:lg.rpe<=f[0]?0:1})();
+  let msg=pickMsg(CM_AFTER[fk],date+fk);const ms=coachMilestone(q);if(ms&&lg.status!=="none")msg=ms+" "+msg;
+  const ws=ds(weekStart(parse(date))),wk=(q.plan||[]).filter(x=>x.date>=ws&&x.date<=addDays(ws,6));const allDone=wk.length&&wk.every(x=>L[ek(x)]&&L[ek(x)].status!=="none");
+  const km=Object.keys(L).filter(d=>L[d].status!=="none").reduce((a,d)=>{const x=(q.plan||[]).find(y=>ek(y)===d);return a+(x?pgKm(q,x)*(L[d].status==="part"?.5:1):0)},0);
+  openSheet(`<div class="pgbravo"><div class="pgbtop">${coachAv()}<div><small>ton coach</small><b>${lg.status==="none"?"pas grave":fk===2?"bien tenu":"bravo !"}</b></div></div>
   <p class="pgbmsg">${esc(msg)}</p>${allDone?`<div class="pgbwk">🔥 semaine complète ! toutes tes séances sont faites.</div>`:""}
   ${(m||[]).length?`<div class="pgbadj">${m.map(x=>`<p>${esc(x)}</p>`).join("")}</div>`:""}
   <div class="pgbstat"><div><b>${n}</b><small>séances</small></div><div><b>${Math.round(km)}</b><small>km au total</small></div><div><b>${Math.max(0,Math.round((parse(q.race.date)-parse(today()))/864e5))}</b><small>jours restants</small></div></div>
@@ -2737,8 +2876,10 @@ $("#view").addEventListener("click",e=>{
   if(b=q("[data-pgsel]")){pgSel=b.dataset.pgsel;render();return}
   if(b=q("[data-pgset]")){const k=b.dataset.pgset;let v=b.dataset.val;if(["dist","focus","weeks","n","pkm","freq"].includes(k))v=+v;
     if(k==="mode"&&pgW.mode!==v){const m=v;pgWInit(null);pgW.mode=m}else pgW[k]=v;
-    const auto=["mode","freq","pain","type"].includes(k)||(k==="vsrc"&&v==="none");
+    if(k==="renfo"&&+v===0)pgW.equip=[];const auto=["mode","freq","pain","type"].includes(k)||(k==="renfo"&&+v===0)||(k==="vsrc"&&v==="none");
     if(auto){render();setTimeout(()=>{if(pgW&&!(k==="vsrc"))pgWNext()},220)}else render();return}
+  if(b=q("[data-pgeq]")){const k=b.dataset.pgeq;if(k==="none")pgW.equip=pgW.equip.includes("none")?[]:["none"];else{pgW.equip=pgW.equip.filter(x=>x!=="none");pgW.equip=pgW.equip.includes(k)?pgW.equip.filter(x=>x!==k):[...pgW.equip,k]}render();return}
+  if(b=q("[data-pgskip]")){const key=b.dataset.pgskip;if(!confirm("passer cette séance ?"))return;const q2=JSON.parse(JSON.stringify(PRG()));const e=(q2.plan||[]).find(x=>ek(x)===key)||{code:"C1"};q2.logs={...(q2.logs||{}),[key]:{status:"none",rpe:0,pain:0,cond:[],notes:"",ts:Date.now()}};const m=adapt(q2,key.slice(0,10));savePrg(q2);pgLoading("on réorganise ta semaine",["on note la séance passée","on garde la suite du plan"],1300,()=>coachAfter(q2,key,sessOf(e),m));return}
   if(b=q("[data-pgtog]")){const k=b.dataset.pgtog;pgW[k]=!pgW[k];render();return}
   if(b=q("[data-pgwday]")){const i=+b.dataset.pgwday;pgW.days=pgW.days.includes(i)?pgW.days.filter(x=>x!==i):[...pgW.days,i];render();return}
   if(b=q("[data-pgwnext]")){pgWNext();return}
