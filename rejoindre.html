@@ -11,158 +11,156 @@
 <meta property="og:url" content="https://lafleche-seven.vercel.app/rejoindre.html">
 <meta name="theme-color" content="#08080A">
 <link rel="icon" href="favicon.png">
-<link rel="stylesheet" href="fonts.css"><link rel="preload" href="font_bc_900i.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
+<link rel="preload" href="font_bc_900i.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-:root{--nuit:#08080A;--graphite:#141417;--ardoise:#26262C;--or:#FFC107;--craie:#F5F5F3;--brume:#9A9AA0;--alerte:#FF5A47;--rail:132px}
+:root{--nuit:#08080A;--graphite:#131316;--ardoise:#25252B;--or:#FFC107;--craie:#F5F5F3;--brume:#8E8E95;--alerte:#FF5A47}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-stopped{overflow:hidden}
 body{margin:0;background:var(--nuit);color:var(--craie);font:400 17px/1.6 Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img,video,canvas{display:block;max-width:100%}
 a{color:var(--or)}
 :focus-visible{outline:3px solid var(--or);outline-offset:3px}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
-@media (min-width:1100px){.wrap{padding-right:calc(var(--rail) + 24px)}}
-h1,h2,h3{font-family:"Barlow Condensed",sans-serif;font-style:italic;font-weight:900;line-height:.92;margin:0;letter-spacing:-.01em}
-h1{font-size:clamp(64px,10.5vw,138px);text-transform:uppercase}
-h2{font-size:clamp(44px,7.4vw,96px);text-transform:uppercase}
-h3{font-size:clamp(28px,3.4vw,38px);font-weight:800}
-p{margin:0 0 1em;max-width:62ch}
-.lead{font-size:clamp(18px,2vw,21px);color:#cfcfd4}
-.stage{font-family:"Barlow Condensed",sans-serif;font-style:italic;font-weight:700;font-size:20px;color:var(--or);margin:0 0 14px;display:flex;align-items:center;gap:12px}
-.stage svg{width:34px;height:16px;flex:none}
-section{padding:120px 0;position:relative}
-@media (max-width:760px){section{padding:84px 0}.stagehero{height:540px}}
-.dim{color:var(--brume)}
-
-/* ---------- boutons ---------- */
-.btn{display:inline-flex;align-items:center;gap:10px;font:900 italic 24px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;text-decoration:none;color:var(--nuit);background:var(--or);padding:20px 34px;border:0;cursor:pointer;clip-path:polygon(4% 0,100% 0,96% 100%,0 100%);transition:transform .15s}
-.btn:hover{transform:translateY(-2px)}
+.big{font-family:"Barlow Condensed",sans-serif;font-style:italic;font-weight:900;text-transform:uppercase;line-height:.9;letter-spacing:-.01em;margin:0}
+.big .g{color:var(--or)}
+.k1{font-size:clamp(54px,11vw,150px)}
+.k2{font-size:clamp(44px,7.6vw,104px)}
+.k3{font-size:clamp(30px,3.6vw,44px)}
+.small{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brume);font-weight:600}
+.lead{font-size:clamp(17px,1.8vw,20px);color:#c9c9cf;max-width:46ch}
+p{margin:0 0 1em}
+.btn{display:inline-flex;align-items:center;font:900 italic 23px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;text-decoration:none;color:var(--nuit);background:var(--or);padding:19px 32px;border:0;cursor:pointer;clip-path:polygon(4% 0,100% 0,96% 100%,0 100%)}
 .btn.ghost{background:transparent;color:var(--craie);box-shadow:inset 0 0 0 2px var(--ardoise);clip-path:none}
 .btn[disabled]{opacity:.6;cursor:wait}
+.top{position:fixed;left:0;right:0;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:16px 24px;pointer-events:none}
+.top>*{pointer-events:auto}
+.top img{width:118px}
+.top a{font:800 italic 16px "Barlow Condensed";text-transform:uppercase;text-decoration:none;color:var(--nuit);background:var(--or);padding:8px 14px;opacity:0;transform:translateY(-8px);transition:.3s}
+.top a.on{opacity:1;transform:none}
+.top{transition:background .3s}.top.solid{background:rgba(8,8,10,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+@media (max-width:860px){#renfo .lead{display:none}#renfo .dur{grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}#renfo .dur div{padding:10px}#renfo .dur b{font-size:34px}#renfo .dur span{font-size:12px}.r3d{width:min(330px,78vw)}#renfo .split{gap:6px}
+ #jour .lead,#cordee .lead{font-size:15px}#jour .lead{display:none}.serie{font-size:96px}.rope svg{max-width:340px}#cordee .split{gap:8px}}
+.prog{position:fixed;left:0;top:0;height:2px;width:100%;background:var(--or);transform-origin:0 50%;transform:scaleX(0);z-index:31}
 
-/* ---------- jauge d'altitude ---------- */
-.rail{position:fixed;right:0;top:0;bottom:0;width:var(--rail);z-index:20;display:none;pointer-events:none}
-@media (min-width:1100px){.rail{display:block}}
-.rail svg{position:absolute;inset:0;width:100%;height:100%}
-.rail .lab{position:absolute;right:22px;font:700 italic 15px/1.1 "Barlow Condensed",sans-serif;color:#5d5d64;text-align:right;transform:translateY(-50%);transition:color .3s}
-.rail .lab b{display:block;font-size:12px;font-weight:600;font-style:normal;font-family:Barlow;letter-spacing:.02em}
-.rail .lab.on{color:var(--or)}
-.rail .lab.past{color:#8a8a90}
-.mbar{position:fixed;left:0;right:0;top:0;height:46px;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:rgba(8,8,10,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #1d1d22;transform:translateY(-100%);transition:transform .3s}
-.mbar.show{transform:none}
-.mbar i{position:absolute;left:0;bottom:-1px;height:2px;background:var(--or);width:0}
-.mbar span{font:800 italic 18px "Barlow Condensed";color:var(--or)}
-.mbar a{font:800 italic 16px "Barlow Condensed";text-transform:uppercase;color:var(--nuit);background:var(--or);padding:6px 12px;text-decoration:none}
-@media (min-width:1100px){.mbar{display:none}}
+/* ---------- séquence d'ouverture ---------- */
+.intro{height:100svh;position:relative;overflow:hidden}
+.intro .fr{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 8vw}
+.intro .bar{display:block;width:70px;height:6px;background:var(--craie);margin-top:28px;transform-origin:0 50%}
+.intro .hero .bar{display:none}
+.hero .lead{margin-top:22px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero .facts{margin-top:20px;color:var(--brume);font-size:15px;display:flex;gap:6px 20px;flex-wrap:wrap}
+.hero .facts b{color:var(--craie);font-weight:600}
+.cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--brume);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.cue i{width:2px;height:40px;background:linear-gradient(var(--or),transparent);animation:cue 1.8s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.intro .glow{position:absolute;inset:0;background:radial-gradient(50% 40% at 70% 40%,rgba(255,193,7,.14),transparent 70%);opacity:0;pointer-events:none}
 
-/* ---------- hero ---------- */
-.hero{min-height:100svh;padding:28px 0 60px;display:flex;flex-direction:column;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 45% at 70% 30%,rgba(255,193,7,.16),transparent 70%);pointer-events:none}
-.top{display:flex;justify-content:space-between;align-items:center}
-.top img{width:150px}
-.top a{color:var(--craie);text-decoration:none;font-weight:600;font-size:15px}
-.hgrid{flex:1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:center;margin-top:30px}
-@media (max-width:860px){.hgrid{grid-template-columns:1fr;gap:10px}}
-.hero h1{margin:6px 0 22px}
-.hero h1 span{display:block}
-.hero h1 .g{color:var(--or)}
-.hcta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:30px}
-.facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:22px;color:var(--brume);font-size:15px}
-.facts b{color:var(--craie);font-weight:600}
-.stagehero{position:relative;height:min(78vh,700px);min-height:520px}
-@media (max-width:860px){.stagehero{height:600px;min-height:0;margin-top:20px}}
-.phone{position:absolute;width:min(300px,62vw);aspect-ratio:9/19.5;border-radius:44px;background:#121215;padding:10px;box-shadow:0 40px 90px rgba(0,0,0,.7),inset 0 0 0 2px #2b2b31}
-.phone .scr{width:100%;height:100%;border-radius:34px;overflow:hidden;position:relative;background:#0c0c0e}
-.phone .scr img{position:absolute;inset:0;width:100%;height:auto;opacity:0;transition:opacity .8s}
-.phone .scr img.on{opacity:1}
-.stagehero .phone{right:6%;top:2%;transform:rotate(4deg)}
-@media (max-width:860px){.stagehero .phone{right:4%;width:58vw}}
-.coach{position:absolute;left:0;bottom:4%;width:min(330px,64vw);background:linear-gradient(180deg,#19191d,#111114);border:1px solid #2a2a30;padding:14px 14px 16px;box-shadow:0 30px 70px rgba(0,0,0,.6);transform:rotate(-3deg)}
-.coach canvas{width:100%;aspect-ratio:1/1}
-.coach p{margin:8px 4px 0;font-size:14px;color:var(--brume);line-height:1.4}
-.coach p b{color:var(--craie);font:800 italic 22px/1 "Barlow Condensed";display:block;margin-bottom:4px;text-transform:uppercase}
+/* ---------- étapes (paliers entre les parties) ---------- */
+.etape{height:100svh;position:relative;overflow:hidden;display:flex;align-items:center}
+.etape .in{position:relative;z-index:2;padding:0 8vw;width:100%}
+.etape .lvl{font:900 italic clamp(110px,24vw,300px)/.8 "Barlow Condensed";color:transparent;-webkit-text-stroke:2px var(--or);font-variant-numeric:tabular-nums}
+.etape .nm{margin-top:14px}
+.etape .alt{margin-top:18px;color:var(--brume);max-width:40ch}
+.etape svg{position:absolute;left:0;right:0;bottom:0;width:100%;height:55%;z-index:1}
+.etape svg .fill{fill:#0f0e0a}
+.etape svg .ln{fill:none;stroke:var(--or);stroke-width:3}
+.etape svg circle{fill:var(--or)}
 
-/* ---------- saison ---------- */
-.season{display:grid;grid-template-columns:repeat(3,1fr);margin-top:56px;border-top:2px solid var(--ardoise)}
-@media (max-width:760px){.season{grid-template-columns:1fr;border-top:0;border-left:2px solid var(--ardoise);margin-left:8px}}
-.season div{padding:26px 20px 0 0;position:relative}
-@media (max-width:760px){.season div{padding:0 0 28px 26px}}
-.season div::before{content:"";position:absolute;top:-9px;left:0;width:16px;height:16px;border-radius:50%;background:var(--ardoise)}
-@media (max-width:760px){.season div::before{top:4px;left:-9px}}
-.season .here::before{background:var(--or);box-shadow:0 0 0 8px rgba(255,193,7,.18)}
-.season .here{color:var(--craie)}
-.season h3{margin-bottom:8px}
-.season .here h3{color:var(--or)}
-.season small{display:block;color:var(--brume);font-size:14px;margin-bottom:6px}
-.season p{color:var(--brume);font-size:16px}
+/* ---------- chapitre générique ---------- */
+.chap{position:relative;min-height:100svh;display:flex;align-items:center}
+.pin{height:100svh;display:flex;align-items:center;width:100%}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6vw;align-items:center;width:100%}
+@media (max-width:860px){.split{grid-template-columns:1fr;gap:26px}.pin{align-items:flex-start;padding-top:84px}}
 
-/* ---------- piliers ---------- */
-.pill{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.pill.rev .shot{order:2}
-@media (max-width:860px){.pill{grid-template-columns:1fr;gap:34px}.pill.rev .shot{order:0}}
-.shot{position:relative;display:flex;justify-content:center}
-.shot .phone{position:relative;width:min(290px,72vw)}
-.shot .phone .scr img{opacity:1;position:static}
-.shot .tag{position:absolute;left:4%;bottom:12%;background:var(--or);color:var(--nuit);font:900 italic 22px "Barlow Condensed";padding:8px 14px;transform:rotate(-4deg);text-transform:uppercase}
-.list{list-style:none;padding:0;margin:26px 0 0}
-.list li{padding:14px 0 14px 34px;border-top:1px solid #1f1f24;position:relative;color:#d4d4d9}
-.list li::before{content:"";position:absolute;left:4px;top:23px;width:14px;height:8px;border-left:3px solid var(--or);border-bottom:3px solid var(--or);transform:rotate(-45deg)}
-.list li b{color:var(--craie);font-weight:600}
+/* ---------- la journée (arc) ---------- */
+.arc{position:relative;width:100%;max-width:520px;margin:0 auto}
+.arc svg{width:100%;height:auto;overflow:visible}
+.arc .track{fill:none;stroke:#2a2a30;stroke-width:3}
+.arc .done{fill:none;stroke:var(--or);stroke-width:3}
+.arc .ic{fill:none;stroke:#6e6e75;stroke-width:2.4;stroke-linecap:round;transition:stroke .3s}
+.arc .ic.on{stroke:var(--or)}
+.arc .dot{fill:var(--or)}
+.mom{text-align:center;margin-top:-6px}
+.mom .nm{font:900 italic 34px/1 "Barlow Condensed";text-transform:uppercase;color:var(--or)}
+.hl{list-style:none;padding:0;margin:18px auto 0;max-width:360px}
+.hl li{display:flex;align-items:center;gap:14px;padding:11px 14px;background:var(--graphite);margin-bottom:6px;font-size:16px}
+.hl li i{width:24px;height:24px;flex:none;background:#26262c;position:relative;transition:background .25s}
+.hl li.on i{background:var(--or)}
+.hl li.on i::after{content:"";position:absolute;left:8px;top:4px;width:6px;height:12px;border-right:3px solid #08080A;border-bottom:3px solid #08080A;transform:rotate(45deg)}
+.xpline{display:flex;justify-content:space-between;align-items:baseline;max-width:360px;margin:12px auto 0;color:var(--brume);font-size:14px}
+.xpline b{font:900 italic 34px "Barlow Condensed";color:var(--craie);font-variant-numeric:tabular-nums}
+.xpline b.ok{color:var(--or)}
 
 /* ---------- cordée ---------- */
-.duo{display:grid;grid-template-columns:1fr 1fr 300px;gap:0;margin-top:56px;align-items:stretch}
+.rope svg{width:100%;height:auto;max-width:560px}
+.rope .node circle{fill:#141417;stroke:#3a3a42;stroke-width:3;transition:stroke .3s}
+.rope .node.ok circle{stroke:var(--or)}
+.rope .node.ko circle{stroke:var(--alerte)}
+.rope .node text{font:900 italic 28px "Barlow Condensed";text-anchor:middle}
+.rope .node .lb{font:700 italic 17px "Barlow Condensed";fill:#8E8E95}
+.rope .cord{fill:none;stroke:var(--or);stroke-width:4;stroke-dasharray:10 8}
+.serie{font:900 italic clamp(96px,16vw,190px)/.8 "Barlow Condensed";font-variant-numeric:tabular-nums;color:var(--or);transition:color .3s}
+.serie.ko{color:var(--alerte)}
+.swap{position:relative;min-height:2.3em}@media (max-width:860px){.swap{min-height:3.4em}}
+.swap>*{position:absolute;left:0;top:0;width:100%}
+
+/* ---------- frise des cycles ---------- */
+.tl{position:relative;padding-left:46px;margin-top:50px;max-width:640px}
+.tl::before{content:"";position:absolute;left:10px;top:6px;bottom:6px;width:2px;background:#26262c}
+.tl .fill{position:absolute;left:10px;top:6px;width:2px;height:calc(100% - 12px);background:var(--or);transform-origin:top;transform:scaleY(0)}
+.tl .it{position:relative;padding-bottom:46px}
+.tl .it::before{content:"";position:absolute;left:-42px;top:12px;width:14px;height:14px;border-radius:50%;background:var(--nuit);border:2px solid var(--or)}
+.tl .it small{display:block;color:var(--brume);font-size:14px;margin-bottom:6px}
+.tl .it p{color:#c9c9cf;margin:8px 0 0}
+.tl .int{display:flex;gap:3px;margin-top:12px}.tl .int i{width:24px;height:6px;background:#2a2a30}.tl .int i.on{background:var(--or)}
+.progwrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:6vw;align-items:start}
+@media (max-width:860px){.progwrap{grid-template-columns:1fr}}
+.phone{width:min(300px,70vw);aspect-ratio:9/19.5;border-radius:44px;background:#121215;padding:10px;box-shadow:0 40px 90px rgba(0,0,0,.7),inset 0 0 0 2px #2b2b31;margin:0 auto}
+.phone .scr{width:100%;height:100%;border-radius:34px;overflow:hidden}
+.phone img{width:100%;height:auto}
+.stick{position:sticky;top:12vh}
+@media (max-width:860px){.stick{position:static}}
+.facts2{list-style:none;padding:0;margin:30px 0 0}
+.facts2 li{padding:12px 0;border-top:1px solid #1f1f24;color:#d4d4d9}
+.facts2 li b{color:var(--craie)}
+
+/* ---------- renfo 3D ---------- */
+.r3d{position:relative;width:min(560px,86vw);aspect-ratio:1/1;margin:0 auto}
+.r3d canvas{width:100%;height:100%}
+.r3d .lbl{position:absolute;left:0;right:0;bottom:2%;text-align:center}
+.r3d .lbl b{display:block;font:900 italic 38px/1 "Barlow Condensed";text-transform:uppercase}
+.r3d .lbl span{color:var(--brume);font-size:15px}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:14px}.dots i{width:24px;height:4px;background:#2a2a30}.dots i.on{background:var(--or)}
+.dur{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+@media (max-width:760px){.dur{grid-template-columns:1fr}}
+.dur div{border:1px solid #25252b;padding:20px}
+.dur b{display:block;font:900 italic 48px/.9 "Barlow Condensed"}.dur b em{color:var(--or);font-style:italic}
+.dur span{color:var(--brume);font-size:15px}
+
+/* ---------- comparatif, étapes, faq ---------- */
+section.std{padding:16vh 0}
+.duo{display:grid;grid-template-columns:1fr 1fr 300px;margin-top:50px;align-items:stretch}
 @media (max-width:980px){.duo{grid-template-columns:1fr 1fr}.duo .vid{grid-column:1/-1;justify-self:center;margin-top:30px}}
 @media (max-width:620px){.duo{grid-template-columns:1fr}}
 .side{padding:30px 28px;background:var(--graphite)}
-.side.solo{background:transparent;border:2px dashed #2b2b31;border-right:0}
-@media (max-width:620px){.side.solo{border-right:2px dashed #2b2b31;border-bottom:0}}
-.side h3{margin-bottom:16px}
-.side.solo h3{color:var(--brume)}
-.side.team h3{color:var(--or)}
-.side ul{list-style:none;margin:0;padding:0}
+.side.solo{background:transparent;border:2px dashed #2b2b31}
+.side ul{list-style:none;margin:16px 0 0;padding:0}
 .side li{padding:10px 0;border-top:1px solid #222228;font-size:16px}
-.side.solo li{color:var(--brume)}
-.vid{width:300px;margin-left:34px;position:relative}
+.side.solo li,.side.solo .k3{color:var(--brume)}
+.side.team .k3{color:var(--or)}
+.vid{width:300px;margin-left:34px}
 @media (max-width:980px){.vid{margin-left:0}}
 .vid video{width:100%;aspect-ratio:9/16;object-fit:cover;background:#000;border:2px solid var(--ardoise)}
 .vid small{display:block;color:var(--brume);font-size:13px;margin-top:8px}
-
-/* ---------- renfo 3D ---------- */
-.lab3d{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;margin-top:40px}
-@media (max-width:860px){.lab3d{grid-template-columns:1fr}}
-.stage3d{position:relative;background:radial-gradient(70% 60% at 50% 40%,#1d1a10,#0b0b0d 70%);border:1px solid #232328;aspect-ratio:1/1}
-.stage3d canvas{width:100%;height:100%}
-.stage3d .ang{position:absolute;left:12px;bottom:12px;display:flex;gap:6px}
-.chip{font:700 italic 16px "Barlow Condensed";background:#1b1b20;color:var(--brume);border:1px solid #2c2c33;padding:7px 12px;cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--or);color:var(--nuit);border-color:var(--or)}
-.exos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:24px 0}
-.exos button{text-align:left;font:800 italic 24px/1 "Barlow Condensed";text-transform:uppercase;color:var(--craie);background:var(--graphite);border:1px solid #24242a;padding:16px;cursor:pointer}
-.exos button small{display:block;font:500 14px Barlow;text-transform:none;color:var(--brume);margin-top:6px}
-.exos button[aria-pressed="true"]{border-color:var(--or);box-shadow:inset 4px 0 0 var(--or)}
-.how3d{background:var(--graphite);padding:18px 20px;border-left:4px solid var(--or)}
-.how3d ol{margin:0;padding-left:20px}
-.how3d li{margin:4px 0}
-.how3d .err{color:#ff8a7a;font-size:15px;margin-top:8px}
-
-/* ---------- pour qui ---------- */
-.who{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:50px;background:var(--ardoise);border:2px solid var(--ardoise)}
-@media (max-width:860px){.who{grid-template-columns:1fr}}
-.who div{background:var(--nuit);padding:34px 28px}
-.who h3{margin-bottom:12px}
-.who p{color:var(--brume);font-size:16px;margin:0}
-
-/* ---------- étapes ---------- */
 .steps{counter-reset:s;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px}
 @media (max-width:860px){.steps{grid-template-columns:1fr;gap:30px}}
 .steps div{counter-increment:s;position:relative;padding-top:86px}
 .steps div::before{content:counter(s);position:absolute;top:0;left:0;font:900 italic 110px/.8 "Barlow Condensed";color:transparent;-webkit-text-stroke:2px var(--or)}
 .steps p{color:var(--brume);font-size:16px}
-
-/* ---------- FAQ ---------- */
 .faq{margin-top:40px;max-width:820px}
-.faq details{border-top:1px solid #222228}
-.faq details:last-child{border-bottom:1px solid #222228}
+.faq details{border-top:1px solid #222228}.faq details:last-child{border-bottom:1px solid #222228}
 .faq summary{list-style:none;cursor:pointer;padding:22px 44px 22px 0;font:800 italic 26px/1.1 "Barlow Condensed";position:relative}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::after{content:"";position:absolute;right:8px;top:30px;width:14px;height:14px;border-right:3px solid var(--or);border-bottom:3px solid var(--or);transform:rotate(45deg);transition:transform .2s}
@@ -170,318 +168,194 @@ section{padding:120px 0;position:relative}
 .faq details p{color:#c9c9cf;padding-bottom:16px}
 
 /* ---------- inscription ---------- */
-.summit{background:linear-gradient(180deg,var(--nuit),#15130b 60%,#1d1a0c);overflow:hidden}
-.summit svg.mt{position:absolute;left:0;right:0;bottom:0;width:100%;height:46%;opacity:.5}
-.form{position:relative;max-width:620px;margin-top:40px;background:rgba(14,14,16,.92);border:1px solid #2c2a22;padding:32px}
+.summit{padding:14vh 0 16vh;background:linear-gradient(180deg,var(--nuit),#15130b 60%,#1d1a0c)}
+.form{max-width:620px;margin-top:40px;background:rgba(14,14,16,.92);border:1px solid #2c2a22;padding:32px}
 .form label.f{display:block;font-weight:600;margin-bottom:8px}
 .form input[type=email]{width:100%;font:500 19px Barlow;color:var(--craie);background:#0a0a0c;border:2px solid #2d2d34;padding:16px;margin-bottom:16px}
 .form input[type=email]:focus{border-color:var(--or);outline:none}
 .ok{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:#c9c9cf;margin-bottom:22px;line-height:1.45}
 .ok input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--or)}
-.msg{min-height:24px;margin-top:16px;font-weight:600}
-.msg.err{color:var(--alerte)}
-.msg.good{color:var(--or)}
-.after{display:none;margin-top:18px;padding-top:18px;border-top:1px solid #2a2a30}
-.after.show{display:block}
+.msg{min-height:24px;margin-top:16px;font-weight:600}.msg.err{color:var(--alerte)}.msg.good{color:var(--or)}
+.after{display:none;margin-top:18px;padding-top:18px;border-top:1px solid #2a2a30}.after.show{display:block}
 .after p{font-size:15px;color:#c9c9cf}
-
-
-/* ---------- défiler ---------- */
-.scrollcue{display:flex;align-items:center;gap:10px;margin-top:34px;color:var(--brume);font-size:14px;text-decoration:none}
-.scrollcue i{width:22px;height:34px;border:2px solid #3a3a42;border-radius:12px;position:relative}
-.scrollcue i::after{content:"";position:absolute;left:50%;top:6px;width:4px;height:7px;margin-left:-2px;border-radius:2px;background:var(--or);animation:cue 1.6s infinite}
-@keyframes cue{0%{transform:translateY(0);opacity:1}70%{transform:translateY(10px);opacity:0}100%{opacity:0}}
-/* ---------- tracker interactif ---------- */
-.trk{background:var(--graphite);border:1px solid #24242a;padding:22px 20px 20px;position:relative;max-width:520px;width:100%}
-.trk .lv{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
-.trk .lv b{font:900 italic 30px/1 "Barlow Condensed";color:var(--or);text-transform:uppercase}
-.trk .lv span{font-size:14px;color:var(--brume)}
-.trk .xpb{height:8px;background:#26262c;margin-bottom:18px;overflow:hidden}.trk .xpb i{display:block;height:100%;background:var(--or);width:0;transition:width .5s cubic-bezier(.2,.8,.2,1)}
-.trk table{width:100%;border-collapse:separate;border-spacing:5px}
-.trk th{font:700 13px Barlow;color:var(--brume);text-align:center}.trk th.td{color:var(--or)}
-.trk td.n{font-size:14px;color:#d8d8dd;padding-right:6px;white-space:nowrap}
-.trk td.n small{display:block;color:var(--brume);font-size:11px}
-.trk button.b{width:100%;aspect-ratio:1;border:0;background:#26262c;cursor:pointer;position:relative;padding:0}
-.trk button.b.on{background:var(--or)}
-.trk button.b.on::after{content:"";position:absolute;left:32%;top:24%;width:30%;height:42%;border-right:3px solid #08080A;border-bottom:3px solid #08080A;transform:rotate(45deg)}
-.trk button.b.td{box-shadow:inset 0 0 0 2px var(--or)}
-.trk button.b:disabled{cursor:default;opacity:.55}
-.trk .hint{font-size:13px;color:var(--brume);margin:12px 0 0}
-.fxp{position:absolute;font:900 italic 22px "Barlow Condensed";color:var(--or);pointer-events:none;animation:fxp 1.1s forwards;white-space:nowrap}
-@keyframes fxp{0%{opacity:0;transform:translateY(6px)}15%{opacity:1}100%{opacity:0;transform:translateY(-46px)}}
-.ladder{display:flex;gap:4px;margin-top:16px;flex-wrap:wrap}
-.ladder span{font:700 italic 13px "Barlow Condensed";padding:4px 8px;background:#1d1d22;color:#6d6d74}
-.ladder span.on{background:var(--or);color:var(--nuit)}
-/* ---------- cordée en schéma ---------- */
-.rope{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:50px;align-items:center;margin-top:50px}
-@media (max-width:860px){.rope{grid-template-columns:1fr;gap:26px}}
-.rope svg{width:100%;height:auto;max-width:520px}
-.rope .serie{font:900 italic 80px/.9 "Barlow Condensed";color:var(--or)}
-.rope .serie small{display:block;font:600 16px Barlow;color:var(--brume);margin-top:8px}
-/* ---------- cycles ---------- */
-.cyc{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:50px;background:var(--ardoise);border:2px solid var(--ardoise)}
-@media (max-width:860px){.cyc{grid-template-columns:1fr 1fr}}
-.cyc div{background:var(--nuit);padding:24px 20px 22px;position:relative}
-.cyc small{display:block;color:var(--brume);font-size:13px;margin-bottom:10px}
-.cyc h3{font-size:30px;margin-bottom:10px}
-.cyc p{color:var(--brume);font-size:15px;margin:0 0 16px}
-.cyc .int{display:flex;gap:3px}.cyc .int i{width:22px;height:6px;background:#2a2a30}.cyc .int i.on{background:var(--or)}
-/* ---------- durées de renfo ---------- */
-.dur{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:46px}
-@media (max-width:860px){.dur{grid-template-columns:1fr 1fr}}
-.dur div{border:1px solid #26262c;padding:22px 18px;background:linear-gradient(180deg,#121215,#0b0b0d)}
-.dur svg{width:44px;height:44px;margin-bottom:14px}
-.dur b{display:block;font:900 italic 46px/.9 "Barlow Condensed";color:var(--craie)}
-.dur b em{font-style:italic;color:var(--or)}
-.dur span{display:block;margin-top:8px;color:var(--brume);font-size:15px}
-/* ---------- semaine type + compteurs ---------- */
-.wk{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:46px}
-@media (max-width:760px){.wk{grid-template-columns:1fr}}
-.wk div{background:var(--graphite);padding:14px 12px;min-height:118px;border-top:3px solid #2a2a30}
-@media (max-width:760px){.wk div{min-height:0;display:flex;gap:14px;align-items:baseline}}
-.wk div.k{border-top-color:var(--or)}
-.wk h4{margin:0 0 8px;font:800 italic 20px "Barlow Condensed";text-transform:uppercase;color:var(--brume)}
-.wk div.k h4{color:var(--or)}
-.wk p{margin:0;font-size:14px;color:#d4d4d9;line-height:1.35}
-.cnt{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px}
-@media (max-width:760px){.cnt{grid-template-columns:1fr 1fr}}
-.cnt b{display:block;font:900 italic clamp(54px,8vw,92px)/.85 "Barlow Condensed";color:var(--craie);font-variant-numeric:tabular-nums}
-.cnt span{color:var(--brume);font-size:15px}
-.cnt+small{display:block;margin-top:16px;color:#6d6d74;font-size:13px}
-.wa{display:inline-flex;align-items:center;gap:10px;margin-top:12px;color:var(--craie);text-decoration:none;font-weight:600;border-bottom:2px solid var(--or);padding-bottom:3px}
+.wa{display:inline-block;margin-top:14px;color:var(--craie);text-decoration:none;font-weight:600;border-bottom:2px solid var(--or);padding-bottom:3px}
 footer{padding:60px 0 50px;border-top:1px solid #1d1d22;color:var(--brume);font-size:14px}
 footer .cols{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:30px}
 @media (max-width:760px){footer .cols{grid-template-columns:1fr}}
 footer b{color:var(--craie);display:block;margin-bottom:6px}
 footer img{width:120px;margin-bottom:14px}
+
+/* ---------- états de départ (seulement si les animations tournent) ---------- */
+.anim .intro .fr{opacity:0}
+
+.anim .rv{opacity:0;transform:translateY(40px)}
+@media (prefers-reduced-motion:reduce){.cue i{animation:none}}
+/* sans animation : tout est lisible en pile */
+html:not(.anim) .intro{height:auto}
+html:not(.anim) .intro .fr{position:relative;min-height:auto;padding:14vh 8vw 0}
+html:not(.anim) .intro .fr:not(.hero){display:none}
+html:not(.anim) .cue{display:none}
 </style>
 </head>
 <body>
+<div class="prog" id="prog"></div>
+<header class="top"><img src="logo_la_fleche.png" alt="La Flèche"><a href="#inscription" id="topCta">Créer mon compte</a></header>
 
-<!-- jauge d'altitude (ordinateur) -->
-<div class="rail" aria-hidden="true"><svg id="railSvg" preserveAspectRatio="none"></svg><div id="railLabs"></div></div>
-<!-- barre de palier (téléphone) -->
-<div class="mbar" id="mbar" aria-hidden="true"><span id="mstage">Bitume</span><a href="#inscription">s'inscrire</a><i id="mprog"></i></div>
-
-<header class="hero" data-stage="0" id="top">
- <div class="wrap top"><img src="logo_la_fleche.png" alt="La Flèche"><a href="./">j'ai déjà un compte</a></div>
- <div class="wrap hgrid">
-  <div>
-   <p class="stage"><svg viewBox="0 0 34 16"><path d="M1 15 L12 3 L18 10 L24 5 L33 15" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>Niveau 1, le bitume</p>
-   <h1><span>Deviens</span><span class="g">régulier.</span></h1>
-   <p class="lead">L'appli gratuite pour courir sans lâcher : tu coches tes habitudes, tu cours en cordée avec tes potes, et ton plan s'adapte à ce que tu ressens.</p>
-   <div class="hcta"><a class="btn" href="#inscription">Créer mon compte</a><a class="btn ghost" href="#habitudes">Voir l'appli</a></div>
-   <div class="facts"><span><b>Gratuit</b>, sans pub</span><span><b>30 secondes</b> pour t'inscrire</span><span><b>Pas de mot de passe</b></span></div>
-   <a class="scrollcue" href="#saison"><i></i>fais défiler pour grimper</a>
-  </div>
-  <div class="stagehero">
-   <div class="phone"><div class="scr" id="heroScr">
-     <img src="lp_habitudes.jpg" alt="Liste d'habitudes cochées dans l'appli" class="on">
-     <img src="lp_cordee.jpg" alt="Page de la cordée Les Terrils">
-     <img src="lp_plan.jpg" alt="Semaine du plan de course">
-     <img src="lp_objectif.jpg" alt="Courbe de l'objectif de temps">
-   </div></div>
-   <div class="coach"><canvas data-mq="squat" data-yaw="48" width="600" height="600" aria-label="Personnage 3D qui fait un squat"></canvas><p><b>Ton coach renfo</b>chaque exercice montré en 3D, sous tous les angles.</p></div>
-  </div>
- </div>
-</header>
-
-<section data-stage="1" id="saison">
- <div class="wrap">
-  <p class="stage">Niveau 10, les pavés</p>
-  <h2>La saison 1<br>a commencé.</h2>
-  <div class="season">
-   <div><small>10 novembre 2026</small><h3>Lancement</h3><p>Les premiers coureurs cochent leurs habitudes et montent leurs cordées.</p></div>
-   <div class="here"><small>Tu es ici</small><h3>Bêta ouverte</h3><p>Le programme de course arrive. On cherche des testeurs, débutants comme confirmés, pour l'ajuster.</p></div>
-   <div><small>Ensuite</small><h3>Tes retours</h3><p>Chaque semaine, l'appli change avec ce que les testeurs remontent. Ton avis compte vraiment.</p></div>
-  </div>
- </div>
+<!-- ===== ouverture : phrases qui s'enchaînent ===== -->
+<section class="intro" id="intro">
+ <div class="glow"></div>
+ <div class="fr"><h1 class="big k1">Lundi,<br>tu cours.</h1><i class="bar"></i></div>
+ <div class="fr"><p class="big k1">Jeudi,<br>tu lâches.</p><i class="bar"></i></div>
+ <div class="fr"><p class="big k1">Dimanche,<br><span class="g">tu te promets</span><br>de recommencer.</p><i class="bar"></i></div>
+ <div class="fr hero"><p class="small">La Flèche · appli gratuite de course</p><h2 class="big k1">Cette fois,<br><span class="g">tu tiens.</span></h2>
+  <p class="lead">Tu coches tes habitudes, tu cours en cordée avec tes potes, et ton plan s'adapte à ce que tu ressens.</p>
+  <div class="cta"><a class="btn" href="#inscription">Créer mon compte</a><a class="btn ghost" href="./">J'ai déjà un compte</a></div>
+  <div class="facts"><span><b>Gratuit</b>, sans pub</span><span><b>30 secondes</b> pour t'inscrire</span><span><b>Pas de mot de passe</b></span></div></div>
+ <div class="cue" id="cue"><i></i>fais défiler</div>
 </section>
 
-<section data-stage="2" id="habitudes">
- <div class="wrap pill">
-  <div class="shot"><div class="trk" id="trk"><div class="lv"><b id="trkL">Niveau 1</b><span id="trkX">0 / 100 xp</span></div><div class="xpb"><i id="trkB"></i></div>
-     <table><thead><tr><th></th><th>L</th><th>M</th><th>M</th><th>J</th><th>V</th><th>S</th><th class="td">D</th></tr></thead><tbody id="trkT"></tbody></table>
-     <p class="hint">Essaie : coche la colonne d'aujourd'hui.</p><div class="ladder" id="trkLd"></div></div></div>
-  <div>
-   <p class="stage">Niveau 20, le pont</p>
-   <h2>Une case,<br>un pas.</h2>
-   <p class="lead">Choisis tes habitudes du matin au soir. Chaque case cochée te fait gagner de l'XP et monter de niveau, du bitume jusqu'aux Alpes.</p>
-   <ul class="list">
-    <li><b>100 niveaux</b> à grimper, avec une épreuve à chaque palier</li>
-    <li><b>Ta série</b> grandit chaque jour où tu tiens tout</li>
-    <li><b>Tâches, idées, records</b> : tout ton entraînement au même endroit</li>
-   </ul>
-  </div>
- </div>
+<!-- ===== étape : niveau 10 ===== -->
+<section class="etape" data-to="10">
+ <div class="in"><p class="small">Première étape</p><div class="lvl">0</div><p class="big k2 nm">Les pavés</p><p class="alt">Tout le monde part du bitume. Chaque case cochée te fait monter, palier après palier, jusqu'aux Alpes.</p></div>
+ <svg viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true"><path class="fill" d="M0 400 L0 360 L200 330 L380 345 L560 300 L720 320 L900 280 L1050 300 L1200 270 L1200 400Z"/><path class="ln" d="M0 360 L200 330 L380 345 L560 300 L720 320 L900 280 L1050 300 L1200 270"/></svg>
 </section>
 
-<section data-stage="3" id="cordee">
- <div class="wrap">
-  <p class="stage">Niveau 30, le terril</p>
-  <h2>Si un seul lâche,<br>tout le monde perd.</h2>
-  <p class="lead" style="margin-top:22px">Monte une cordée avec tes potes. Vous partagez une série : si l'un de vous oublie ses habitudes, toute l'équipe retombe à zéro. Tu ne cours plus seulement pour toi.</p>
-  <div class="rope">
-   <svg viewBox="0 0 520 300" role="img" aria-label="Schéma d'une cordée de quatre coureurs reliés par une corde">
-    <path id="ropeP" d="M70 230 C150 120 200 260 260 150 S380 60 450 90" fill="none" stroke="#FFC107" stroke-width="4" stroke-dasharray="10 8"/>
-    <g font-family="Barlow Condensed" font-style="italic" font-weight="900" text-anchor="middle">
-     <circle cx="70" cy="230" r="34" fill="#141417" stroke="#FFC107" stroke-width="4"/><text x="70" y="241" font-size="30" fill="#FFC107">TOI</text>
-     <circle cx="200" cy="200" r="30" fill="#141417" stroke="#3a3a42" stroke-width="3"/><text x="200" y="210" font-size="28" fill="#5ec2ff">L</text>
-     <circle cx="330" cy="105" r="30" fill="#141417" stroke="#3a3a42" stroke-width="3"/><text x="330" y="115" font-size="28" fill="#ff7b6b">M</text>
-     <circle cx="450" cy="90" r="30" fill="#141417" stroke="#3a3a42" stroke-width="3"/><text x="450" y="100" font-size="28" fill="#9be15d">N</text>
-     <text x="70" y="290" font-size="18" fill="#9A9AA0">toi</text><text x="200" y="256" font-size="18" fill="#9A9AA0">Léa</text><text x="330" y="160" font-size="18" fill="#9A9AA0">Max</text><text x="450" y="145" font-size="18" fill="#9A9AA0">Nina</text>
-    </g></svg>
-   <div><div class="serie"><span data-count="12">0</span> jours<small>de série commune. 2 à 4 coureurs, une seule série : elle avance quand tout le monde a tenu sa journée.</small></div></div>
-  </div>
-  <div class="duo">
-   <div class="side solo"><h3>Tout seul</h3><ul><li>Motivé le lundi, disparu le jeudi</li><li>Personne ne voit quand tu sautes une séance</li><li>Tu repousses à demain, puis à lundi</li><li>Tes progrès, tu es le seul à les fêter</li></ul></div>
-   <div class="side team"><h3>En cordée</h3><ul><li>Une série commune qui vous tient tous</li><li>Un chat d'équipe pour se secouer</li><li>Des défis collectifs chaque semaine</li><li>Un classement pour se tirer vers le haut</li></ul></div>
-   <div class="vid"><video src="lp_cordee.mp4" poster="lp_cordee_poster.jpg" muted loop playsinline preload="none" aria-label="Animation : la série de la cordée retombe à zéro quand Max oublie sa séance"></video><small>13 jours de série. Et Max oublie sa séance.</small></div>
-  </div>
+<!-- ===== la journée : arc matin / journée / soir ===== -->
+<section class="chap" id="jour"><div class="pin"><div class="wrap split">
+ <div><p class="small">Les habitudes</p><h2 class="big k2">Une journée,<br><span class="g">trois moments.</span></h2>
+  <p class="lead" style="margin-top:22px">Le matin, la journée, le soir : tu choisis tes habitudes, et chaque case cochée te rapporte de l'XP. Une journée complète vaut 100 XP, quel que soit ton nombre d'habitudes.</p></div>
+ <div>
+  <div class="arc"><svg viewBox="0 0 520 290" aria-hidden="true">
+   <path class="track" id="arcT" d="M40 270 A220 220 0 0 1 480 270"/><path class="done" id="arcD" d="M40 270 A220 220 0 0 1 480 270"/>
+   <g class="ic" data-m="0" transform="translate(96 150)"><path d="M-22 14h44M-14 14a14 14 0 0 1 28 0M0-12v-8M-18-4l-5-5M18-4l5-5"/></g>
+   <g class="ic" data-m="1" transform="translate(260 60)"><circle r="13"/><path d="M0-22v-7M0 22v7M-22 0h-7M22 0h7M-16-16l-5-5M16 16l5 5M16-16l5-5M-16 16l-5 5"/></g>
+   <g class="ic" data-m="2" transform="translate(424 150)"><path d="M6-18a17 17 0 1 0 12 26 14 14 0 0 1-12-26z"/></g>
+   <circle class="dot" id="arcDot" r="9" cx="40" cy="270"/></svg></div>
+  <div class="mom"><div class="nm" id="momN">le matin</div></div>
+  <ul class="hl" id="momL"></ul>
+  <div class="xpline"><span>XP de la journée</span><b id="xpN">0</b></div>
  </div>
+</div></div></section>
+
+<!-- ===== étape : niveau 30 ===== -->
+<section class="etape" data-to="30">
+ <div class="in"><p class="small">Deuxième étape</p><div class="lvl">10</div><p class="big k2 nm">Le terril</p><p class="alt">Plus haut, on ne grimpe plus seul.</p></div>
+ <svg viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true"><path class="fill" d="M0 400 L0 330 L160 300 L330 320 L520 200 L640 230 L760 150 L900 240 L1050 210 L1200 250 L1200 400Z"/><path class="ln" d="M0 330 L160 300 L330 320 L520 200 L640 230 L760 150 L900 240 L1050 210 L1200 250"/></svg>
 </section>
 
-<section data-stage="4" id="programme">
- <div class="wrap pill rev">
-  <div class="shot"><div class="phone"><div class="scr"><img src="lp_plan.jpg" alt="Semaine de plan avec la sortie longue marquée séance clé"></div></div><span class="tag">Route ou trail</span></div>
-  <div>
-   <p class="stage">Niveau 40, le mont Noir</p>
-   <h2>Un plan qui<br>t'écoute.</h2>
-   <p class="lead">Donne ta course, ta date et ton niveau. L'appli construit ton plan par cycles, puis l'ajuste après chaque séance selon ton ressenti.</p>
-   <ul class="list">
-    <li><b>Du 5 km à l'ultra</b>, sur route ou en trail au ressenti</li>
-    <li><b>Tes allures</b> calculées depuis ta VMA ou tes records</li>
-    <li><b>Ta courbe de chrono</b> : au départ, aujourd'hui, en fin de prépa</li>
-    <li><b>Strava</b> pour valider tes séances en un geste</li>
-   </ul>
-  </div>
+<!-- ===== la cordée ===== -->
+<section class="chap" id="cordee"><div class="pin"><div class="wrap split">
+ <div class="rope"><svg viewBox="0 0 560 330" role="img" aria-label="Quatre coureurs reliés par une corde">
+   <path class="cord" id="cord" d="M70 260 C150 150 200 290 230 210 S370 80 470 110"/>
+   <g class="node ok" data-n="0" transform="translate(70 260)"><circle r="38"/><text y="10" fill="#FFC107">TOI</text></g>
+   <g class="node" data-n="1" transform="translate(230 210)"><circle r="32"/><text y="10" fill="#5ec2ff">L</text><text class="lb" y="58">Léa</text></g>
+   <g class="node" data-n="2" transform="translate(350 120)"><circle r="32"/><text y="10" fill="#ff7b6b">M</text><text class="lb" y="58">Max</text></g>
+   <g class="node" data-n="3" transform="translate(470 110)"><circle r="32"/><text y="10" fill="#9be15d">N</text><text class="lb" y="58">Nina</text></g>
+  </svg></div>
+ <div><p class="small">La cordée</p><div class="serie" id="serie">1</div><p class="small" id="serieL" style="margin-top:10px">jours de série commune</p>
+  <div class="swap" style="margin-top:26px"><p class="big k3" id="cTxtA">2 à 4 coureurs,<br><span class="g">une seule série.</span></p><p class="big k3" id="cTxtB" style="opacity:0">Max oublie sa séance.<br><span style="color:var(--alerte)">Tout le monde retombe à zéro.</span></p></div>
+  <p class="lead" id="cTxtC">Elle avance quand tout le monde a tenu sa journée. Si un seul lâche, toute la cordée perd sa série. Tu ne cours plus seulement pour toi.</p></div>
+</div></div></section>
+
+<!-- ===== comparatif ===== -->
+<section class="std"><div class="wrap">
+ <h2 class="big k2 rv">Seul, ou<br><span class="g">en cordée ?</span></h2>
+ <div class="duo">
+  <div class="side solo rv"><p class="big k3">Tout seul</p><ul><li>Motivé le lundi, disparu le jeudi</li><li>Personne ne voit quand tu sautes une séance</li><li>Tu repousses à demain, puis à lundi</li><li>Tes progrès, tu es le seul à les fêter</li></ul></div>
+  <div class="side team rv"><p class="big k3">En cordée</p><ul><li>Une série commune qui vous tient tous</li><li>Un chat d'équipe pour se secouer</li><li>Des défis collectifs chaque semaine</li><li>Un classement pour se tirer vers le haut</li></ul></div>
+  <div class="vid rv"><video src="lp_cordee.mp4" poster="lp_cordee_poster.jpg" muted loop playsinline preload="none" aria-label="Animation : la série de la cordée retombe à zéro"></video><small>13 jours de série. Et Max oublie sa séance.</small></div>
  </div>
- <div class="wrap">
-  <div class="cyc">
-   <div><small>Semaines 1 à 3</small><h3>Seuil long</h3><p>De longs blocs à allure contrôlée pour construire le moteur.</p><div class="int"><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
-   <div><small>Semaines 4 à 6</small><h3>VO2max</h3><p>Des fractions courtes et intenses pour lever ton plafond.</p><div class="int"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div>
-   <div><small>Semaines 7 à 9</small><h3>Spécifique</h3><p>Ton allure de course, répétée jusqu'à devenir naturelle.</p><div class="int"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div>
-   <div><small>Dernière semaine</small><h3>Affûtage</h3><p>Moins de volume, un peu de vitesse : tu arrives frais.</p><div class="int"><i class="on"></i><i></i><i></i><i></i></div></div>
-  </div>
-  <p class="dim" style="margin-top:14px;font-size:14px">Exemple pour un semi en 10 semaines. Chaque cycle finit par une semaine plus légère pour assimiler.</p>
- </div>
+</div></section>
+
+<!-- ===== étape : niveau 50 ===== -->
+<section class="etape" data-to="50">
+ <div class="in"><p class="small">Troisième étape</p><div class="lvl">30</div><p class="big k2 nm">La colline</p><p class="alt">Ici, il faut un plan. Un vrai, qui suit ton rythme.</p></div>
+ <svg viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true"><path class="fill" d="M0 400 L0 300 L140 260 L300 290 L460 160 L600 200 L720 90 L860 180 L1020 130 L1200 200 L1200 400Z"/><path class="ln" d="M0 300 L140 260 L300 290 L460 160 L600 200 L720 90 L860 180 L1020 130 L1200 200"/></svg>
 </section>
 
-<section data-stage="5" id="renfo">
- <div class="wrap">
-  <p class="stage">Niveau 50, la colline</p>
-  <h2>Le renfo,<br>montré en 3D.</h2>
-  <p class="lead" style="margin-top:22px">Deux séances de 20 minutes par semaine, c'est ce qui éloigne les blessures. Choisis un exercice et tourne autour du personnage.</p>
-  <div class="lab3d">
-   <div class="stage3d"><canvas id="lab" width="900" height="900" aria-label="Personnage 3D qui montre l'exercice choisi"></canvas>
-    <div class="ang" role="group" aria-label="Angle de vue"><button class="chip" data-yaw="48" aria-pressed="false">3/4</button><button class="chip" data-yaw="90" aria-pressed="false">face</button><button class="chip" data-yaw="0" aria-pressed="false">profil</button><button class="chip" data-yaw="spin" aria-pressed="true">360°</button></div></div>
-   <div>
-    <div class="exos" role="group" aria-label="Exercice">
-     <button data-ex="squat" aria-pressed="true">Squat<small>jambes et fessiers</small></button>
-     <button data-ex="fente" aria-pressed="false">Fentes<small>force sur une jambe</small></button>
-     <button data-ex="pont" aria-pressed="false">Pont fessier<small>moteur de la foulée</small></button>
-     <button data-ex="lateral" aria-pressed="false">Gainage latéral<small>bassin stable</small></button>
-    </div>
-    <div class="how3d" id="how3d" aria-live="polite"></div>
-   </div>
+<!-- ===== programme : frise des cycles ===== -->
+<section class="std" id="programme"><div class="wrap progwrap">
+ <div>
+  <p class="small">Le programme</p><h2 class="big k2">Un plan<br><span class="g">qui t'écoute.</span></h2>
+  <p class="lead" style="margin-top:22px">Donne ta course, ta date et ton niveau. Ton plan se construit par cycles, puis s'ajuste après chaque séance selon ton ressenti.</p>
+  <div class="tl" id="tl"><i class="fill"></i>
+   <div class="it"><small>Semaines 1 à 3</small><p class="big k3">Seuil long</p><p>De longs blocs à allure contrôlée pour construire le moteur.</p><div class="int"><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+   <div class="it"><small>Semaines 4 à 6</small><p class="big k3">VO2max</p><p>Des fractions courtes et intenses pour lever ton plafond.</p><div class="int"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div>
+   <div class="it"><small>Semaines 7 à 9</small><p class="big k3">Spécifique</p><p>Ton allure de course, répétée jusqu'à devenir naturelle.</p><div class="int"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div>
+   <div class="it"><small>Dernière semaine</small><p class="big k3">Affûtage</p><p>Moins de volume, un peu de vitesse : tu arrives frais.</p><div class="int"><i class="on"></i><i></i><i></i><i></i></div></div>
   </div>
-  <div class="dur">
-   <div><svg viewBox="0 0 48 48" fill="none" stroke="#FFC107" stroke-width="3" stroke-linecap="round"><circle cx="24" cy="26" r="16"/><path d="M24 26V18M20 6h8"/><path d="M24 26 30 22" stroke-width="0"/><path d="M24 10a16 16 0 0 1 13.9 8" stroke-width="5"/></svg><b>15<em>'</em></b><span>L'essentiel : 3 ou 4 exercices, parfait les jours chargés.</span></div>
-   <div><svg viewBox="0 0 48 48" fill="none" stroke="#FFC107" stroke-width="3" stroke-linecap="round"><circle cx="24" cy="26" r="16"/><path d="M24 26V18M20 6h8"/><path d="M24 10a16 16 0 0 1 0 32" stroke-width="5"/></svg><b>30<em>'</em></b><span>Le bon équilibre pour la plupart des coureurs.</span></div>
-   <div><svg viewBox="0 0 48 48" fill="none" stroke="#FFC107" stroke-width="3" stroke-linecap="round"><circle cx="24" cy="26" r="16"/><path d="M24 26V18M20 6h8"/><path d="M24 10a16 16 0 1 1 -16 16" stroke-width="5"/></svg><b>45<em>'</em></b><span>La séance complète, avec plus de séries.</span></div>
-   <div><svg viewBox="0 0 48 48" fill="none" stroke="#FFC107" stroke-width="3" stroke-linecap="round"><path d="M8 34h32M12 34V20M36 34V20M8 20h32"/><path d="M18 14l6-6 6 6"/></svg><b>1<em>×</em> ou 2<em>×</em></b><span>Par semaine, au choix. Tu changes quand tu veux dans les réglages.</span></div>
-  </div>
+  <ul class="facts2 rv"><li><b>Du 5 km à l'ultra</b>, sur route ou en trail au ressenti</li><li><b>Tes allures</b> calculées depuis ta VMA ou tes records</li><li><b>Ta courbe de chrono</b> : au départ, aujourd'hui, en fin de prépa</li><li><b>Strava</b> pour valider tes séances en un geste</li></ul>
  </div>
+ <div class="stick"><div class="phone rv"><div class="scr"><img src="lp_plan.jpg" alt="Semaine du plan avec la sortie longue marquée séance clé"></div></div></div>
+</div></section>
+
+<!-- ===== étape : niveau 70 ===== -->
+<section class="etape" data-to="70">
+ <div class="in"><p class="small">Quatrième étape</p><div class="lvl">50</div><p class="big k2 nm">Le col</p><p class="alt">Pour tenir jusqu'en haut, il faut un corps solide.</p></div>
+ <svg viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true"><path class="fill" d="M0 400 L0 280 L120 220 L260 260 L420 110 L560 170 L680 40 L820 150 L980 80 L1200 160 L1200 400Z"/><path class="ln" d="M0 280 L120 220 L260 260 L420 110 L560 170 L680 40 L820 150 L980 80 L1200 160"/></svg>
 </section>
 
-<section data-stage="6" id="pourqui">
- <div class="wrap">
-  <p class="stage">Niveau 60, le ballon</p>
-  <h2>Pour qui ?</h2>
-  <div class="who">
-   <div><h3>Tu reprends</h3><p>Tu veux juste courir deux fois par semaine sans lâcher au bout de dix jours. L'appli démarre doucement et te protège des blessures.</p></div>
-   <div><h3>Tu prépares une course</h3><p>10 km, semi, marathon : un plan par cycles, des séances clés et une estimation de chrono qui bouge avec toi.</p></div>
-   <div><h3>Tu vis pour le trail</h3><p>Dénivelé, sorties longues au ressenti, renfo des descentes : tout est pensé pour la montagne.</p></div>
-  </div>
+<!-- ===== renfo 3D ===== -->
+<section class="chap" id="renfo"><div class="pin"><div class="wrap split">
+ <div><p class="small">Le renfo</p><h2 class="big k2">Montré en 3D,<br><span class="g">sous tous les angles.</span></h2>
+  <p class="lead" style="margin-top:22px">Chaque exercice a son personnage animé, la bonne position et l'erreur à éviter. Tu choisis la durée.</p>
+  <div class="dur"><div><b>15<em>′</em></b><span>l'essentiel</span></div><div><b>30<em>′</em></b><span>le bon équilibre</span></div><div><b>45<em>′</em></b><span>la séance complète</span></div></div></div>
+ <div><div class="r3d"><canvas id="r3d" width="900" height="900" aria-label="Personnage 3D qui enchaîne quatre exercices"></canvas><div class="lbl"><b id="r3dN">Squat</b><span id="r3dT">fesses en arrière, poids sur les talons</span></div></div><div class="dots" id="r3dD"><i class="on"></i><i></i><i></i><i></i></div></div>
+</div></div></section>
+
+<!-- ===== démarrer ===== -->
+<section class="std"><div class="wrap">
+ <h2 class="big k2 rv">Trois gestes<br><span class="g">pour démarrer.</span></h2>
+ <div class="steps">
+  <div class="rv"><p class="big k3">Ton e-mail</p><p>Tu reçois un lien de connexion. Pas de mot de passe à retenir.</p></div>
+  <div class="rv"><p class="big k3">L'appli sur ton écran</p><p>Ajoute La Flèche à ton écran d'accueil, iPhone ou Android. Elle s'ouvre comme une vraie appli.</p></div>
+  <div class="rv"><p class="big k3">Ta première case</p><p>Choisis tes habitudes, coche la première, et invite tes potes dans ta cordée.</p></div>
  </div>
+</div></section>
+
+<!-- ===== questions ===== -->
+<section class="std" id="faq"><div class="wrap">
+ <h2 class="big k2 rv">Tes questions</h2>
+ <div class="faq">
+  <details><summary>C'est vraiment gratuit ?</summary><p>Oui. Pas d'abonnement, pas de pub, pas de carte bancaire. La Flèche est un projet de coureur, construit avec les retours de ceux qui l'utilisent.</p></details>
+  <details><summary>Je dois la télécharger sur l'App Store ?</summary><p>Non. C'est une appli web : tu l'ouvres dans ton navigateur, puis tu l'ajoutes à ton écran d'accueil. Elle marche sur iPhone comme sur Android, et se met à jour toute seule.</p></details>
+  <details><summary>Je débute, c'est pour moi ?</summary><p>Oui. Les habitudes marchent pour tout le monde, et le plan de course part de ton niveau réel, même si tu ne cours pas encore.</p></details>
+  <details><summary>Est-ce que ça marche avec Strava ?</summary><p>Oui, si tu le connectes. Tes sorties servent à valider tes séances et à suivre tes kilomètres. Elles ne sont jamais montrées aux autres membres.</p></details>
+  <details><summary>Que deviennent mes données ?</summary><p>Elles servent uniquement à faire marcher l'appli. Elles sont stockées en Europe, jamais revendues. Tu peux télécharger une copie ou supprimer ton compte à tout moment depuis les paramètres.</p></details>
+  <details><summary>Je n'ai pas reçu l'e-mail.</summary><p>Regarde dans tes spams et attends une minute. Toujours rien ? Redemande un lien, ou écris à @la.fleche_01 sur Instagram.</p></details>
+ </div>
+</div></section>
+
+<!-- ===== étape finale : les Alpes ===== -->
+<section class="etape" data-to="100">
+ <div class="in"><p class="small">Dernière étape</p><div class="lvl">70</div><p class="big k2 nm">Les Alpes</p><p class="alt">Le sommet se gagne une case après l'autre. La première, c'est maintenant.</p></div>
+ <svg viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true"><path class="fill" d="M0 400 L0 260 L140 160 L280 220 L430 70 L560 140 L660 10 L800 120 L960 50 L1200 130 L1200 400Z"/><path class="ln" d="M0 260 L140 160 L280 220 L430 70 L560 140 L660 10 L800 120 L960 50 L1200 130"/></svg>
 </section>
 
-<section data-stage="6" id="semaine">
- <div class="wrap">
-  <p class="stage">Toujours au ballon</p>
-  <h2>Une semaine<br>dans la cordée.</h2>
-  <div class="wk">
-   <div><h4>Lun</h4><p>Renfo 30 min, guidé en 3D</p></div>
-   <div><h4>Mar</h4><p>Footing tranquille</p></div>
-   <div><h4>Mer</h4><p>Repos, habitudes cochées</p></div>
-   <div class="k"><h4>Jeu</h4><p>Séance clé du cycle</p></div>
-   <div><h4>Ven</h4><p>Repos ou renfo 15 min</p></div>
-   <div><h4>Sam</h4><p>Footing avec la cordée</p></div>
-   <div class="k"><h4>Dim</h4><p>Sortie longue, puis le purgatoire des cases ratées</p></div>
-  </div>
-  <div class="cnt" id="cnt">
-   <div><b data-count="34">0</b><span>km dans la semaine</span></div>
-   <div><b data-count="5">0</b><span>séances validées</span></div>
-   <div><b data-count="12">0</b><span>jours de série</span></div>
-   <div><b data-count="740">0</b><span>xp gagnés</span></div>
-  </div>
-  <small>Exemple d'une semaine type pour un coureur qui prépare un semi.</small>
- </div>
-</section>
+<!-- ===== inscription ===== -->
+<section class="summit" id="inscription"><div class="wrap">
+ <h2 class="big k2 rv">À toi de<br><span class="g">grimper.</span></h2>
+ <form class="form rv" id="lfForm" novalidate>
+  <label class="f" for="mail">Ton e-mail</label>
+  <input id="mail" type="email" autocomplete="email" inputmode="email" placeholder="prenom@exemple.fr" required>
+  <label class="ok"><input type="checkbox" id="consent"><span>J'ai 15 ans ou plus et j'accepte que mes données servent à faire marcher l'appli. Elles sont stockées en Europe et jamais revendues.</span></label>
+  <button class="btn" type="submit" id="go">Recevoir mon lien</button>
+  <div class="msg" id="msg" role="status" aria-live="polite"></div>
+  <div class="after" id="after"><p>Ouvre le mail sur ce téléphone et touche le lien : tu arrives directement dans l'appli. Sur iPhone avec l'appli déjà installée, tape plutôt le code à 6 chiffres dans l'appli.</p><a class="btn ghost" href="./">Ouvrir l'appli</a><br><a class="wa" href="https://chat.whatsapp.com/Dy05QzTmjut3HnAVl6gLxk" target="_blank" rel="noopener">Rejoindre la communauté WhatsApp</a></div>
+ </form>
+</div></section>
 
-<section data-stage="7" id="etapes">
- <div class="wrap">
-  <p class="stage">Niveau 70, le col</p>
-  <h2>Trois gestes<br>pour démarrer.</h2>
-  <div class="steps">
-   <div><h3>Ton e-mail</h3><p>Tu reçois un lien de connexion. Pas de mot de passe à retenir.</p></div>
-   <div><h3>L'appli sur ton écran</h3><p>Ajoute La Flèche à ton écran d'accueil, iPhone ou Android. Elle s'ouvre comme une vraie appli.</p></div>
-   <div><h3>Ta première case</h3><p>Choisis tes habitudes, coche la première, et invite tes potes dans ta cordée.</p></div>
-  </div>
- </div>
-</section>
-
-<section data-stage="8" id="faq">
- <div class="wrap">
-  <p class="stage">Niveau 80, la haute montagne</p>
-  <h2>Tes questions</h2>
-  <div class="faq">
-   <details><summary>C'est vraiment gratuit ?</summary><p>Oui. Pas d'abonnement, pas de pub, pas de carte bancaire. La Flèche est un projet de coureur, construit avec les retours de ceux qui l'utilisent.</p></details>
-   <details><summary>Je dois la télécharger sur l'App Store ?</summary><p>Non. C'est une appli web : tu l'ouvres dans ton navigateur, puis tu l'ajoutes à ton écran d'accueil. Elle marche sur iPhone comme sur Android, et se met à jour toute seule.</p></details>
-   <details><summary>Je débute, c'est pour moi ?</summary><p>Oui. Les habitudes marchent pour tout le monde, et le plan de course part de ton niveau réel, même si tu ne cours pas encore.</p></details>
-   <details><summary>Est-ce que ça marche avec Strava ?</summary><p>Oui, si tu le connectes. Tes sorties servent à valider tes séances et à suivre tes kilomètres. Elles ne sont jamais montrées aux autres membres.</p></details>
-   <details><summary>Que deviennent mes données ?</summary><p>Elles servent uniquement à faire marcher l'appli. Elles sont stockées en Europe, jamais revendues. Tu peux télécharger une copie ou supprimer ton compte à tout moment depuis les paramètres.</p></details>
-   <details><summary>Je n'ai pas reçu l'e-mail.</summary><p>Regarde dans tes spams et attends une minute. Toujours rien ? Redemande un lien, ou écris à @la.fleche_01 sur Instagram.</p></details>
-  </div>
- </div>
-</section>
-
-<section data-stage="9" id="inscription" class="summit">
- <svg class="mt" viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true"><path d="M0 400 L0 300 L170 210 L260 260 L420 120 L520 190 L640 40 L760 170 L860 110 L1010 230 L1200 150 L1200 400Z" fill="#141209"/><path d="M0 300 L170 210 L260 260 L420 120 L520 190 L640 40 L760 170 L860 110 L1010 230 L1200 150" fill="none" stroke="#FFC107" stroke-width="3" opacity=".7"/></svg>
- <div class="wrap">
-  <p class="stage">Niveau 90, le sommet</p>
-  <h2>À toi de<br>grimper.</h2>
-  <form class="form" id="lfForm" novalidate>
-   <label class="f" for="mail">Ton e-mail</label>
-   <input id="mail" type="email" autocomplete="email" inputmode="email" placeholder="prenom@exemple.fr" required>
-   <label class="ok"><input type="checkbox" id="consent"><span>J'ai 15 ans ou plus et j'accepte que mes données servent à faire marcher l'appli. Elles sont stockées en Europe et jamais revendues.</span></label>
-   <button class="btn" type="submit" id="go">Recevoir mon lien</button>
-   <div class="msg" id="msg" role="status" aria-live="polite"></div>
-   <div class="after" id="after"><p>Ouvre le mail sur ce téléphone et touche le lien : tu arrives directement dans l'appli. Sur iPhone avec l'appli déjà installée, tape plutôt le code à 6 chiffres dans l'appli.</p><a class="btn ghost" href="./">Ouvrir l'appli</a><br><a class="wa" href="https://chat.whatsapp.com/Dy05QzTmjut3HnAVl6gLxk" target="_blank" rel="noopener">Rejoindre la communauté WhatsApp</a></div>
-  </form>
- </div>
-</section>
-
-<footer data-stage="10">
- <div class="wrap cols">
-  <div><img src="logo_la_fleche.png" alt="La Flèche"><p>Du bitume aux Alpes, une case après l'autre.</p><a href="https://www.instagram.com/la.fleche_01/">@la.fleche_01</a></div>
-  <div><b>Mentions légales</b>Édité par Théo Berger, particulier, projet étudiant non commercial (France). Contact : <a href="mailto:laflecherun@gmail.com">laflecherun@gmail.com</a>.<br>Hébergement : Vercel Inc., Covina, Californie, États-Unis.</div>
-  <div><b>Tes données</b>Base de données Supabase, serveurs en Irlande. Aucune pub, aucun cookie de suivi. Le détail complet est dans l'appli, rubrique Paramètres, « tes données ».</div>
- </div>
-</footer>
+<footer><div class="wrap cols">
+ <div><img src="logo_la_fleche.png" alt="La Flèche"><p>Du bitume aux Alpes, une case après l'autre.</p><a href="https://www.instagram.com/la.fleche_01/">@la.fleche_01</a></div>
+ <div><b>Mentions légales</b>Édité par Théo Berger, particulier, projet étudiant non commercial (France). Contact : <a href="mailto:laflecherun@gmail.com">laflecherun@gmail.com</a>.<br>Hébergement : Vercel Inc., Covina, Californie, États-Unis.</div>
+ <div><b>Tes données</b>Base de données Supabase, serveurs en Irlande. Aucune pub, aucun cookie de suivi. Le détail complet est dans l'appli, rubrique Paramètres, « tes données ».</div>
+</div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.js"></script>
 <script src="config.js"></script>
+<script src="lp_gsap.js"></script>
+<script src="lp_scrolltrigger.js"></script>
+<script src="lp_lenis.js"></script>
 <script>
 /* ---------- MANNEQUIN 3D : exercices de renfo animés ---------- */
 const MQ=(()=>{const D2R=Math.PI/180;
@@ -682,64 +556,74 @@ return{draw,scan,EX,poseAt}})();
 (function(){
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-/* ---------- paliers (les vrais niveaux de l'appli) ---------- */
-const ST=[["Bitume",1],["Pavés",10],["Pont",20],["Terril",30],["Mont Noir",40],["Colline",50],["Ballon",60],["Col",70],["Haute montagne",80],["Sommet",90],["Alpes",100]];
-const secs=$$("[data-stage]");
-const svg=$("#railSvg"),labs=$("#railLabs");
-function drawRail(){const h=innerHeight,w=132,top=70,bot=h-60,n=ST.length;let d="",pts=[];
-  ST.forEach((s,i)=>{const y=bot-(bot-top)*i/(n-1),x=w-34-(i%2?18:0)-Math.sin(i*1.7)*6;pts.push([x,y])});
-  d="M"+pts.map(p=>p.join(" ")).join(" L");
-  svg.setAttribute("viewBox",`0 0 ${w} ${h}`);
-  svg.innerHTML=`<path d="${d}" fill="none" stroke="#2a2a30" stroke-width="3"/><path id="railOn" d="${d}" fill="none" stroke="#FFC107" stroke-width="3"/><circle id="railDot" r="8" fill="#FFC107" stroke="#08080A" stroke-width="3"/>`;
-  labs.innerHTML=ST.map((s,i)=>`<div class="lab" style="top:${pts[i][1]}px;right:${w-pts[i][0]+16}px">${s[0]}<b>niv. ${s[1]}</b></div>`).join("");
-  const p=$("#railOn"),L=p.getTotalLength();p.style.strokeDasharray=L;p.dataset.len=L;update()}
-function update(){const max=document.documentElement.scrollHeight-innerHeight,f=max>0?Math.min(1,Math.max(0,scrollY/max)):0;
-  const p=$("#railOn");if(p){const L=+p.dataset.len;p.style.strokeDashoffset=L*(1-f);const q=p.getPointAtLength(L*f);const dot=$("#railDot");dot.setAttribute("cx",q.x);dot.setAttribute("cy",q.y)}
-  let cur=0;secs.forEach(s=>{if(s.getBoundingClientRect().top<innerHeight*.55)cur=+s.dataset.stage});
-  $$(".rail .lab").forEach((l,i)=>{l.classList.toggle("on",i===cur);l.classList.toggle("past",i<cur)});
-  $("#mstage").textContent=ST[cur][0]+", niveau "+ST[cur][1];$("#mprog").style.width=(f*100)+"%";$("#mbar").classList.toggle("show",scrollY>innerHeight*.7)}
-addEventListener("scroll",update,{passive:true});addEventListener("resize",drawRail);drawRail();
+const ok=!reduce&&window.gsap&&window.ScrollTrigger;
+if(ok)document.documentElement.classList.add("anim");
 
-/* ---------- écrans du téléphone ---------- */
-const hs=$$("#heroScr img");let hi=0;if(!reduce)setInterval(()=>{hs[hi].classList.remove("on");hi=(hi+1)%hs.length;hs[hi].classList.add("on")},2800);
+/* ---------- contenu de l'arc ---------- */
+const MOM=[["le matin",["Faire son lit","Gainage 2 min","Douche froide"]],["la journée",["Footing ou renfo","Boire 1,5 L d'eau"]],["le soir",["Préparer ses affaires","Pas d'écran au lit","Lecture 15 min"]]];
+const TOT=MOM.reduce((a,m)=>a+m[1].length,0);
+let curM=-1;function setMom(i,ticked){if(i!==curM){curM=i;$("#momN").textContent=MOM[i][0];$("#momL").innerHTML=MOM[i][1].map(h=>`<li><i></i>${h}</li>`).join("");$$(".arc .ic").forEach(g=>g.classList.toggle("on",+g.dataset.m<=i))}
+  $$("#momL li").forEach((li,k)=>li.classList.toggle("on",k<ticked))}
+function xp(n){const v=Math.round(100*n/TOT);$("#xpN").textContent=v===100?"100 · journée validée":v;$("#xpN").classList.toggle("ok",v===100)}
 
-/* ---------- vidéo de la cordée : joue quand elle est visible ---------- */
-const v=$(".vid video");new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!reduce){v.play().catch(()=>{})}else v.pause()}),{threshold:.4}).observe(v);
+/* ---------- renfo 3D ---------- */
+const EX=[["squat","Squat","fesses en arrière, poids sur les talons",48],["fente","Fentes","genou arrière presque au sol, buste droit",60],["pont","Pont fessier","pousse dans les talons, serre en haut",-22],["planche","Planche","corps bien aligné, bassin ni haut ni bas",-16]];
+let exI=0,yawOff=0,r3dVis=false;const cv=$("#r3d"),t0=performance.now();
+function setEx(i){if(i===exI&&$("#r3dN").textContent)return;exI=i;$("#r3dN").textContent=EX[i][1];$("#r3dT").textContent=EX[i][2];$$("#r3dD i").forEach((d,k)=>d.classList.toggle("on",k===i))}
+new IntersectionObserver(es=>es.forEach(e=>r3dVis=e.isIntersecting)).observe(cv);
+(function loop(){requestAnimationFrame(loop);if(!r3dVis||typeof MQ==="undefined")return;const t=reduce?1.2:(performance.now()-t0)/1000;MQ.draw(cv,EX[exI][0],t,{yaw:EX[exI][3]+yawOff,ghost:false})})();
 
-/* ---------- personnages 3D ---------- */
-const HOW={squat:[["pieds largeur d'épaules, pointes un peu ouvertes","descends les fesses en arrière, poids sur les talons","remonte en poussant le sol"],"les genoux qui rentrent vers l'intérieur"],
- fente:[["grand pas en avant, buste droit","descends le genou arrière presque au sol","repousse sur le talon avant pour revenir"],"le genou avant qui part vers l'intérieur"],
- pont:[["allongé, talons près des fesses","pousse dans les talons pour monter le bassin","serre les fessiers 1 s en haut"],"creuser le bas du dos"],
- lateral:[["coude sous l'épaule, pieds l'un sur l'autre","monte le bassin : épaule, hanche, cheville alignées","tiens sans bouger, puis change de côté"],"la hanche qui redescend vers le sol"]};
-let ex="squat",yaw="spin";const lab=$("#lab"),hero=$(".coach canvas"),t0=performance.now();
-const DEF={squat:48,fente:60,pont:-22,lateral:-10};
-function how(){const h=HOW[ex];$("#how3d").innerHTML=`<ol>${h[0].map(x=>`<li>${x}</li>`).join("")}</ol><div class="err">À éviter : ${h[1]}</div>`}how();
-$$(".exos button").forEach(b=>b.onclick=()=>{ex=b.dataset.ex;$$(".exos button").forEach(x=>x.setAttribute("aria-pressed",x===b));how()});
-$$(".ang .chip").forEach(b=>b.onclick=()=>{yaw=b.dataset.yaw;$$(".ang .chip").forEach(x=>x.setAttribute("aria-pressed",x===b))});
-let vis=new Set();const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?vis.add(e.target):vis.delete(e.target)));[lab,hero].forEach(c=>io.observe(c));
-function loop(){requestAnimationFrame(loop);if(typeof MQ==="undefined")return;const t=reduce?1.2:(performance.now()-t0)/1000;
-  if(vis.has(hero))MQ.draw(hero,"squat",t,{yaw:48+Math.sin(t*.4)*18,ghost:false});
-  if(vis.has(lab)){const base=DEF[ex];MQ.draw(lab,ex,t,yaw==="spin"?{yaw:base,spin:!reduce,ghost:false}:{yaw:+yaw,ghost:false})}}
-loop();
+/* ---------- vidéo : joue quand visible ---------- */
+const v=$(".vid video");new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!reduce)v.play().catch(()=>{});else v.pause()}),{threshold:.4}).observe(v);
 
-/* ---------- tracker d'habitudes interactif ---------- */
-const HAB=[["Faire son lit","matin"],["Gainage 2 min","matin"],["Footing ou renfo","journée"],["Pas d'écran au lit","soir"]];
-const PRE=[[1,1,1,0,1,1],[1,0,1,1,1,0],[1,1,0,1,1,1],[0,1,1,1,0,1]];
-const STG=["Bitume","Pavés","Pont","Terril","Mont Noir","Colline","Ballon","Col","Haute montagne","Sommet","Alpes"];
-let xp=60;const tb=$("#trkT");
-tb.innerHTML=HAB.map((h,i)=>`<tr><td class="n">${h[0]}<small>${h[1]}</small></td>${PRE[i].map(v=>`<td><button class="b ${v?"on":""}" disabled aria-label="${h[0]}, jour passé${v?", fait":""}"></button></td>`).join("")}<td><button class="b td" data-h="${i}" aria-pressed="false" aria-label="${h[0]}, aujourd'hui"></button></td></tr>`).join("");
-$("#trkLd").innerHTML=STG.slice(0,6).map((n,i)=>`<span class="${i===0?"on":""}">${n}</span>`).join("")+"<span>… Alpes</span>";
-function trk(){const L=Math.floor(xp/100)+1,r=xp%100;$("#trkL").textContent="Niveau "+L;$("#trkX").textContent=r+" / 100 xp";$("#trkB").style.width=r+"%";
-  }
-trk();
-tb.addEventListener("click",e=>{const b=e.target.closest("button[data-h]");if(!b)return;const on=!b.classList.contains("on");b.classList.toggle("on",on);b.setAttribute("aria-pressed",on);
-  const all=$$("#trkT button[data-h]").every(x=>x.classList.contains("on"));const gain=25+(on&&all?15:0);xp=Math.max(0,xp+(on?gain:-25));trk();
-  if(on&&!reduce){const f=document.createElement("span");f.className="fxp";f.textContent="+"+gain+" xp"+(all?" · journée validée":"");const r=b.getBoundingClientRect(),t=$("#trk").getBoundingClientRect();f.style.left=Math.min(r.left-t.left-20,t.width-190)+"px";f.style.top=(r.top-t.top-10)+"px";$("#trk").appendChild(f);setTimeout(()=>f.remove(),1200)}});
+if(!ok){setMom(2,3);xp(TOT);$("#serie").textContent="12";$$(".rope .node").forEach(n=>n.classList.add("ok"));$$(".etape .lvl").forEach(l=>l.textContent=l.parentElement.parentElement.dataset.to);setEx(0)}
+else{
+gsap.registerPlugin(ScrollTrigger);const SECS=$$("body > section");const pr=el=>-SECS.indexOf(el.closest("body > section"));
+let lenis=null;try{lenis=new Lenis({lerp:.11});lenis.on("scroll",ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0)}catch(e){}
+$$('a[href^="#"]').forEach(a=>a.addEventListener("click",e=>{const t=document.querySelector(a.getAttribute("href"));if(!t)return;e.preventDefault();lenis?lenis.scrollTo(t,{offset:0,duration:1.6}):t.scrollIntoView()}));
+gsap.to("#prog",{scaleX:1,ease:"none",scrollTrigger:{start:0,end:"max",scrub:.3}});
+ScrollTrigger.create({start:()=>innerHeight*3,end:"max",onToggle:s=>{$("#topCta").classList.toggle("on",s.isActive);$(".top").classList.toggle("solid",s.isActive)}});
 
-/* ---------- compteurs ---------- */
-const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;cio.unobserve(e.target);const el=e.target,to=+el.dataset.count;if(reduce){el.textContent=to;return}
-  const t0=performance.now(),d=1400;const step=t=>{const k=Math.min(1,(t-t0)/d),v=Math.round(to*(1-Math.pow(1-k,3)));el.textContent=v;if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)}),{threshold:.6});
-$$("[data-count]").forEach(x=>cio.observe(x));
+/* ouverture : 4 écrans qui s'enchaînent sur place */
+const fr=$$(".intro .fr");gsap.set(fr[0],{opacity:1});const ti=gsap.timeline({scrollTrigger:{trigger:"#intro",start:"top top",end:"+=320%",scrub:.6,pin:true,refreshPriority:pr($("#intro"))}});
+fr.forEach((f,i)=>{const bar=f.querySelector(".bar"),txt=f.querySelector(".big");
+  if(i>0)ti.fromTo(f,{opacity:0},{opacity:1,duration:.35}).fromTo(txt,{y:60,opacity:0},{y:0,opacity:1,duration:.6},"<");
+  if(bar)ti.fromTo(bar,{scaleX:0},{scaleX:3,duration:.7});
+  if(i<fr.length-1)ti.to(f,{opacity:0,y:-50,duration:.4,delay:.15})});
+ti.to(".intro .glow",{opacity:1,duration:.5},"<").to("#cue",{opacity:0,duration:.2},0.1);
+
+/* étapes : le niveau monte, la crête se dessine */
+$$(".etape").forEach(sec=>{const lvl=sec.querySelector(".lvl"),ln=sec.querySelector(".ln"),from=+lvl.textContent,to=+sec.dataset.to,L=ln.getTotalLength();ln.style.strokeDasharray=L;ln.style.strokeDashoffset=L;
+  const o={v:from};const tl=gsap.timeline({scrollTrigger:{trigger:sec,start:"top top",end:"+=120%",scrub:.5,pin:true,refreshPriority:pr(sec)}});
+  tl.from(sec.querySelector(".small"),{opacity:0,y:20,duration:.2}).from(lvl,{opacity:0,y:40,duration:.3},"<")
+    .to(o,{v:to,duration:1,ease:"none",onUpdate:()=>lvl.textContent=Math.round(o.v)},"<.1").to(ln,{strokeDashoffset:0,duration:1,ease:"none"},"<")
+    .from(sec.querySelector(".nm"),{opacity:0,y:40,duration:.4},"-=.5").from(sec.querySelector(".alt"),{opacity:0,y:20,duration:.3},"-=.2")
+    .from(sec.querySelector(".fill"),{opacity:0,duration:.6},0).to(sec.querySelector(".in"),{opacity:0,y:-40,duration:.3,delay:.25})});
+
+/* la journée : le point parcourt l'arc, les cases se cochent */
+const arcD=$("#arcD"),LA=arcD.getTotalLength();arcD.style.strokeDasharray=LA;arcD.style.strokeDashoffset=LA;const arcT=$("#arcT"),dot=$("#arcDot");setMom(0,0);xp(0);
+ScrollTrigger.create({trigger:"#jour",start:"top top",end:"+=260%",scrub:.4,pin:true,refreshPriority:pr($("#jour")),onUpdate:s=>{const p=s.progress;arcD.style.strokeDashoffset=LA*(1-p);const q=arcT.getPointAtLength(LA*p);dot.setAttribute("cx",q.x);dot.setAttribute("cy",q.y);
+  const i=Math.min(2,Math.floor(p*3)),local=p*3-i,n=MOM[i][1].length,tk=Math.min(n,Math.floor(local*(n+1)));setMom(i,tk);let done=0;for(let k=0;k<i;k++)done+=MOM[k][1].length;xp(done+tk)}});
+
+/* la cordée : la série monte, Max lâche, tout retombe */
+const cord=$("#cord"),LC=cord.getTotalLength(),nodes=$$(".rope .node"),ser=$("#serie");
+ScrollTrigger.create({trigger:"#cordee",start:"top top",end:"+=260%",scrub:.4,pin:true,refreshPriority:pr($("#cordee")),onUpdate:s=>{const p=s.progress;cord.style.strokeDashoffset=LC*(1-Math.min(1,p*3));
+  nodes.forEach((n,k)=>{n.classList.toggle("ok",p>k*.08&&!(p>.68&&k===2));n.classList.toggle("ko",p>.68&&k===2)});
+  const crash=p>.68;ser.textContent=crash?0:Math.max(1,Math.round(1+12*Math.min(1,p/.62)));ser.classList.toggle("ko",crash);
+  $("#serieL").textContent=crash?"série perdue":"jours de série commune";gsap.set("#cTxtA",{opacity:crash?0:1});gsap.set("#cTxtB",{opacity:crash?1:0})}});
+cord.style.strokeDasharray=LC;
+
+/* frise des cycles : la ligne se remplit, les blocs apparaissent */
+gsap.to("#tl .fill",{scaleY:1,ease:"none",scrollTrigger:{trigger:"#tl",start:"top 70%",end:"bottom 60%",scrub:.4}});
+$$("#tl .it").forEach(it=>gsap.from(it,{opacity:0,x:-30,duration:.7,ease:"power3.out",scrollTrigger:{trigger:it,start:"top 78%"}}));
+
+/* renfo : le personnage tourne et enchaîne 4 exercices */
+setEx(0);ScrollTrigger.create({trigger:"#renfo",start:"top top",end:"+=240%",scrub:.4,pin:true,refreshPriority:pr($("#renfo")),onUpdate:s=>{const p=s.progress;setEx(Math.min(3,Math.floor(p*4)));yawOff=Math.sin(p*Math.PI*8)*40}});
+
+/* le reste apparaît au fil du défilement */
+$$(".rv").forEach(el=>gsap.to(el,{opacity:1,y:0,duration:.9,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 86%"}}));
+ScrollTrigger.sort();ScrollTrigger.refresh();addEventListener("load",()=>ScrollTrigger.refresh());
+}
 
 /* ---------- inscription par lien e-mail ---------- */
 const C=window.LF_CONFIG||{};let sb=null;try{sb=window.supabase.createClient(C.SUPABASE_URL,C.SUPABASE_ANON_KEY,{auth:{persistSession:true,detectSessionInUrl:false}})}catch(e){}
