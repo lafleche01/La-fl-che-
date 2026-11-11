@@ -101,6 +101,25 @@ const mcp={async callTool(server,tool,args){
 window.LF_ical=async url=>{const {data,error}=await sb.functions.invoke("ical",{body:{url}});if(error)throw new Error("serveur indisponible");if(data.error)throw new Error(data.error);return data.ics};
 window.LF_strava_disconnect=async()=>{await fn({action:"disconnect"});localStorage.removeItem(SEEN)};
 
+/* ---------- notifications push (même appli fermée) ---------- */
+const b64u=s=>{const p="=".repeat((4-s.length%4)%4),r=atob((s+p).replace(/-/g,"+").replace(/_/g,"/"));return Uint8Array.from([...r].map(c=>c.charCodeAt(0)))};
+async function pushFn(body){const {data,error}=await sb.functions.invoke(C.PUSH_FN||"smooth-worker",{body});if(error)throw err(error,"server_unavailable");if(data&&data.error)throw new Error(data.error);return data}
+window.LF_push={
+  supported:()=>"serviceWorker" in navigator&&"PushManager" in window&&"Notification" in window,
+  async status(){if(!this.supported())return"unsupported";const r=await navigator.serviceWorker.ready;const s=await r.pushManager.getSubscription();if(s)return"on";return Notification.permission==="denied"?"denied":"off"},
+  async enable(){if(!this.supported())throw new Error("installe d'abord l'appli sur ton écran d'accueil");await ready;
+    const perm=await Notification.requestPermission();if(perm!=="granted")throw new Error("notifications refusées");
+    let key;try{key=(await pushFn({action:"vapid"})).key}catch(_){}if(!key)throw new Error("le serveur de notifications n'est pas encore installé");
+    const r=await navigator.serviceWorker.ready;let s=await r.pushManager.getSubscription();
+    if(!s)s=await r.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64u(key)});
+    const {error}=await sb.from("push_subs").upsert({endpoint:s.endpoint,uid:session.user.id,sub:s.toJSON(),tz:Intl.DateTimeFormat().resolvedOptions().timeZone||"Europe/Paris",updated_at:new Date().toISOString()});
+    if(error)throw err(error);return true},
+  async disable(){const r=await navigator.serviceWorker.ready;const s=await r.pushManager.getSubscription();if(!s)return;await sb.from("push_subs").delete().eq("endpoint",s.endpoint);await s.unsubscribe()},
+  async send(body){await ready;return pushFn(body)}};
+// garde l'abonnement à jour (fuseau, nouvel appareil)
+(async()=>{try{await ready;if(!window.LF_push.supported()||Notification.permission!=="granted")return;const r=await navigator.serviceWorker.ready;const s=await r.pushManager.getSubscription();
+  if(s)await sb.from("push_subs").upsert({endpoint:s.endpoint,uid:session.user.id,sub:s.toJSON(),tz:Intl.DateTimeFormat().resolvedOptions().timeZone||"Europe/Paris",updated_at:new Date().toISOString()})}catch(_){}})();
+
 window.claude={use:async name=>{await ready;
   if(name==="db")return db;if(name==="user")return user;if(name==="mcp")return mcp;
   return null; // downloads : l'appli bascule sur le partage du téléphone
