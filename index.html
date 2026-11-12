@@ -961,6 +961,40 @@ svg.av.em{border-radius:50%;display:block}
 .emo svg{width:64px!important;height:64px!important}
 
 .emtx{display:flex;gap:8px;margin-top:10px}.emtx input{flex:1;font-family:'Barlow Condensed';font-style:italic;font-weight:900;font-size:22px;letter-spacing:.06em;text-transform:uppercase;padding:10px 14px}
+
+/* photos d'ambiance (fichiers img_*.jpg à côté de index.html ; sinon dégradé) */
+.im-easy{background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.7)),url(img_easy.jpg) center/cover no-repeat,linear-gradient(160deg,#2a2410,#0b0b0c 75%)!important}
+.im-long{background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.7)),url(img_long.jpg) center/cover no-repeat,linear-gradient(160deg,#10283a,#0b0b0c 75%)!important}
+.im-hard{background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.7)),url(img_hard.jpg) center/cover no-repeat,linear-gradient(160deg,#3a2d00,#0b0b0c 75%)!important}
+.im-hill{background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.7)),url(img_hill.jpg) center/cover no-repeat,linear-gradient(160deg,#2d1f12,#0b0b0c 75%)!important}
+.im-race{background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.7)),url(img_race.jpg) center/cover no-repeat,linear-gradient(160deg,#3a2600,#0b0b0c 75%)!important}
+.im-race_trail{background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.7)),url(img_race_trail.jpg) center/cover no-repeat,linear-gradient(160deg,#2a1a0a,#0b0b0c 75%)!important}
+.im-renfo{background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.7)),url(img_renfo.jpg) center/cover no-repeat,linear-gradient(160deg,#2a1630,#0b0b0c 75%)!important}
+.im-rec{background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.7)),url(img_rec.jpg) center/cover no-repeat,linear-gradient(160deg,#132a22,#0b0b0c 75%)!important}
+.im-trail{background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.7)),url(img_trail.jpg) center/cover no-repeat,linear-gradient(160deg,#16281a,#0b0b0c 75%)!important}
+.im-trail_long{background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.7)),url(img_trail_long.jpg) center/cover no-repeat,linear-gradient(160deg,#1b2a16,#0b0b0c 75%)!important}
+.im-goal_route{background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.7)),url(img_goal_route.jpg) center/cover no-repeat,linear-gradient(160deg,#2c2410,#0b0b0c 75%)!important}
+.im-goal_trail{background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.7)),url(img_goal_trail.jpg) center/cover no-repeat,linear-gradient(160deg,#14281c,#0b0b0c 75%)!important}
+.im-mode_course{background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.7)),url(img_mode_course.jpg) center/cover no-repeat,linear-gradient(160deg,#2c2410,#0b0b0c 75%)!important}
+.im-mode_forme{background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.7)),url(img_mode_forme.jpg) center/cover no-repeat,linear-gradient(160deg,#132a22,#0b0b0c 75%)!important}
+.im-mode_perf{background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.7)),url(img_mode_perf.jpg) center/cover no-repeat,linear-gradient(160deg,#10283a,#0b0b0c 75%)!important}
+.im-start{background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.7)),url(img_start.jpg) center/cover no-repeat,linear-gradient(160deg,#2c2410,#0b0b0c 75%)!important}
+
+.pgsph{min-height:250px!important}
+.pgspx{border-radius:50%;background:rgba(0,0,0,.35)!important;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.nextc.hasimg{padding:0 0 18px!important;overflow:hidden}
+.nextc.hasimg>span:not(.nimg){margin-left:18px;margin-right:18px}
+.nextc .nimg{display:block;height:128px;margin:0 0 14px!important}
+.nextc.hasimg .nk{margin-top:2px}
+.pggoal.photo{color:#fff;min-height:220px;display:flex;flex-direction:column;justify-content:flex-end;border:0!important}
+.pggoal.photo *{color:#fff}
+.pggoal.photo .pgcs>div,.pggoal.photo .pgcs{background:rgba(255,255,255,.12)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:12px}
+.pggoal.photo .pgcs small{color:rgba(255,255,255,.75)!important}
+.pgopt.pgoph{flex-direction:column;align-items:stretch!important;padding:0!important;overflow:hidden;border-radius:var(--r)!important;text-align:left}
+.pgopt.pgoph .pgoimg{display:block;height:128px}
+.pgopt.pgoph .pgot{padding:14px 16px 6px}
+.pgopt.pgoph .pgmr{position:absolute;right:14px;top:14px}
+.pgopt.pgoph{position:relative}
 </style>
 <script>try{var m=localStorage.getItem("lf_mode")||"auto";if(m==="clair"||(m==="auto"&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.classList.add("light")}catch(_){}</script>
 <meta name="description" content="Coche tes habitudes, monte de niveau avec tes potes et suis ton plan de course. Gratuit, sans mot de passe.">
@@ -2334,6 +2368,8 @@ const PH_INFO={entretien:["Entretien","garder la forme toute l'année : surtout 
  test:["Test","le moment de voir le chemin parcouru."],course:["Jour J","tout le travail est fait : profite."]};
 const pgWS=off=>addDays(ds(weekStart(new Date())),7*off);
 function pgSessName(e){const c=sessOf(e);return e.sec||((SESS[c]||RENFO[c]||["séance"])[0]+(QTAB[c]&&isTrail(PRG())?" en côte":""))}
+/* photo d'ambiance d'une séance : img_<clé>.jpg (sinon le dégradé de la marque) */
+function pgImgKey(p,e){const c=sessOf(e),t=pgSessType(e),tr=p&&p.race&&p.race.type==="trail";if(e.rec||c==="RW")return"rec";if(t==="renfo")return"renfo";if(t==="race")return tr?"race_trail":"race";if(t==="hard")return tr&&/côte|cote|D\+|montée/i.test(JSON.stringify(SESS[c]||""))?"hill":"hard";if(t==="long")return tr?"trail_long":"long";return tr?"trail":"easy"}
 function pgSessType(e){const c=sessOf(e);return RENFO[c]?"renfo":(SESS[c]||[])[3]||"easy"}
 function pgBadge(e,wk){const c=sessOf(e),t=pgSessType(e);if(c==="VMATEST"||c==="TEST")return["séance test","test"];if(["RACE","RACEB","RACEC"].includes(c))return["course","race"];if(e.rec)return["récup obligatoire","rec"];
   if(t==="long"||QTAB[c]||c==="C13")return["séance clé","key"];
@@ -2444,7 +2480,7 @@ function pgSessPage(p,key){const L=p.logs||{},plan=p.plan||[],e=plan.find(x=>ek(
   const c=sessOf(e),t=pgSessType(e),s=SESS[c]||RENFO[c]||["séance",""],lg=L[key],b=pgBadge(e),dp=pgDp(p,e);
   const ws=ds(weekStart(parse(e.date))),wl=plan.filter(x=>x.date>=ws&&x.date<=addDays(ws,6)),i=wl.indexOf(e)+1;const canVal=ws<=ds(weekStart(new Date()));
   const ty=PG_TYPE[(SESS[c]||[])[3]]||PG_TYPE.easy;
-  return `<div class="pgsp ${t}"><div class="pgsph"><button class="pgspx" data-pgclose>✕</button>${lg?`<span class="pgspok">✓ séance ${lg.status==="none"?"passée":"validée"}</span>`:b?`<span class="pgspok">${b[0]}</span>`:"<span></span>"}<button class="pgspx" data-pgmore="${esc(key)}">⋯</button>
+  return `<div class="pgsp ${t}"><div class="pgsph im-${pgImgKey(p,e)}"><button class="pgspx" data-pgclose>✕</button>${lg?`<span class="pgspok">✓ séance ${lg.status==="none"?"passée":"validée"}</span>`:b?`<span class="pgspok">${b[0]}</span>`:"<span></span>"}<button class="pgspx" data-pgmore="${esc(key)}">⋯</button>
    <div class="pgspt"><small>${e.date===today()?"aujourd'hui":fdate(e.date,{weekday:"long",day:"numeric",month:"long"})}</small><h1>${esc(pgSessName(e))}</h1></div></div>
    <div class="pgspb">
    ${lg?pgDoneCard(p,e,lg):""}
@@ -2782,7 +2818,7 @@ function vProgGoal(p){const r=p.race,t=today(),j=Math.max(0,Math.round((parse(r.
   const cy=pgCycles(p);const ci=Math.max(0,cy.findIndex(x=>x.st==="en cours"));const sel=Math.min(cy.length-1,Math.max(0,pgCyc<0?ci:pgCyc));const C=cy[sel]||{};const sc=pgScore(p),stx=pgScoreTxt(sc);
   const barW=weeks.map((x,i)=>`<div class="${i===nowW-1?"cur":""}"><i class="pl" style="height:${Math.round((tr?x.pS/3600/Math.max(1,...weeks.map(y=>y.pS/3600)):x.pK/mxK)*100)}%"></i><i class="dn" style="height:${Math.round((tr?x.dS/3600/Math.max(1,...weeks.map(y=>y.pS/3600)):x.dK/mxK)*100)}%"></i></div>`).join("");
   const barR=weeks.map((x,i)=>`<div class="${i===nowW-1?"cur":""}"><i class="pl" style="height:${Math.round(x.wk.length/mxN*100)}%"></i><i class="dn" style="height:${Math.round(x.n/mxN*100)}%"></i></div>`).join("");
-  return `<div class="pgsub s-${pgGS}"><div class="pgstabs">${[['apercu', 'aperçu'], ['progression', 'progression'], ['reglages', 'réglages']].map(([k,l])=>`<button class="${pgGS===k?"on":""}" data-pgsub="pgGS:${k}">${l}</button>`).join("")}</div><div data-g="apercu"><div class="pggoal ${r.type==="trail"?"trail":""}"><div class="pggh"><span class="pgbdg key">${md==="forme"?"forme":md==="perf"?"progression":r.type==="trail"?"trail":"route"}</span><span>${fdate(r.date,{day:"numeric",month:"short",year:"numeric"})}</span><b>J-${j}</b></div>
+  return `<div class="pgsub s-${pgGS}"><div class="pgstabs">${[['apercu', 'aperçu'], ['progression', 'progression'], ['reglages', 'réglages']].map(([k,l])=>`<button class="${pgGS===k?"on":""}" data-pgsub="pgGS:${k}">${l}</button>`).join("")}</div><div data-g="apercu"><div class="pggoal photo ${r.type==="trail"?"trail im-goal_trail":"im-goal_route"}"><div class="pggh"><span class="pgbdg key">${md==="forme"?"forme":md==="perf"?"progression":r.type==="trail"?"trail":"route"}</span><span>${fdate(r.date,{day:"numeric",month:"short",year:"numeric"})}</span><b>J-${j}</b></div>
    <h1>${esc(r.name)}</h1><div class="pgcs"><div><small>distance</small><b>${r.dist} km</b></div>${r.dplus?`<div><small>dénivelé</small><b>${r.dplus} m</b></div>`:""}<div><small>préparation</small><b>${W} sem.</b></div></div></div>
   ${c?pgTimeCard(p,hist,ws0,W,nowW):""}
   <button class="pgnextb" data-pgnext><span>🎯</span><span><b>préparer mon prochain objectif</b><small>${md!=="forme"&&!r.virtual?`départ possible à partir du ${fdate(recEnd(p),{day:"numeric",month:"long"})}, après ta récup`:"une course, une distance, une saison"}</small></span><em>›</em></button>
@@ -2841,7 +2877,7 @@ function pgWInit(p){p=p||{};const r=p.race||{};pgW={step:0,mode:p.mode||null,nam
 const pgSteps=()=>{const s=PGW_STEPS[pgW.mode||"course"].slice();if(pgW.type==="trail"&&pgW.mode!=="perf"){const i=s.indexOf(pgW.mode==="course"?"race":"disc");s.splice(i+1,0,"terrain")}return s};
 function pgRange(key,min,max,step,unit,fmt){const v=pgW[key];return `<div class="pgbigval"><b id="pgv-${key}">${fmt?fmt(v):v}</b><span>${unit}</span></div><input class="pgslider" type="range" min="${min}" max="${max}" step="${step}" value="${v}" data-pgw="${key}" style="--p:${((v-min)/(max-min)*100).toFixed(1)}%"><div class="pgscale"><span>${fmt?fmt(min):min}</span><span>${fmt?fmt(max):max}${max>=100&&key==="km"?"+":""}</span></div>`}
 function vProgSetup(p){if(!pgW)pgWInit(p);const W=pgW,steps=pgSteps(),k=steps[W.step],tot=steps.length;
-  const opt=(key,val,label,sub,ic)=>`<button class="pgopt ${String(W[key])===String(val)?"on":""}" data-pgset="${key}" data-val="${val}">${ic?`<span class="pgoi">${ic}</span>`:""}<span class="pgot"><b>${label}</b>${sub?`<small>${sub}</small>`:""}</span><span class="pgmr"></span></button>`;
+  const opt=(key,val,label,sub,ic)=>`<button class="pgopt ${String(W[key])===String(val)?"on":""} ${key==="mode"?"pgoph":""}" data-pgset="${key}" data-val="${val}">${key==="mode"?`<span class="pgoimg im-mode_${val}"></span>`:ic?`<span class="pgoi">${ic}</span>`:""}<span class="pgot"><b>${label}</b>${sub?`<small>${sub}</small>`:""}</span><span class="pgmr"></span></button>`;
   const chip=(key,val,label)=>`<button class="pgchip ${String(W[key])===String(val)?"on":""}" data-pgset="${key}" data-val="${val}" data-stay>${label}</button>`;
   let q="",sub="",body="",auto=false;
   if(k==="type"){q="quel est ton objectif ?";sub="tu pourras ajouter des objectifs secondaires ensuite.";body=PG_MODES.map(([m,n,d,ic])=>opt("mode",m,n,d,ic)).join("");auto=true}
@@ -3097,10 +3133,10 @@ function openProgResult(){const p=PRG();if(!p)return;
       const q=JSON.parse(JSON.stringify(p)),km=raceKm(q.race);q.result={sec,date:today()};q.perf={km,sec};const nv=(km/(sec/3600))/pctFor(km);q.vmaAdj=+(nv-q.vma0).toFixed(2);
       q.msgs=[{date:today(),m:`🏅 finisher en ${fmtTime(sec)} ! nouvelle allure VMA : ${fmtPace(nv)} /km, tes allures sont recalculées.`},...(q.msgs||[])];closeSheet();savePrg(q);toast("bravo finisher 🏅")}})}
 function progQGCard(){if(!PROG_ON())return"";const p=PRG();
-  if(!p||!p.plan)return `<button class="nextc" data-nav="prog"><span class="nk"><span>ton programme</span><em>gratuit</em></span><span class="nn">Prépare ta prochaine course</span><span class="nm">10 km, semi, marathon ou trail : un plan qui s'adapte à toi.</span><span class="ng"><span>2 minutes pour le créer</span><b>commencer</b></span></button>`;
+  if(!p||!p.plan)return `<button class="nextc hasimg" data-nav="prog"><span class="nimg im-start"></span><span class="nk"><span>ton programme</span><em>gratuit</em></span><span class="nn">Prépare ta prochaine course</span><span class="nm">10 km, semi, marathon ou trail : un plan qui s'adapte à toi.</span><span class="ng"><span>2 minutes pour le créer</span><b>commencer</b></span></button>`;
   const e=nextSess(p);if(!e)return"";const s=SESS[sessOf(e)]||RENFO[sessOf(e)]||["séance"],j=Math.round((parse(p.race.date)-parse(today()))/864e5);
   const ws=ds(weekStart(new Date())),st=pgWeekStats(p,ws);
-  return `<button class="nextc" data-nav="prog"><span class="nk"><span>${e.date<=today()?"ta séance":"prochaine séance"}</span><em>J-${j} · ${esc(p.race.name)}</em></span>
+  return `<button class="nextc hasimg" data-nav="prog"><span class="nimg im-${pgImgKey(p,e)}"></span><span class="nk"><span>${e.date<=today()?"ta séance":"prochaine séance"}</span><em>J-${j} · ${esc(p.race.name)}</em></span>
    <span class="nn">${esc(pgSessName(e))}</span><span class="nm">${esc(sessText(p,e))}</span>
    ${st.wk.length?`<span class="wkb">${st.wk.map(x=>`<i class="${(p.logs||{})[ek(x)]?"on":""}"></i>`).join("")}</span>`:""}
    <span class="ng"><span>${st.n}/${st.wk.length} séance${st.wk.length>1?"s":""} cette semaine</span><b>voir</b></span></button>`}
