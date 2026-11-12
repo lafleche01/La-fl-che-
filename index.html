@@ -349,6 +349,15 @@ button.stage{width:100%;text-align:left}
 .pgmqw.sm,.pgmqw.sm .pgmq{width:58px;height:58px}.rfrest{padding:7px 10px;border-top:1px dashed var(--line);font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.1em}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.srw{display:flex;flex-direction:column}.srw .sr{flex:1}.pradd{align-self:flex-start;margin:-2px 0 8px 2px;background:none;border:0;color:var(--gold);font-weight:700;font-size:13px;padding:4px 0;cursor:pointer}
 .bugbig{display:flex;align-items:center;gap:14px;width:100%;margin:4px 0 14px;padding:14px 16px;background:var(--panel);border:1px solid var(--line);color:var(--ink);text-align:left;cursor:pointer}.bugbig>span:first-child{font-size:24px}.bugbig b{display:block;font-size:16px}.bugbig small{display:block;color:var(--mute);font-size:13px;margin-top:2px}.bugbig span:nth-child(2){flex:1}.bugbig em{font-style:normal;font-size:22px;color:var(--mute)}
+.pgbil{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);padding:14px;margin:10px 0}.pgbilh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.pgbilh b{font-size:16px}.pgbilh span{font-size:12px;color:var(--mute)}
+.pgbilg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0}.pgbilg div{background:var(--panel2);padding:8px 6px;text-align:center}.pgbilg b{display:block;font-family:'Barlow Condensed';font-style:italic;font-weight:900;font-size:22px}.pgbilg b small{font-size:14px;color:var(--mute)}.pgbilg span{font-size:11px;color:var(--mute)}
+.pgbilw{margin:0;font-size:14px;font-weight:600}.pgbilm{margin-top:10px;padding-top:8px;border-top:1px solid var(--line)}.pgbilm small{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:4px}.pgbilm p{margin:4px 0;font-size:13px}
+.pglastb{display:flex;justify-content:space-between;align-items:center;width:100%;margin:8px 0;padding:12px 14px;background:var(--panel);border:1px solid var(--line);color:var(--ink);font-weight:700;font-size:14px;text-align:left}.pglastb em{font-style:normal;color:var(--gold);font-size:20px}
+.pgxtra{margin:14px 0 6px}.pgxtrah{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}.pgxtrah b{font-size:15px}
+.pgxrow{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--panel);border:1px solid var(--line);margin-bottom:6px}.pgxrow>div{flex:1}.pgxrow b{display:block;font-size:14px}.pgxrow small{color:var(--mute);font-size:12px}.pgxi{font-size:20px}.pgxdel{background:none;border:0;color:var(--mute);font-size:16px;padding:4px 6px}
+.pgnextb{display:flex;align-items:center;gap:12px;width:100%;margin:12px 0;padding:14px 16px;background:var(--panel);border:1px dashed var(--gold);color:var(--ink);text-align:left;cursor:pointer}.pgnextb>span:first-child{font-size:22px}.pgnextb span:nth-child(2){flex:1}.pgnextb b{display:block;font-size:15px}.pgnextb small{display:block;color:var(--mute);font-size:12px;margin-top:2px}.pgnextb em{font-style:normal;font-size:22px;color:var(--gold)}
+.trkhr{display:block;margin:6px 0 0;font-size:13px;color:#ccc}.trkhr small{color:#8a8a92}.trkhr input{display:block;width:100%;margin-top:4px;background:#141416;border:1px solid #333;color:#fff;padding:10px;font-size:16px}
+.pgest b.g{color:#22a35a}
 .hgrid .box.today{border-color:var(--gold)!important;box-shadow:inset 0 0 0 1px var(--gold)}
 .trkbug{background:none;border:0;color:#9a9aa2;font-size:13px;padding:6px;text-decoration:underline}
 .fnbar{display:grid;grid-template-columns:120px 1fr 70px;gap:10px;align-items:center;margin:6px 0;font-size:14px}.fnbar i{display:block;height:22px;background:var(--gold);min-width:2px}.fnbar span:last-child{text-align:right;font-weight:700}.fnbar small{color:var(--mute);font-weight:400}
@@ -800,6 +809,158 @@ html.hlock,html.hlock body{overflow:hidden;touch-action:none;overscroll-behavior
 .hname.hdragsrc{opacity:.35}
 .hghost{position:fixed;left:0;top:0;z-index:400;pointer-events:none;padding:12px 16px;background:var(--gold);color:#000;font-family:'Barlow Condensed';font-style:italic;font-weight:900;font-size:18px;text-transform:uppercase;box-shadow:0 12px 30px rgba(0,0,0,.45);max-width:70vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hline{position:fixed;z-index:399;height:3px;background:var(--gold);pointer-events:none;box-shadow:0 0 0 3px rgba(255,193,7,.25)}
+
+/* =================== REFONTE « AÉRÉE » : surfaces arrondies, moins de capitales, plus d'espace =================== */
+:root{--r:18px;--rs:12px;--shadow:0 1px 2px rgba(0,0,0,.25)}
+html.light{--shadow:0 1px 2px rgba(20,20,22,.04),0 8px 24px rgba(20,20,22,.06)}
+html.light{--bg:#F6F5F1;--panel2:#F0EFEA}
+body{font-size:15.5px}
+/* plus d'angles coupés sur les grandes surfaces */
+.tile,.set,.tutocard,.agev,.unl div,.pgcard,.pgcardx,.pgov,.pggoal,.pgbil,.pgxrow,.alert,.instb,.commu,.bugbig,.seasoncard,.kpi,.card,.box,.pglastb,.pgnextb,.pgcoachb,.pgsrc{clip-path:none!important}
+.tile,.set,.pgcard,.pgcardx,.pgov,.pggoal,.pgbil,.pgxrow,.alert,.instb,.commu,.bugbig,.seasoncard,.kpi,.pglastb,.pgnextb,.pgcoachb,.tutocard{border-radius:var(--r);border:0!important;box-shadow:var(--shadow)}
+.pgxrow{border-radius:var(--rs)}
+.btn{border-radius:999px}
+.chip,.pgchip,.pgsrc{border-radius:var(--rs)}
+input,select,textarea{border-radius:var(--rs)}
+/* titres et étiquettes : casse normale */
+.tag{font-family:'Barlow',sans-serif!important;font-style:normal!important;font-weight:600!important;font-size:13.5px!important;letter-spacing:0!important;text-transform:none!important;color:var(--mute)!important}
+.tag::before{display:none}
+.tag::first-letter{text-transform:uppercase}
+h1{font-size:clamp(32px,8.6vw,46px)!important;line-height:1.02!important;text-transform:none!important;margin-top:6px!important;letter-spacing:-.005em}
+h1 br{display:none}h1 .g{margin-left:.22em}
+.label,.section-label{font-family:'Barlow',sans-serif!important;font-style:normal!important;font-weight:600!important;font-size:13px!important;letter-spacing:.01em!important;text-transform:none!important}
+.pgcs small,.pgovg small,.kpi span,.pgest small,.pgbilm small,.pglab{text-transform:none!important;letter-spacing:0!important;font-size:12px!important}
+.sub{line-height:1.5}
+/* sections plus espacées */
+#view>*+*{margin-top:18px}
+.list,.tiles{gap:12px}
+/* en-tête : logo, puis avatar + menu à droite */
+.appbar{padding:10px 0 10px;margin-bottom:4px}
+.brand .brandlogo{height:38px}
+.lvchip{display:flex;gap:8px}
+.lvchip i{display:none}
+.lvchip span{font-size:13px}
+.menub{width:40px;height:40px;border-radius:50%;background:var(--panel);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;color:var(--txt);border:0;cursor:pointer;flex:none}
+.menub svg{width:20px;height:20px}.menub.on{background:var(--gold);color:#000}
+/* barre du bas : 4 onglets plus larges */
+nav.bottom button,nav.bottom .navext{flex:1}
+nav.bottom span{letter-spacing:.02em!important;text-transform:none!important;font-family:'Barlow',sans-serif!important;font-style:normal!important;font-weight:600!important;font-size:11.5px!important}
+/* accueil */
+.hero{margin-top:6px!important;gap:16px!important}
+.ring{width:88px!important;height:88px!important}
+.ring .rlv{font-size:12px}
+.hname1{font-size:clamp(28px,8vw,38px)!important}
+.hname1 .g{margin-left:.22em}
+.stg,.kmt{font-size:13.5px}
+.xpbar{margin-top:14px!important}
+.nextc{display:block;width:100%;text-align:left;padding:20px 18px;border:0;border-radius:var(--r);background:var(--panel);box-shadow:var(--shadow);color:inherit;font:inherit;cursor:pointer;margin-top:18px}
+.nextc .nk{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--mute);font-weight:600}
+.nextc .nk em{font-style:normal;color:var(--gold);font-weight:700}
+html.light .nextc .nk em{color:color-mix(in srgb,var(--gold) 62%,#3a2a00)}
+.nextc .nn{display:block;font-family:'Barlow Condensed';font-style:italic;font-weight:900;font-size:30px;line-height:1.05;margin:8px 0 4px}
+.nextc .nm{font-size:14.5px;color:var(--mute)}
+.nextc .ng{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:13.5px}
+.nextc .ng b{background:var(--gold);color:#000;padding:9px 18px;border-radius:999px;font-weight:700;font-size:14px}
+.nextc .wkb{display:flex;gap:5px;margin-top:14px}.nextc .wkb i{flex:1;height:5px;border-radius:3px;background:var(--panel2)}.nextc .wkb i.on{background:var(--gold)}
+.helpc{display:flex;align-items:center;gap:12px;width:100%;margin-top:14px;padding:14px 16px;border-radius:var(--r);background:var(--panel);box-shadow:var(--shadow);color:inherit;text-decoration:none;text-align:left;font:inherit;border:0;cursor:pointer}
+.helpc .hi{font-size:22px;flex:none}.helpc .ht{flex:1}.helpc b{display:block;font-size:15px}.helpc small{display:block;color:var(--mute);font-size:12.5px;margin-top:2px}
+.helpc .hx{flex:none;background:none;border:0;color:var(--mute);font-size:13px;padding:6px;cursor:pointer;text-decoration:underline}
+.qgfoot{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.alert.gold{color:inherit!important;background:var(--panel)}
+.alert{padding:14px 16px!important}
+.commu.big{background:var(--panel)!important}
+.instb{background:var(--panel)!important}
+/* programme : séances en lignes compactes */
+.pgcard{padding:16px!important}
+.pgcard .pgcs,.pgcard .pgcd{display:none}
+.pgcard .pgmeta{display:block;font-size:13.5px;color:var(--mute);margin-top:3px}
+.pgcard .pgch b{font-size:21px}
+.pgcard.done{opacity:.72}
+.pgov{padding:16px 18px!important}
+/* menu */
+.tile{aspect-ratio:auto!important;min-height:118px;padding:16px 12px}
+.tile b,.tile .tn{text-transform:none!important}
+
+.pgtabs{border:0!important;border-radius:999px;background:var(--panel2)!important;padding:4px!important;box-shadow:none}
+.pgtabs button{border-radius:999px!important;font-family:'Barlow',sans-serif!important;font-style:normal!important;font-weight:600!important;text-transform:none!important;letter-spacing:0!important;font-size:14.5px!important;clip-path:none!important}
+.pgtabs button.on{background:var(--panel)!important;color:var(--txt)!important;box-shadow:var(--shadow)}
+.pgwnav>button{border:0!important;border-radius:50%!important;box-shadow:var(--shadow)}
+.instb b,.instb .ct b{font-family:'Barlow',sans-serif!important;font-style:normal!important;text-transform:none!important;letter-spacing:0!important;font-size:15px!important;color:var(--txt)!important;font-weight:700!important}
+.pgcard .pgch>div>b{font-family:'Barlow Condensed';text-transform:none!important}
+
+.xpbar{background:var(--panel);border-radius:var(--r);box-shadow:var(--shadow);padding:14px 16px}
+.xpbar .row{padding:0!important;background:none!important;box-shadow:none!important;border:0!important}
+.xpbar .bar{margin-top:10px;height:6px;border-radius:99px;overflow:hidden;background:var(--panel2)!important;clip-path:none!important}
+.xpbar .fill{border-radius:99px}
+.xpbar .row{display:flex!important;justify-content:space-between;align-items:center;gap:10px;overflow:visible!important;width:auto!important}.xpbar .row .label{white-space:nowrap;padding-right:2px}.xpbar .row{clip-path:none!important;min-height:0!important}
+
+/* =================== DA 2 : plus calme, plus lisible =================== */
+.section-label{font-family:'Barlow',sans-serif!important;font-style:normal!important;font-weight:800!important;font-size:19px!important;letter-spacing:-.005em!important;text-transform:none!important;color:var(--txt)!important;margin-top:32px!important;margin-bottom:2px}
+.section-label::before,.section-label::after{display:none!important}
+.section-label b{color:inherit!important}
+.btn{clip-path:none!important;border-radius:999px!important;font-family:'Barlow',sans-serif!important;font-style:normal!important;font-weight:700!important;text-transform:none!important;letter-spacing:0!important;font-size:14.5px!important;padding:12px 20px!important}
+.btn.small{padding:9px 16px!important;font-size:13.5px!important}
+.btn.ghost{background:transparent!important;box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.main{background:var(--gold)!important;color:#141416!important}
+.chip{border-radius:999px!important;text-transform:none!important;letter-spacing:0!important;font-size:13px!important;clip-path:none!important}
+.row{clip-path:none!important;border:0!important;border-radius:var(--rs)!important;box-shadow:var(--shadow)}
+.list{display:flex;flex-direction:column;gap:10px}
+.wch,.box,.hgrid .box,.duel,.cardx,.teamcard,.badge,.stage,.perf,.set,.unl div,.avo,.agd{clip-path:none!important}
+.wch,.duel,.teamcard,.perf{border-radius:var(--r)!important;border:0!important;box-shadow:var(--shadow)}
+.badge,.stage{border-radius:var(--rs)!important}
+.subnav,.subnav button{clip-path:none!important}
+.subnav button{border-radius:999px!important;text-transform:none!important;letter-spacing:0!important;font-family:'Barlow',sans-serif!important;font-style:normal!important;font-weight:600!important}
+.hadd{border-radius:var(--rs)!important;text-transform:none!important;letter-spacing:0!important;font-family:'Barlow',sans-serif!important;font-style:normal!important;font-weight:600!important}
+.sheet,#sheet,.sheetin{border-radius:24px 24px 0 0}
+.empty,.hempty{border-radius:var(--r)!important;clip-path:none!important}
+
+.kpi,.stat,.panel,.row,.card,.perf,.duel,.wch,.stage,.badge,.sr,.alert,.empty,.add-in,.sheet{clip-path:none!important}
+.empty{background:var(--panel)!important;border:0!important;box-shadow:var(--shadow);font-weight:400}
+.empty b{display:block;font-family:'Barlow Condensed';font-style:italic;font-weight:800;font-size:22px;color:var(--txt);margin-bottom:4px;text-transform:none}
+.subtabs{border:0!important;background:var(--panel2);border-radius:999px;padding:4px;gap:2px}
+.subtab{flex:1;border:0!important;border-radius:999px;text-transform:none!important;letter-spacing:0!important;font-weight:600;font-size:14px!important;margin:0!important;text-align:center;padding:9px 8px!important}
+.subtab.on{background:var(--panel);color:var(--txt)!important;box-shadow:var(--shadow)}
+.sheet{border-top:0!important;border-radius:24px 24px 0 0;padding-top:26px!important}
+.sheet::before{content:"";display:block;width:40px;height:5px;border-radius:3px;background:var(--line);margin:-12px auto 4px}
+.wch{border:0!important;background:var(--panel)!important;box-shadow:var(--shadow);border-left:4px solid var(--gold)!important}
+.wtag{text-transform:none!important;letter-spacing:0!important;font-size:13px!important;font-weight:700}
+.add-in{border-radius:999px!important}
+
+.subtab{font-family:'Barlow',sans-serif!important;font-style:normal!important}
+.back{font-family:'Barlow',sans-serif!important;font-style:normal!important;font-weight:600!important;text-transform:none!important;letter-spacing:0!important;font-size:14.5px!important;color:var(--mute)!important}
+.srow>span{font-family:'Barlow',sans-serif!important;font-style:normal!important;font-weight:600!important;text-transform:none!important;letter-spacing:0!important;color:var(--txt)!important;font-size:15px!important}
+.pgtop small{text-transform:none!important;letter-spacing:0!important;font-size:13.5px!important;font-weight:600}
+.pgtop b{text-transform:none!important}
+.pgstabs{border:0!important;background:var(--panel2);border-radius:999px;padding:4px;gap:2px!important}
+.pgstabs button{flex:1;border:0!important;border-radius:999px;margin:0!important;padding:8px 6px!important;text-transform:none!important;letter-spacing:0!important;font-weight:600;font-size:13.5px!important}
+.pgstabs button.on{background:var(--panel);color:var(--txt)!important;box-shadow:var(--shadow)}
+.chip{font-family:'Barlow',sans-serif!important;font-style:normal!important;font-weight:600!important}
+
+/* emblème */
+svg.av.em{border-radius:50%;display:block}
+.emhero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;margin-top:14px}
+.embig{width:150px;height:150px;filter:drop-shadow(0 10px 24px rgba(0,0,0,.18))}.embig svg{width:100%;height:100%}
+.emhero h1{margin-top:10px!important}
+.emst{font-weight:700;font-size:15px}.emkm{color:var(--mute);font-size:14px}
+.emhero .kmbar{width:180px}.emhero .btn{margin-top:8px}
+.emopts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+.emo{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;background:var(--panel);border-radius:var(--rs);box-shadow:var(--shadow);border:2px solid transparent;color:inherit;cursor:pointer;font:inherit}
+.emo svg{width:56px;height:56px}.emo span{font-size:12px;color:var(--mute);text-align:center;line-height:1.2}
+.emo.on{border-color:var(--gold)}.emo.on span{color:var(--txt);font-weight:700}
+.emo.lock{opacity:.45}
+.emroad{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px}
+.emroad>div{display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.45}.emroad>div.ok{opacity:1}
+.emroad svg{width:58px;height:58px}.emroad small{font-weight:700;font-size:12.5px;text-align:center}.emroad i{font-style:normal;color:var(--mute);font-size:11.5px}
+.obav.em4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.obav.em4 .obavb{padding:10px 4px!important;border-radius:var(--rs);clip-path:none!important}
+.obav.em4 .obavb svg{width:60px;height:60px;margin:0 auto}
+.obav.em4 .obavb span{font-size:12.5px!important;text-transform:none!important;letter-spacing:0!important;font-style:normal!important;font-family:'Barlow',sans-serif!important}
+
+.embig{width:180px!important;height:180px!important}
+.emopts{grid-template-columns:repeat(4,1fr)}
+.emo svg{width:64px!important;height:64px!important}
+
+.emtx{display:flex;gap:8px;margin-top:10px}.emtx input{flex:1;font-family:'Barlow Condensed';font-style:italic;font-weight:900;font-size:22px;letter-spacing:.06em;text-transform:uppercase;padding:10px 14px}
 </style>
 <script>try{var m=localStorage.getItem("lf_mode")||"auto";if(m==="clair"||(m==="auto"&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.classList.add("light")}catch(_){}</script>
 <meta name="description" content="Coche tes habitudes, monte de niveau avec tes potes et suis ton plan de course. Gratuit, sans mot de passe.">
@@ -939,11 +1100,7 @@ const AV={
  acc:{n:"équipement",o:[["rien",1],["écouteurs",24],["sac de trail",30]]},
 };
 const AV_DEF={face:0,skin:0,hair:0,hairC:0,beard:0,head:0,eyes:0,top:0,topC:0,acc:0};
-const UNLOCK_LIST=(()=>{const m={};const add=(L,x)=>(m[L]=m[L]||[]).push(x);
-  Object.values(AV).forEach(c=>c.o.forEach(([v,L])=>{if(L>1)add(L,`avatar : ${c.n.startsWith("couleur")?c.n+" "+(v.startsWith("#")?"spéciale":v):v}`)}));
-  PALIERS.forEach(L=>add(L,`contour ${STAGES.find(x=>x[0]===L)?STAGES.find(x=>x[0]===L)[1]:""}`));
-  add(40,"médaille de bronze");add(60,"médaille d'argent");add(90,"médaille d'or");add(100,"couronne de laurier");
-  return m})();
+let UNLOCK_LIST={};
 const unlocked=f=>curL>=FEAT[f];
 const lockMsg=f=>toast(`🔒 se débloque au niveau ${FEAT[f]}`);
 function jokersPerMonth(){return 1}
@@ -1233,97 +1390,152 @@ const SND=(()=>{const get=(k,d)=>{try{return localStorage.getItem(k)||d}catch(_)
 /* ================= LOGO ================= */
 const LOGO=`<img src="logo_mark.png" alt="La Flèche" style="width:100%;height:100%;object-fit:contain">`;
 /* ================= AVATAR ================= */
-function avatarSvg(cfg,L,cls=""){
-  const c={...AV_DEF,...(cfg||{})},pick=k=>AV[k].o[Math.min(c[k]||0,AV[k].o.length-1)][0];
-  const skin=pick("skin"),hairC=pick("hairC"),topC=pick("topC"),hair=pick("hair"),head=pick("head"),eyes=pick("eyes"),top=pick("top"),acc=pick("acc"),beard=pick("beard"),fem=pick("face")==="féminin";
-  const si=stageIdx(L),sc=STAGE_COL[si],id="a"+Math.random().toString(36).slice(2,8);
-  const mix=(x,y,p)=>`color-mix(in srgb, ${x} ${p}%, ${y})`;
-  const sd=mix(skin,"#3a1d10",78),sl=mix(skin,"#fff",82),hd=mix(hairC,"#000",65),hl=mix(hairC,"#fff",72),td=mix(topC,"#000",70),tl=mix(topC,"#fff",85);
-  const lip=mix(skin,"#a8423a",60),lipF=mix(skin,"#c2414f",45),gold="#FFC107";
-  const capOn=head==="casquette"||head==="bonnet";
-  let s=`<svg viewBox="0 0 120 120" class="avsvg ${cls} ${L>=100?"legend":""}"><defs>
-   <radialGradient id="${id}bg" cx="50%" cy="30%" r="75%"><stop offset="0" stop-color="${sc}" stop-opacity=".55"/><stop offset="1" stop-color="#101012"/></radialGradient>
-   <linearGradient id="${id}sk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${sl}"/><stop offset=".55" stop-color="${skin}"/><stop offset="1" stop-color="${sd}"/></linearGradient>
-   <linearGradient id="${id}hr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${hl}"/><stop offset=".5" stop-color="${hairC}"/><stop offset="1" stop-color="${hd}"/></linearGradient>
-   <linearGradient id="${id}tp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${tl}"/><stop offset="1" stop-color="${td}"/></linearGradient>
-   <radialGradient id="${id}ch" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#e0786a" stop-opacity=".28"/><stop offset="1" stop-color="#e0786a" stop-opacity="0"/></radialGradient>
-   <clipPath id="${id}c"><circle cx="60" cy="60" r="55"/></clipPath></defs>
-  <circle cx="60" cy="60" r="55" fill="url(#${id}bg)"/><g clip-path="url(#${id}c)"><g transform="translate(-9 -3) scale(1.15)">`;
-  // cheveux arrière
-  if(hair==="longs"&&!capOn)s+=`<path d="M38 46 C34 64 35 82 40 94 C48 99 72 99 80 94 C85 82 86 64 82 46 Z" fill="url(#${id}hr)"/>`;
-  if(hair==="longs"&&capOn)s+=`<path d="M40 52 C37 68 38 82 42 92 C50 96 70 96 78 92 C82 82 83 68 80 52 Z" fill="url(#${id}hr)"/>`;
-  if(hair==="queue de cheval")s+=`<path d="M73 31 C87 33 93 52 88 72 C86 80 81 83 78 79 C84 64 84 46 75 38 Z" fill="url(#${id}hr)"/>`;
-  if(hair==="carré")s+=`<path d="M38.5 44 C35.5 56 36 68 39.5 75 C46 77 74 77 80.5 75 C84 68 84.5 56 81.5 44 Z" fill="url(#${id}hr)"/>`;
-  // buste
-  const shoulders="M6 124 C8 103 24 93 43 89 C49 88 53 86 54 82 L66 82 C67 86 71 88 77 89 C96 93 112 103 114 124 Z";
-  if(top==="débardeur"){
-    s+=`<path d="${shoulders}" fill="url(#${id}sk)"/><path d="M24 104 C30 98 36 95 42 94" stroke="${sd}" stroke-width="1.5" fill="none" opacity=".5"/><path d="M96 104 C90 98 84 95 78 94" stroke="${sd}" stroke-width="1.5" fill="none" opacity=".5"/>
-     <path d="M30 124 C31 106 37 95 44 90 C48 96 53 100 60 100 C67 100 72 96 76 90 C83 95 89 106 90 124 Z" fill="url(#${id}tp)"/>
-     <path d="M44 90 C48 96 53 100 60 100 C67 100 72 96 76 90" stroke="${td}" stroke-width="2" fill="none"/>`;
-  }else{
-    s+=`<path d="${shoulders}" fill="url(#${id}tp)"/>
-     <path d="M48 86 C51 93 55 96 60 96 C65 96 69 93 72 86" fill="url(#${id}sk)"/>
-     <path d="M47 85.5 C50.5 94 55 97.5 60 97.5 C65 97.5 69.5 94 73 85.5" stroke="${td}" stroke-width="2.6" fill="none"/>
-     <path d="M30 124 C31 112 33 104 36 99M90 124 C89 112 87 104 84 99" stroke="${td}" stroke-width="1.4" fill="none" opacity=".55"/>`;
-    if(top==="coupe-vent")s+=`<path d="M45 84 C48 92 54 97 60 97 C66 97 72 92 75 84 L76 78 C70 83 50 83 44 78Z" fill="${td}"/><path d="M60 97 V124" stroke="${td}" stroke-width="2.2"/><path d="M61.5 100 V124" stroke="${tl}" stroke-width=".8" opacity=".6"/><path d="M18 110 C24 104 30 101 36 99" stroke="#fff" stroke-opacity=".18" stroke-width="3" fill="none"/>`;
-  }
-  if(acc==="sac de trail")s+=`<path d="M39 90 C41 100 42 112 42 124M81 90 C79 100 78 112 78 124" stroke="#1d1d22" stroke-width="6.5" stroke-linecap="round"/><path d="M40 106 h7 v12 h-7z M73 106 h7 v12 h-7z" fill="#8fd6f5" opacity=".85"/><path d="M42 108 h42" stroke="#1d1d22" stroke-width="2"/>`;
-  // dossard + médaille
-  s+=`<g transform="rotate(-3 60 112)"><rect x="47" y="103" width="26" height="16" rx="1.5" fill="#F4F4EF"/><rect x="47" y="103" width="26" height="3.2" fill="${gold}"/><text x="60" y="117" text-anchor="middle" font-family="Barlow Condensed" font-style="italic" font-weight="900" font-size="11" fill="#151515">${L}</text></g>`;
-  const med=L>=90?gold:L>=60?"#C9CED6":L>=40?"#CD7F32":null;
-  if(med)s+=`<path d="M52 86 L58 101 M68 86 L62 101" stroke="#B83227" stroke-width="3.4"/><circle cx="60" cy="102" r="6" fill="${med}" stroke="${mix(med,"#000",60)}" stroke-width="1.3"/><circle cx="58.3" cy="100.3" r="1.6" fill="#fff" opacity=".55"/>`;
-  // cou
-  s+=`<path d="M51 64 C51 73 52 80 49 86 C53 91 67 91 71 86 C68 80 69 73 69 64 Z" fill="url(#${id}sk)"/><path d="M51 70 C55 76 65 76 69 70 L69 76 C64 80 56 80 51 76Z" fill="${sd}" opacity=".45"/>`;
-  // oreilles + visage
-  s+=`<path d="M41.5 50 C37 48 35.5 54 37.5 58 C38.5 61 40.5 62.5 42.5 61.5Z" fill="${skin}"/><path d="M78.5 50 C83 48 84.5 54 82.5 58 C81.5 61 79.5 62.5 77.5 61.5Z" fill="${sd}"/>
-   <path d="${fem?"M41.5 47 C41.5 32 49 24 60 24 C71 24 78.5 32 78.5 47 C78.5 59 75 68 68.5 74 C65.5 76.6 54.5 76.6 51.5 74 C45 68 41.5 59 41.5 47 Z":"M41 47 C41 32 49 24 60 24 C71 24 79 32 79 47 C79 60 75 70 67.5 75.5 C64 78 56 78 52.5 75.5 C45 70 41 60 41 47 Z"}" fill="url(#${id}sk)"/>
-   <ellipse cx="48" cy="61" rx="6" ry="4" fill="url(#${id}ch)"/><ellipse cx="72" cy="61" rx="6" ry="4" fill="url(#${id}ch)"/>
-   <path d="M71 30 C77 36 79 46 78 56" stroke="${sd}" stroke-width="3" fill="none" opacity=".35"/>`;
-  // barbe
-  if(beard==="légère")s+=`<path d="M42.5 55 C43 66 47 72 52.5 75.5 C56 78 64 78 67.5 75.5 C73 72 77 66 77.5 55 C75 64 71 69 66 70 C62 68.5 58 68.5 54 70 C49 69 45 64 42.5 55Z" fill="${hairC}" opacity=".28"/>`;
-  if(beard==="fournie")s+=`<path d="M42 52 C42 66 46 74 52 78 C56 81 64 81 68 78 C74 74 78 66 78 52 C76 60 72 66 67 67.5 C63 65.5 57 65.5 53 67.5 C48 66 44 60 42 52Z" fill="url(#${id}hr)"/><path d="M53 66 C56 64.5 64 64.5 67 66 C64 67.3 56 67.3 53 66Z" fill="${hd}"/>`;
-  // yeux
-  const eye=(x)=>`<path d="M${x-4.6} 50.5 Q${x} 47.2 ${x+4.6} 50.5 Q${x} 53 ${x-4.6} 50.5Z" fill="#fbfaf7"/><circle cx="${x}" cy="50.4" r="2" fill="#4a2f1e"/><circle cx="${x}" cy="50.4" r="1" fill="#0e0907"/><circle cx="${x+.7}" cy="49.7" r=".55" fill="#fff"/><path d="M${x-4.8} 50.4 Q${x} 46.6 ${x+4.8} 50.4" stroke="#2a1a12" stroke-width="1.1" fill="none"/>`;
-  s+=eye(52)+eye(68);
-  if(fem)s+=`<path d="M47.6 49.6 l-2 -0.9 M48.4 48.7 l-1.5 -1.4 M72.4 49.6 l2 -0.9 M71.6 48.7 l1.5 -1.4" stroke="#2a1a12" stroke-width=".85" stroke-linecap="round"/><path d="M47.4 50.4 Q52 46.2 56.6 50.2 M63.4 50.2 Q68 46.2 72.6 50.4" stroke="#2a1a12" stroke-width="1.5" fill="none"/>`;
-  const bc=hair==="chauve"||hair==="rasés"?mix(hairC,skin,55):hairC;
-  s+=fem?`<path d="M46.8 45.2 C49.5 42.4 54 42.2 57 44.2" stroke="${bc}" stroke-width="1.2" fill="none" stroke-linecap="round"/><path d="M73.2 45.2 C70.5 42.4 66 42.2 63 44.2" stroke="${bc}" stroke-width="1.2" fill="none" stroke-linecap="round"/>`:`<path d="M46.5 45.5 C49 43.3 53.5 43 57 44.6 L56.6 46 C53.5 45 50 45.2 47 46.6Z" fill="${bc}"/><path d="M73.5 45.5 C71 43.3 66.5 43 63 44.6 L63.4 46 C66.5 45 70 45.2 73 46.6Z" fill="${bc}"/>`;
-  // nez + bouche
-  s+=`<path d="M60.5 51 C60 56 58.5 59.5 57 61 C58.5 62.4 61.5 62.4 63 61.2" stroke="${sd}" stroke-width="1.3" fill="none" stroke-linecap="round" opacity=".85"/><ellipse cx="58" cy="61.4" rx="1.1" ry=".7" fill="${sd}" opacity=".6"/><ellipse cx="62.2" cy="61.4" rx="1.1" ry=".7" fill="${sd}" opacity=".6"/>`;
-  if(fem&&beard!=="fournie")s+=`<path d="M54.5 66.2 Q57 64.6 60 65.4 Q63 64.6 65.5 66.2 Q60 67.6 54.5 66.2Z" fill="${lipF}"/><path d="M54.8 66.4 Q60 71.2 65.2 66.4 Q60 67.9 54.8 66.4Z" fill="${lipF}"/><path d="M57 68.3 Q60 69.4 63 68.3" stroke="#fff" stroke-opacity=".35" stroke-width=".7" fill="none"/>`;
-  else if(beard!=="fournie")s+=`<path d="M54.5 66.4 Q57 65.4 60 66 Q63 65.4 65.5 66.4 Q60 67.6 54.5 66.4Z" fill="${lip}"/><path d="M55 66.6 Q60 70.4 65 66.6 Q60 67.9 55 66.6Z" fill="${mix(lip,"#fff",85)}"/><path d="M54 66.4 Q60 67.8 66 66.4" stroke="${mix(lip,"#000",60)}" stroke-width=".8" fill="none"/>`;
-  else s+=`<path d="M55.5 69 Q60 71 64.5 69" stroke="${lip}" stroke-width="2" fill="none" stroke-linecap="round"/>`;
-  // cheveux avant
-  if(!capOn){
-    if(hair==="courts")s+=`<path d="M40.5 48 C38.5 33 46 22.5 60 22.5 C74 22.5 81.5 33 79.5 48 C78.5 41 76 36.5 71 34 C66 37.5 57 38.5 50 36 C45.5 38.5 42 42.5 40.5 48 Z" fill="url(#${id}hr)"/><path d="M50 27 C56 25 65 25.5 70 29" stroke="${hl}" stroke-width="1.6" fill="none" opacity=".7"/><path d="M52 36 C55 33 58 31.5 62 31M58 37 C61 34 64 33 68 33" stroke="${hd}" stroke-width="1" fill="none" opacity=".6"/>`;
-    if(hair==="longs")s+=`<path d="M40 52 C38 33 46 22.5 60 22.5 C74 22.5 82 33 80 52 C78 42 74 35 66 33 C60 36 52 37 46 35 C43 40 41 45 40 52 Z" fill="url(#${id}hr)"/><path d="M41 46 C39 58 39.5 70 42 80 L45 80 C43 70 43 58 44.5 47Z M79 46 C81 58 80.5 70 78 80 L75 80 C77 70 77 58 75.5 47Z" fill="url(#${id}hr)"/><path d="M48 27 C55 24 66 24.5 72 28" stroke="${hl}" stroke-width="1.6" fill="none" opacity=".7"/>`;
-    if(hair==="chignon")s+=`<ellipse cx="60" cy="21" rx="8.5" ry="7" fill="url(#${id}hr)"/><path d="M40.5 47 C39.5 32 47 23.5 60 23.5 C73 23.5 80.5 32 79.5 47 C77 37 70 31 60 31 C50 31 43 37 40.5 47 Z" fill="url(#${id}hr)"/><path d="M47 30 C53 26.5 67 26.5 73 30" stroke="${hl}" stroke-width="1.3" fill="none" opacity=".7"/>`;
-    if(hair==="rasés")s+=`<path d="M41 46 C40 31 48 23.5 60 23.5 C72 23.5 80 31 79 46 C76 37 69 33 60 33 C51 33 44 37 41 46 Z" fill="${hairC}" opacity=".5"/>`;
-    if(hair==="bouclés")s+=[[43,42,7],[47,33,7.5],[55,27,8],[64,26,8],[72,30,7.5],[77,38,7],[78,46,5.5],[42,49,5],[51,34,6],[60,32,6],[68,34,6]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="url(#${id}hr)"/><circle cx="${x-1.5}" cy="${y-1.8}" r="${r*.35}" fill="${hl}" opacity=".35"/>`).join("");
-    if(hair==="crête")s+=`<path d="M41 46 C40 31 48 23.5 60 23.5 C72 23.5 80 31 79 46 C76 37 69 33 60 33 C51 33 44 37 41 46 Z" fill="${hairC}" opacity=".3"/><path d="M54 36 C53 27 54 20 57 13 L60 18 L63 12 C66 20 67 28 66 36 Z" fill="url(#${id}hr)"/>`;
-    if(hair==="queue de cheval"||hair==="tresse")s+=`<path d="M40.5 47 C39.5 32 47 23.5 60 23.5 C73 23.5 80.5 32 79.5 47 C77 37 70 31 60 31 C50 31 43 37 40.5 47 Z" fill="url(#${id}hr)"/><path d="M47 29 C53 25.5 67 25.5 73 29" stroke="${hl}" stroke-width="1.3" fill="none" opacity=".7"/>`;
-    if(hair==="queue de cheval")s+=`<rect x="73" y="33" width="5" height="4" rx="1.5" transform="rotate(25 75 35)" fill="${gold}"/>`;
-    if(hair==="tresse")s+=[[78,46],[80,53],[81,60],[81.5,67],[81,74],[80,81],[78.5,88]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="4.6" ry="4.4" fill="url(#${id}hr)"/><path d="M${x-3.5} ${y-1} Q${x} ${y+2.4} ${x+3.5} ${y-1}" stroke="${hd}" stroke-width=".9" fill="none"/>`).join("")+`<rect x="75.5" y="91.5" width="5" height="3" rx="1.2" fill="${gold}"/><path d="M78 94 l-1.5 4 M78 94 l1.5 4" stroke="url(#${id}hr)" stroke-width="2.4" stroke-linecap="round"/>`;
-    if(hair==="carré")s+=`<path d="M40 52 C38 33 46 22.5 60 22.5 C74 22.5 82 33 80 52 C78 42 74 35 66 33 C60 36 52 37 46 35 C43 40 41 45 40 52 Z" fill="url(#${id}hr)"/><path d="M41 46 C39.5 56 39.5 66 41 74 L45 74 C43.5 66 43.5 56 44.5 47Z M79 46 C80.5 56 80.5 66 79 74 L75 74 C76.5 66 76.5 56 75.5 47Z" fill="url(#${id}hr)"/><path d="M48 27 C55 24 66 24.5 72 28" stroke="${hl}" stroke-width="1.6" fill="none" opacity=".7"/>`;
-    if(hair==="chauve")s+=`<ellipse cx="54" cy="31" rx="7" ry="3.5" fill="#fff" opacity=".18"/>`;
-  }
-  // accessoires de tête
-  if(head==="bandeau")s+=`<path d="M40.8 39 C52 33.5 68 33.5 79.2 39 L79.4 45 C68 39.5 52 39.5 40.6 45Z" fill="${gold}"/><path d="M40.8 41 C52 35.5 68 35.5 79.2 41" stroke="#fff" stroke-opacity=".35" stroke-width=".8" fill="none"/>`;
-  if(head==="buff")s+=`<path d="M40.6 37 C52 30.5 68 30.5 79.4 37 L79.6 46 C68 40 52 40 40.4 46Z" fill="url(#${id}tp)"/><path d="M44 40 l4 -3 M51 38 l4 -3 M58 37.5 l4 -3 M65 38 l4 -3 M72 40 l4 -3" stroke="${gold}" stroke-width="1.4"/>`;
-  if(head==="frontale")s+=`<path d="M40.6 40 C52 35 68 35 79.4 40 L79.5 44.5 C68 39.5 52 39.5 40.5 44.5Z" fill="#1c1c20"/><circle cx="60" cy="38" r="12" fill="${gold}" opacity=".18"/><rect x="53.5" y="33.5" width="13" height="9" rx="3" fill="#2a2a30"/><circle cx="60" cy="38" r="3.2" fill="#fff8d0"/><circle cx="60" cy="38" r="1.6" fill="#fff"/>`;
-  if(head==="casquette")s+=`<path d="M39.6 45 C38.8 30 47.5 22 60 22 C72.5 22 81.2 30 80.4 45 C70 41 50 41 39.6 45Z" fill="url(#${id}tp)"/><path d="M60 22 V41" stroke="${td}" stroke-width="1"/><path d="M57 42 C68 39.5 84 40.5 97 46.5 C86 49 70 48.5 58 46.5Z" fill="${td}"/><circle cx="60" cy="22.5" r="1.8" fill="${td}"/><path d="M45 35 l4 -5 l4 5" stroke="${gold}" stroke-width="1.8" fill="none"/>`;
-  if(head==="bonnet")s+=`<path d="M39.5 46 C38.5 28 47 19 60 19 C73 19 81.5 28 80.5 46Z" fill="url(#${id}tp)"/><path d="M38.5 40 C52 36.5 68 36.5 81.5 40 L81.6 47.5 C68 44 52 44 38.4 47.5Z" fill="${td}"/><path d="M44 28 V38M50 24 V38M56 22 V38M62 22 V38M68 23 V38M74 26 V38" stroke="${td}" stroke-width=".9" opacity=".5"/><circle cx="60" cy="16.5" r="5.5" fill="#efefe9"/>`;
-  // lunettes
-  if(eyes==="rondes")s+=`<circle cx="52" cy="50.5" r="5.6" fill="#fff" fill-opacity=".06" stroke="#1d1a18" stroke-width="1.5"/><circle cx="68" cy="50.5" r="5.6" fill="#fff" fill-opacity=".06" stroke="#1d1a18" stroke-width="1.5"/><path d="M57.6 50 Q60 48.8 62.4 50M46.4 49.5 L41.5 48M73.6 49.5 L78.5 48" stroke="#1d1a18" stroke-width="1.3" fill="none"/>`;
-  if(eyes==="sport")s+=`<path d="M41 47 C53 43.5 67 43.5 79 47 L78.4 53.5 C74 56.5 66 56.5 61.5 53 L60 52 L58.5 53 C54 56.5 46 56.5 41.6 53.5Z" fill="#141416"/><path d="M44 48 C52 45.8 60 45.6 68 46.2" stroke="${gold}" stroke-width="1.5" fill="none" opacity=".85"/><path d="M66 48.5 C70 48.3 74 48.8 76.5 49.5" stroke="#7FD3F7" stroke-width="1.2" fill="none" opacity=".6"/>`;
-  if(acc==="écouteurs")s+=`<ellipse cx="38.6" cy="55" rx="2.6" ry="3.2" fill="#f2f2ee"/><ellipse cx="81.4" cy="55" rx="2.6" ry="3.2" fill="#f2f2ee"/>`;
-  if(L>=100)s+=[...Array(14)].map((_,i)=>{const side=i<7?-1:1,k=i%7,a=(side<0?(-170+k*18):(-10-k*18))*Math.PI/180,x=60+24*Math.cos(a),y=40+21*Math.sin(a),rot=(side<0?(-170+k*18):(-10-k*18))+90;return `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="4.6" ry="2.2" fill="${gold}" transform="rotate(${rot} ${x.toFixed(1)} ${y.toFixed(1)})"/>`}).join("");
-  s+=`</g></g><circle cx="60" cy="60" r="56" fill="none" stroke="${sc}" stroke-width="${L>=5?3:1.5}"/>`;
-  if(L>=5)s+=`<circle cx="60" cy="60" r="59" fill="none" stroke="${sc}" stroke-width="1" opacity=".55"/>`;
-  if(L>=25)s+=`<circle cx="60" cy="60" r="59" fill="none" stroke="${gold}" stroke-width="1.8" stroke-dasharray="2.5 6" opacity=".8"/>`;
-  return s+`</svg>`;
+/* ===== coureur v2 : silhouette dessinée (membres effilés, volumes, ombres), route ou trail ===== */
+const GEAR=["#FFC107","#FF7A1A","#FF3B30","#FF4D6D","#A78BFA","#4F7CFF","#22D3EE","#3DDBB0","#7CE38B","#C6FF3A","#F4F4F2","#2A2A30"];
+const GEAR_N=["or","orange","rouge","braise","violet","électrique","cyan","menthe","forêt","fluo","blanc","noir"];
+const SKIN=["#F6D3B3","#E8B48C","#C98B5E","#9C6440","#6B4128"];
+const HAIRC=["#1E1A18","#4A2E1E","#7A5230","#D9B26A","#B5532A","#9A9AA0"];
+const RDEF={ty:0,g:0,sk:0,hc:0,hs:0,ts:1,tc:5,bs:1,bc:11,ks:0,sm:0,sc:0,hd:0,gl:0,pl:0,vs:0,bf:0,tp:0};
+const TDEF={ty:1,ts:0,tc:7,bs:0,bc:11,ks:2,sm:1,sc:1,hd:1,vs:1,pl:1};
+function emRunner(c0,id){
+  const c={...RDEF,...(c0.ty==1?TDEF:{}),...c0};
+  const mx=(a,b,p)=>`color-mix(in srgb, ${a} ${p}%, ${b})`,sh=(x,p=72)=>mx(x,"#000",p),li=(x,p=78)=>mx(x,"#fff",p);
+  const fem=(c.g|0)===1,trail=(c.ty|0)===1,skin=SKIN[c.sk|0]||SKIN[0],hair=HAIRC[c.hc|0]||HAIRC[0];
+  const top=GEAR[c.tc|0],bot=GEAR[c.bc|0],shoe=GEAR[c.sc|0],acc=shoe;
+  const G={};let defs="";
+  const grad=(k,col,dark)=>{const n=id+k;defs+=`<linearGradient id="${n}" ${/sh/.test(k)?'x1="0" y1="0" x2="1" y2="1"':'gradientUnits="userSpaceOnUse" x1="44" y1="22" x2="72" y2="100"'}><stop offset="0" stop-color="${li(col,dark?92:80)}"/><stop offset=".5" stop-color="${dark?sh(col,86):col}"/><stop offset="1" stop-color="${sh(col,dark?62:74)}"/></linearGradient>`;return `url(#${n})`};
+  const fSk=grad("sk",skin),fSkB=grad("skb",skin,1),fTop=grad("tp",top),fTopB=grad("tpb",top,1),fBot=grad("bt",bot),fBotB=grad("btb",bot,1),fShoe=grad("sh",shoe),fShoeB=grad("shb",shoe,1);
+  const ol=(col)=>`stroke="${sh(col,45)}" stroke-width=".35" stroke-linejoin="round"`;
+  /* segment effilé avec galbe (muscle) d'un côté */
+  const seg=(a,b,ra,rb,fill,line,bul=0)=>{const dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy)||1,nx=-dy/l,ny=dx/l;
+    const p1=[a[0]+nx*ra,a[1]+ny*ra],p2=[b[0]+nx*rb,b[1]+ny*rb],p3=[b[0]-nx*rb,b[1]-ny*rb],p4=[a[0]-nx*ra,a[1]-ny*ra];
+    const m=[(a[0]+b[0])/2,(a[1]+b[1])/2],k=(ra+rb)/2;const c1=[m[0]+nx*k*(1+Math.max(0,bul)),m[1]+ny*k*(1+Math.max(0,bul))],c2=[m[0]-nx*k*(1+Math.max(0,-bul)),m[1]-ny*k*(1+Math.max(0,-bul))];
+    const f=v=>v.map(x=>x.toFixed(2)).join(" ");
+    return `<path d="M${f(p1)} Q${f(c1)} ${f(p2)} L${f(p3)} Q${f(c2)} ${f(p4)}Z" fill="${fill}"/><circle cx="${a[0]}" cy="${a[1]}" r="${ra}" fill="${fill}"/><circle cx="${b[0]}" cy="${b[1]}" r="${rb}" fill="${fill}"/>`};
+  const mid=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
+  /* articulations (profil, foulée) */
+  const S=[62.2,40],Sb=[59.6,41.2],P=[55.6,61.6],Ef=[69.4,50.4],Hf=[76.6,44.2],Eb=[50.2,49.4],Hb=[53,57.6],
+        Kf=[67.6,72.8],Af=[63.6,87.4],Kb=[47.4,77.6],Ab=[38.6,84.6];
+  /* chaussure : route (basse, fine) ou trail (épaisse, crampons) */
+  const shoeG=(x,y,a,back)=>{const f=back?fShoeB:fShoe,d=trail||c.sm==1;const sole=d?"#2b2b30":"#F4F4F0",mid_=d?li(shoe,55):"#fff";
+    return `<g transform="translate(${x} ${y}) rotate(${a})">
+    ${d?`<path d="M-3.1 -3 Q-.2 -5.4 3.6 -3.8 L9.8 -1.3 Q12.2 -.2 11.8 2 L-3.4 2.6 Q-4.6 -.2 -3.1 -3Z" fill="${f}" ${ol(shoe)}/>`
+       :`<path d="M-2.8 -2.4 Q0 -4.2 3.4 -2.9 L10.4 -.6 Q12.4 .3 11.8 1.8 L-3 2.1 Q-4 -.1 -2.8 -2.4Z" fill="${f}" ${ol(shoe)}/>`}
+    <path d="M-1.2 -3.2 L1.4 -.5 M1.4 -3.4 L3.8 -.7 M3.6 -2.6 L5.6 -.4" stroke="${shoe==="#F4F4F2"?"#888":"#fff"}" stroke-width=".5" stroke-linecap="round" opacity=".75"/>
+    <path d="M5.4 -1.6 Q8 -.8 10.8 .2" stroke="${li(shoe,45)}" stroke-width=".8" fill="none" stroke-linecap="round" opacity=".8"/>
+    <path d="M-3.4 2 L11.8 1.6 Q12.4 3 11.2 3.4 L-3 3.6 Q-4.2 3 -3.4 2Z" fill="${mid_}"/>
+    ${d?`<path d="M-3 3.5 L11.2 3.3 Q11.6 5 10.2 5.4 L-2.6 5.6 Q-3.8 4.8 -3 3.5Z" fill="${sole}"/><path d="M-2 5.5 l.5 1.1 M.6 5.5 l.5 1.1 M3.2 5.4 l.5 1.1 M5.8 5.4 l.5 1.1 M8.4 5.3 l.5 1.1" stroke="${sole}" stroke-width="1.3" stroke-linecap="round"/>`
+       :`<path d="M-3 3.5 L11.2 3.3 Q11.4 4.4 10 4.6 L-2.6 4.8 Q-3.6 4.3 -3 3.5Z" fill="${acc}" opacity=".9"/>`}</g>`};
+  /* chaussettes / manchons */
+  const sockLen=c.ks==2?.42:c.ks==1?.72:.86;
+  const sock=(K,A,r1,r2,back)=>c.ks==2?seg(mid(K,A,.22),mid(K,A,.9),r1*.98,r2*1.02,back?sh(acc,70):acc,acc):seg(mid(K,A,sockLen),A,r2*1.05,r2*1.05,back?"#d9d9d4":"#F4F4F0","#bbb");
+  /* jambes */
+  const legB=`${seg(P,Kb,4.1,2.5,fSkB,skin,.25)}${seg(Kb,Ab,2.55,1.6,fSkB,skin,.35)}${sock(Kb,Ab,2.55,1.6,1)}${shoeG(Ab[0]+.2,Ab[1]+1.5,50,1)}`;
+  const legF=`${seg(P,Kf,4.4,2.6,fSk,skin,.3)}${seg(Kf,Af,2.7,1.7,fSk,skin,.4)}<path d="M65.6 76 Q66.6 80 64.8 84.4" stroke="${sh(skin,70)}" stroke-width=".6" fill="none" opacity=".5"/>
+    <path d="M60 64 Q64 66 66.2 70" stroke="${li(skin,60)}" stroke-width=".6" fill="none" opacity=".6"/>${sock(Kf,Af,2.7,1.7,0)}${shoeG(Af[0]+.6,Af[1]+1.7,8,0)}`;
+  /* bas : short, short fendu, cuissard, collant */
+  const bs=c.bs|0;
+  const botLeg=(K,back,r)=>{const f=back?fBotB:fBot;if(bs===3)return seg(P,K,4.6,2.8,f,bot,.3);if(bs===2)return seg(P,mid(P,K,.8),4.6,3.2,f,bot,.3);return seg(P,mid(P,K,bs===1?.42:.55),bs===1?5.2:5.6,bs===1?4.4:5.2,f,bot)};
+  const botLow=(K,A,back)=>bs===3?seg(K,mid(K,A,.82),2.8,1.85,back?fBotB:fBot,bot,.4):"";
+  const hips=`<path d="M50.2 58.6 Q56 56.6 62 59.4 Q63 62.6 61.6 64.4 L51 64.6 Q49.4 61.6 50.2 58.6Z" fill="${fBot}" ${ol(bot)}/><path d="M50.4 59 Q56 57.4 61.8 59.8" stroke="${sh(bot,60)}" stroke-width="1.3" fill="none"/>`;
+  const split=bs===1?`<path d="M62.2 63.2 L63.4 66.4" stroke="${li(bot,40)}" stroke-width=".7"/>`:"";
+  const stripe=bs!==1?`<path d="${bs===3?"M56.6 62.6 Q62 67 66.6 72.2":"M56.6 62.6 Q60 64.8 62.6 67.6"}" stroke="${acc}" stroke-width=".7" fill="none" opacity=".9"/>`:"";
+  /* buste */
+  const ts=c.ts|0;
+  const torso=fem?`M57.2 37.4 Q62.8 35.4 66.8 39.4 Q67.6 46.2 64.8 52.6 Q62.8 58.4 61.6 61.8 L50.6 60.4 Q50.6 51.8 52.8 45 Q54 39.2 57.2 37.4Z`
+                 :`M56.4 37 Q62.8 34.8 67.8 39 Q68.8 46.2 65.8 52.6 Q63.2 58.4 61.8 62 L50.2 60.4 Q50.2 51.4 52.4 44.6 Q53.6 38.8 56.4 37Z`;
+  const torsoSh=`<path d="M52.6 44.8 Q50.8 53 50.6 60.4 L55.6 61.2 Q54.2 52 56 44.6Z" fill="${sh(top,60)}" opacity=".35"/><path d="M64 40.4 Q66.8 45 64.6 51.4" stroke="${li(top,50)}" stroke-width=".9" fill="none" opacity=".55"/>`;
+  const shirt=`<path d="${torso}" fill="${fTop}" ${ol(top)}/>${torsoSh}${ts===1?`<path d="M57.4 37.2 Q61.4 41.4 65.4 38.4" stroke="${skin}" stroke-width="2.6" fill="none"/><path d="M57.6 37.8 Q61.4 41 65 38.8" stroke="${sh(top,60)}" stroke-width=".5" fill="none"/>`:`<path d="M60.2 36.4 Q62.6 38.6 65.4 37.2" stroke="${sh(top,55)}" stroke-width=".7" fill="none"/>`}
+    ${ts===3?`<path d="M62.6 37.8 L60.8 61" stroke="${sh(top,55)}" stroke-width=".7"/><path d="M57 37.4 L55.6 40.6 L58.6 39.4Z" fill="${sh(top,70)}"/>`:""}
+    ${ts!==3?`<path d="M58 47.6 Q61.6 48.6 65.4 47.4" stroke="${acc}" stroke-width=".6" fill="none" opacity=".8"/>`:""}`;
+  /* bras */
+  const sleeve=(Sx,E,H,back)=>{const f=back?fTopB:fTop;if(ts===2||ts===3)return seg(Sx,E,2.9,2.4,f,top)+seg(E,mid(E,H,.86),2.4,2.1,f,top);if(ts===0)return seg(Sx,mid(Sx,E,.5),3.2,2.9,f,top);return ""};
+  const armB=`${seg(Sb,Eb,2.5,1.9,fSkB,skin,.3)}${seg(Eb,Hb,1.9,1.5,fSkB,skin,.2)}<circle cx="${Hb[0]}" cy="${Hb[1]}" r="2.1" fill="${sh(skin,82)}"/>${sleeve(Sb,Eb,Hb,1)}`;
+  const wr=mid(Ef,Hf,.82);
+  const armF=`${seg(S,Ef,2.7,2,fSk,skin,.35)}${seg(Ef,Hf,2,1.55,fSk,skin,.25)}<circle cx="${Hf[0]}" cy="${Hf[1]}" r="2.25" fill="${skin}" ${ol(skin)}/><path d="M${Hf[0]-1.2} ${Hf[1]-1.4} q1.2 -.6 2.2 .2" stroke="${sh(skin,60)}" stroke-width=".45" fill="none"/>
+    ${sleeve(S,Ef,Hf,0)}<g transform="rotate(-40 ${wr[0]} ${wr[1]})"><rect x="${wr[0]-1.25}" y="${wr[1]-2.2}" width="2.5" height="4.4" rx=".6" fill="#1c1c21"/><rect x="${wr[0]-.85}" y="${wr[1]-1.2}" width="1.7" height="2.4" rx=".5" fill="${acc}"/></g>`;
+  /* gilet d'hydratation */
+  const vest=c.vs?`<path d="M56.2 38.4 Q60 36.8 63.6 38.2 L62.6 51 Q58.2 51.8 53.4 50.2 Q53.6 43.2 56.2 38.4Z" fill="#26262c" ${ol("#26262c")}/>
+    <path d="M62.4 39.2 Q67.2 40.4 67.2 45.2 L65.6 50.8 L62.6 51Z" fill="#34343c"/>
+    <rect x="63.6" y="40.2" width="3.4" height="7.8" rx="1.6" fill="${li(acc,35)}" opacity=".95"/><rect x="64.1" y="38.9" width="2.4" height="1.7" rx=".6" fill="${acc}"/><path d="M64.2 42 L64.2 47" stroke="#fff" stroke-width=".5" opacity=".7"/>
+    <path d="M55 46.6 Q59 47.8 64 46.4" stroke="${acc}" stroke-width=".9" fill="none"/><path d="M56 42.4 Q59.6 43.6 63 42.4" stroke="#55555f" stroke-width=".6" fill="none"/><path d="M54 49 Q51 52 51.4 56" stroke="#26262c" stroke-width="1.2" fill="none"/>`:"";
+  /* dossard (lettres au choix) */
+  const bibT=(c.tx||"").slice(0,3)||String(c.L||1);
+  const bib=`<g transform="rotate(7 58 55.4)"><rect x="54.2" y="52.4" width="7.6" height="5.6" rx=".7" fill="#fff" ${ol("#ccc")}/><rect x="54.2" y="52.4" width="7.6" height="1.1" fill="${acc}"/><text x="58" y="57.3" text-anchor="middle" font-family="Barlow Condensed" font-style="italic" font-weight="900" font-size="${bibT.length>2?3.2:3.9}" fill="#141416">${esc(bibT)}</text></g>`;
+  /* tête */
+  const neck=`<path d="M62.2 33.4 L65.8 33 L66.2 38.6 L61.6 38.6Z" fill="${sh(skin,82)}"/>`;
+  const face=`<path d="M60.8 27.2 Q60.6 20.2 67.2 19.8 Q73.8 19.8 74 26.2 Q74.2 27.8 75.4 29.8 Q76 30.8 74.8 31.2 L74 31.4 Q74.6 32.4 73.9 32.8 Q74.2 34 72.6 34.8 Q70.2 35.8 66.6 35.2 Q63.4 34.8 61.8 32.6 Q60.8 30.6 60.8 27.2Z" fill="${fSk}" ${ol(skin)}/>
+    <path d="M63.8 26.6 Q65.6 25.6 66.6 27.6 Q66.8 30 65.4 30.6 Q64 30.6 63.8 29Z" fill="${sh(skin,82)}"/><path d="M64.6 27.6 q.8 .4 .6 1.6" stroke="${sh(skin,60)}" stroke-width=".4" fill="none"/>
+    ${c.gl?"":`<path d="M71.2 26.4 q.9 -.3 1.6 .1" stroke="#1c1c20" stroke-width=".85" stroke-linecap="round" fill="none"/><path d="M70.4 24.6 q1.4 -.8 2.8 0" stroke="${sh(hair,90)}" stroke-width=".7" fill="none" stroke-linecap="round"/>`}
+    <path d="M72.6 32.4 q-1 .5 -2 .2" stroke="${sh(skin,58)}" stroke-width=".55" fill="none" stroke-linecap="round"/>
+    ${fem?"":`<path d="M66.6 33.8 Q69.6 35 72.8 33.8" stroke="${sh(skin,85)}" stroke-width=".5" fill="none" opacity=".6"/>`}
+    <path d="M73.6 28.6 q.9 .6 1.4 1.3" stroke="${li(skin,55)}" stroke-width=".5" fill="none" opacity=".7"/>`;
+  const hs=c.hs|0;
+  const hairBack=fem?(hs===1?`<circle cx="60.6" cy="21.6" r="3.4" fill="${hair}" ${ol(hair)}/><path d="M59 20 q1.6 -1 3.2 .2" stroke="${li(hair,60)}" stroke-width=".5" fill="none"/>`
+      :hs===2?`<path d="M61.4 25 Q57.6 26 56.4 30 Q55.6 33.4 52.6 36.4 Q57 35.4 58.6 31.6 Q59.6 28.4 61.6 28Z" fill="${hair}" ${ol(hair)}/><path d="M57.2 29 l1.6 .8 M56.4 31.4 l1.6 .7 M55.2 33.8 l1.5 .6" stroke="${sh(hair,60)}" stroke-width=".5"/>`
+      :`<path d="M61.6 23.2 Q57 21.6 54.2 25.2 Q51.6 29 47.4 29.4 Q51.8 32 55.4 29.2 Q57.6 27.6 60.6 28.4Z" fill="${hair}" ${ol(hair)}/><path d="M55 26.2 Q52.6 28.4 49.6 29" stroke="${li(hair,60)}" stroke-width=".5" fill="none"/>`)+`<path d="M60.2 23.2 Q58.6 21.6 56.8 22.8" stroke="${acc}" stroke-width="1.5" stroke-linecap="round" fill="none"/>`:"";
+  const hairTop=fem?`<path d="M60.4 28.2 Q59.2 19.4 67 18.8 Q73.8 18.8 74.8 24.8 Q70.6 22 66 23.4 Q63.2 24.2 62.4 28.4Z" fill="${hair}" ${ol(hair)}/><path d="M63 21 Q67 19.6 71.6 21" stroke="${li(hair,60)}" stroke-width=".6" fill="none" opacity=".8"/>`
+    :hs===1?`<path d="M60.8 27.4 Q60.4 20.4 67.2 19.8 Q72.8 19.8 73.8 23.6 Q70 21.6 66.4 22.4 Q63 22.8 62.4 27.8Z" fill="${hair}" opacity=".55"/>`
+    :hs===2?`<path d="M60.4 28.6 Q58.6 18.6 67.2 18.4 Q74.6 18.4 74.6 24 Q73 22.6 71.6 23 Q70.6 21.6 69 22.6 Q67.4 21.6 66 22.8 Q64.4 22 63.4 23.8 Q62.4 25 62.6 28.8Z" fill="${hair}" ${ol(hair)}/><circle cx="63" cy="20.6" r="1.6" fill="${hair}"/><circle cx="66.6" cy="19.2" r="1.7" fill="${hair}"/><circle cx="70.4" cy="19.4" r="1.6" fill="${hair}"/>`
+    :`<path d="M60.6 28.8 Q59.4 19.2 67.4 19 Q73.6 19 74.4 24.2 Q71.6 22.2 68.6 23 Q65.4 22.4 63.2 24.4 Q62.6 26.4 62.6 29Z" fill="${hair}" ${ol(hair)}/><path d="M63.6 21 Q67.6 19.6 72 21.2" stroke="${li(hair,60)}" stroke-width=".6" fill="none" opacity=".8"/>`;
+  const beard=!fem&&c.br?`<path d="M62.6 31 Q64 35.4 68.4 35.4 Q71.8 35.4 73.2 33.6 Q72.2 32.6 70.6 33 Q67.6 33.6 66.4 31.2Z" fill="${hair}" opacity=".9"/>`:"";
+  const sung=c.gl?`<path d="M69.4 24.9 Q72.8 24 75.4 25.2 L75 27.4 Q72 28.6 69.4 27.2Z" fill="#141416"/><path d="M70.4 25.4 Q72.8 24.8 74.8 25.6" stroke="${li(acc,30)}" stroke-width=".8" fill="none" opacity=".9"/><path d="M69.4 25.8 L63.8 26.2" stroke="#141416" stroke-width=".8"/>`:"";
+  const hd=c.hd|0;
+  const headwear=hd===1?`<path d="M60.2 26.2 Q59.4 17.8 67.6 17.6 Q74.2 18 74.4 24.2 L60.6 26.6Z" fill="${fTop}" ${ol(top)}/><path d="M72.6 23 Q78 22.4 81 24.4 Q77.2 25.8 72.4 25Z" fill="${sh(top,72)}"/><path d="M61.8 25.4 Q67 24.4 74 24" stroke="${sh(top,60)}" stroke-width=".7" fill="none"/><circle cx="67.4" cy="17.9" r=".7" fill="${sh(top,60)}"/><path d="M64 21.4 L69.6 20.6" stroke="${acc}" stroke-width=".9" stroke-linecap="round"/>`
+    :hd===2?`<path d="M60.6 24.2 Q67 21.2 74.4 23.6 L74.6 26.2 Q67 23.8 60.6 26.9Z" fill="${acc}" ${ol(acc)}/>`
+    :hd===3?`<path d="M60.8 24.6 Q67 22.2 73.6 23.4 L73.8 25.4 Q67 24.2 60.8 26.8Z" fill="${fTop}"/><path d="M72.4 23.2 Q78 22.4 81.2 24.4 Q77.2 25.9 72.4 25.2Z" fill="${sh(top,72)}"/>`
+    :hd===4?`<path d="M60.6 24.4 Q67 21.8 74.2 23.6 L74.3 25.5 Q67 23.7 60.6 26.5Z" fill="#26262c"/><path d="M60.8 24.6 Q63 18.6 67.4 18.8" stroke="#26262c" stroke-width="1.1" fill="none"/><rect x="72.6" y="22.2" width="3.4" height="3.8" rx="1" fill="#34343c"/><circle cx="75.8" cy="24.1" r="1.15" fill="#FFF6C9"/><path d="M76.4 22.4 L106 12 L106 36 L76.4 25.8Z" fill="url(#${id}l)" opacity=".85"/>`
+    :hd===5?`<path d="M60.2 27 Q58.8 16.8 67.6 16.6 Q75 16.8 74.8 25 Q67.6 22.8 60.2 27Z" fill="${fTop}" ${ol(top)}/><circle cx="66.4" cy="16.4" r="2" fill="${acc}"/><path d="M60.6 25.6 Q67.6 22.2 74.6 24.2" stroke="${sh(top,55)}" stroke-width="1.4" fill="none"/>`:"";
+  const buff=c.bf?`<path d="M61.4 32.4 Q64.6 34.8 68.6 33.8 L68.8 38.6 Q64.4 39.8 61 37.6Z" fill="${acc}" ${ol(acc)}/><path d="M62 35 Q65 36.4 68.6 35.6" stroke="${li(acc,50)}" stroke-width=".5" fill="none"/>`:"";
+  /* bâtons */
+  const poleB=c.pl?`<path d="M${Hb[0]+.6} ${Hb[1]+1} L27.6 103" stroke="#2b2b31" stroke-width="1.2" stroke-linecap="round"/><path d="M${Hb[0]+.6} ${Hb[1]+.4} L${Hb[0]-1.2} ${Hb[1]+5}" stroke="${sh(acc,80)}" stroke-width="2" stroke-linecap="round"/>`:"";
+  const poleF=c.pl?`<path d="M${Hf[0]-.4} ${Hf[1]+1} L59 104" stroke="#3c3c44" stroke-width="1.35" stroke-linecap="round"/><path d="M${Hf[0]-.2} ${Hf[1]+.4} L${Hf[0]-1.3} ${Hf[1]+5.4}" stroke="${acc}" stroke-width="2.1" stroke-linecap="round"/><path d="M${Hf[0]-.4} ${Hf[1]-1} q1.6 1 1 3" stroke="#888" stroke-width=".4" fill="none"/><circle cx="59.4" cy="102.2" r="1.15" fill="#2b2b31"/>`:"";
+  return `<defs>${defs}<linearGradient id="${id}l" x1="0" x2="1"><stop offset="0" stop-color="#FFF6C9" stop-opacity=".9"/><stop offset="1" stop-color="#FFF6C9" stop-opacity="0"/></linearGradient></defs>
+   <ellipse cx="54" cy="104.6" rx="21" ry="2.3" fill="#000" opacity=".3"/>
+   <g>${poleB}${armB}${legB}${botLeg(Kb,1)}${botLow(Kb,Ab,1)}${hairBack}${neck}${shirt}${vest}${hips}${legF}${botLeg(Kf,0)}${botLow(Kf,Af,0)}${split}${stripe}${bib}${face}${beard}${hairTop}${sung}${headwear}${buff}${armF}${poleF}</g>`;
 }
-const myAvatar=()=>avatarSvg((meDoc&&meDoc.avatar)||AV_DEF,curL);
+
+/* emblème : ta couleur, tes initiales, et un relief qui grandit du bitume (niv.1) jusqu'aux alpes (niv.100) */
+const EM_COL=[["#FFC107","or",1],["#FF7A1A","orange",1],["#4F7CFF","électrique",1],["#3DDBB0","menthe",1],["#FF4D6D","braise",10],["#A78BFA","violet",20],["#22D3EE","cyan",30],["#7CE38B","forêt",40],["#FF6FB5","rose",50],["#C6FF3A","fluo",60],["#E8E8EC","argent",70],["#141416","nuit",80]];
+const EM_MOT=[["coureur",1],["initiales",1],["flèche",1],["dossard",20],["sommet",50]];
+const EM_TEX=[["uni",1],["courbes de niveau",10],["étoiles",30],["aurore",90]];
+const inits=n=>{const w=String(n||"").trim().split(/\s+/).filter(Boolean);if(!w.length)return"";return (w.length>1?w[0][0]+w[1][0]:w[0].slice(0,2)).toUpperCase()};
+UNLOCK_LIST=(()=>{const m={};const add=(L,x)=>(m[L]=m[L]||[]).push(x);
+  EM_COL.forEach(([,n,L])=>{if(L>1)add(L,"emblème : couleur "+n)});EM_MOT.forEach(([n,L])=>{if(L>1)add(L,"emblème : motif "+n)});EM_TEX.forEach(([n,L])=>{if(L>1)add(L,"emblème : fond "+n)});
+  PALIERS.forEach(L=>add(L,`relief ${STAGES.find(x=>x[0]===L)?STAGES.find(x=>x[0]===L)[1]:""}`));
+  return m})();
+function emRidge(si,base,amp,seed){const pts=[];const n=Math.max(4,9-Math.floor(si/2));for(let k=0;k<=n;k++){const x=k/n*120;const r=Math.sin(k*1.7+seed)*.5+.5;const h=si===0?1.5:amp*(.45+.55*r)*(k%2?1:.5);pts.push(`${x.toFixed(1)},${(base-h).toFixed(1)}`)}return `M0,120 L0,${base} L${pts.join(" L")} L120,${base} L120,120 Z`}
+function avatarSvg(cfg,L,cls=""){
+  const c=cfg||{},si=Math.max(0,stageIdx(L||1)),id="e"+Math.random().toString(36).slice(2,8);
+  const col=(EM_COL[c.c|0]||EM_COL[0])[0],dark=col==="#141416",ring=STAGE_COL[si];
+  const mot=c.m|0,tex=c.t|0,ini=c.ini||inits(c.nm)||"",rc={...c,g:c.g!=null?c.g:(c.face===1?1:0),sk:c.sk!=null?c.sk:Math.min(4,c.skin|0),hc:c.hc!=null?c.hc:Math.min(5,c.hairC|0),L:L||1},amp=6+si*6.4,base=110;
+  const bgA=dark?"#34343c":`color-mix(in srgb, ${col} 58%, #1a1a1e)`,bgB=dark?"#0b0b0d":`color-mix(in srgb, ${col} 16%, #0b0b0d)`;
+  const front=dark?"#3a3a42":`color-mix(in srgb, ${col} 78%, #111)`,back=dark?"#26262c":`color-mix(in srgb, ${col} 40%, #111)`;
+  const topo=tex===1?[0,1,2,3,4,5].map(k=>`<ellipse cx="${30+k*6}" cy="${40+k*3}" rx="${18+k*13}" ry="${10+k*8}" fill="none" stroke="#fff" stroke-opacity=".07" stroke-width="1"/>`).join(""):"";
+  const stars=tex===2?[...Array(14)].map((_,k)=>{const x=(k*37)%112+4,y=(k*23)%52+8;return `<circle cx="${x}" cy="${y}" r="${k%3?.7:1.1}" fill="#fff" opacity="${.35+(k%4)*.15}"/>`}).join(""):"";
+  const aur=tex===3?`<path d="M-5 40 C25 20 45 48 70 30 S110 14 125 26 L125 46 C100 34 80 60 55 46 S15 44 -5 60Z" fill="url(#${id}a)" opacity=".55"/>`:"";
+  const snow=si>=8?`<path d="${emRidge(si,base,amp,2.1)}" fill="#fff" opacity=".0"/>`:"";
+  const road=si===0?`<path d="M14 113 L106 113" stroke="#fff" stroke-opacity=".5" stroke-width="1.6" stroke-dasharray="6 6"/>`:"";
+  const tc=dark?"#FFC107":"#fff";
+  const fs=ini.length>2?30:40;
+  const bigT=(c.tx||"").slice(0,3),motif=mot===0?`${(c.tp|0)===1&&bigT?`<text x="60" y="${bigT.length>2?58:62}" text-anchor="middle" font-family="Barlow Condensed" font-style="italic" font-weight="900" font-size="${bigT.length>2?40:52}" fill="#fff" opacity=".2" letter-spacing="-1">${esc(bigT)}</text>`:""}<g transform="translate(-6 -12.6) scale(1.2)">${emRunner(rc,id+"r")}</g>`:mot===2||(!ini&&mot===1)?`<path d="M34 62 L74 50 L70 44 L90 50 L76 64 L74 57 L36 68 Z" fill="${tc}"/>`
+    :mot===3?`<rect x="34" y="34" width="52" height="40" rx="5" fill="#fff"/><circle cx="40" cy="40" r="1.6" fill="#999"/><circle cx="80" cy="40" r="1.6" fill="#999"/><text x="60" y="66" text-anchor="middle" font-family="Barlow Condensed" font-style="italic" font-weight="900" font-size="26" fill="#141416">${L||1}</text>`
+    :mot===4?`<path d="M30 70 L52 38 L60 48 L68 34 L92 70 Z" fill="${tc}" opacity=".95"/><path d="M52 38 L46 47 L52 45 L56 50 L60 48Z M68 34 L63 42 L68 41 L72 45Z" fill="${dark?"#141416":col}" opacity=".9"/>`
+    :`<text x="60" y="${fs===40?67:63}" text-anchor="middle" font-family="Barlow Condensed" font-style="italic" font-weight="900" font-size="${fs}" letter-spacing="-.5" fill="${tc}">${esc(ini)}</text>`;
+  return `<svg class="av em ${cls}" viewBox="${/zoomlo/.test(cls)?"20 46 68 68":/zoom/.test(cls)?"26 6 68 68":"0 0 120 120"}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="avatar">
+   <defs><radialGradient id="${id}g" cx="35%" cy="25%" r="85%"><stop offset="0" stop-color="${bgA}"/><stop offset="1" stop-color="${bgB}"/></radialGradient>
+   <linearGradient id="${id}f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${front}"/><stop offset="1" stop-color="${dark?"#1b1b20":"color-mix(in srgb, "+col+" 45%, #0b0b0d)"}"/></linearGradient>
+   <linearGradient id="${id}a" x1="0" x2="1"><stop offset="0" stop-color="#3DDBB0"/><stop offset=".5" stop-color="#A78BFA"/><stop offset="1" stop-color="#22D3EE"/></linearGradient>
+   <clipPath id="${id}c"><circle cx="60" cy="60" r="55"/></clipPath></defs>
+   <circle cx="60" cy="60" r="59" fill="${ring}"/>
+   <g clip-path="url(#${id}c)"><rect width="120" height="120" fill="url(#${id}g)"/>${topo}${stars}${aur}
+    <path d="${emRidge(si,base-6,amp*.8,4.2)}" fill="${back}"/>
+    <path d="${emRidge(si,base,amp,1.3)}" fill="url(#${id}f)"/>${si>=8?`<path d="${emRidge(si,base,amp,1.3)}" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.2"/>`:""}${road}${snow}
+    ${motif}</g>
+   <circle cx="60" cy="60" r="55" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="1"/>
+  </svg>`;
+}
+const myAvatar=()=>avatarSvg({...((meDoc&&meDoc.avatar)||{}),nm:myName()},curL);
 
 /* ================= ICONS ================= */
 const I={
@@ -1342,7 +1554,7 @@ const I={
 I.nav.equipe='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><path d="M15.5 14.2c3 0 5.5 2 5.5 5.3"/></svg>';
 I.nav.agenda='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="5" width="17" height="15.5" rx="1.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="M7.5 13h3M7.5 16.5h6"/></svg>';
 I.nav.menu='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>';
-const NAV=[["qg","QG"],["habitudes","Habitudes"],["equipe","Équipe"],["menu","Menu"]];
+const NAV=[["qg","Accueil"],["habitudes","Habitudes"],["equipe","Équipe"]];
 const MENU_VIEWS=["news","admin","menu","suggest","confid","agenda","taches","idees","perfs","renfo","course","mhab","reglages","avatar","badges","route","tutos"];
 
 /* ================= RENDER ================= */
@@ -1380,7 +1592,7 @@ function openInstall(p){p=p||(isIOS()?"ios":"android");
     if(t.closest("[data-icopy]")){try{await navigator.clipboard.writeText(APP_URL);t.closest("[data-icopy]").textContent="lien copié ✓"}catch(_){prompt("copie ce lien :",APP_URL)}return}
     if(t.closest("[data-doinstall]")&&deferredInstall){const d=deferredInstall;deferredInstall=null;d.prompt();try{const r=await d.userChoice;if(r&&r.outcome==="accepted")o.remove()}catch(_){}}}}
 window.openInstall=openInstall;
-const TUTOS=[["1_qg","Le QG","ton accueil : niveau, paliers, défi, série"],["2_habitudes","Les habitudes","cocher, routines, ajouter les tiennes"],["3_minuteur","Le minuteur","mode bloqué et mode libre"],["4_equipe","L'équipe","cordée, mises, classement, saison"],["5_organisation","Agenda, tâches, idées","t'organiser au même endroit"],["6_perfs","Performance","kilomètres, Strava, records"],["7_profil","Le profil","avatar, badges, route, story"],["8_reglages","Les réglages","couleurs, rappels, bugs, pseudo"]];
+const TUTOS=[["1_qg","Le QG","ton accueil : niveau, paliers, défi, série"],["2_habitudes","Les habitudes","cocher, routines, ajouter les tiennes"],["3_minuteur","Le minuteur","mode bloqué et mode libre"],["4_equipe","L'équipe","cordée, mises, classement, saison"],["5_organisation","Agenda, tâches, idées","t'organiser au même endroit"],["6_perfs","Performance","kilomètres, Strava, records"],["7_profil","Le profil","emblème, badges, route, story"],["8_reglages","Les réglages","couleurs, rappels, bugs, pseudo"],["9_programme","Le programme","séances, séances en plus, chrono visé, stats"]];
 function vTutos(){
   return `<div class="tag">Tutos · ${TUTOS.length} vidéos</div><h1>Comment<br><span class="g">ça marche</span></h1>
   ${tutoWelcome?`<div class="tutowelcome"><b>👋 bienvenue dans la flèche !</b><span>regarde ces vidéos de 30 secondes pour tout comprendre. tu les retrouves à tout moment dans menu › tutos vidéo.</span><div class="actions"><button class="btn main" data-tuto="0">▶ lancer la 1re vidéo</button><button class="btn ghost" data-nav="qg">plus tard</button></div></div>`:`<p class="sub">une vidéo par onglet, moins de 30 secondes chacune. touche pour regarder.</p>`}
@@ -1524,7 +1736,7 @@ function buildPlan(p){
         let d=free.find(x=>!used.some(u=>Math.abs(u-x)<2))??free.find(x=>!used.includes(x))??others.filter(x=>!hardDays.includes(x)&&!used.includes(x))[0]??days.find(x=>!used.includes(x))??days[0];used.push(d);const date=addDays(wk,d);
         if(date>=t)plan.push({date,code,f:1,phase,...(bq?{blk:bi,bq,pw}:{}),key:days.includes(d)?date+"#r"+k:undefined})}}
   }
-  p.recV=1;p.plan=[...(p.plan||[]).filter(e=>e.date<t),...plan].sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:(a.key?1:-1));longCap(p,t);p.weeks=W;p.obj=obj;p.short=mode==="course"&&W<(obj==="trail"?TRAIL_MINW[cat]:(MINW[obj]||[8,6]))[lvl==="D"?0:1];applySecs(p);return p}
+  const cut=p.created&&p.created>t?p.created:t;p.recV=1;p.plan=[...(p.plan||[]).filter(e=>e.date<cut),...plan.filter(e=>e.date>=cut)].sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:(a.key?1:-1));longCap(p,t);p.weeks=W;p.obj=obj;p.short=mode==="course"&&W<(obj==="trail"?TRAIL_MINW[cat]:(MINW[obj]||[8,6]))[lvl==="D"?0:1];applySecs(p);return p}
 /* récupération obligatoire après une course : durée selon la distance-effort (km + D+/100).
    repères : CK et douleurs culminent 24-72 h après un semi ; inflammation 6-9 jours après un marathon ;
    reprendre un footing modéré à 48 h aide le marathonien (essai randomisé, Martinez-Navarro 2021) ;
@@ -1608,7 +1820,7 @@ function secNote(p,e){const sc=(p.secs||[]).find(x=>x.date===e.date);if(!sc||!p.
   return t+" et si tu as mal ou te sens vidé, dis-le dans ton ressenti : le plan s'allège tout seul."}
 function pgNotes(p,e){const code=sessOf(e);if(RENFO[code])return[];if(code==="RACEB"||code==="RACEC"){const n=secNote(p,e);return n?[["ta course secondaire",n]]:[]}const base=sessText(p,e),tt=terrText(p,code,base);const out=pgBlocks(p,e).filter(([k])=>k==="pré-fatigue"||k==="sensations");if(tt!==base)out.unshift(["sur ton terrain",tt]);if(QTAB[code]&&isTrail(p)){const tr=p.terrain||{};if(tr.hill==="none"||tr.hill==="short")out.unshift(["sur ton terrain",tr.tread?"sur tapis à 6-8 % : mêmes durées, récup en marchant à plat.":tr.stairs?"escaliers, pont ou parking : enchaîne montées et descentes sans t'arrêter pendant la durée de l'effort.":tr.hill==="short"?"enchaîne ta butte plusieurs fois (descente trottinée) pour tenir la durée de chaque répétition.":"pas de côte : fais les répétitions sur le plat au même effort, avec la pré-fatigue juste avant."])}
   if(QTAB[code]&&e.pw!=null)out.push(["dans ton cycle",e.pw<0?"semaine d'assimilation : un peu moins de répétitions pour digérer le travail du bloc.":"semaine "+(e.pw+1)+" du bloc : la séance clé monte d'un cran chaque semaine."]);
-  if(e.rec){const sc=(p.secs||[]).find(x=>x.name===e.rec&&x.date<e.date)||((p.race||{}).date<e.date?p.race:null);if(sc){const E=kmEffort(sc),R=recRule(E,p.level,sc.prio||"A");out.unshift(["récupération obligatoire",`après « ${e.rec} ». `+recWhy(E,R)])}}
+  if(e.rec){const sc=(p.secs||[]).find(x=>x.name===e.rec&&x.date<e.date)||((p.race||{}).date<e.date?p.race:null)||(p.prev||[]).filter(x=>x.date<e.date).slice(-1)[0];if(sc){const E=kmEffort(sc),R=recRule(E,p.level,sc.prio||"A");out.unshift(["récupération obligatoire",`après « ${e.rec} ». `+recWhy(E,R)])}}
   if(e.cap)out.push(["progression douce","durée limitée à +10 % de ta plus longue sortie du mois. c'est le grand saut sur une seule séance qui blesse le plus : on allonge un peu chaque semaine."]);return out}
 function pgBlocks(p,e){const code=sessOf(e),s=SESS[code],ty=s[3];let body=sessText(p,e);
   if(isTrail(p)&&(code==="C11"||code==="C12"))body=body.replace(/ à \d+:\d+-\d+:\d+ \/km/g," aux sensations");
@@ -2133,7 +2345,7 @@ function pgIcon(t){return `<span class="pgic ${t}"><svg viewBox="0 0 24 24">${PG
 function pgCard(p,e,i,n,first){const c=sessOf(e),t=pgSessType(e),b=pgBadge(e),s=SESS[c]||RENFO[c]||["séance",""],dp=pgDp(p,e),L=p.logs||{},lg=L[ek(e)];
   const kmTxt=RENFO[c]?renfoBlocks(p,c,e).reduce((a,x)=>a+x.items.length,0)+" exercices":(pgKm(p,e)?"≈ "+pgKm(p,e).toFixed(1).replace(".",",")+" km":"");
   return `<button class="pgcard ${lg?(lg.status==="none"?"miss":"done"):""} ${t}" data-pgopen="${esc(ek(e))}">
-   <div class="pgch">${pgIcon(t)}<div><small>séance ${i}/${n}${b?` <em class="pgbdg ${b[1]}">${b[0]}</em>`:""}${lg?` <em class="pgbdg ok">${lg.status==="none"?"passée":"✓ faite"}</em>`:""}</small><b>${esc(pgSessName(e))}</b></div><i>›</i></div>
+   <div class="pgch">${pgIcon(t)}<div><small>séance ${i}/${n}${b?` <em class="pgbdg ${b[1]}">${b[0]}</em>`:""}${lg?` <em class="pgbdg ok">${lg.status==="none"?"passée":"✓ faite"}</em>`:""}</small><b>${esc(pgSessName(e))}</b><span class="pgmeta">${esc(pgDur(p,e).replace(" max",""))}${dp?" · "+dp+" m D+":kmTxt?" · "+esc(kmTxt):""}</span></div><i>›</i></div>
    <div class="pgcs"><div><small>durée</small><b>${esc(pgDur(p,e).replace(" max",""))}</b></div><div><small>${dp?"dénivelé":RENFO[c]?"contenu":"distance"}</small><b>${dp?dp+" à "+Math.round(dp*1.2/10)*10+" m":kmTxt||"–"}</b></div><div><small>difficulté</small>${pgDiff(c)}</div></div>
    ${first&&s[1]?`<p class="pgcd">${esc(pgDesc(p,e))}</p>`:""}</button>`}
 function pgDesc(p,e){const c=sessOf(e),s=SESS[c]||RENFO[c]||["",""],t=pgSessType(e);
@@ -2144,20 +2356,83 @@ function pgDesc(p,e){const c=sessOf(e),s=SESS[c]||RENFO[c]||["",""],t=pgSessType
   return (s[1]?s[1].charAt(0).toUpperCase()+s[1].slice(1)+". ":"")+base}
 function pgWeekStats(p,ws){const L=p.logs||{},wk=(p.plan||[]).filter(e=>e.date>=ws&&e.date<=addDays(ws,6));let dS=0,dK=0,pS=0,pK=0,n=0;
   wk.forEach(e=>{const c=sessOf(e),sec=RENFO[c]?renfoMin(p,c,e)*60:sessTotals(p,e).sec,km=RENFO[c]?0:pgKm(p,e);pS+=sec;pK+=km;const lg=L[ek(e)];if(lg&&lg.status!=="none"){n++;const a=lg.act,f=lg.status==="part"?.5:1;dS+=a&&a.sec?a.sec:sec*f;dK+=a&&a.km!=null&&a.src?a.km:km*f}});
+  weekExtras(p,ws).forEach(x=>{dS+=x.sec||0;if(xRun(x))dK+=x.km||0});
   return{wk,n,dS,dK,pS,pK}}
+
+/* ================= séances en plus · bilan de semaine · hausse de volume · progression ================= */
+const XK=[["footing","footing","🏃",1],["fractionne","fractionné","⚡",1],["longue","sortie longue","🛣",1],["trail","trail","⛰",1],["velo","vélo","🚴",0],["natation","natation","🏊",0],["renfo","renfo / muscu","🏋️",0],["autre","autre sport","✨",0]];
+const xk=x=>XK.find(k=>k[0]===x.kind)||XK[7],xRun=x=>!!xk(x)[3];
+const f1=v=>String(Math.round((+v||0)*10)/10).replace(".",",");
+const weekExtras=(p,ws)=>{const we=addDays(ws,6);return((p&&p.extra)||[]).filter(x=>x.date>=ws&&x.date<=we).sort((a,b)=>a.date<b.date?-1:1)};
+const durParse=t=>{t=String(t||"").trim();if(/^\d+$/.test(t))return(+t)*60;return prParse(t)};
+/* toutes les distances courues (plan, en plus, sorties), sans doublon */
+function runDist(p,from,to){const out=[],seen=new Set(),L=(p&&p.logs)||{};
+  for(const k in L){const a=L[k]&&L[k].act;if(a&&a.km>0){const d=a.date||k.slice(0,10);if(d>=from&&d<=to){out.push({d,km:+a.km});if(a.id)seen.add(a.id)}}}
+  ((p&&p.extra)||[]).forEach(x=>{if(xRun(x)&&x.km>0&&x.date>=from&&x.date<=to){out.push({d:x.date,km:+x.km});if(x.runId)seen.add(x.runId)}});
+  runs.forEach(r=>{if(!seen.has(r.id)&&r.km>0&&r.date>=from&&r.date<=to&&!/ride|swim|walk|hike/i.test(r.sport||""))out.push({d:r.date,km:+r.km})});return out}
+const max30=(p,date)=>Math.max(0,...runDist(p,addDays(date,-30),addDays(date,-1)).map(x=>x.km));
+/* étude Garmin-RUNSAFE (5 205 coureurs, 2025) : dépasser de plus de 10 % sa plus longue sortie des 30 derniers jours augmente le risque de blessure */
+function spikeTxt(p,km,date){const mx=max30(p,date);if(!(mx>=3)||!(+km>mx*1.1))return"";const pc=Math.round((km/mx-1)*100);
+  return `⚠️ +${pc} % d'un coup : ${f1(km)} km contre ${f1(mx)} km pour ta plus longue sortie du mois. au-delà de +10 % sur une seule sortie, le risque de blessure augmente. les prochains jours, reste en facile et écoute tes jambes.`}
+function spikeWarn(km,date){const t=spikeTxt(PRG(),km,date);if(!t)return;setTimeout(()=>openSheet(`<h2>grosse hausse d'un coup</h2><p class="sub">${esc(t)}</p><p class="sub" style="font-size:12px">repère tiré d'une étude sur plus de 5 000 coureurs suivis 18 mois (2025).</p><div class="actions"><button class="btn main" id="spOk">compris</button></div>`,()=>{$("#spOk").onclick=closeSheet}),700)}
+function openExtra(ws){const p=PRG();if(!p)return;const L=p.logs||{},used=new Set([...Object.values(L).map(l=>l&&l.act&&l.act.id).filter(Boolean),...(p.extra||[]).map(x=>x.runId).filter(Boolean)]);
+  const from=ws&&ws<pgWS(0)?ws:addDays(today(),-10),to=ws&&ws<pgWS(0)?addDays(ws,6):today();
+  const rec=runs.filter(r=>!used.has(r.id)&&r.date>=from&&r.date<=to).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,6);
+  let kind="footing";
+  openSheet(`<h2>séance en plus</h2><p class="sub" style="margin:0 0 10px">une sortie hors de ton plan, depuis une autre appli ou à la main. elle compte dans ton bilan et ta charge.</p>
+   ${rec.length?`<small class="pglab">tes sorties récentes</small>${rec.map(r=>`<button class="pgsrc" data-xr="${esc(r.id)}"><i>${isSR(r)?"🟧":r.src==="tracker"?"📍":"✍️"}</i><span><b>${esc(r.name||"sortie")} · ${f1(r.km)} km</b><small>${fdate(r.date,{weekday:"short",day:"numeric",month:"short"})}${r.sec?" · "+fmtDur(r.sec):""}${r.hr?" · ❤ "+r.hr:""}${isSR(r)?" · strava":r.src==="tracker"?" · suivi gps":""}</small></span></button>`).join("")}<small class="pglab">ou à la main</small>`:""}
+   <div class="chips" id="xK" style="margin-top:0">${XK.map(([k,l,i])=>`<button class="chip ${k===kind?"on":""}" data-k="${k}">${i} ${l}</button>`).join("")}</div>
+   <div class="two"><label>date<input id="xD" type="date" value="${ws&&ws<pgWS(0)?addDays(ws,6):today()}" max="${today()}"></label><label>durée<input id="xS" placeholder="45 · 1h05" autocomplete="off"></label></div>
+   <div class="two" id="xRunF"><label>distance (km)<input id="xKm" inputmode="decimal" placeholder="8,5"></label><label>dénivelé + (m)<input id="xDp" inputmode="numeric" placeholder="0"></label></div>
+   <div class="two"><label>cardio moyen <i>facultatif</i><input id="xH" inputmode="numeric" placeholder="bpm"></label><label>cardio max <i>facultatif</i><input id="xHm" inputmode="numeric" placeholder="bpm"></label></div>
+   <small class="pglab">effort ressenti</small><div class="chips" id="xR" style="margin-top:0">${[2,4,6,8,10].map(v=>`<button class="chip" data-v="${v}">${v}/10</button>`).join("")}</div>
+   <div class="actions"><button class="btn main" id="xOk">ajouter</button><button class="btn ghost" id="xX">annuler</button></div>`,()=>{
+   let rpe=0;$("#xX").onclick=closeSheet;
+   document.querySelectorAll("#xK .chip").forEach(c=>c.onclick=()=>{kind=c.dataset.k;document.querySelectorAll("#xK .chip").forEach(x=>x.classList.toggle("on",x===c));$("#xRunF").style.display=xRun({kind})?"":"none"});
+   document.querySelectorAll("#xR .chip").forEach(c=>c.onclick=()=>{rpe=+c.dataset.v;document.querySelectorAll("#xR .chip").forEach(x=>x.classList.toggle("on",x===c))});
+   document.querySelectorAll("[data-xr]").forEach(b=>b.onclick=()=>{const r0=runs.find(x=>x.id===b.dataset.xr);if(!r0)return;
+     const x={id:newId(),runId:r0.id,date:r0.date,kind:/trail/i.test(r0.sport||r0.name||"")||r0.dplus>300?"trail":r0.km>=16?"longue":"footing",name:r0.name||"",sec:r0.sec||0,km:+r0.km||0,dp:r0.dplus||0,hr:r0.hr||0,cad:r0.cad||0,src:isSR(r0)?"strava":r0.src||"manuel",at:Date.now()};xSave(x)});
+   $("#xOk").onclick=()=>{const sec=durParse($("#xS").value),km=parseFloat(($("#xKm").value||"").replace(",","."))||0;if(!sec&&!km){toast("indique au moins la durée");$("#xS").style.borderColor="#FF4D3A";return}
+     const x={id:newId(),date:$("#xD").value||today(),kind,sec,km:xRun({kind})?km:0,dp:xRun({kind})?(+$("#xDp").value||0):0,hr:+$("#xH").value||0,hrmax:+$("#xHm").value||0,rpe,src:"manuel",at:Date.now()};xSave(x)}})}
+function xSave(x){const q=JSON.parse(JSON.stringify(PRG()));q.extra=[...(q.extra||[]),x].slice(-200);const sp=xRun(x)&&x.km?spikeTxt(q,x.km,x.date):"";if(sp)q.msgs=[{date:x.date,m:sp},...(q.msgs||[])].slice(0,20);savePrg(q);closeSheet();SND.ok();toast("séance en plus ajoutée 💪");if(sp)spikeWarn(x.km,x.date)}
+function weekBilan(p,ws){const st=pgWeekStats(p,ws),L=p.logs||{},we=addDays(ws,6),ex=weekExtras(p,ws);
+  const skip=st.wk.filter(e=>L[ek(e)]&&L[ek(e)].status==="none").length,miss=st.wk.filter(e=>!L[ek(e)]&&e.date<today()).length;
+  const ms=(p.msgs||[]).filter(m=>m.date>=ws&&m.date<=we).map(m=>m.m).slice(0,3);const rate=st.wk.length?st.n/st.wk.length:0;
+  const word=!st.wk.length?"semaine hors plan":rate>=1?"semaine parfaite 🔥 tout est fait":rate>=.75?"belle semaine : l'essentiel est fait":rate>=.5?"semaine à moitié : pas grave, le plan s'est ajusté":"semaine compliquée : on repart doucement, sans rien rattraper";
+  return{st,skip,miss,ex,xs:ex.reduce((a,x)=>a+(x.sec||0),0),xk:ex.filter(xRun).reduce((a,x)=>a+(x.km||0),0),ms,word}}
+function bilanCard(p,ws){const b=weekBilan(p,ws);if(!b.st.wk.length&&!b.ex.length)return"";
+  return `<div class="pgbil"><div class="pgbilh"><b>bilan de la semaine</b><span>${fdate(ws,{day:"numeric",month:"short"})} – ${fdate(addDays(ws,6),{day:"numeric",month:"short"})}</span></div>
+   <div class="pgbilg"><div><b>${b.st.n}<small>/${b.st.wk.length}</small></b><span>séances</span></div><div><b>${f1(b.st.dK+b.xk)}</b><span>km</span></div><div><b>${fmtDur(b.st.dS+b.xs)}</b><span>d'effort</span></div><div><b>${b.ex.length}</b><span>en plus</span></div></div>
+   <p class="pgbilw">${esc(b.word)}${b.skip?` · ${b.skip} passée${b.skip>1?"s":""}`:""}${b.miss?` · ${b.miss} non faite${b.miss>1?"s":""}`:""}</p>
+   ${b.ms.length?`<div class="pgbilm"><small>comment ton plan s'est adapté</small>${b.ms.map(m=>`<p>${esc(m)}</p>`).join("")}</div>`:""}</div>`}
+function extraBlock(p,ws){const ex=weekExtras(p,ws);
+  return `<div class="pgxtra"><div class="pgxtrah"><b>en plus du plan${ex.length?" · "+ex.length:""}</b><button class="btn small" data-xadd="${ws}">+ séance en plus</button></div>${ex.map(x=>{const k=xk(x);return`<div class="pgxrow"><span class="pgxi">${k[2]}</span><div><b>${esc(x.name||k[1])}</b><small>${fdate(x.date,{weekday:"short",day:"numeric",month:"short"})}${x.km?" · "+f1(x.km)+" km":""}${x.sec?" · "+fmtDur(x.sec):""}${x.km&&x.sec?" · "+fmtSec(x.sec/x.km)+" /km":""}${x.hr?" · ❤ "+x.hr:""}${x.rpe?" · effort "+x.rpe+"/10":""}${x.sg?" · chiffres strava effacés":""}</small></div><button class="pgxdel" data-xdel="${esc(x.id)}" aria-label="retirer">✕</button></div>`}).join("")}</div>`}
+/* progression de l'endurance : allure en footing ramenée au même cardio */
+function easyPts(p){const L=p.logs||{},out=[];(p.plan||[]).forEach(e=>{const lg=L[ek(e)],a=lg&&lg.act,ty=(SESS[sessOf(e)]||[])[3];if(a&&a.hr>0&&a.km>1&&a.sec>0&&(ty==="easy"||ty==="long")&&!(a.dplus>150))out.push({d:a.date||e.date,v:a.km/(a.sec/3600),hr:a.hr})});
+  (p.extra||[]).forEach(x=>{if((x.kind==="footing"||x.kind==="longue")&&x.hr>0&&x.km>1&&x.sec>0&&!(x.dp>150))out.push({d:x.date,v:x.km/(x.sec/3600),hr:x.hr})});return out}
+function progCard(p){const P=easyPts(p),t=today(),A=P.filter(x=>x.d>=addDays(t,-21)),B=P.filter(x=>x.d<addDays(t,-28)&&x.d>=addDays(t,-84));
+  if(A.length<2||B.length<2)return `<div class="pgcardx"><div class="pgxh"><b>ton endurance progresse ?</b></div><p class="sub" style="font-size:13px;margin:0">ajoute ton cardio moyen quand tu valides tes footings (montre, ceinture) : dès 2 footings maintenant et 2 il y a plus d'un mois, tu verras ton allure à cardio égal. c'est le meilleur signe de progrès en endurance.</p></div>`;
+  const ref=Math.round(P.reduce((a,x)=>a+x.hr,0)/P.length),avg=G=>G.reduce((a,x)=>a+x.v*ref/x.hr,0)/G.length,vA=avg(A),vB=avg(B),d=Math.round(3600/vB-3600/vA);
+  return `<div class="pgcardx"><div class="pgxh"><b>ton endurance à cardio égal</b><span>à ${ref} bpm</span></div><div class="pgest"><div><small>il y a 1 à 3 mois</small><b>${fmtPace(vB)}</b><span>${B.length} footings</span></div><div><small>ces 3 semaines</small><b class="${d>0?"g":""}">${fmtPace(vA)}</b><span>${A.length} footings</span></div></div>
+   <p class="sub" style="font-size:13px;margin:8px 0 0">${d>3?`🔥 ${d} s plus vite au kilomètre pour le même effort : ton moteur progresse.`:d<-3?`${-d} s plus lent au km pour le même cardio : fatigue, chaleur ou manque de sommeil ? surveille sur 2 semaines.`:"stable : c'est normal sur quelques semaines, la progression se voit sur 2-3 mois."}</p></div>`}
+/* ---------- prochain objectif : départ après la récup ---------- */
+function recEnd(p){const r=p&&p.race;if(!r||!r.date||r.virtual||(p.mode||"course")==="forme")return today();const R=recRule(kmEffort(r),p.level,"A");const e=addDays(r.date,R.hard+1);return e>today()?e:today()}
+function startNext(){const p=PRG();if(!p)return;pgWInit(p);pgW.next=true;pgW.mode=null;pgW.name="";pgW.date="";pgW.minStart=recEnd(p);pgW.start=pgW.minStart;pgW.prevRace=p.race&&!p.race.virtual?p.race:null;pgW.recs={...pgW.recs};progEdit=true;go("prog");window.scrollTo(0,0)}
 function vProgWeek(p){const t=today(),plan=p.plan||[],L=p.logs||{};const ws=pgWS(pgWk),we=addDays(ws,6);
   const ws0=plan.length?ds(weekStart(parse(p.created||plan[0].date))):ws,W=p.weeks||1,wn=Math.round((parse(ws)-parse(ws0))/864e5/7)+1;
   const st=pgWeekStats(p,ws),wk=st.wk;const todo=wk.filter(e=>!L[ek(e)]),done=wk.filter(e=>L[ek(e)]);
-  const minW=Math.min(0,Math.round((parse(ws0)-parse(pgWS(0)))/864e5/7)),maxW=Math.max(0,Math.round((parse(ds(weekStart(parse(plan.length?plan[plan.length-1].date:t))))-parse(pgWS(0)))/864e5/7));
+  const minW=Math.min(0,Math.round((parse(plan.length?ds(weekStart(parse(plan[0].date))):ws0)-parse(pgWS(0)))/864e5/7)),maxW=Math.max(0,Math.round((parse(ds(weekStart(parse(plan.length?plan[plan.length-1].date:t))))-parse(pgWS(0)))/864e5/7));
   const ph=(wk[0]||{}).phase,wq=(wk.find(x=>x.bq)||{}).bq,wpw=(wk.find(x=>x.bq)||{}).pw;const dpw=wk.length&&wk.every(x=>x.rec||RENFO[x.code])?0:dplusTarget(p,ws);
   const ov=`<div class="pgov"><b>ton aperçu de la semaine</b><div class="pgovg"><div><small>séances</small><span>${st.n}</span><em>/ ${wk.length}</em></div><div><small>durée</small><span>${fmtDur(st.dS)}</span><em>/ ${fmtDur(st.pS)}</em></div><div><small>distance</small><span>${Math.round(st.dK*10)/10}</span><em>/ ${Math.round(st.pK)} km</em></div></div>${dpw?`<p class="pgovdp">⛰ dénivelé visé : ${dpw} m D+ sur la semaine</p>`:""}</div>`;
-  const nav=`<div class="pgwnav"><button data-pgwk="-1" ${pgWk<=minW?"disabled":""}>‹</button><div><b>${pgWk===0?"cette semaine":pgWk===1?"semaine prochaine":pgWk===-1?"semaine dernière":fdate(ws,{day:"numeric",month:"short"})+" – "+fdate(we,{day:"numeric",month:"short"})}</b><small>${fdate(ws,{day:"2-digit",month:"short"})} – ${fdate(we,{day:"2-digit",month:"short"})} · ${wn>W?"récupération après ta course":"semaine "+Math.max(1,wn)+" sur "+W}${wn>W?"":wq?" · "+esc(blkName(p,wq).toLowerCase())+(wpw<0?" (assimilation)":""):ph?" · "+esc((PH_INFO[ph]||[ph])[0].toLowerCase()):""}</small></div><button data-pgwk="1" ${pgWk>=maxW?"disabled":""}>›</button></div>`;
+  const nav=`<div class="pgwnav"><button data-pgwk="-1" ${pgWk<=minW?"disabled":""}>‹</button><div><b>${pgWk===0?"cette semaine":pgWk===1?"semaine prochaine":pgWk===-1?"semaine dernière":fdate(ws,{day:"numeric",month:"short"})+" – "+fdate(we,{day:"numeric",month:"short"})}</b><small>${fdate(ws,{day:"2-digit",month:"short"})} – ${fdate(we,{day:"2-digit",month:"short"})} · ${wn>W?"récupération après ta course":wn<1?"avant ta prépa":"semaine "+wn+" sur "+W}${wn>W?"":wq?" · "+esc(blkName(p,wq).toLowerCase())+(wpw<0?" (assimilation)":""):ph?" · "+esc((PH_INFO[ph]||[ph])[0].toLowerCase()):""}</small></div><button data-pgwk="1" ${pgWk>=maxW?"disabled":""}>›</button></div>`;
   const ms=pgWk===0?coachMilestone(p):"";
   const cards=todo.map((e,k)=>pgCard(p,e,wk.indexOf(e)+1,wk.length,k===0)).join("");
-  return nav+(ms?`<div class="pgcoachb">${coachAv()}<p><small>le mot du coach</small>${esc(ms)}</p></div>`:"")+ov+
+  const past=ws<pgWS(0),endWk=pgWk===0&&(dow(t)===6||(wk.length&&!todo.length)),showLast=pgWk===0&&t<=addDays(ws,2)&&weekBilan(p,pgWS(-1)).st.wk.length;
+  return nav+(past?bilanCard(p,ws):"")+(showLast?`<button class="pglastb" data-pgwk="-1">📊 le bilan de ta semaine dernière <em>›</em></button>`:"")+(ms?`<div class="pgcoachb">${coachAv()}<p><small>le mot du coach</small>${esc(ms)}</p></div>`:"")+ov+
    (p.paused?`<div class="alert">⏸ plan en pause (douleurs répétées). <button class="btn small" data-pgresume>reprendre</button></div>`:"")+
    (wk.length?`<div class="pgcards">${cards||`<div class="pgallok">🎉 toutes les séances de la semaine sont faites. récupère bien !</div>`}</div>`:`<p class="sub">pas de séance prévue cette semaine.</p>`)+
-   (done.length?`<button class="pgdonehd" data-pgdonet>séances terminées · ${done.length}<i>${pgDoneOpen?"▴":"▾"}</i></button>${pgDoneOpen?`<div class="pgcards">${done.map(e=>pgCard(p,e,wk.indexOf(e)+1,wk.length,false)).join("")}</div>`:""}`:"");
+   (done.length?`<button class="pgdonehd" data-pgdonet>séances terminées · ${done.length}<i>${pgDoneOpen?"▴":"▾"}</i></button>${pgDoneOpen?`<div class="pgcards">${done.map(e=>pgCard(p,e,wk.indexOf(e)+1,wk.length,false)).join("")}</div>`:""}`:"")+
+   (ws<=pgWS(0)?extraBlock(p,ws):"")+(endWk?bilanCard(p,ws):"");
 }
 /* ---------- page d'une séance ---------- */
 function pgNutri(p,e){if(p.nutri===false)return"";const c=sessOf(e);if(RENFO[c])return"";const sec=sessTotals(p,e).sec;if(sec<60*60)return"";
@@ -2347,7 +2622,7 @@ function trkPaint(full){const o=document.getElementById("trk");if(!o||!trk||o.st
      <div class="trkgrid"><div><b>${km.toFixed(2).replace(".",",")}</b><span>km</span></div><div><b>${fmtHMS(sec)}</b><span>durée</span></div><div><b>${paceOf(sec,km)}</b><span>/km</span></div><div><b>${Math.round(trk.dplus)}</b><span>m D+</span></div></div>
      ${trk.splits.length?`<div class="trksp">${trk.splits.map((s,i)=>`<span><small>km ${i+1}</small>${fmtPace(3600/s)}</span>`).join("")}</div>`:""}
      ${trk.cut>5?`<p class="trkwarn">⚠️ l'écran s'est éteint ${trkSecSay(trk.cut)} : la distance de ce moment est estimée en ligne droite.</p>`:""}</div>
-    <div class="gdctl trkend">${short?`<button class="btn main" data-trkx>fermer</button>`:trk.key?`<button class="btn" data-trkdrop>ne pas garder</button><button class="btn main" data-trksave="plan">valider ma séance</button>`:`<button class="btn" data-trkdrop>ne pas garder</button><button class="btn main" data-trksave="run">enregistrer</button>`}</div>
+    ${short?"":`<label class="trkhr">cardio moyen <small>si tu as une montre ou une ceinture</small><input id="trkHr" inputmode="numeric" placeholder="bpm"></label>`}<div class="gdctl trkend">${short?`<button class="btn main" data-trkx>fermer</button>`:trk.key?`<button class="btn" data-trkdrop>ne pas garder</button><button class="btn main" data-trksave="plan">valider ma séance</button>`:`<button class="btn" data-trkdrop>ne pas garder</button><button class="btn main" data-trksave="run">enregistrer</button>`}</div>
     <button class="trkbug" data-trkbug>🐞 un souci avec le gps ? signale-le</button>${!short&&!trk.key&&ts?`<button class="trklink" data-trksave="link" data-k="${esc(ts.key)}">compter comme ta séance du jour · ${esc(ts.name)} ›</button>`:""}`;return}
   const S=trk.steps&&trk.steps[trk.i],sec=trk.el/1000,km=trk.dist/1000;
   let big,unit,lab,sub="",tg="";
@@ -2376,11 +2651,12 @@ function trkPaint(full){const o=document.getElementById("trk");if(!o||!trk||o.st
      st==="count"?`<button class="btn" data-trkcancel>annuler</button>`:
      `${S?`<button class="btn" data-trkp>‹</button>`:""}<button class="btn ${st==="pause"?"main":""}" data-trkpause>${st==="pause"?"▶ reprendre":"pause"}</button>${S?`<button class="btn" data-trkn>›</button>`:""}<button class="btn ${trk.endArm>Date.now()?"danger":""}" data-trkend>${trk.endArm>Date.now()?"sûr ?":"terminer"}</button>`}</div>`}
 function trkAct(){const sec=Math.round(trk.el/1000),km=+(trk.dist/1000).toFixed(2),st=trk.startAt||new Date();
-  return{src:"tracker",name:trk.key?trk.name:"sortie La Flèche",date:ds(st),start:ds(st)+"T"+String(st.getHours()).padStart(2,"0")+":"+String(st.getMinutes()).padStart(2,"0"),sec,km,dplus:Math.round(trk.dplus),hr:0,cad:0}}
-function trkSave(how,linkKey){const a=trkAct();const id=newId();const doc={date:a.date,name:a.name,km:Math.round(a.km*100)/100,dplus:a.dplus,sec:a.sec,sport:"Run",manual:true,src:"tracker"};
+  const hrI=document.getElementById("trkHr"),hr=hrI?Math.min(230,Math.max(0,+hrI.value||0)):0;
+  return{hr,splits:(trk.splits||[]).map(x=>Math.round(x)),src:"tracker",name:trk.key?trk.name:"sortie La Flèche",date:ds(st),start:ds(st)+"T"+String(st.getHours()).padStart(2,"0")+":"+String(st.getMinutes()).padStart(2,"0"),sec,km,dplus:Math.round(trk.dplus),cad:0}}
+function trkSave(how,linkKey){const a=trkAct();const id=newId();const doc={date:a.date,name:a.name,km:Math.round(a.km*100)/100,dplus:a.dplus,sec:a.sec,hr:a.hr||0,splits:a.splits||[],sport:"Run",manual:true,src:"tracker"};
   if(a.km>0){runs.push({id,...doc});dset(P("runs",id),doc);pushEvent(`a couru ${doc.km.toFixed(1).replace(".",",")} km`)}a.id=id;
   const key=how==="plan"?trk.key:how==="link"?linkKey:null;trkClose();
-  if(key)openProgLog(key,false,a);else toast(`sortie enregistrée · ${a.km.toFixed(2).replace(".",",")} km 🏹`)}
+  if(key)openProgLog(key,false,a);else{toast(`sortie enregistrée · ${a.km.toFixed(2).replace(".",",")} km 🏹`);spikeWarn(a.km,a.date)}}
 document.addEventListener("click",e=>{const q=s=>e.target.closest(s);if(!q("#trk"))return;let b;
   if(q("[data-trkx]")||q("[data-trkdrop]")){trkClose();return}
   if(q("[data-trkvol]")){try{localStorage.setItem("lf_voice",trkVoiceOn()?"off":"on")}catch(_){}trkPaint();return}
@@ -2509,6 +2785,7 @@ function vProgGoal(p){const r=p.race,t=today(),j=Math.max(0,Math.round((parse(r.
   return `<div class="pgsub s-${pgGS}"><div class="pgstabs">${[['apercu', 'aperçu'], ['progression', 'progression'], ['reglages', 'réglages']].map(([k,l])=>`<button class="${pgGS===k?"on":""}" data-pgsub="pgGS:${k}">${l}</button>`).join("")}</div><div data-g="apercu"><div class="pggoal ${r.type==="trail"?"trail":""}"><div class="pggh"><span class="pgbdg key">${md==="forme"?"forme":md==="perf"?"progression":r.type==="trail"?"trail":"route"}</span><span>${fdate(r.date,{day:"numeric",month:"short",year:"numeric"})}</span><b>J-${j}</b></div>
    <h1>${esc(r.name)}</h1><div class="pgcs"><div><small>distance</small><b>${r.dist} km</b></div>${r.dplus?`<div><small>dénivelé</small><b>${r.dplus} m</b></div>`:""}<div><small>préparation</small><b>${W} sem.</b></div></div></div>
   ${c?pgTimeCard(p,hist,ws0,W,nowW):""}
+  <button class="pgnextb" data-pgnext><span>🎯</span><span><b>préparer mon prochain objectif</b><small>${md!=="forme"&&!r.virtual?`départ possible à partir du ${fdate(recEnd(p),{day:"numeric",month:"long"})}, après ta récup`:"une course, une distance, une saison"}</small></span><em>›</em></button>
   </div><div data-g="progression"><div class="pgcardx"><div class="pgxh"><b>régularité</b><span>la constance paie, séance après séance</span></div><div class="pgbig2"><b>${past.length?reg:"–"}<i>${past.length?"%":""}</i></b><span>${past.length?dn.length+" séance"+(dn.length>1?"s":"")+" faite"+(dn.length>1?"s":"")+" sur "+past.length:"pas encore de séance passée"}</span></div><div class="pgbars">${barR}</div><div class="pgleg"><span><i class="dn"></i>faites</span><span><i class="pl"></i>prévues</span></div></div>
   <div class="pgcardx"><div class="pgxh"><b>volume</b><span>${tr?"en heures":"en km"} par semaine</span></div><div class="pgbig2"><b>${tr?(Math.round(avg*10)/10):Math.round(avg)}<i>${tr?"h":"km"}/sem.</i></b><span>cette semaine : ${tr?fmtDur(cur.dS||0):Math.round((cur.dK||0)*10)/10+" km"} faits · ${tr?fmtDur(cur.pS*.95)+" à "+fmtDur(cur.pS*1.05):Math.round(cur.pK*.95)+" à "+Math.round(cur.pK*1.05)+" km"} conseillés</span></div><div class="pgbars">${barW}</div><div class="pgleg"><span><i class="dn"></i>fait</span><span><i class="pl"></i>prévu</span></div></div>
   ${cy.length?`<div class="pgcardx"><div class="pgxh"><b>cycles</b><span>des blocs ciblés, une qualité à la fois</span></div><div class="pgcyn"><button data-pgcyc="${sel-1}" ${sel<=0?"disabled":""}>‹</button><div><small>cycle ${sel+1} sur ${cy.length} · ${C.st} · ${C.weeks} sem.</small><b>${esc(C.name||"")}</b></div><button data-pgcyc="${sel+1}" ${sel>=cy.length-1?"disabled":""}>›</button></div>
@@ -2523,7 +2800,7 @@ function vProgStats(p){const L=p.logs||{},plan=p.plan||[];const keys=Object.keys
   const byM={};keys.forEach(k=>{const m=k.slice(0,7);(byM[m]=byM[m]||[]).push(k)});
   const row=k=>{const e=plan.find(x=>ek(x)===k);if(!e)return"";const lg=L[k],a=lg.act;return `<button class="pgdrow" data-pgopen="${esc(k)}">${pgIcon(pgSessType(e))}<div><b>${esc(pgSessName(e))}</b><small>${fdate(e.date,{day:"numeric",month:"long"})}${a&&a.km?" · "+String(+(+a.km).toFixed(1)).replace(".",",")+" km":""}${lg.feel!=null?" · "+feelTxt(e,lg.feel):""}</small></div>${a&&a.src==="strava"?'<span class="pgsrcb">strava</span>':""}<em>›</em></button>`};
   return `<div class="pgsub s-${pgSS}"><div class="pgstabs">${[['chiffres', 'chiffres'], ['journal', 'journal'], ['connexions', 'connexions']].map(([k,l])=>`<button class="${pgSS===k?"on":""}" data-pgsub="pgSS:${k}">${l}</button>`).join("")}</div><div data-g="chiffres"><div class="pgcardx"><div class="pgxh"><b>depuis le début du plan</b></div><div class="pgcs four"><div><small>distance</small><b>${Math.round(km)} km</b></div><div><small>séances</small><b>${keys.length}</b></div><div><small>temps</small><b>${Math.round(sec/3600)} h</b></div><div><small>dénivelé</small><b>${Math.round(dp)} m</b></div></div></div>
-  <div class="pgcardx"><div class="pgxh"><b>temps de course estimés</b><span>selon ton niveau actuel</span></div><div class="pgest">${est.map(([n,s,d])=>`<div><small>${n}</small><b>${fmtTime(s)}</b><span>${fmtPace(d/(s/3600))} /km</span></div>`).join("")}</div></div>
+  ${progCard(p)}<div class="pgcardx"><div class="pgxh"><b>temps de course estimés</b><span>selon ton niveau actuel</span></div><div class="pgest">${est.map(([n,s,d])=>`<div><small>${n}</small><b>${fmtTime(s)}</b><span>${fmtPace(d/(s/3600))} /km</span></div>`).join("")}</div></div>
   ${isTrail(p)?`<div class="pgcardx"><div class="pgxh"><b>tes ressentis d'effort</b><span>sur 10</span></div><div class="pgfeelz">${[["endurance","EF"],["active","Z2"],["seuil","Z3"],["vma","Z4"],["côte","COTE"],["marche active","HIKE"],["descente","DESC"]].map(([n,z])=>`<div><i style="background:${ZC[z]}"></i><b>${n}</b><span>${FEELZ[z]}</span></div>`).join("")}</div><p class="pglsub">en trail, la pente et le terrain changent tout le temps : on se fie à l'effort ressenti, pas à l'allure.</p></div>`:`<div class="pgcardx"><div class="pgxh"><b>allures d'entraînement</b><span>min/km</span></div><div class="pgest">${[["récup","REC"],["endurance","EF"],["active · allure marathon","Z2"],["seuil long","Z3"],["seuil vif","Z3P"],["vo2max (2-4 min)","Z4L"],["vma courte","Z4"],["vitesse","Z5"]].map(([n,z])=>`<div><small>${n}</small><b>${zoneTxt(p,z).replace(" /km","")}</b><span>${Math.round(PZ[z][0]*100)}-${Math.round(PZ[z][1]*100)} % VMA</span></div>`).join("")}</div><p class="pglsub">allure VMA ${fmtPace(v)} /km · recalculées à chaque adaptation du plan.</p></div>`}
   </div><div data-g="journal">${(p.msgs||[]).length?`<div class="pgcardx"><div class="pgxh"><b>adaptations du coach</b></div><div class="pgcoach">${p.msgs.slice(0,6).map(x=>`<div><span>🏹</span><p>${esc(x.m)}<small>${fdate(x.date)}</small></p></div>`).join("")}</div></div>`:""}
   ${label("journal d'entraînement")}${keys.length?Object.keys(byM).map(m=>`<div class="pgmonth">${fdate(m+"-01",{month:"long",year:"numeric"})}</div><div class="pgdlist">${byM[m].map(row).join("")}</div>`).join(""):`<p class="sub">tes séances validées apparaîtront ici.</p>`}
@@ -2534,7 +2811,7 @@ function vProg(){if(!PROG_ON())return `<p class="sub">bientôt disponible.</p>`;
   const md=p.mode||"course",r=p.race,j=Math.max(0,Math.round((parse(r.date)-parse(today()))/864e5));
   const head=`<div class="pgtop"><div><small>${md==="course"?"objectif":md==="forme"?"programme forme":"progression"}</small><b>${esc(r.name)}</b></div><span>J-${j}</span></div>
   <div class="pgtabs">${[["seances","séances"],["objectif","objectif"],["stats","stats"]].map(([k,l])=>`<button class="${pgTab===k?"on":""}" data-pgtab="${k}">${l}</button>`).join("")}</div>`;
-  return `<div class="tag">Programme · bêta gratuite</div>`+head+(pgTab==="objectif"?vProgGoal(p):pgTab==="stats"?vProgStats(p):vProgWeek(p))}
+  return head+(pgTab==="objectif"?vProgGoal(p):pgTab==="stats"?vProgStats(p):vProgWeek(p))}
 document.addEventListener("click",e=>{const q=s=>e.target.closest(s);let b;
   if(q("#sheet")){if(b=q("[data-pgskip]")){closeSheet();pgSkip(b.dataset.pgskip);return}if(b=q("[data-pglogedit]")){closeSheet();setTimeout(()=>openProgLog(b.dataset.pglogedit,true),50);return}return}
   if(!q("#view"))return;
@@ -2545,6 +2822,9 @@ document.addEventListener("click",e=>{const q=s=>e.target.closest(s);let b;
   if(q("[data-pgclose]")){pgOpen=null;render();return}
   if(b=q("[data-pgmore]")){pgMore(b.dataset.pgmore);return}
   if(b=q("[data-pgexport]")){pgExport(b.dataset.pgexport);return}
+  if(b=q("[data-xadd]")){openExtra(b.dataset.xadd);return}
+  if(b=q("[data-xdel]")){const id=b.dataset.xdel;openSheet(`<h2>retirer cette séance ?</h2><div class="actions"><button class="btn main" id="xdY">retirer</button><button class="btn ghost" id="xdN">annuler</button></div>`,()=>{$("#xdN").onclick=closeSheet;$("#xdY").onclick=()=>{const q=JSON.parse(JSON.stringify(PRG()));q.extra=(q.extra||[]).filter(x=>x.id!==id);savePrg(q);closeSheet()}});return}
+  if(b=q("[data-pgnext]")){startNext();return}
   if(b=q("[data-trk]")){trkStart(b.dataset.trk);return}
   if(b=q("[data-pgguide]")){pgGuide(b.dataset.pgguide);return}
   if(q("[data-pgdonet]")){pgDoneOpen=!pgDoneOpen;render();return}
@@ -2570,7 +2850,9 @@ function vProgSetup(p){if(!pgW)pgWInit(p);const W=pgW,steps=pgSteps(),k=steps[W.
   else if(k==="race"){q=W.type==="trail"?"ton trail":"ta course";sub="le plan se construit à rebours depuis le jour J.";
     body=`
     <label class="pgfld"><small>nom de la course</small><input data-pgw="name" value="${esc(W.name)}" placeholder="semi de lille"></label>
-    <label class="pgfld"><small>date</small><input data-pgw="date" type="date" value="${esc(W.date)}" min="${addDays(today(),14)}"></label>
+    ${W.next?`<label class="pgfld"><small>début de ta prépa</small><input data-pgw="start" type="date" value="${esc(W.start||"")}" min="${esc(W.minStart||today())}"></label><p class="pghint" style="margin-top:-4px">${W.minStart>today()?`🛌 tu es en récupération jusqu'au ${fdate(addDays(W.minStart,-1),{day:"numeric",month:"long"})} : ta prépa peut démarrer à partir du ${fdate(W.minStart,{day:"numeric",month:"long"})}.`:"ta prépa peut démarrer quand tu veux."}</p>`:""}
+    <label class="pgfld"><small>date</small><input data-pgw="date" type="date" value="${esc(W.date)}" min="${W.next?addDays(W.start||today(),28):addDays(today(),14)}"></label>
+    ${W.next&&W.prevRace&&W.date?(()=>{const gap=Math.round((parse(W.date)-parse(W.prevRace.date))/864e5/7),need=kmEffort(W.prevRace)>45||(+W.dist+(+W.dplus||0)/100)>45?8:6;return gap<need?`<p class="pghint" style="color:#FF9F43">⚠️ ${gap} semaines après « ${esc(W.prevRace.name)} » : il est conseillé d'en laisser au moins ${need} entre deux grosses courses.</p>`:""})():""}
     ${W.type==="route"?`<small class="pglab">distance</small><div class="pgchips">${[[5,"5K"],[10,"10K"],[21.1,"21K"],[42.2,"42K"]].map(([v,l])=>chip("dist",v,l)).join("")}</div>`
       :`<small class="pglab">distance</small>${pgRange("dist",5,350,1,"km")}<small class="pglab">dénivelé positif</small>${pgRange("dplus",0,30000,100,"m D+")}<small class="pglab">terrain de la course</small><div class="pgchips">${[["roulant","roulant"],["mixte","mixte"],["technique","technique"],["alpin","très technique"]].map(([v,l])=>chip("tech",v,l)).join("")}</div><p class="pghint">roulant : larges chemins · technique : racines, rochers, single · très technique : pierriers, passages alpins. ça change ton chrono possible.</p>`}`}
   else if(k==="terrain"){q="quelle côte as-tu près de chez toi ?";sub="le temps qu'il te faut pour la monter en courant. on adapte tes séances à ce que tu as.";
@@ -2603,13 +2885,14 @@ function vProgSetup(p){if(!pgW)pgWInit(p);const W=pgW,steps=pgSteps(),k=steps[W.
     const rows=[["programme",m[1]],...(W.mode==="course"?[["course",`${W.name||"ma course"} · ${W.type==="trail"?W.dist+" km · "+W.dplus+" m D+ · terrain "+({roulant:"roulant",mixte:"mixte",technique:"technique",alpin:"très technique"})[W.tech]:W.dist+" km"}`],["date",W.date?fdate(W.date,{weekday:"short",day:"numeric",month:"long",year:"numeric"}):"–"]]:W.mode==="perf"?[["objectif",(W.focus>20?"semi":W.focus+" km")+" · "+W.weeks+" semaines"]]:[["cycle","8 semaines"]]),
       ["en ce moment",`${["0","1-2","","3-4","","5+"][W.freq]||"–"} sorties · ${W.km} km/sem.`],["allures",W.vsrc==="chrono"?`chrono ${W.pkm} km en ${W.ptime}`:W.vsrc==="vma"?`allure VMA ${fmtPace(+W.vma)} /km`:W.vtest==="done"?`test 6 min : ${W.cooper} m`:"test VMA en 1re séance"],...(W.type==="trail"&&W.mode!=="perf"?[["terrain",`${({none:"pas de côte",short:"petite côte (< 1 min)",mid:"côte moyenne (1-3 min)",long:"longue côte (3-10 min)",mtn:"montagne"})[W.hill]||"–"}${W.tread?" · tapis":""}${W.stairs?" · escaliers":""}${(W.hill==="none"||W.hill==="short")&&W.pfm?" · pré-fatigue":""}`]]:[]),["séances",`${W.n} de course par semaine${W.days.length?" · "+W.days.slice().sort((a,b)=>a-b).map(d=>["lun","mar","mer","jeu","ven","sam","dim"][d]).join(", "):" · jours libres"}`],["renfo",+W.renfo?`${W.renfo} × ${+W.rfDur||30} min · ${W.equip.length?W.equip.map(k=>(EQUIP.find(x=>x[0]===k)||["",""])[1]).join(", "):"poids du corps"}`:"aucun"]];
     const sp=W.mode==="course"&&W.date?(()=>{const q0={freq:+W.freq,km:+W.km,long:+W.long||0};return{race:{type:W.type,dist:+W.dist,dplus:W.type==="trail"?+W.dplus:0,date:W.date},weeks:Math.max(1,Math.floor((parse(W.date)-parse(ds(weekStart(new Date()))))/864e5/7)+1),q:q0,level:levelFrom(q0,W.pain==="1")}})():null;
-    body=`${pgFun(W).map(t=>`<div class="pgfun">${esc(t)}</div>`).join("")}${sp?pgScoreCard(sp):""}<div class="pgrecap">${rows.map(([a,b])=>`<div><small>${a}</small><b>${esc(b)}</b></div>`).join("")}</div><p class="pghint">la flèche propose des séances générales, pas un avis médical. en cas de douleur qui dure, consulte un professionnel.${owner?"":" pendant la bêta, le coach voit ton plan (pas tes tâches ni tes idées) pour l'améliorer."}</p>`}
+    body=`${pgFun(W).map(t=>`<div class="pgfun">${esc(t)}</div>`).join("")}${sp?pgScoreCard(sp):""}<div class="pgrecap">${rows.map(([a,b])=>`<div><small>${a}</small><b>${esc(b)}</b></div>`).join("")}</div><p class="pghint">la flèche propose des séances générales, pas un avis médical. en cas de douleur qui dure, consulte un professionnel.</p>`}
   const last=k==="recap";
   return `<div class="pgwiz" style="--dir:${W.dir}"><div class="pgwtop">${W.step>0?`<button class="pgwback" data-pgwprev>‹</button>`:(PRG()&&PRG().plan?`<button class="pgwback" data-pgcancel>✕</button>`:"<span></span>")}<div class="pgprog">${steps.map((_,i)=>`<i class="${i<=W.step?"on":""}"></i>`).join("")}</div><span class="pgwn">${W.step+1}/${tot}</span></div>
-  <div class="pgstep" key="${k}">${W.step===0?`<span class="pgbeta">bêta · gratuit pendant la bêta</span>`:""}<h1 class="pgq">${q}</h1><p class="pgqs">${sub}</p><div class="pgbody">${body}</div></div>
+  <div class="pgstep" key="${k}">${W.step===0?`<span class="pgbeta">gratuit</span>`:""}<h1 class="pgq">${q}</h1><p class="pgqs">${sub}</p><div class="pgbody">${body}</div></div>
   ${auto&&!last?"":`<div class="pgwfoot"><button class="btn main pgsave" ${last?"data-pgcreate":"data-pgwnext"}>${last?(PRG()&&PRG().plan?"recalculer mon plan 🏹":"créer mon plan 🏹"):"suivant"}</button></div>`}</div>`}
 function pgWNext(){const W=pgW,k=pgSteps()[W.step];
   if(k==="type"&&!W.mode){toast("choisis un type");return}
+  if(k==="race"&&W.next){if(!W.start||W.start<W.minStart){toast(`tu es en récupération : ta prépa peut démarrer à partir du ${fdate(W.minStart,{day:"numeric",month:"long"})}`);return}if(!W.date||W.date<addDays(W.start,28)){toast("laisse au moins 4 semaines entre le début de ta prépa et ta course");return}}
   if(k==="race"){if(!W.date||W.date<addDays(today(),7)){toast("choisis la date de ta course (au moins 1 semaine)");return}if(!(+W.dist>0)){toast("choisis la distance");return}}
   if(k==="terrain"&&!W.hill){toast("choisis ta côte");return}
   if(k==="freq"&&W.freq===null){toast("choisis une réponse");return}
@@ -2629,9 +2912,9 @@ function progCreate(){const W=pgW;if(!W)return;const old=PRG()||{};const mode=W.
   const psec=W.vsrc==="chrono"?parseTime(W.ptime):0,pkm=W.vsrc==="chrono"?+W.pkm:0,coop=W.vsrc==="test"&&W.vtest==="done"?+W.cooper:0;
   let vma=W.vsrc==="vma"?+W.vma:coop>300?coop/100:pkm&&psec?(pkm/(psec/3600))/pctFor(pkm):level==="D"?10:level==="I"?13:15;
 
-  const same=old.mode===mode&&old.plan;const days=autoDays(+W.n,W.days);
+  const nx=!!W.next&&!!old.plan;const same=old.mode===mode&&old.plan&&!nx;const days=autoDays(+W.n,W.days);
   const terrain=race.type==="trail"?{hill:W.hill||"mid",tread:!!W.tread,stairs:!!W.stairs,pfm:(W.hill==="none"||W.hill==="short")&&W.pfm!==false}:null;
-  race.tech=race.type==="trail"?W.tech:undefined;let p={...old,v:6,renfo:+W.renfo||0,equip:W.equip.slice(),rfGoal:W.rfGoal||"equilibre",rfDur:+W.rfDur||30,nutri:old.nutri!==false,terrain,mode,cycle,race,level:W.pain==="1"?"D":level,q:{freq,km,long:lg},cooper:coop||0,perf:pkm&&psec?{km:pkm,sec:psec}:null,vma0:+vma.toFixed(2),vmaAdj:0,n:+W.n,days,start:same?old.start:null,created:same?old.created:today(),plan:same?old.plan:[],logs:old.logs||{},msgs:old.msgs||[],secs:mode==="course"?old.secs||[]:[],chrono:[],ups:0,lastAdj:today(),light:null,paused:false};
+  race.tech=race.type==="trail"?W.tech:undefined;let p={...old,v:6,renfo:+W.renfo||0,equip:W.equip.slice(),rfGoal:W.rfGoal||"equilibre",rfDur:+W.rfDur||30,nutri:old.nutri!==false,terrain,mode,cycle,race,level:W.pain==="1"?"D":level,q:{freq,km,long:lg},cooper:coop||0,perf:pkm&&psec?{km:pkm,sec:psec}:null,vma0:+vma.toFixed(2),vmaAdj:0,n:+W.n,days,start:same?old.start:nx?ds(weekStart(parse(W.start))):null,created:same?old.created:nx?W.start:today(),plan:same||nx?old.plan:[],logs:old.logs||{},msgs:old.msgs||[],secs:mode==="course"?(nx?(old.secs||[]).filter(x=>x.date>W.start&&x.date<race.date):old.secs||[]):[],prev:nx&&old.race&&!old.race.virtual?[...(old.prev||[]),old.race].slice(-6):old.prev||[],extra:old.extra||[],chrono:[],ups:0,lastAdj:today(),light:null,paused:false};
   p.vmaTest=W.vsrc==="test"&&W.vtest==="plan";buildPlan(p);
   if(p.vmaTest){const e=p.plan.find(x=>x.date>today()&&SESS[x.code]&&!["long","race"].includes(SESS[x.code][3]));if(e)e.code="VMATEST"}
   pushChrono(p,"calcul de départ");progEdit=false;pgW=null;pgSel=null;pgLoading("on construit ton plan",["on analyse ton niveau","on calcule tes allures","on place tes séances","on prépare ton coach"],2600,()=>{savePrg(p);go("prog");window.scrollTo(0,0)})}
@@ -2745,6 +3028,7 @@ function openProgLog(key,edit,pre){const p=PRG();if(!p)return;const date=String(
     q.logs={...(q.logs||{}),[key]:{status:W.st,rpe,feel:W.feel,pain:W.tags.includes("douleur")?5:0,cond,tags:W.tags,notes:W.notes,src:W.st==="none"?"":W.src,act:W.st==="none"?null:W.act,ts:Date.now(),snap}};
     let m=[];if(code==="VMATEST"&&W.st!=="none"){q.vma0=W.tdist/100;q.vmaAdj=0;q.vmaTest=false;q.lastAdj=date;pushChrono(q,"test VMA");m=[`🎯 test VMA : ${W.tdist} m en 6 min, ton allure VMA est de ${fmtPace(W.tdist/100)} /km. toutes tes allures sont recalculées.`];q.msgs=[...m.map(x=>({date,m:x})),...(q.msgs||[])]}
     else m=adapt(q,date);
+    {const ak=W.st!=="none"&&W.act&&+W.act.km;const sp=ak&&!RENFO[code]?spikeTxt(q,ak,W.act.date||date):"";if(sp){m=[...m,sp];q.msgs=[{date,m:sp},...(q.msgs||[])].slice(0,20)}}
     if(q.nutri!==false&&W.st==="full"&&!RENFO[code]&&(W.act&&W.act.sec?W.act.sec:plan.sec)>=60*60&&(q.gut||0)<GUT.length-1){q.gutN=(q.gutN||0)+1;if(q.gutN>=4){q.gut=(q.gut||0)+1;q.gutN=0;const t2=`🍯 palier nutrition ${q.gut+1} débloqué : ${GUT[q.gut]} g de glucides par heure sur tes longues séances.`;m=[...m,t2];q.msgs=[{date,m:t2},...(q.msgs||[])]}}
     closeSheet();savePrg(q);pgSel=key;
     const lt=W.st==="none"?"on réorganise ta semaine":W.tags.includes("douleur")?"on te protège":W.feel===2?"on adapte ton entraînement":W.feel<(FEEL_EXP[ty]||0)?"on muscle un peu la suite":"on garde le cap";
@@ -2812,9 +3096,14 @@ function openProgResult(){const p=PRG();if(!p)return;
     $("#rsX").onclick=closeSheet;$("#rsGo").onclick=()=>{const sec=parseTime($("#rsT").value);if(!sec){toast("temps invalide");return}
       const q=JSON.parse(JSON.stringify(p)),km=raceKm(q.race);q.result={sec,date:today()};q.perf={km,sec};const nv=(km/(sec/3600))/pctFor(km);q.vmaAdj=+(nv-q.vma0).toFixed(2);
       q.msgs=[{date:today(),m:`🏅 finisher en ${fmtTime(sec)} ! nouvelle allure VMA : ${fmtPace(nv)} /km, tes allures sont recalculées.`},...(q.msgs||[])];closeSheet();savePrg(q);toast("bravo finisher 🏅")}})}
-function progQGCard(){if(!PROG_ON())return"";const p=PRG();if(!p||!p.plan)return `<button class="instb" data-nav="prog"><span class="ci">🏃</span><span class="ct"><b>programme course · bêta</b><small>bêta · gratuit pendant la bêta · prépare ta course</small></span><span class="cg">›</span></button>`;
-  const e=nextSess(p);if(!e)return"";const s=SESS[sessOf(e)],j=Math.round((parse(p.race.date)-parse(today()))/864e5);
-  return `<button class="instb" data-nav="prog"><span class="ci">🏃</span><span class="ct"><b>${e.date===today()?"séance du jour":"prochaine séance "+fdate(e.date,{weekday:"short"})} · ${esc(s[0])}</b><small>${esc(sessText(p,e))} · J-${j} ${esc(p.race.name)}</small></span><span class="cg">›</span></button>`}
+function progQGCard(){if(!PROG_ON())return"";const p=PRG();
+  if(!p||!p.plan)return `<button class="nextc" data-nav="prog"><span class="nk"><span>ton programme</span><em>gratuit</em></span><span class="nn">Prépare ta prochaine course</span><span class="nm">10 km, semi, marathon ou trail : un plan qui s'adapte à toi.</span><span class="ng"><span>2 minutes pour le créer</span><b>commencer</b></span></button>`;
+  const e=nextSess(p);if(!e)return"";const s=SESS[sessOf(e)]||RENFO[sessOf(e)]||["séance"],j=Math.round((parse(p.race.date)-parse(today()))/864e5);
+  const ws=ds(weekStart(new Date())),st=pgWeekStats(p,ws);
+  return `<button class="nextc" data-nav="prog"><span class="nk"><span>${e.date<=today()?"ta séance":"prochaine séance"}</span><em>J-${j} · ${esc(p.race.name)}</em></span>
+   <span class="nn">${esc(pgSessName(e))}</span><span class="nm">${esc(sessText(p,e))}</span>
+   ${st.wk.length?`<span class="wkb">${st.wk.map(x=>`<i class="${(p.logs||{})[ek(x)]?"on":""}"></i>`).join("")}</span>`:""}
+   <span class="ng"><span>${st.n}/${st.wk.length} séance${st.wk.length>1?"s":""} cette semaine</span><b>voir</b></span></button>`}
 
 function campusUrl(){const w="https://www.campus.coach/app",ps="https://play.google.com/store/apps/details?id=campus.coach.mobileApp";return /Android/i.test(navigator.userAgent)?"intent://www.campus.coach/app#Intent;scheme=https;package=campus.coach.mobileApp;S.browser_fallback_url="+encodeURIComponent(ps)+";end":w}
 let renderHeld=false,renderPend=false;
@@ -2826,8 +3115,10 @@ function render(){if(renderHeld){renderPend=true;return}
   if(meDoc&&meDoc.mode&&meDoc.mode!==curMode())setMode(meDoc.mode,true);
   if(prevLevel!==null&&lv.L>prevLevel) showLevelUp(lv.L);
   if(fullyLoaded()) prevLevel=lv.L;
-  $("#lvchip").innerHTML=`<button class="mini" data-goav>${myAvatar()}</button><span>NIV.${lv.L}</span><i>${xp.total} XP</i>`;
-  $("#nav").innerHTML=NAV.map(([k,l])=>`<button class="${k===view||(k==="menu"&&MENU_VIEWS.includes(view))||(k==="equipe"&&(view==="saison"||view==="tchat"))?"on":""}" data-nav="${k}">${I.nav[k]}<span>${l}</span></button>`).join("")+(PROG_ON()?`<button class="${view==="prog"?"on":""}" data-nav="prog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="4" r="2"/><path d="M7 21l3-6 3 2v5M10 15l1-5 4 2 3-1M11 10l-3 1-2 3"/></svg><span>Programme</span></button>`:`<a class="navext" href="${campusUrl()}"${/Android/i.test(navigator.userAgent)?"":` target="_blank"`} rel="noopener" title="ouvrir Campus Coach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="4" r="2"/><path d="M7 21l3-6 3 2v5M10 15l1-5 4 2 3-1M11 10l-3 1-2 3"/></svg><span>Campus</span></a>`);
+  $("#lvchip").innerHTML=`<button class="mini" data-goav>${myAvatar()}</button><span>NIV.${lv.L}</span><i>${xp.total} XP</i><button class="menub ${view==="menu"||MENU_VIEWS.includes(view)?"on":""}" data-nav="menu" aria-label="menu et réglages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>`;
+  {const nb=([k,l])=>`<button class="${k===view||(k==="equipe"&&(view==="saison"||view==="tchat"))?"on":""}" data-nav="${k}">${I.nav[k]}<span>${l}</span></button>`;
+   const pb=PROG_ON()?`<button class="${view==="prog"?"on":""}" data-nav="prog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="4" r="2"/><path d="M7 21l3-6 3 2v5M10 15l1-5 4 2 3-1M11 10l-3 1-2 3"/></svg><span>Programme</span></button>`:"";
+   $("#nav").innerHTML=nb(NAV[0])+pb+nb(NAV[1])+nb(NAV[2])}
   const showAdd=view==="taches"||view==="idees";
   $("#add").classList.toggle("show",showAdd);$("#frame").classList.toggle("withadd",showAdd);
   const needsOnboard=allLoaded()&&!owner&&uid&&!(meDoc&&meDoc.onboarded)&&!habits.length;
@@ -2847,7 +3138,13 @@ function detectMilestones(lv){
   const ps=prevStreak;prevStreak=st;
   if(ps!==null&&st>ps&&[3,7,14,21,30,50,75,100,150,200,365].includes(st))pushEvent(`tient une série de ${st} jours 🔥`);
   const list=badgeList(lv),on=list.filter(b=>b.on).map(b=>b.id),pb=prevBadges;prevBadges=on;
-  if(pb){on.filter(x=>!pb.includes(x)).forEach(x=>{const b=list.find(y=>y.id===x);pushEvent(`a débloqué le badge « ${b.n} »`);queueBadge(b)})}
+  /* chaque badge ne s'affiche qu'une fois, sur tous les appareils : liste des badges déjà vus gardée dans le profil */
+  let ls=null;try{ls=JSON.parse(localStorage.getItem("lf_bseen")||"null")}catch(e){}
+  const known=(meDoc&&Array.isArray(meDoc.bseen))||Array.isArray(ls),seen=new Set([...((meDoc&&meDoc.bseen)||[]),...(ls||[])]);
+  const fresh=on.filter(x=>!seen.has(x));
+  if((known&&pb)||(!known&&on.length<=2))fresh.forEach(x=>{const b=list.find(y=>y.id===x);pushEvent(`a débloqué le badge « ${b.n} »`);queueBadge(b)});
+  if(fresh.length||!known||(meDoc&&!Array.isArray(meDoc.bseen))){fresh.forEach(x=>seen.add(x));const arr=[...seen];try{localStorage.setItem("lf_bseen",JSON.stringify(arr))}catch(e){}
+    if(meDoc){meDoc={...meDoc,bseen:arr};dset(ROOT()+"profile/me",meDoc)}}
 }
 const allLoaded=()=>["items","habits","days","perfs"].every(k=>loaded[k]);
 const fullyLoaded=()=>allLoaded()&&loaded.runs&&loaded.profile&&(!uid||(eventsInit&&loaded.board&&loaded.challenges&&loaded.nudges&&loaded.teams));
@@ -2873,14 +3170,14 @@ function publishBoard(xp,lv){
 
 /* ---------- ONBOARDING (copains) ---------- */
 const isNewbie=()=>!owner&&!Object.values(days).some(d=>d&&d.done&&Object.values(d.done).some(Boolean));
-let obFace=0;const obAvCfg=f=>f?{face:1,hair:7,hairC:1,beard:0}:{face:0,hair:0,hairC:1,beard:0};
+let obFace=0;const obAvCfg=f=>({c:[0,4,3,2][f],m:0,g:f%2,face:f%2,ty:f>1?1:0,tc:[5,3,7,4][f],sc:[0,7,1,9][f],hd:[0,2,1,5][f]});
 function vOnboard(){
   const nm=(profiles[uid]&&profiles[uid].name)||"";
   return `<div class="oblogo"><img src="logo_la_fleche.png" alt="La Flèche"><span>du plat aux alpes</span></div><div class="tag">Bienvenue au QG</div><h1>Prêt à<br><span class="g">grimper ?</span></h1>
   <p class="sub">habitudes, tâches, idées, records… chaque case cochée te fait monter de niveau, du bitume jusqu'aux alpes.</p>
   <div class="field" style="margin-top:26px"><label>ton pseudo (visible par ton équipe, modifiable quand tu veux)</label><input id="obName" maxlength="24" value="${esc(nm)}" placeholder="ex. La Flèche"></div>
-  ${label("ton avatar")}
-  <div class="obav" id="obAv">${[0,1].map(f=>`<button type="button" class="obavb ${f===obFace?"on":""}" data-obface="${f}">${avatarSvg(obAvCfg(f),1)}<span>${f?"féminin":"masculin"}</span></button>`).join("")}</div>
+  ${label("ton coureur")}
+  <div class="obav em4" id="obAv">${[0,1,2,3].map(f=>`<button type="button" class="obavb ${f===obFace?"on":""}" data-obface="${f}">${avatarSvg({...obAvCfg(f),nm:nm||"La Flèche"},1)}<span>${["coureur","coureuse","traileur","traileuse"][f]}</span></button>`).join("")}</div>
   <p class="sub" style="font-size:13px;margin-top:6px">tu pourras tout personnaliser ensuite dans profil.</p>
   ${label("choisis tes habitudes de départ")}
   <div class="list" id="obHabits">${STARTER.map(([n,s],i)=>`<label class="row" style="align-items:center;cursor:pointer"><input type="checkbox" data-i="${i}" ${i<5?"checked":""} style="width:20px;height:20px;accent-color:#FFC107"><span class="body"><span class="txt" style="font-size:16px">${esc(n)}</span><span class="meta">${SLOTS.find(x=>x[0]===s)[1]}</span></span></label>`).join("")}</div>
@@ -2892,7 +3189,7 @@ function finishOnboard(){
   const picks=[...document.querySelectorAll("#obHabits input:checked")].map(i=>STARTER[+i.dataset.i]);
   picks.forEach(([name,slot],i)=>saveHabit(newId(),{name,slot,order:i+1,createdAt:Date.now(),archived:false},true));
   DEFAULT_PERFS.forEach(([name,unit],i)=>savePerf(newId(),{name,unit,order:i+1,log:[],lower:false},true));
-  meDoc={onboarded:true,pseudo,startedAt:today(),avatar:{...AV_DEF,...obAvCfg(obFace)}};dset(ROOT()+"profile/me",meDoc);
+  meDoc={onboarded:true,pseudo,startedAt:today(),avatar:obAvCfg(obFace)};dset(ROOT()+"profile/me",meDoc);
   dset("board/"+uid,{pseudo,level:1,xp:0,weekXp:0,week:isoWeek(new Date()),streak:0,todayDone:0,todayTotal:picks.length,todayValid:false,day:today(),teamId:"",updatedAt:Date.now()});
   go("habitudes");toast("bienvenue "+pseudo+" !");
 }
@@ -2921,7 +3218,7 @@ function vTeam(){
   const nudged=id=>nudges.some(n=>n.from===uid&&n.to===id&&n.day===t);
   const rows=mem.map((m,i)=>`<div class="row" style="align-items:center;${m.id===uid?"border-color:var(--gold)":""}">
     <div class="anton" style="width:26px;font-size:24px;color:${i===0?"var(--gold)":"var(--mute)"}">${i+1}</div>
-    <div class="tav">${avatarSvg(m.avatar||AV_DEF,m.level||1)}</div>
+    <div class="tav">${avatarSvg({...(m.avatar||{}),nm:m.pseudo},m.level||1)}</div>
     <div class="body"><div class="txt">${esc(m.pseudo||"Coureur")}${m.id===uid?' <span class="label g">· toi</span>':""}</div><div class="ktitle">🏃 ${kmTitle(m.kmTotal||0)} · ${String(m.kmTotal||0).replace(".",",")} km${m.maxOk===false?' <span style="color:#FF8A50">· max à noter</span>':""}</div>
       ${(m.prs||[]).length?`<div class="meta"><span>⏱ ${m.prs.slice(0,3).map(x=>prLab(x.k)+" "+prFmt(x.sec)).join(" · ")}</span></div>`:""}<div class="meta"><span>niv.${m.level||1} · ${stageOf(m.level||1)}</span><span>🔥 ${m.streak||0} j</span><span class="${m.tv?"hot":""}">auj. ${m.td}/${m.todayTotal||0}${m.tv?" ✓":""}</span></div>
       ${m.id!==uid&&!m.tv?`<button class="btn small" style="margin-top:8px" data-nudge="${esc(m.id)}" ${nudged(m.id)?"disabled":""}>${nudged(m.id)?"secoué ✓":"👊 secouer"}</button>`:""}</div>
@@ -3093,7 +3390,7 @@ function vQG(xp,lv){
   if(inboxNew())alerts+=`<button class="alert gold" data-nav="reglages">📬 ${inboxNew()} nouveau${inboxNew()>1?"x":""} retour${inboxNew()>1?"s":""} des joueurs (bugs / idées) ›</button>`;
   if(dow(t)===6) alerts+=`<button class="alert gold" data-bilan>📊 c'est dimanche : ton bilan de la semaine est prêt ›</button>`;
   return `
-  <div class="tag">Semaine ${isoWeek(new Date())} · ${fdate(t,{weekday:"long",day:"numeric",month:"long"})}</div>
+  <div class="tag">${fdate(t,{weekday:"long",day:"numeric",month:"long"})}</div>
   <div class="hero">
     <div class="ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#222226" stroke-width="9"/><circle cx="60" cy="60" r="52" fill="none" style="stroke:var(--gold)" stroke-width="9" stroke-linecap="round" stroke-dasharray="${(326.7*pct/100).toFixed(1)} 400" transform="rotate(-90 60 60)"/></svg>
       <button class="rav" data-goav aria-label="mon avatar">${myAvatar()}</button><div class="rlv">NIV.${lv.L}</div></div>
@@ -3105,27 +3402,21 @@ function vQG(xp,lv){
     <div class="row"><span class="label">${lv.blocked?`⛔ épreuve requise pour passer niv.${lv.blocked}`:lv.need?`${lv.into} / ${lv.need} XP vers niv.${lv.L+1}`:"niveau max — t'es dans les Alpes"}</span><span class="label g">${xp.total} XP</span></div>
     <div class="bar"><div class="fill" style="width:${pct}%"></div></div>
   </div>
+  ${PROG_ON()?progQGCard():""}
   ${alerts.includes("maxr")||alerts.includes("première mission")?"":maxReminder()}
   ${alerts}
-  ${PROG_ON()?`<div class="commuqg">${progQGCard()}</div>`:""}
   ${!isStandalone()&&!(meDoc&&meDoc.instx)?`<div class="commuqg">${installBtn("mets la flèche sur ton écran d'accueil · 1 minute")}<button class="commux" data-instx aria-label="masquer">déjà installée ✓</button></div>`:""}
-  ${!(meDoc&&meDoc.commu)?`<div class="commuqg"><a class="commu big" href="${COMMU}" target="_blank" rel="noopener" data-commujoin><span class="ci">💬</span><span class="ct"><b>rejoins la communauté</b><small>bugs, idées, défis et cordées · sur whatsapp</small></span><span class="cg">›</span></a><button class="commux" data-commux aria-label="masquer">déjà dedans ✓</button></div>`:""}
+  ${(isStandalone()||(meDoc&&meDoc.instx))&&!(meDoc&&meDoc.commu)?`<div class="commuqg"><a class="commu big" href="${COMMU}" target="_blank" rel="noopener" data-commujoin><span class="ci">💬</span><span class="ct"><b>rejoins la communauté</b><small>bugs, idées, défis et cordées · sur whatsapp</small></span><span class="cg">›</span></a><button class="commux" data-commux aria-label="masquer">déjà dedans ✓</button></div>`:""}
   ${timerStrip()}
   ${(()=>{if(!db||!uid)return "";const rows=seasonRows("saison"),k=rows.findIndex(b=>b.id===uid);return `<button class="seasoncard" data-nav="saison"><span class="label">saison ${seasonNo()} · jour ${seasonDay()}/${SEASON_DAYS}</span><b>${k>=0?`${k+1}${k?"e":"er"} <small>sur ${rows.length}</small>`:"—"}</b><span class="g">${xp.season} xp ›</span></button>`})()}
-  <button class="btn small storybtn" data-story>📸 partager ma story</button>
   ${trialCard(lv)}
   ${purgCard()}
   ${weeklyCard()}
-  <div class="kpis">
-    <div class="kpi"><b>${todayN}/${n}</b><span>habitudes auj.</span></div>
-    <div class="kpi"><b>+${xpToday}</b><span>xp auj.</span></div>
-    <div class="kpi"><b>${xp.week}</b><span>xp semaine</span></div>
-  </div>
   <div class="overview">
     <div>${heat}</div>
     <div class="flame">${I.flame(streak>0)}<div class="n">${streak} J</div><div class="m">${team?"cordée":"série"}<b>×${m.toFixed(2).replace(/0$/,"")}</b></div>${team?`<div class="pstreak"><small>ta série perso</small><b>🔥 ${currentStreak()} j</b></div>`:`<div class="pstreak"><small>record</small><b>${bestStreak()} j</b></div>`}</div>
   </div>
-  <div class="actions" style="margin-top:18px"><button class="btn small" data-bilan>bilan de la semaine</button><button class="btn small ghost" data-goav>profil, badges & route ›</button></div>`;
+  <div class="qgfoot"><button class="btn small" data-bilan>bilan de la semaine</button><button class="btn small ghost" data-goav>profil et badges</button><button class="btn small ghost" data-story>partager ma story</button></div>`;
 }
 function vBadges(){
   const bl=badgeList({L:curL}),on=bl.filter(b=>b.on).length;
@@ -3403,7 +3694,7 @@ function vMenu(){
   const T=[["agenda","Agenda",nEv?`${nEv} événement${nEv>1?"s":""} aujourd'hui`:"ta journée"],["taches","Tâches",open?`${open} en cours`:"rien sur le feu"],["idees","Idées",`${ide} en stock`],["course","Performance","course · renfo"],["mhab","Mes habitudes",`${activeHabits().length} habitudes`],["avatar","Profil","avatar · badges · route"],["reglages","Paramètres",inboxNew()?`📬 ${inboxNew()} nouveau${inboxNew()>1?"x":""} retour${inboxNew()>1?"s":""}`:"compte, bug, remise à zéro"],["tutos","Tutos vidéo","8 vidéos · comment ça marche"]];
   T.push(["news","Nouveautés",newsNew()?"🆕 une mise à jour à découvrir":"ce qui change dans l'appli"]);
   if(owner)T.unshift(["admin","Tour de contrôle",`${players().length} membres · ${teams.filter(x=>board.some(b=>b.teamId===x.id)).length} cordées${inboxNew()?" · 📬 "+inboxNew():""}`]);
-  return `<div class="tag">Menu</div><h1>Tout<br><span class="g">le reste</span></h1><button class="bugbig" data-bugopen><span>🐞</span><span><b>signaler un problème</b><small>un bug, une idée : ça m'arrive directement</small></span><em>›</em></button>
+  return `<h1>Menu</h1><button class="bugbig" data-bugopen><span>🐞</span><span><b>signaler un problème</b><small>un bug, une idée : ça m'arrive directement</small></span><em>›</em></button>
   <div class="tiles">${T.map(([k,n,sub])=>`<button class="tile ${k==="mhab"||k==="reglages"||k==="admin"?"hi":""} ${k==="tutos"||k==="admin"||k==="news"?"wide":""}" data-nav="${k}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${TILE_IC[k]}</svg><b>${n}</b><span>${sub}</span></button>`).join("")}</div>${installBtn()}${commuBtn()}`;
 }
 /* ---------- MES HABITUDES ---------- */
@@ -3432,8 +3723,8 @@ function vSaison(){
   ${me>=0?`<div class="alert gold">tu es <b>${me+1}${me?"e":"er"}</b> sur ${rows.length} avec <b>${rows[me].sx} XP</b>${rankMode==="general"?" au total":""}${me>0?` · ${rows[me-1].sx-rows[me].sx+1} XP pour passer ${esc(rows[me-1].pseudo)}`:" · tiens bon !"}</div>`:""}
   <div class="chips">${[["saison",`saison ${n}`],["general","général"]].map(([k,l])=>`<button class="chip ${rankMode===k?"on":""}" data-rkmode="${k}">${l}</button>`).join("")}</div>
   <div class="chips" id="snScope" style="margin-top:8px">${[["tous","tout le monde"],["equipe","mon équipe"]].map(([k,l])=>`<button class="chip ${seasonScope===k?"on":""}" data-snscope="${k}">${l}</button>`).join("")}</div>
-  ${pod.length?`<div class="podium">${ord.map(i=>{const b=pod[i];return `<div class="pod p${i+1} ${b.id===uid?"me":""}"><div class="pav">${avatarSvg(b.avatar,b.level||1)}</div><div class="pnm">${esc(b.pseudo)}</div><div class="pxp">${b.sx} xp</div><div class="pst">${i+1}</div></div>`}).join("")}</div>`:`<div class="empty"><b>personne pour l'instant</b>coche tes habitudes pour lancer la saison.</div>`}
-  <div class="list">${rows.slice(3).map((b,i)=>`<div class="row srank ${b.id===uid?"me":""}"><span class="rk">${i+4}</span><span class="sav">${avatarSvg(b.avatar,b.level||1)}</span><div class="body"><div class="txt">${esc(b.pseudo)}</div><div class="meta"><span>niv.${b.level||1} · ${stageOf(b.level||1)}</span>${b.streak>1?`<span class="hot">🔥 ${b.streak} j</span>`:""}</div></div><b class="g">${b.sx}</b></div>`).join("")}</div>`;
+  ${pod.length?`<div class="podium">${ord.map(i=>{const b=pod[i];return `<div class="pod p${i+1} ${b.id===uid?"me":""}"><div class="pav">${avatarSvg({...(b.avatar||{}),nm:b.pseudo},b.level||1)}</div><div class="pnm">${esc(b.pseudo)}</div><div class="pxp">${b.sx} xp</div><div class="pst">${i+1}</div></div>`}).join("")}</div>`:`<div class="empty"><b>personne pour l'instant</b>coche tes habitudes pour lancer la saison.</div>`}
+  <div class="list">${rows.slice(3).map((b,i)=>`<div class="row srank ${b.id===uid?"me":""}"><span class="rk">${i+4}</span><span class="sav">${avatarSvg({...(b.avatar||{}),nm:b.pseudo},b.level||1)}</span><div class="body"><div class="txt">${esc(b.pseudo)}</div><div class="meta"><span>niv.${b.level||1} · ${stageOf(b.level||1)}</span>${b.streak>1?`<span class="hot">🔥 ${b.streak} j</span>`:""}</div></div><b class="g">${b.sx}</b></div>`).join("")}</div>`;
 }
 
 /* ---------- SUGGESTIONS D'HABITUDES ---------- */
@@ -3570,7 +3861,7 @@ async function makeStory(){
   const bg=g.createRadialGradient(540,820,40,540,820,1100);bg.addColorStop(0,"#1c1a10");bg.addColorStop(1,"#09090A");g.fillStyle=bg;g.fillRect(0,0,1080,1920);
   g.strokeStyle="rgba(255,255,255,.06)";g.lineWidth=3;for(let i=0;i<7;i++){g.beginPath();g.ellipse(860,380,140+i*90,80+i*52,0,0,7);g.stroke()}
   const logo=await img("logo_la_fleche.png");if(logo){const w=520,h=w*logo.height/logo.width;g.drawImage(logo,(1080-w)/2,110,w,h)}
-  const svg=avatarSvg({...AV_DEF,...((meDoc&&meDoc.avatar)||{})},lv.L).replace("<svg ",'<svg xmlns="http://www.w3.org/2000/svg" width="520" height="520" ');
+  const svg=avatarSvg({nm:myName(),...((meDoc&&meDoc.avatar)||{})},lv.L).replace("<svg ",'<svg xmlns="http://www.w3.org/2000/svg" width="520" height="520" ');
   const av=await img("data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg));
   g.save();g.beginPath();g.arc(540,660,250,0,7);g.fillStyle="#141417";g.fill();g.lineWidth=14;g.strokeStyle=gold;g.stroke();g.clip();if(av)g.drawImage(av,280,400,520,520);g.restore();
   const T=(txt,y,size,col="#F5F5F3",w=900,font="Barlow Condensed",st="italic 900")=>{g.font=`${st} ${size}px '${font}'`;g.fillStyle=col;g.textAlign="center";g.fillText(txt,540,y,w)};
@@ -3773,7 +4064,7 @@ function vReglages(){
     <div id="logoutMsg" class="sub" style="font-size:13px;display:none;margin-top:4px">la connexion passe par ton compte claude.ai : déconnecte-toi depuis claude.ai, puis rouvre l'appli avec l'autre compte. dans la future appli autonome, ce bouton te déconnectera directement.</div>
   </div>
   ${installBtn()}
-  ${label("accès bêta")}
+  ${label("programme")}
   <div class="set"><div class="srow"><span>programme d'entraînement</span><b class="g">ouvert à tous · gratuit</b></div><p class="sub" style="font-size:12px;margin:4px 0 0">un bug, une séance bizarre ? <button data-bugopen="programme" style="color:var(--gold);text-decoration:underline">signale-le ici</button>, ou écris dans le groupe whatsapp.</p></div>
   ${label("préférences")}
   <div class="set">
@@ -3824,25 +4115,44 @@ function openReset(day){
 
 /* ---------- AVATAR ---------- */
 function vAvatar(xp,lv){
-  const cfg={...AV_DEF,...((meDoc&&meDoc.avatar)||{})},km=kmTotal(),nt=nextKmTitle(km);
-  const cats=Object.entries(AV).map(([k,c])=>`<div class="avcat"><div class="label">${c.n}</div><div class="avopts">${c.o.map(([v,L],i)=>{const lock=!curLg&&L>curL,on=cfg[k]===i;
-    return `<button class="avo ${on?"on":""} ${lock?"lock":""}" data-av="${k}" data-i="${i}" ${lock?`data-lock="${L}"`:""}>${v.startsWith("#")?`<i style="background:${v}"></i>`:esc(v)}${lock?`<small>🔒 ${L}</small>`:""}</button>`}).join("")}</div></div>`).join("");
-  const themes=THEMES;
-  const allL=Object.keys(UNLOCK_LIST).map(Number).sort((a,b)=>a-b);
-  return subnav([["avatar","avatar"],["badges","badges"],["route","route"]])+`<button class="btn small storybtn" data-story style="float:right;margin-top:-4px">📸 story</button><div class="tag">Avatar · ${stageOf(curL)}</div>
-  <div class="avhero"><div class="avbig">${myAvatar()}</div>
-   <div class="avinfo"><h1 data-rename style="font-size:clamp(38px,10vw,62px);cursor:pointer" title="changer de pseudo">${esc((myName()||"Coureur").split(" ")[0])} <span style="font-size:.4em;opacity:.6">✏️</span></h1>
-    <div class="stg"><span>NIV.${curL}</span>${leagueTag(curLg)}${stageOf(curL)}</div>
-    <div class="kmt big">🏃 ${kmTitle(km)}</div>
-    <div class="label" style="margin-top:6px">${String(km).replace(".",",")} km courus${nt?` · ${nt[1]} à ${nt[0]} km`:""}</div>
-    ${nt?`<div class="kmbar"><div style="width:${Math.min(100,Math.round(km/nt[0]*100))}%"></div></div>`:""}</div></div>
-  <p class="sub" style="font-size:14px">contour qui change à chaque palier, dossard à ton niveau, médailles aux niveaux 40, 60 et 90. les éléments 🔒 arrivent en montant.</p>
-  ${label("personnaliser")}${cats}
-  ${""}
+  const cfg=(meDoc&&meDoc.avatar)||{},km=kmTotal(),nt=nextKmTitle(km),me={...cfg,nm:myName()};const eff={...RDEF,...(cfg.ty==1?TDEF:{}),g:cfg.face===1?1:0,...cfg},fem0=(eff.g|0)===1;
+  const opt=(k,list,render)=>`<div class="emopts">${list.map((o,i)=>{const cv=eff[k]==null?0:eff[k];const lock=!curLg&&o[o.length-1]>curL,on=(cv|0)===i;return `<button class="emo ${on?"on":""} ${lock?"lock":""}" data-em="${k}" data-i="${i}" ${lock?`data-lock="${o[o.length-1]}"`:""}>${render(o,i)}<span>${esc(o[1]&&typeof o[1]==="string"&&k==="c"?o[1]:o[0])}${lock?` · niv.${o[o.length-1]}`:""}</span></button>`}).join("")}</div>`;
+  const prev=(over)=>{const k=Object.keys(over)[0],run=(cfg.m|0)===0;return avatarSvg({...me,...over},curL,!run||["c","t","m","pl","ty","tp","vs"].includes(k)?"emp":["bc","sc","bs","ks","sm"].includes(k)?"emp zoomlo":"emp zoom")};
+  return subnav([["avatar","avatar"],["badges","badges"],["route","route"]])+`
+  <div class="emhero"><div class="embig">${myAvatar()}</div>
+   <h1 data-rename style="cursor:pointer" title="changer de pseudo">${esc(myName()||"Coureur")}</h1>
+   <div class="emst">niv.${curL} · ${leagueTag(curLg)}${stageOf(curL)}</div>
+   <div class="emkm">${kmTitle(km)} · ${String(km).replace(".",",")} km${nt?` · ${esc(nt[1])} à ${nt[0]} km`:""}</div>
+   ${nt?`<div class="kmbar"><div style="width:${Math.min(100,Math.round(km/nt[0]*100))}%"></div></div>`:""}
+   <button class="btn small ghost" data-story>partager ma story</button></div>
+  <p class="sub" style="text-align:center;font-size:14px">ton coureur, ton équipement, et derrière lui un relief qui grandit avec ton niveau : du bitume jusqu'aux alpes.</p>
+  ${(cfg.m|0)===0?`
+  ${label("style")}${opt("ty",[["coureur sur route",1],["traileur",1]],(o,i)=>prev({ty:i}))}
+  ${label("silhouette")}${opt("g",[["homme",1],["femme",1]],(o,i)=>prev({g:i,face:i}))}
+  ${label("peau")}${opt("sk",SKIN.map((x,i)=>["teinte "+(i+1),1]),(o,i)=>prev({sk:i}))}
+  ${label("cheveux")}${opt("hs",(fem0?[["queue",1],["chignon",1],["tresse",1]]:[["courts",1],["rasés",1],["bouclés",1]]),(o,i)=>prev({hs:i}))}
+  ${opt("hc",HAIRC.map((x,i)=>[["noirs","bruns","châtains","blonds","roux","gris"][i],1]),(o,i)=>prev({hc:i}))}
+  ${fem0?"":`${label("barbe")}${opt("br",[["non",1],["oui",1]],(o,i)=>prev({br:i}))}`}
+  ${label("tête")}${opt("hd",[["rien",1],["casquette",1],["bandeau",1],["visière",5],["frontale",20],["bonnet",15]],(o,i)=>prev({hd:i}))}
+  ${label("haut")}${opt("ts",[["t-shirt",1],["débardeur",1],["manches longues",5],["coupe-vent",25]],(o,i)=>prev({ts:i}))}
+  ${opt("tc",GEAR.map((x,i)=>[GEAR_N[i],1]),(o,i)=>prev({tc:i}))}
+  ${label("bas")}${opt("bs",[["short",1],["short fendu",1],["cuissard",5],["collant",15]],(o,i)=>prev({bs:i}))}
+  ${opt("bc",GEAR.map((x,i)=>[GEAR_N[i],1]),(o,i)=>prev({bc:i}))}
+  ${label("chaussettes")}${opt("ks",[["basses",1],["hautes",1],["manchons",10]],(o,i)=>prev({ks:i}))}
+  ${label("chaussures")}${opt("sm",[["route",1],["trail",1]],(o,i)=>prev({sm:i}))}
+  ${opt("sc",GEAR.map((x,i)=>[GEAR_N[i],1]),(o,i)=>prev({sc:i}))}
+  ${label("équipement")}
+  <div class="emopts">${[["gl","lunettes",1],["pl","bâtons",5],["vs","gilet d'hydratation",10],["bf","tour de cou",20]].map(([k,n,lv])=>{const lock=!curLg&&lv>curL,on=!!eff[k];return `<button class="emo ${on?"on":""} ${lock?"lock":""}" data-em="${k}" data-i="${on?0:1}" ${lock?`data-lock="${lv}"`:""}>${prev({[k]:1})}<span>${n}${lock?` · niv.${lv}`:on?" ✓":""}</span></button>`}).join("")}</div>
+  ${label("tes lettres")}
+  <div class="emtx"><input id="emTx" maxlength="3" value="${esc(cfg.tx||"")}" placeholder="${esc(inits(myName())||"LF")}" autocomplete="off"><button class="btn small main" data-emtx>ok</button></div>
+  ${opt("tp",[["sur le dossard",1],["dossard + en grand",1]],(o,i)=>prev({tp:i,tx:cfg.tx||inits(myName())}))}`:""}
+  ${label("paysage")}${opt("c",EM_COL,(o,i)=>prev({c:i}))}
+  ${label("fond")}${opt("t",EM_TEX,(o,i)=>prev({t:i}))}
+  ${label("au centre")}${opt("m",EM_MOT,(o,i)=>prev({m:i}))}
+  ${label("le relief, palier par palier")}
+  <div class="emroad">${STAGES.map(([L0,n])=>`<div class="${curL>=L0?"ok":""}">${avatarSvg({...me},L0,"ems")}<small>${esc(n)}</small><i>niv.${L0}</i></div>`).join("")}</div>
   ${label("titres de coureur")}
-  <div class="unl">${KM_TITLES.map(([k,n])=>`<div class="${km>=k?"ok":""}"><b>${k} km</b><span>${n}</span></div>`).join("")}</div>
-  ${label("éléments d'avatar par niveau")}
-  <div class="unl">${allL.map(L=>`<div class="${curL>=L?"ok":""}"><b>NIV.${L}</b><span>${UNLOCK_LIST[L].map(esc).join(" · ")}</span></div>`).join("")}</div>`;
+  <div class="unl">${KM_TITLES.map(([k,n])=>`<div class="${km>=k?"ok":""}"><b>${k} km</b><span>${n}</span></div>`).join("")}</div>`;
 }
 
 /* ---------- AGENDA ---------- */
@@ -3996,7 +4306,7 @@ function parsePerf(p,s){s=s.trim().replace(",",".");if(p.unit==="sec"){if(s.incl
 function stravaPurge(all){if(!uid||readOnly)return;const lim=Date.now()-7*864e5;let n=0;
   runs.filter(r=>isSR(r)&&(all||(r.at||0)<lim)).forEach(r=>{ddel(P("runs",r.id));n++});runs=runs.filter(r=>!(isSR(r)&&(all||(r.at||0)<lim)));
   if(strava&&(all||(strava.syncedAt||0)<lim)){ddel(P("strava","best"));strava=null;n++}
-  const p=PRG();if(p&&p.logs){let ch=false;const q=JSON.parse(JSON.stringify(p));for(const k in q.logs){const a=q.logs[k].act;if(a&&a.src==="strava"&&(all||(a.at||0)<lim)){q.logs[k].act=null;q.logs[k].sg=1;ch=true}}if(ch){saveProfile({prog:q});n++}}
+  const p=PRG();if(p&&p.logs){let ch=false;const q=JSON.parse(JSON.stringify(p));for(const k in q.logs){const a=q.logs[k].act;if(a&&a.src==="strava"&&(all||(a.at||0)<lim)){q.logs[k].act=null;q.logs[k].sg=1;ch=true}}(q.extra||[]).forEach(x=>{if(x.src==="strava"&&!x.sg&&(all||(x.at||0)<lim)){Object.assign(x,{sec:0,km:0,dp:0,hr:0,cad:0,sg:1});ch=true}});if(ch){saveProfile({prog:q});n++}}
   if(n)render();return n}
 async function syncStrava(){
   const msg=t=>{const m=$("#stravaMsg");if(m)m.textContent=t};
@@ -4035,7 +4345,7 @@ function openRun(){
    $("#rSave").onclick=()=>{const km=parseFloat(($("#rKm").value||"").replace(",","."));if(!km||km<=0||km>400)return;
      const dp=Math.max(0,parseInt($("#rDp").value||"0")||0),date=$("#rDate").value||today();const id="m"+newId().slice(0,12);
      const doc={date,name:($("#rName").value||"sortie").trim().slice(0,60),km:Math.round(km*10)/10,dplus:dp,sport:"Run",manual:true};
-     runs.push({id,...doc});dset(P("runs",id),doc);closeSheet();render();toast(`sortie ajoutée · ${doc.km.toString().replace(".",",")} km`);pushEvent(`a couru ${doc.km.toString().replace(".",",")} km`)};
+     runs.push({id,...doc});dset(P("runs",id),doc);closeSheet();render();toast(`sortie ajoutée · ${doc.km.toString().replace(".",",")} km`);spikeWarn(doc.km,date);pushEvent(`a couru ${doc.km.toString().replace(".",",")} km`)};
   });
 }
 
@@ -4053,7 +4363,7 @@ $("#addOpts").addEventListener("click",e=>{const c=e.target.closest("[data-addca
 
 /* ================= EVENTS ================= */
 function go(v){if(v!=="tutos")tutoWelcome=false;if(v==="prog"){pgOpen=null;pgWk=0}view=v;filter="Tout";try{history.replaceState(null,"","#"+v)}catch(_){}render();window.scrollTo(0,0)}
-$("#lvchip").addEventListener("click",e=>{if(e.target.closest("[data-goav]"))go("avatar")});
+$("#lvchip").addEventListener("click",e=>{if(e.target.closest("[data-goav]"))go("avatar");else if(e.target.closest(".menub"))go("menu")});
 $("#nav").addEventListener("click",e=>{const b=e.target.closest("[data-nav]");if(b)go(b.dataset.nav)});
 $("#view").addEventListener("input",e=>{const t=e.target.closest("[data-pgw]");if(!t||!pgW)return;const k=t.dataset.pgw;pgW[k]=t.type==="range"?+t.value:t.value;
   if(t.type==="range"){const v=document.getElementById("pgv-"+k);if(k==="vma"){const h=document.getElementById("pgv-vmakmh");if(h)h.textContent="soit "+(+t.value).toFixed(1)+" km/h"}const fm=k==="vma"?(x=>fmtPace(+x)):k==="long"?(x=>x>=60?Math.floor(x/60)+"h"+String(x%60).padStart(2,"0"):x+" min"):(x=>x);if(v)v.textContent=fm(+t.value);t.style.setProperty("--p",((t.value-t.min)/(t.max-t.min)*100).toFixed(1)+"%")}});
@@ -4156,6 +4466,8 @@ $("#view").addEventListener("click",e=>{
   if(b=q("[data-nudge]")){if(!unlocked("nudge"))return lockMsg("nudge");if(!b.disabled)nudge(b.dataset.nudge);return}
   if(b=q("[data-dnew]")){if(!unlocked("duel"))return lockMsg("duel");openDuel();return}
   if(b=q("[data-goav]")){go("avatar");return}
+  if(b=q("[data-emtx]")){const v=(($("#emTx")||{}).value||"").replace(/[^A-Za-zÀ-ÿ0-9]/g,"").toUpperCase().slice(0,3);saveProfile({avatar:{...((meDoc&&meDoc.avatar)||{}),tx:v}});toast(v?"lettres enregistrées":"lettres retirées");return}
+  if(b=q("[data-em]")){if(b.dataset.lock){toast(`🔒 se débloque au niveau ${b.dataset.lock}`);return}SND.tick();saveProfile({avatar:{...((meDoc&&meDoc.avatar)||{}),[b.dataset.em]:+b.dataset.i}});return}
   if(b=q("[data-av]")){if(b.dataset.lock){toast(`🔒 se débloque au niveau ${b.dataset.lock}`);return}saveProfile({avatar:{...AV_DEF,...((meDoc&&meDoc.avatar)||{}),[b.dataset.av]:+b.dataset.i}});return}
   if(b=q("[data-mode]")){setMode(b.dataset.mode);saveProfile({mode:b.dataset.mode});return}
   if(b=q("[data-theme]")){if(!unlocked("theme"))return lockMsg("theme");saveProfile({theme:b.dataset.theme});document.documentElement.style.setProperty('--gold',b.dataset.theme);return}
@@ -4333,7 +4645,7 @@ function publishProg(p){if(!db||!uid||!p||readOnly)return;clearTimeout(progTimer
 /* ---------- TOUR DE CONTRÔLE (admin) ---------- */
 const adKpi=(v,l)=>`<div class="kpi"><b>${v}</b><span>${l}</span></div>`;
 function adUserRow(b,extra){const tm=b.teamId&&teams.find(t=>t.id===b.teamId);
-  return `<button class="row adrow" data-aduser="${esc(b.id)}"><div class="tav">${avatarSvg(b.avatar||AV_DEF,b.level||1)}</div><div class="body"><div class="txt">${esc(b.pseudo||"Coureur")}${isBanned(b.id)?' <span class="adtag red">suspendu</span>':""}</div>
+  return `<button class="row adrow" data-aduser="${esc(b.id)}"><div class="tav">${avatarSvg({...(b.avatar||{}),nm:b.pseudo},b.level||1)}</div><div class="body"><div class="txt">${esc(b.pseudo||"Coureur")}${isBanned(b.id)?' <span class="adtag red">suspendu</span>':""}</div>
    <div class="meta"><span>niv.${b.level||1}</span><span>🔥 ${b.streak||0} j</span><span>${tm?"🪢 "+esc(tm.name||b.teamId):"solo"}</span><span>vu ${ago2(b.updatedAt)}</span></div>${extra?`<div class="meta"><span class="hot">${esc(extra)}</span></div>`:""}</div><span class="chev">›</span></button>`}
 function adDash(){const P=players(),now=Date.now(),t=today(),H=864e5;
   const a1=P.filter(b=>now-(b.updatedAt||0)<H).length,a7=P.filter(b=>now-(b.updatedAt||0)<7*H).length;
@@ -4400,7 +4712,7 @@ function openAdPlan(id){const x=progs.find(p=>p.id===id);if(!x)return;const r=x.
    ${label("adaptations récentes")}<div class="list">${(x.msgs||[]).map(m=>`<div class="row"><div class="body"><div class="meta"><span>${esc(m.date?fdate(m.date,{day:"numeric",month:"short"}):"")}</span></div><div class="txt" style="font-size:14px">${esc(typeof m==="string"?m:m.m||"")}</div></div></div>`).join("")||'<p class="sub" style="font-size:14px">aucune pour l\'instant.</p>'}</div>
    <div class="actions"><button class="btn ghost" id="apX">fermer</button></div>`,()=>{$("#apX").onclick=closeSheet})}
 function openAdUser(id){const b=board.find(x=>x.id===id);if(!b)return;const tm=b.teamId&&teams.find(t=>t.id===b.teamId),pr=progs.find(x=>x.id===id),isB=betaOf(id),isBan=isBanned(id);
-  openSheet(`<div class="aduh"><div class="tav">${avatarSvg(b.avatar||AV_DEF,b.level||1)}</div><div><h2 style="margin:0">${esc(b.pseudo||"Coureur")}</h2><small>niv.${b.level||1} · ${b.xp||0} xp · vu il y a ${ago2(b.updatedAt)}</small></div></div>
+  openSheet(`<div class="aduh"><div class="tav">${avatarSvg({...(b.avatar||{}),nm:b.pseudo},b.level||1)}</div><div><h2 style="margin:0">${esc(b.pseudo||"Coureur")}</h2><small>niv.${b.level||1} · ${b.xp||0} xp · vu il y a ${ago2(b.updatedAt)}</small></div></div>
    <div class="kpis" style="margin-top:12px">${adKpi("🔥 "+(b.streak||0)+" j","série")}${adKpi(String(b.kmTotal||0).replace(".",","),"km au total")}${adKpi(b.day===today()?(b.todayDone||0)+"/"+(b.todayTotal||0):"–","aujourd'hui")}</div>
    <p class="sub" style="font-size:13px;margin:10px 0">${tm?"cordée « "+esc(tm.name||b.teamId)+" »":"pas de cordée"}${b.firstDay?" · inscrit le "+fdate(b.firstDay,{day:"numeric",month:"long"}):""}${isBan?' · <b style="color:#ff6b6b">suspendu</b>':""}</p>
    <div class="adacts">
@@ -4486,7 +4798,7 @@ document.addEventListener("input",e=>{const t=e.target;if(!t||!t.id)return;
 TILE_IC.news='<path d="M12 3l2.5 5.5L20 9.5l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1z"/>';TILE_IC.admin='<path d="M12 3 4 7v5c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V7z"/><path d="m9 12 2 2 4-4"/>';
 
 /* ---------- NOUVEAUTÉS ---------- */
-const NEWS=[{v:"2026-11-13",t:"Le programme ouvert à tous, et un tracker GPS",items:[["🏃","Ton plan de course","onglet Programme en bas : 10 km, semi, trail, ou juste progresser"],["🎯","Il s'adapte à toi","ressenti, douleurs, séances ratées : le plan se recalcule"],["🧪","Bêta gratuite","gratuit pendant la bêta. un bug ? DM @la.fleche_01 ou le groupe whatsapp"],["🏆","Mes records","dans Performance : tes chronos restent pour toujours et ta cordée les voit. depuis strava, un bouton te propose de les ajouter"],["🏋️","Renfo qui utilise ton matériel","haltères, kettlebell, élastiques, swiss ball, barre de traction, chaise ou salle : 16 nouveaux exercices animés, choisis selon ce que tu as"],["🛌","Récup obligatoire après ton objectif","de 4 jours après un 5 km à 4 semaines après un ultra : la durée suit la distance et le dénivelé. les courses secondaires ont une consigne d'effort"],["📍","Courir avec l'appli","plus besoin de montre : GPS, allure et séance guidée à la voix (Performance › courir maintenant, ou ▶ lancer sur une séance)"],["📅","Nouvelle habitude = lundi","une habitude ajoutée en cours de semaine démarre le lundi suivant (sauf ta 1re semaine)"]]},{v:"2026-11-12",t:"Habitudes plus libres, renfo sur mesure",items:[["↕️","Déplace tes habitudes","appui long sur le nom d'une habitude, puis glisse-la"],["📆","x fois par semaine","une habitude peut se faire 3 fois par semaine, les jours que tu veux"],["⏱","Renfo de 15, 30 ou 45 min","choisis la durée dans les réglages du programme"],["🧰","Le matériel en dessin","plus besoin de connaître les noms"],["🌗","Thème automatique","l'appli suit le mode clair ou sombre de ton téléphone"]]},
+const NEWS=[{v:"2026-11-14",t:"Une appli plus claire, et ton coureur",items:[["✨","Plus aérée","moins de texte en capitales, des cartes plus lisibles, ta prochaine séance en grand sur l'accueil"],["☰","Le menu en haut à droite","en bas : accueil, programme, habitudes, équipe"],["⛰","Ton coureur","un vrai trailer à ton image : silhouette, tenue, casquette ou frontale, bâtons, gilet… devant un relief qui grandit avec ton niveau"]]},{v:"2026-11-13",t:"Le programme ouvert à tous, et un tracker GPS",items:[["🏃","Ton plan de course","onglet Programme en bas : 10 km, semi, trail, ou juste progresser"],["🎯","Il s'adapte à toi","ressenti, douleurs, séances ratées : le plan se recalcule"],["🆓","Gratuit pour tous","un bug ? DM @la.fleche_01 ou le groupe whatsapp"],["📊","Bilan de la semaine","dans Programme : séances faites, km, effort et comment ton plan s'est adapté"],["➕","Séances en plus","une sortie hors plan (autre appli ou à la main) avec cardio, allure et effort : elle compte dans ton bilan"],["⚠️","Alerte grosse hausse","si une sortie dépasse de plus de 10 % ta plus longue du mois, l'appli te prévient"],["🎯","Prochain objectif","choisis la date de début de ta prochaine prépa, une fois ta récup terminée"],["🏆","Mes records","dans Performance : tes chronos restent pour toujours et ta cordée les voit. depuis strava, un bouton te propose de les ajouter"],["🏋️","Renfo qui utilise ton matériel","haltères, kettlebell, élastiques, swiss ball, barre de traction, chaise ou salle : 16 nouveaux exercices animés, choisis selon ce que tu as"],["🛌","Récup obligatoire après ton objectif","de 4 jours après un 5 km à 4 semaines après un ultra : la durée suit la distance et le dénivelé. les courses secondaires ont une consigne d'effort"],["📍","Courir avec l'appli","plus besoin de montre : GPS, allure et séance guidée à la voix (Performance › courir maintenant, ou ▶ lancer sur une séance)"],["📅","Nouvelle habitude = lundi","une habitude ajoutée en cours de semaine démarre le lundi suivant (sauf ta 1re semaine)"]]},{v:"2026-11-12",t:"Habitudes plus libres, renfo sur mesure",items:[["↕️","Déplace tes habitudes","appui long sur le nom d'une habitude, puis glisse-la"],["📆","x fois par semaine","une habitude peut se faire 3 fois par semaine, les jours que tu veux"],["⏱","Renfo de 15, 30 ou 45 min","choisis la durée dans les réglages du programme"],["🧰","Le matériel en dessin","plus besoin de connaître les noms"],["🌗","Thème automatique","l'appli suit le mode clair ou sombre de ton téléphone"]]},
  {v:"2026-11-11d",t:"Tes données, sous ton contrôle",items:[["🔒","Page confidentialité complète","qui voit quoi, où c'est stocké, pourquoi : tout est écrit noir sur blanc dans les paramètres"],["📦","Télécharge tes données","un bouton pour récupérer une copie de tout ce que l'appli sait de toi"],["🗑","Supprime ton compte","en un geste, sans rien demander à personne : tout est effacé"]]},
  {v:"2026-11-11c",t:"Allures plus justes et courbe de progression",items:[["🧍","Un vrai coach en 3D","les exercices de renfo sont montrés par un personnage réaliste, sous tous les angles"],["🐢","Allures recalées","endurance plus lente, seuil long, seuil vif, VO2max : 8 allures au lieu de 4"],["📉","Courbe de chrono","ton temps au départ, aujourd'hui et la projection en fin de prépa"],["⏱","Tes records à la main","entre tes chronos 5 km, 10 km, semi ou marathon pour caler tes allures"],["🧍","Mannequin 3D amélioré","des gestes plus clairs, avec des flèches sur le mouvement"]]},
  {v:"2026-11-11b",t:"Des plans construits par cycles",items:[["🎯","Note de confiance sur 10","avant de lancer un plan, le coach te dit si le délai et ta base suffisent. tu peux toujours le lancer"],["🧱","Un cycle = une qualité","seuil long, VO2max, seuil vif, spécifique, affûtage : chaque bloc de 3 à 5 semaines travaille une chose à fond"],["📈","La séance clé monte chaque semaine","plus de répétitions ou des répétitions plus longues, puis une semaine d'assimilation"],["⏱","Des intervalles plus longs","2 à 4 min à la place de certains 30/30 : c'est ce qui fait le plus progresser"],["🏋️","Renfo lourd","avec haltères ou salle et l'objectif performance : moins de répétitions, plus de charge"]]},
