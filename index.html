@@ -1016,12 +1016,15 @@ function delPerf(id){perfs=perfs.filter(p=>p.id!==id);render();ddel(P("perfs",id
 /* ================= XP ENGINE ================= */
 const activeHabits=()=>habits.filter(h=>!h.archived).sort((a,b)=>(a.order||0)-(b.order||0));
 const dow=s=>(parse(s).getDay()+6)%7;                       // 0 = lundi
-const sched=(h,s)=>!Array.isArray(h.days)||!h.days.length||h.days.includes(dow(s));
+const sched=(h,s)=>!(h.from&&s<h.from)&&(!Array.isArray(h.days)||!h.days.length||h.days.includes(dow(s)));
 // habitude « n fois par semaine » : libre tant que c'est rattrapable, obligatoire quand il ne reste plus assez de jours
 const pwN=h=>(h.perWeek>0&&h.perWeek<7)?h.perWeek:0;
 function pwDone(h,s){const ws=addDays(s,-dow(s));let n=0;for(let x=ws;x<s;x=addDays(x,1))if(days[x]&&days[x].done&&days[x].done[h.id])n++;return n}
-function hNeed(h,s){const N=pwN(h);if(!N)return sched(h,s);if(days[s]&&days[s].done&&days[s].done[h.id])return true;const left=N-pwDone(h,s);return left>0&&(7-dow(s))<=left}
+function hNeed(h,s){if(h.from&&s<h.from)return false;const N=pwN(h);if(!N)return sched(h,s);if(days[s]&&days[s].done&&days[s].done[h.id])return true;const left=N-pwDone(h,s);return left>0&&(7-dow(s))<=left}
 const pwWeek=(h,s)=>{const ws=addDays(s,-dow(s));let n=0;for(let i=0;i<7;i++){const x=addDays(ws,i);if(days[x]&&days[x].done&&days[x].done[h.id])n++}return n};
+/* nouvelle habitude : elle démarre lundi prochain, sauf la toute première semaine dans l'appli */
+const firstWeek=()=>ds(weekStart(new Date()))<=ds(weekStart(parse(startDay())));
+const habFrom=()=>firstWeek()?null:addDays(ds(weekStart(new Date())),7);
 const habitsFor=s=>activeHabits().filter(h=>hNeed(h,s));
 function startDay(){const rs=meDoc&&meDoc.resetFrom;if(rs&&rs<=today())return rs;const k=Object.keys(days).sort()[0];const st=meDoc&&meDoc.startedAt;const c=[k,st].filter(Boolean).sort()[0];return c||today()}
 const resetT=()=>{const rs=meDoc&&meDoc.resetFrom;return rs&&rs<=today()?parse(rs).getTime()-12*36e5:0};
@@ -2905,7 +2908,7 @@ function vHabits(){
     sh.forEach(h=>{
       const st=habitStreak(h.id);
       const dl=pwN(h)?`${pwWeek(h,dates[0])}/${pwN(h)} cette sem.`:Array.isArray(h.days)&&h.days.length&&h.days.length<7?h.days.map(i=>"LMMJVSD"[i]).join(" "):"";
-      g+=`<button class="hname" data-hedit="${h.id}" data-hslot="${k}">${esc(h.name)}${pwN(h)?`<small class="m">${dl}</small>`:st>1?`<small>${st} j d'affilée</small>`:dl?`<small class="m">${dl}</small>`:""}</button>`;
+      g+=`<button class="hname" data-hedit="${h.id}" data-hslot="${k}">${esc(h.name)}${h.from&&h.from>t?`<small class="m">dès lundi ${fdate(h.from,{day:"numeric",month:"short"})}</small>`:pwN(h)?`<small class="m">${dl}</small>`:st>1?`<small>${st} j d'affilée</small>`:dl?`<small class="m">${dl}</small>`:""}</button>`;
       g+=dates.map(s=>{if(!sched(h,s))return `<div class="box rest">·</div>`;const on=days[s]&&days[s].done&&days[s].done[h.id];if(pwN(h)&&!on&&pwWeek(h,s)>=pwN(h)&&s<=t)return `<div class="box rest">✓</div>`;const fut=dayBlocked(s);const off=days[s]&&days[s].off;
         const rw=getW(ds(weekStart(parse(s))));const rl=rw&&rw.c==="roulette"&&rw.o==="oui"&&rouletteHabit(s)===h&&s<=t;
         return `<button class="box ${on?"on":""} ${s===t?"today":""} ${fut?"fut":""} ${off?"offd":""} ${rl?"roul":""}" ${fut?"disabled":""} data-tick="${h.id}" data-d="${s}" aria-label="${esc(h.name)} ${s}">${I.check}</button>`}).join("");
@@ -3012,7 +3015,7 @@ function vMesHab(){
   return subnav([["mhab","mes habitudes"],["suggest","suggestions"]])+`<div class="tag">Mes habitudes · ${hs.length}</div><h1>Ta<br><span class="g">routine</span></h1>
   <p class="sub">touche une habitude pour la modifier. pour changer sa place, <b>glisse-la par les trois traits</b> à gauche (ou appui long puis glisse).</p>
   ${SLOTS.map(([k,lab])=>{const sh=hs.filter(h=>h.slot===k);return `${label(lab)}<div class="list hdrag" data-slot="${k}">${sh.map(h=>{const dl=pwN(h)?pwN(h)+" fois / semaine":Array.isArray(h.days)&&h.days.length&&h.days.length<7?h.days.map(i=>"LMMJVSD"[i]).join(" "):"tous les jours";const st=habitStreak(h.id);
-     return `<button class="row hrow" data-hedit="${h.id}"><span class="grip" aria-hidden="true"><i></i><i></i><i></i></span><div class="body"><div class="txt">${esc(h.name)}</div><div class="meta"><span>${dl}</span>${h.timer&&h.timer.min?`<span>⏱ ${h.timer.min} min${h.timer.mode==="libre"?" · libre":""}</span>`:""}${st>1?`<span class="hot">🔥 ${st} j</span>`:""}</div></div><span class="chev">›</span></button>`}).join("")}
+     return `<button class="row hrow" data-hedit="${h.id}"><span class="grip" aria-hidden="true"><i></i><i></i><i></i></span><div class="body"><div class="txt">${esc(h.name)}</div><div class="meta"><span>${dl}</span>${h.from&&h.from>today()?`<span class="hot">dès lundi</span>`:""}${h.timer&&h.timer.min?`<span>⏱ ${h.timer.min} min${h.timer.mode==="libre"?" · libre":""}</span>`:""}${st>1?`<span class="hot">🔥 ${st} j</span>`:""}</div></div><span class="chev">›</span></button>`}).join("")}
      <button class="row hadd" data-hadd="${k}">+ ajouter une habitude ${lab.toLowerCase()}</button></div>`}).join("")}`;
 }
 
@@ -3057,8 +3060,8 @@ function vSuggest(){
 }
 function addSuggestion(n){let f=null;SUGG.forEach(c=>c[1].forEach(x=>{if(x[0]===n)f=x}));if(!f)return;
   const [name,slot,min,mode]=f;const mx=Math.max(0,...habits.map(x=>x.order||0));
-  const d={name,slot,days:[],order:mx+1,createdAt:Date.now(),archived:false};if(min)d.timer={min,mode:mode||"bloque"};
-  saveHabit(newId(),d,true);SND.tick();toast("ajoutée à ta routine")}
+  const fr=habFrom();const d={name,slot,days:[],order:mx+1,createdAt:Date.now(),from:fr,archived:false};if(min)d.timer={min,mode:mode||"bloque"};
+  saveHabit(newId(),d,true);SND.tick();toast(fr?"ajoutée · elle démarre lundi 🏹":"ajoutée à ta routine")}
 
 /* ---------- MINUTEUR PLEIN ÉCRAN ---------- */
 let TM=null;
@@ -3767,11 +3770,11 @@ function openHabit(h,isNew){
       <div class="chips" id="hTmM" style="margin-top:8px">${[["bloque","🔒 bloqué"],["libre","📱 libre (autre appli)"]].map(([k,l])=>`<button class="chip ${k===tmode?"on":""}" data-c="${k}">${l}</button>`).join("")}</div>
       <p class="sub" style="font-size:12px;margin:6px 0 0">bloqué : plein écran, sortir de l'appli = séance ratée. libre : pour une appli comme Duolingo, le temps tourne même si tu changes d'appli.</p></div>
     ${isNew?"":`<div class="field"><label>position dans la liste</label><div class="actions"><button class="btn small" id="hUp">↑ monter</button><button class="btn small" id="hDown">↓ descendre</button></div><p class="sub" style="margin:6px 0 0;font-size:13px">change sa place parmi tes habitudes du même moment.</p></div>`}
-    <div class="actions"><button class="btn main" id="hSave">enregistrer</button><button class="btn ghost" id="hClose">fermer</button>${isNew?"":`<button class="btn danger" id="hDel">supprimer</button>`}</div>`,()=>{
+    ${isNew&&habFrom()?`<p class="sub" style="font-size:12px;margin:0 0 10px">📅 elle démarrera lundi ${fdate(habFrom(),{day:"numeric",month:"long"})} : ta semaine en cours ne change pas.</p>`:""}<div class="actions"><button class="btn main" id="hSave">enregistrer</button><button class="btn ghost" id="hClose">fermer</button>${isNew?"":`<button class="btn danger" id="hDel">supprimer</button>`}</div>`,()=>{
     chipPick("#hSlot",slot,v=>slot=v);chipPick("#hTm",String(tmin),v=>tmin=+v);if(!pw)pw=3;chipPick("#hPw",String(pw),v=>pw=+v);chipPick("#hFm",fm,v=>{fm=v;$("#hFmJ").hidden=v==="pw";$("#hFmP").hidden=v!=="pw"});chipPick("#hTmM",tmode,v=>tmode=v);
     $("#hDays").onclick=e=>{const c=e.target.closest("[data-d]");if(!c)return;const i=+c.dataset.d;hd=hd.includes(i)?hd.filter(x=>x!==i):[...hd,i].sort();if(!hd.length)hd=[i];c.classList.toggle("on",hd.includes(i))};
     $("#hSave").onclick=()=>{const name=$("#hName").value.trim().slice(0,60);if(!name)return;
-      if(isNew){const mx=Math.max(0,...habits.map(x=>x.order||0));saveHabit(newId(),{name,slot,days:fm==="pw"||hd.length===7?[]:hd,perWeek:fm==="pw"?pw:0,order:mx+1,createdAt:Date.now(),archived:false,timer:tmin?{min:tmin,mode:tmode}:null},true)}
+      if(isNew){const mx=Math.max(0,...habits.map(x=>x.order||0));const fr=habFrom();saveHabit(newId(),{name,slot,days:fm==="pw"||hd.length===7?[]:hd,perWeek:fm==="pw"?pw:0,order:mx+1,createdAt:Date.now(),from:fr,archived:false,timer:tmin?{min:tmin,mode:tmode}:null},true);if(fr)toast("ajoutée · elle démarre lundi 🏹")}
       else saveHabit(h.id,{name,slot,days:fm==="pw"||hd.length===7?[]:hd,perWeek:fm==="pw"?pw:0,timer:tmin?{min:tmin,mode:tmode}:null});closeSheet()};
     $("#hClose").onclick=closeSheet;
     if(!isNew){
@@ -4029,7 +4032,7 @@ document.addEventListener("input",e=>{const t=e.target;if(!t||!t.id)return;
 TILE_IC.news='<path d="M12 3l2.5 5.5L20 9.5l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1z"/>';TILE_IC.admin='<path d="M12 3 4 7v5c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V7z"/><path d="m9 12 2 2 4-4"/>';
 
 /* ---------- NOUVEAUTÉS ---------- */
-const NEWS=[{v:"2026-11-13",t:"Le programme course est ouvert à tous",items:[["🏃","Ton plan de course","onglet Programme en bas : 10 km, semi, trail, ou juste progresser"],["🎯","Il s'adapte à toi","ressenti, douleurs, séances ratées : le plan se recalcule"],["🧪","Bêta gratuite","gratuit pendant la bêta. un bug ? DM @la.fleche_01 ou le groupe whatsapp"]]},{v:"2026-11-12",t:"Habitudes plus libres, renfo sur mesure",items:[["↕️","Déplace tes habitudes","appui long sur le nom d'une habitude, puis glisse-la"],["📆","x fois par semaine","une habitude peut se faire 3 fois par semaine, les jours que tu veux"],["⏱","Renfo de 15, 30 ou 45 min","choisis la durée dans les réglages du programme"],["🧰","Le matériel en dessin","plus besoin de connaître les noms"],["🌗","Thème automatique","l'appli suit le mode clair ou sombre de ton téléphone"]]},
+const NEWS=[{v:"2026-11-13",t:"Le programme course est ouvert à tous",items:[["🏃","Ton plan de course","onglet Programme en bas : 10 km, semi, trail, ou juste progresser"],["🎯","Il s'adapte à toi","ressenti, douleurs, séances ratées : le plan se recalcule"],["🧪","Bêta gratuite","gratuit pendant la bêta. un bug ? DM @la.fleche_01 ou le groupe whatsapp"],["📅","Nouvelle habitude = lundi","une habitude ajoutée en cours de semaine démarre le lundi suivant (sauf ta 1re semaine)"]]},{v:"2026-11-12",t:"Habitudes plus libres, renfo sur mesure",items:[["↕️","Déplace tes habitudes","appui long sur le nom d'une habitude, puis glisse-la"],["📆","x fois par semaine","une habitude peut se faire 3 fois par semaine, les jours que tu veux"],["⏱","Renfo de 15, 30 ou 45 min","choisis la durée dans les réglages du programme"],["🧰","Le matériel en dessin","plus besoin de connaître les noms"],["🌗","Thème automatique","l'appli suit le mode clair ou sombre de ton téléphone"]]},
  {v:"2026-11-11d",t:"Tes données, sous ton contrôle",items:[["🔒","Page confidentialité complète","qui voit quoi, où c'est stocké, pourquoi : tout est écrit noir sur blanc dans les paramètres"],["📦","Télécharge tes données","un bouton pour récupérer une copie de tout ce que l'appli sait de toi"],["🗑","Supprime ton compte","en un geste, sans rien demander à personne : tout est effacé"]]},
  {v:"2026-11-11c",t:"Allures plus justes et courbe de progression",items:[["🧍","Un vrai coach en 3D","les exercices de renfo sont montrés par un personnage réaliste, sous tous les angles"],["🐢","Allures recalées","endurance plus lente, seuil long, seuil vif, VO2max : 8 allures au lieu de 4"],["📉","Courbe de chrono","ton temps au départ, aujourd'hui et la projection en fin de prépa"],["⏱","Tes records à la main","entre tes chronos 5 km, 10 km, semi ou marathon pour caler tes allures"],["🧍","Mannequin 3D amélioré","des gestes plus clairs, avec des flèches sur le mouvement"]]},
  {v:"2026-11-11b",t:"Des plans construits par cycles",items:[["🎯","Note de confiance sur 10","avant de lancer un plan, le coach te dit si le délai et ta base suffisent. tu peux toujours le lancer"],["🧱","Un cycle = une qualité","seuil long, VO2max, seuil vif, spécifique, affûtage : chaque bloc de 3 à 5 semaines travaille une chose à fond"],["📈","La séance clé monte chaque semaine","plus de répétitions ou des répétitions plus longues, puis une semaine d'assimilation"],["⏱","Des intervalles plus longs","2 à 4 min à la place de certains 30/30 : c'est ce qui fait le plus progresser"],["🏋️","Renfo lourd","avec haltères ou salle et l'objectif performance : moins de répétitions, plus de charge"]]},
