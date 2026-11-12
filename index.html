@@ -1400,7 +1400,7 @@ const SESS={
  RACE:["Jour de course","",["Échauffement 10-15 min, puis ta course. Pars prudent !","",""],"race"],
  C15:["Marche active en côte","monter vite en marchant, comme en course",["4 × 4 min de marche active en côte, redescente tranquille","5 × 5 min de marche active en côte","6 × 6 min de marche active en côte"],"hard"],
  C16:["Descentes","habituer tes cuisses à la descente",["{m} min facile avec 4 × 30 s de descente contrôlée sur pente douce, remontée en marchant","{m} min facile avec 6 × 1 min de descente, remontée en marchant","{m} min facile avec 8 × 1 min 30 de descente, un peu plus vite"],"easy",[30,40,50]],
- R1:["Renfo · fondations","jambes et gainage",["","",""],"renfo"],R2:["Renfo · force 1 jambe","stabilité et puissance",["","",""],"renfo"],R3:["Renfo · explosivité","réactivité et ressort",["","",""],"renfo"],
+ R1:["Renfo · fondations","endurance de force : jambes, mollets, hanches et gainage",["","",""],"renfo"],R2:["Renfo · force","une jambe à la fois et chaîne arrière, comme en course",["","",""],"renfo"],R3:["Renfo · explosivité","ressort, réactivité et puissance",["","",""],"renfo"],
  VMATEST:["Test VMA (6 min)","mesurer ta VMA pour caler toutes tes allures",["20 min très facile + 3 accélérations. Puis 6 min le plus loin possible, à allure régulière (sur piste ou un tour connu). Note la distance en mètres.","",""],"hard"],
  TEST:["Test chrono","mesurer tes progrès",["Échauffement 20 min + 3 accélérations, puis ton test à fond, allure régulière. Note ton temps !","",""],"race"],
  RACEB:["Course secondaire","objectif B : une bonne perf, sans tout casser",["Échauffement 15 min, puis ta course. Cours fort mais garde un peu de marge.","",""],"race"],
@@ -1575,7 +1575,7 @@ function pgBlocks(p,e){const code=sessOf(e),s=SESS[code],ty=s[3];let body=sessTe
   if(ty==="hard"&&code!=="RAPPEL")return [["échauffement",`15-20 min à ${paceTxt(p,"EF")} + 5 min de gammes + 3 lignes droites`],...pfm,["corps de séance",body],...sens,["retour au calme",`10 min à ${paceTxt(p,"EF")}`]];
   if(ty==="race")return [["avant",`échauffement 10-15 min très facile + 3 accélérations`],["la course",`${p.race.name} · pars prudent les 2 premiers km`],["après","marche, hydrate-toi, saisis ton temps dans l'appli"]];
   return [["séance",body],...sens]}
-const pgDur=(p,e)=>{const c=sessOf(e);if(RENFO[c])return renfoMin(p,c)+" min max";return fmtDur(sessTotals(p,e).sec)};
+const pgDur=(p,e)=>{const c=sessOf(e);if(RENFO[c])return renfoMin(p,c,e)+" min max";return fmtDur(sessTotals(p,e).sec)};
 function pgSpark(h){if(h.length<2)return"";const v=h.map(c=>(c.lo+c.hi)/2),mx=Math.max(...v),mn=Math.min(...v),r=mx-mn||1,W=120,H=34;
   const pts=v.map((x,i)=>`${(i/(v.length-1)*W).toFixed(1)},${(4+(x-mn)/r*(H-8)).toFixed(1)}`).join(" ");
   return `<svg class="pgspark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><polyline points="${pts}" fill="none" stroke="var(--gold)" stroke-width="2"/></svg>`}
@@ -1664,10 +1664,26 @@ const EXO={
  fentesautee:["Fentes sautées","en fente, saute et change de jambe en l'air, réception amortie"],
  bonds:["Bonds alternés","foulées bondissantes, cherche la distance et le temps de vol, sur 20-30 m"],
  stepdown:["Step-down lent","sur une marche, descends un pied vers le sol en 3 s, sans t'écraser : travail excentrique pour les descentes"],
- gainage:["Gainage dynamique","en planche, touche ton épaule opposée avec une main, sans bouger le bassin"]};
+ gainage:["Gainage dynamique","en planche, touche ton épaule opposée avec une main, sans bouger le bassin"],
+ goblet:["Squat goblet","haltère ou kettlebell contre la poitrine, descends buste droit, coudes entre les genoux"],
+ squatb:["Squat à la barre","barre sur le haut du dos, descends cuisses parallèles au sol, remonte en poussant fort"],
+ sdtr:["Soulevé de terre roumain","jambes presque tendues, la charge glisse le long des cuisses, fesses vers l'arrière, dos droit"],
+ kbswing:["Kettlebell swing","l'élan vient des hanches : fesses en arrière, puis claque les hanches vers l'avant, bras relâchés"],
+ hipthrust:["Hip thrust","haut du dos sur un banc ou une chaise, monte le bassin à l'horizontale en serrant les fessiers"],
+ legcurl:["Leg curl au swiss ball","talons sur le ballon, bassin levé, ramène le ballon vers toi en pliant les genoux"],
+ nordic:["Nordic ischios","à genoux, chevilles bloquées, bascule vers l'avant le plus lentement possible, rattrape-toi avec les mains"],
+ lateralwalk:["Marche latérale à l'élastique","élastique au-dessus des genoux, demi-squat, pas de côté sans laisser les genoux rentrer"],
+ deadbug:["Dead bug","sur le dos, bras et jambes en l'air, tends un bras et la jambe opposée sans décoller le bas du dos"],
+ planchebal:["Planche sur swiss ball","avant-bras sur le ballon, corps gainé, petits cercles avec le ballon"],
+ kneeraise:["Relevés de genoux suspendu","suspendu à la barre, monte les genoux vers la poitrine sans te balancer"],
+ traction:["Tractions","suspendu à la barre, tire jusqu'au menton au-dessus, redescends en contrôlant"],
+ pompe:["Pompes","mains sous les épaules, corps gainé, la poitrine descend près du sol"],
+ dips:["Dips sur chaise","mains au bord d'une chaise derrière toi, plie les coudes vers l'arrière puis pousse"],
+ rowing:["Rowing penché","buste penché dos droit, tire les coudes vers l'arrière jusqu'aux hanches"],
+ molletmarche:["Mollets sur marche, descente lente","sur l'avant des pieds au bord d'une marche, monte vite, redescends en 3 s talons sous la marche"]};
 const RENFO={
- R1:["Renfo · fondations","jambes et gainage, la base du coureur",[["squat",["2 × 12","3 × 15","3 × 20 lents"]],["pont",["2 × 12","3 × 15","3 × 12 / jambe"]],["mollet",["2 × 15","3 × 15","3 × 15 / jambe"]],["soleaire",["2 × 12","3 × 15","3 × 15 / jambe"]],["planche",["3 × 20 s","3 × 40 s","3 × 60 s"]],["lateral",["2 × 15 s / côté","3 × 30 s","3 × 45 s"]]]],
- R2:["Renfo · force sur une jambe","stabilité et puissance, comme en course",[["fente",["2 × 8 / jambe","3 × 10","3 × 12"]],["stepup",["2 × 8 / jambe","3 × 10","3 × 12"]],["bulgare",["2 × 6 / jambe","3 × 8","4 × 10"]],["sdt1",["2 × 8 / jambe","3 × 10","3 × 12"]],["equilibre",["3 × 30 s","3 × 30 s yeux fermés","3 × 45 s"]],["chaise",["2 × 30 s","3 × 45 s","3 × 60 s"]]]],
+ R1:["Renfo · fondations","endurance de force : jambes, mollets, hanches et gainage",[["squat",["2 × 12","3 × 15","3 × 20 lents"]],["pont",["2 × 12","3 × 15","3 × 12 / jambe"]],["mollet",["2 × 15","3 × 15","3 × 15 / jambe"]],["soleaire",["2 × 12","3 × 15","3 × 15 / jambe"]],["planche",["3 × 20 s","3 × 40 s","3 × 60 s"]],["lateral",["2 × 15 s / côté","3 × 30 s","3 × 45 s"]]]],
+ R2:["Renfo · force","une jambe à la fois et chaîne arrière, comme en course",[["fente",["2 × 8 / jambe","3 × 10","3 × 12"]],["stepup",["2 × 8 / jambe","3 × 10","3 × 12"]],["bulgare",["2 × 6 / jambe","3 × 8","4 × 10"]],["sdt1",["2 × 8 / jambe","3 × 10","3 × 12"]],["equilibre",["3 × 30 s","3 × 30 s yeux fermés","3 × 45 s"]],["chaise",["2 × 30 s","3 × 45 s","3 × 60 s"]]]],
  R3:["Renfo · explosivité","réactivité et ressort",[["sauts",["3 × 20 s","3 × 30 s","4 × 45 s"]],["squatsaute",["2 × 5","3 × 6","4 × 8"]],["fentesautee",["2 × 4 / jambe","3 × 6","3 × 10"]],["bonds",["2 × 15 m","3 × 20 m","4 × 30 m"]],["gainage",["2 × 20 s","3 × 30 s","3 × 45 s"]]]]};
 const EQ_IC={none:'<circle cx="24" cy="9" r="4"/><path d="M24 13v15M13 19l11-3 11 3M24 28l-7 12M24 28l7 12"/>',
  ball:'<circle cx="24" cy="25" r="14"/><path d="M11 21c6-4 20-4 26 0M12 31c6 3 18 3 24 0"/><path d="M8 41h32"/>',
@@ -1680,11 +1696,46 @@ const EQ_IC={none:'<circle cx="24" cy="9" r="4"/><path d="M24 13v15M13 19l11-3 1
 const eqIcon=k=>`<svg class="eqic" viewBox="0 0 48 48" aria-hidden="true">${EQ_IC[k]||""}</svg>`;
 const RF_DUR=[[15,"15 min","l'essentiel, 3-4 exercices"],[30,"30 min","le bon équilibre"],[45,"45 min","complet, plus de séries"]];
 const EQUIP=[["none","rien (poids du corps)"],["ball","swiss ball"],["mat","tapis de sol"],["band","élastiques"],["db","haltères / kettlebell"],["chair","chaise ou banc"],["bar","barre de traction"],["gym","salle de sport"]];
-function renfoList(p,code){const r=RENFO[code],L=LVI[p.level]||0,eq=p.equip||[];let list=r[2].map(([id,s])=>[id,s[L]]);
-  if(isTrail(p)&&code!=="R3")list.push(["stepdown",["2 × 8 / jambe","3 × 8","3 × 10"][L]]);
-  const heavy=(eq.includes("gym")||eq.includes("db"))&&p.level!=="D"&&p.rfGoal==="performance";return list.map(([id,s])=>{let v="";if(heavy&&["squat","fente","bulgare","sdt1","stepup"].includes(id)){s=id==="squat"?"4 × 6":"4 × 6 / jambe";}if(eq.includes("db")&&["squat","fente","bulgare","sdt1","stepup","mollet"].includes(id))v=heavy&&id!=="mollet"?"haltères lourds : les 2 dernières répétitions doivent être dures":"avec haltères (charge modérée)";else if(eq.includes("band")&&["pont","squat"].includes(id))v="élastique au-dessus des genoux";
-    if(!eq.includes("chair")&&!eq.includes("gym")&&["stepup","bulgare"].includes(id))v=(v?v+" · ":"")+"utilise une marche d'escalier ou un muret";if(eq.includes("gym")&&id==="squat")v="presse à cuisses possible à la place";return{id,s,v}}).map((x,i,a)=>x).filter((x,i)=>i<({15:4,30:6}[+p.rfDur||30]||99)).map(x=>{const d=+p.rfDur||30,m=x.s.match(/^(\d+)/);if(!m)return x;let n=+m[1];if(d===15)n=Math.min(n,2);else if(d===30)n=Math.min(n,3);else n=Math.min(4,n+1);return{...x,s:x.s.replace(/^\d+/,String(n))}})}
-function renfoMin(p,code){const l=renfoList(p,code);let s=5*60;l.forEach(x=>{const m=x.s.match(/(\d+)\s*×\s*(\d+)\s*(s|m)?/);if(m){const sets=+m[1],n=+m[2];s+=sets*((m[3]==="s"?n:m[3]==="m"?10:n*3)+50)*(x.s.includes("/ jambe")||x.s.includes("/ côté")?2:1)}});return Math.min(+p.rfDur||30,Math.max(10,Math.round(s/60/5)*5))}
+/* le renfo s'adapte au matériel : pour chaque geste, le meilleur exercice disponible.
+   repères : force lourde (et pliométrie) améliorent l'économie de course, sur 10 semaines et plus ;
+   endurance de force (12 répétitions et plus) pour la base ; excentrique lent pour le trail (descentes). */
+const RF_ORDER={R1:{equilibre:["knee","glute","calf","abd","core","sol","push","core2"],decouverte:["knee","glute","calf","abd","core","sol","push","core2"],prevention:["calf","glute","abd","sol","knee","core","core2","push"],performance:["knee","hinge","glute","calf","core","abd","push","sol"]},
+ R2:{equilibre:["uni","hinge","ham","calfx","core2","pull","uni2","bal"],decouverte:["uni","hinge","ham","calfx","core2","uni2","pull","bal"],prevention:["uni","ham","calfx","bal","hinge","core2","uni2","pull"],performance:["uni","hinge","ham","calfx","uni2","pull","core2","bal"]},
+ R3:{equilibre:["plyo1","plyo2","calf","swing","plyo3","core3","pull"],decouverte:["plyo1","plyo2","calf","swing","plyo3","core3","push"],prevention:["plyo1","calf","plyo2","swing","core3","plyo3","pull"],performance:["plyo1","plyo2","swing","plyo3","calf","core3","pull"]}};
+function rfPick(slot,c){const{L,has,load,gym,heavy,trail,g}=c,d=(a,b,x)=>[a,b,x][L];
+  const ln=heavy?"charge lourde : les 2 dernières répétitions difficiles, 2 min de récup":load?"charge modérée : finis avec 2-3 répétitions en réserve":"";
+  const str=uni=>heavy?"4 × 6"+(uni?" / jambe":""):g==="performance"&&!load?d("2 × 12","3 × 15","3 × 15")+(uni?" / jambe":""):d("2 × 12","3 × 12","3 × 12")+(uni?" / jambe":"");
+  const tn=trail?"descente en 3 s : ça prépare tes descentes":"";const j=(...a)=>a.filter(Boolean).join(" · ");
+  switch(slot){
+   case"knee":return gym?["squatb",str(),j("à la barre",ln,tn)]:has("db")?["goblet",str(),j("haltère ou kettlebell",ln,tn)]:["squat",d("2 × 12","3 × 15","3 × 20 lents"),j(has("band")?"élastique au-dessus des genoux":"",tn)];
+   case"glute":return has("chair")?["hipthrust",str(),gym?"à la barre sur les hanches, avec une mousse":has("db")?j("haltère posé sur les hanches",ln):"sur 1 jambe quand c'est trop facile"]:["pont",d("2 × 12","3 × 15","3 × 12 / jambe"),has("band")?"élastique au-dessus des genoux":""];
+   case"hinge":return gym?["sdtr",str(),j("à la barre",ln)]:has("db")?["sdtr",str(),j("avec haltères",ln)]:["sdt1",d("2 × 8 / jambe","3 × 10 / jambe","3 × 12 / jambe"),""];
+   case"calf":return["mollet",d("2 × 15","3 × 15","3 × 15 / jambe"),gym?"à la machine ou avec haltères":has("db")?"avec haltères (charge modérée)":""];
+   case"sol":return["soleaire",d("2 × 12","3 × 15","3 × 15 / jambe"),has("db")?"haltère dans une main":""];
+   case"calfx":return["molletmarche",d("2 × 12","3 × 12 / jambe","3 × 15 / jambe"),L>1&&has("db")?"avec haltère":"sur une marche d'escalier"];
+   case"abd":return has("band")?["lateralwalk",d("2 × 10 / côté","3 × 12 / côté","3 × 15 / côté"),"élastique au-dessus des genoux"]:["lateral",d("2 × 15 s / côté","3 × 30 s / côté","3 × 45 s / côté"),""];
+   case"core":return has("ball")?["planchebal",d("2 × 20 s","3 × 30 s","3 × 45 s"),"swiss ball"]:["planche",d("3 × 20 s","3 × 40 s","3 × 60 s"),""];
+   case"core2":return has("bar")?["kneeraise",d("2 × 6","3 × 8","3 × 12"),"barre de traction"]:["deadbug",d("2 × 8 / côté","3 × 10 / côté","3 × 12 / côté"),""];
+   case"core3":return["gainage",d("2 × 20 s","3 × 30 s","3 × 45 s"),""];
+   case"push":return has("chair")&&L>0?["dips",d("2 × 6","3 × 10","3 × 12"),"sur une chaise stable"]:["pompe",d("2 × 6","3 × 10","3 × 15"),L===0?"sur les genoux si besoin":""];
+   case"pull":return has("bar")?["traction",d("2 × 3","3 × 5","3 × 8"),L===0?"en négatif : monte avec un saut, redescends en 3-5 s":"barre de traction"]:has("db")?["rowing",d("2 × 10","3 × 12","3 × 12"),"avec haltères (charge modérée)"]:has("band")?["rowing",d("2 × 12","3 × 15","3 × 15"),"avec un élastique sous les pieds"]:null;
+   case"uni":return has("chair")?["bulgare",str(true),j(has("db")?"avec haltères":"",has("db")?ln:"",tn)]:["fente",d("2 × 8 / jambe","3 × 10 / jambe","3 × 12 / jambe"),j(has("db")?"avec haltères":"",tn)];
+   case"uni2":return["stepup",d("2 × 8 / jambe","3 × 10 / jambe","3 × 12 / jambe"),j(has("chair")?"sur une chaise ou un banc":"sur une marche d'escalier",has("db")?"avec haltères":"")];
+   case"ham":return has("ball")?["legcurl",d("2 × 8","3 × 10","3 × 12"),"swiss ball"]:L>0?["nordic",d("2 × 3","3 × 4","3 × 6"),gym?"au banc à ischios, ou chevilles tenues":"chevilles bloquées sous un canapé, ou tenues par quelqu'un"]:["pont",d("2 × 8 / jambe","3 × 10 / jambe","3 × 12 / jambe"),"sur 1 jambe"];
+   case"bal":return["equilibre",d("3 × 30 s","3 × 30 s yeux fermés","3 × 45 s"),""];
+   case"plyo1":return["sauts",d("3 × 20 s","3 × 30 s","4 × 45 s"),""];
+   case"plyo2":return["squatsaute",d("2 × 5","3 × 6","4 × 8"),""];
+   case"plyo3":return["fentesautee",d("2 × 4 / jambe","3 × 6","3 × 10"),""];
+   case"swing":return has("db")?["kbswing",d("2 × 12","3 × 15","4 × 15"),"kettlebell ou haltère tenu à 2 mains"]:["bonds",d("2 × 15 m","3 × 20 m","4 × 30 m"),""]}return null}
+/* allègement avant l'objectif (Campus : réduire le renfo les 2-3 dernières semaines) */
+const rfTaper=(p,e)=>{if(!e||!p.race||!p.race.date||(p.mode||"course")==="forme")return 0;const d=Math.round((parse(p.race.date)-parse(e.date))/864e5);return d<0?0:d<=10?2:d<=21?1:0};
+function renfoList(p,code,e){const tp=rfTaper(p,e);const L=LVI[p.level]||0,eq=p.equip||[],g=p.rfGoal||"equilibre",gym=eq.includes("gym");const has=k=>eq.includes(k)||gym;
+  const c={L,has,gym,load:has("db"),heavy:g==="performance"&&L>0&&has("db")&&!tp,trail:isTrail(p),g};
+  const ord=((RF_ORDER[code]||RF_ORDER.R1)[g]||(RF_ORDER[code]||RF_ORDER.R1).equilibre).slice();if(c.trail&&code!=="R3")ord.splice(2,0,"ecc");
+  const seen=new Set(),list=[];ord.forEach(sl=>{const x=sl==="ecc"?["stepdown",["2 × 8 / jambe","3 × 8 / jambe","3 × 10 / jambe"][L],"marche ou petit muret"]:rfPick(sl,c);if(!x||seen.has(x[0]))return;seen.add(x[0]);list.push({id:x[0],s:x[1],v:x[2]||""})});
+  const mx=Math.min({15:4,30:6}[+p.rfDur||30]||99,tp===2?4:99);
+  return list.filter((x,i)=>i<mx).map(x=>{const d=+p.rfDur||30,m=x.s.match(/^(\d+)/);if(!m)return x;let n=+m[1];if(d===15)n=Math.min(n,2);else if(d===30)n=Math.min(n,3);else n=Math.min(4,n+1);if(tp===1)n=Math.max(1,n-1);if(tp===2)n=Math.min(n,2);return{...x,s:x.s.replace(/^\d+/,String(n))}})}
+function renfoMin(p,code,e){const l=renfoList(p,code,e);let s=5*60;l.forEach(x=>{const m=x.s.match(/(\d+)\s*×\s*(\d+)\s*(s|m)?/);if(m){const sets=+m[1],n=+m[2];s+=sets*((m[3]==="s"?n:m[3]==="m"?10:n*3)+50)*(x.s.includes("/ jambe")||x.s.includes("/ côté")?2:1)}});return Math.min(+p.rfDur||30,Math.max(10,Math.round(s/60/5)*5))}
 /* ---------- MANNEQUIN 3D : exercices de renfo animés ---------- */
 const MQ=(()=>{const D2R=Math.PI/180;
 const SEG={torso:.5,neck:.06,head:.12,sh:.17,hip:.095,ua:.29,fa:.27,th:.43,sk:.42,ft:.17};
@@ -1714,7 +1765,24 @@ const EX={
  fentesautee:{k:[[LUN("R",1),.6,.15],[P({lift:.3,R:{h:30,k:40},L:{h:-10,k:40,a:-10},aL:{s:30,e:30},aR:{s:-20,e:30}}),.4,0],[LUN("L",1),.6,.15],[P({lift:.3,L:{h:30,k:40},R:{h:-10,k:40,a:-10},aR:{s:30,e:30},aL:{s:-20,e:30}}),.4,0]],props:[]},
  bonds:{k:[[P({lift:.22,tp:10,R:{h:70,k:80},L:{h:-30,k:30,a:-30},aL:{s:60,e:70},aR:{s:-45,e:40}}),.35,0],[P({lift:0,tp:8,R:{h:20,k:20},L:{h:-25,k:60,a:-30},aL:{s:30,e:60},aR:{s:-20,e:50}}),.25,0],[P({lift:.22,tp:10,L:{h:70,k:80},R:{h:-30,k:30,a:-30},aR:{s:60,e:70},aL:{s:-45,e:40}}),.35,0],[P({lift:0,tp:8,L:{h:20,k:20},R:{h:-25,k:60,a:-30},aR:{s:30,e:60},aL:{s:-20,e:50}}),.25,0]],props:[],yaw:22},
  stepdown:{k:[[st({sup:"L",gy:.38,L:{h:4,k:6},R:{h:14,k:8,a:5},aL:{s:30,e:20},aR:{s:30,e:20}}),1.6,.2],[st({sup:"L",gy:.38,tp:16,L:{h:66,k:96},R:{h:22,k:2,a:20},aL:{s:45,e:20},aR:{s:45,e:20}}),.9,.4]],props:["box"],boxFoot:"L",boxH:.38,boxSupport:1,yaw:24},
- gainage:{custom:t=>{const c=t%3.2,s=c<1.6?"R":"L",u=wave(c%1.6,.55,.3,.55,.2);return C_plank(0,1,s,u)},T:3.2,gT:.7,props:["mat"],yaw:-20}};
+ gainage:{custom:t=>{const c=t%3.2,s=c<1.6?"R":"L",u=wave(c%1.6,.55,.3,.55,.2);return C_plank(0,1,s,u)},T:3.2,gT:.7,props:["mat"],yaw:-20},
+ goblet:{k:[[st({aL:{s:28,e:118,ab:-10},aR:{s:28,e:118,ab:-10}}),1,.3],[st({tp:26,L:{h:102,k:122},R:{h:102,k:122},aL:{s:42,e:108,ab:-10},aR:{s:42,e:108,ab:-10}}),1.2,.3]],props:[],dbAt:"mid",alwaysDb:1},
+ squatb:{k:[[st({aL:{s:20,e:140,ab:55},aR:{s:20,e:140,ab:55}}),1,.3],[st({tp:38,L:{h:96,k:112},R:{h:96,k:112},aL:{s:50,e:140,ab:55},aR:{s:50,e:140,ab:55}}),1.2,.3]],props:[],bbAt:"sh",alwaysBb:1},
+ sdtr:{k:[[st({L:{h:0,k:6},R:{h:0,k:6},aL:{s:4,e:4,ab:6},aR:{s:4,e:4,ab:6}}),1.1,.2],[st({tp:72,L:{h:-8,k:18},R:{h:-8,k:18},aL:{s:2,e:2,ab:6},aR:{s:2,e:2,ab:6}}),1.3,.4]],props:[],bbAt:"ha"},
+ kbswing:{k:[[st({tp:60,L:{h:14,k:32},R:{h:14,k:32},aL:{s:-28,e:0,ab:-8},aR:{s:-28,e:0,ab:-8}}),.45,.05],[st({tp:-4,L:{h:0,k:2},R:{h:0,k:2},aL:{s:88,e:0,ab:-8},aR:{s:88,e:0,ab:-8}}),.45,.12]],props:[],dbAt:"mid",alwaysDb:1,yaw:12},
+ hipthrust:{custom:t=>C_hip(wave(t,1,.6,1,.3)),T:2.9,gT:1.2,props:["mat"],bench:[-.5,-.02,.4],dbAt:"hip",bbAt:"hip",yaw:-24},
+ legcurl:{custom:t=>C_curl(wave(t,.9,.3,1,.3)),T:2.5,gT:1,props:["mat"],ballAt:J=>({c:V((J.heL.x+J.heR.x)/2+.02,.29,0),r:.29}),yaw:-28},
+ nordic:{custom:t=>C_nord(wave(t,2.3,.1,.7,.6)),T:3.7,gT:2.35,props:["mat"],roller:1,yaw:-30},
+ lateralwalk:{k:[[st({tp:14,L:{h:30,k:44,ab:10},R:{h:30,k:44,ab:10},aL:{s:35,e:50,ab:4},aR:{s:35,e:50,ab:4}}),.45,.1],[st({tp:14,L:{h:30,k:40,ab:24},R:{h:30,k:46,ab:8},aL:{s:35,e:50,ab:4},aR:{s:35,e:50,ab:4}}),.45,.1]],props:[],yaw:84},
+ deadbug:{custom:t=>C_bug(t),T:4,gT:.9,props:["mat"],yaw:-24},
+ planchebal:{custom:t=>C_pball(t),T:3.93,gT:0,props:[],hold:1,ballBack:.6,ballAt:J=>({c:V((J.elL.x+J.elR.x)/2-.12,.25,(J.elL.z+J.elR.z)/2),r:.27}),yaw:-18},
+ kneeraise:{custom:t=>HANG(mix(KR0,KR1,wave(t,.9,.4,1.1,.3)),2.15),T:2.7,gT:1.1,props:["bar"],yaw:40},
+ traction:{custom:t=>HANG(mix(TR0,TR1,wave(t,1,.4,1.6,.3)),2.2),T:3.3,gT:1.2,props:["bar"],yaw:62},
+ pompe:{custom:t=>C_push(wave(t,1,.2,.8,.3)),T:2.3,gT:1.1,props:["mat"],yaw:-22},
+ dips:{custom:t=>C_dip(wave(t,1,.2,.9,.3)),T:2.4,gT:1.1,props:[],bench:[-.52,-.04,.44],yaw:32},
+ rowing:{k:[[st({tp:48,L:{h:18,k:32},R:{h:18,k:32},aL:{s:0,e:4,ab:6},aR:{s:0,e:4,ab:6}}),.9,.15],[st({tp:48,L:{h:18,k:32},R:{h:18,k:32},aL:{s:-55,e:105,ab:16},aR:{s:-55,e:105,ab:16}}),.8,.5]],props:[],yaw:30},
+ molletmarche:{custom:t=>TOE(mix(MD0,MD1,wave(t,.6,.5,2.4,.3)),.22),T:3.8,gT:.85,props:[],step:1,yaw:30}};
+
 // ---------- maths ----------
 const lerp=(a,b,t)=>a+(b-a)*t,ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
 function mix(a,b,t){const r={};for(const k in a){if(k==="sup"){r.sup=t<.5?a.sup:b.sup;continue}if(typeof a[k]==="object"){r[k]={};for(const j in a[k])r[k][j]=lerp(a[k][j],b[k][j],t)}else r[k]=lerp(a[k],b[k],t)}return r}
@@ -1755,6 +1823,41 @@ function C_side(u){const J={},S=V(0,.34,0),hy=.13+u*.13,px=Math.sqrt(.25-Math.po
   J.shL=V(0,.34,0);J.shR=V(0,.66,0);J.elL=V(0,.045,0);J.haL=V(0,.04,.26);J.elR=V(0,.94,0);J.haR=V(.02,1.2,0);
   J.hpL=V(px,hy,0);J.hpR=V(px,hy+.19,0);J.anL=V(ax,.06,-.02);J.anR=V(ax,.15,.02);J.knL=mixV(J.hpL,J.anL,.5);J.knR=mixV(J.hpR,J.anR,.5);
   J.toL=V(ax+.03,.05,.16);J.heL=V(ax+.03,.03,-.05);J.toR=V(ax+.03,.14,.17);J.heR=V(ax+.03,.14,-.05);J.head=V(-.19,.58,0);return fin(J,V(0,0,1))}
+// ---------- nouveaux exercices (matériel) ----------
+const KR0=P({aL:{s:178,e:0,ab:16},aR:{s:178,e:0,ab:16},L:{h:4,k:8},R:{h:4,k:8}}),KR1=P({tp:-8,aL:{s:178,e:0,ab:16},aR:{s:178,e:0,ab:16},L:{h:96,k:96},R:{h:96,k:96}});
+const TR0=P({aL:{s:176,e:2,ab:28},aR:{s:176,e:2,ab:28},L:{h:10,k:35},R:{h:10,k:35}}),TR1=P({aL:{s:22,e:148,ab:46},aR:{s:22,e:148,ab:46},L:{h:14,k:40},R:{h:14,k:40}});
+const MD0=P({L:{a:-26},R:{a:-26},aL:{s:5,e:10},aR:{s:5,e:10}}),MD1=P({L:{a:40},R:{a:40},aL:{s:5,e:10},aR:{s:5,e:10}});
+function HANG(p,hy){const J=skel(p),hx=(J.haL.x+J.haR.x)/2,h=(J.haL.y+J.haR.y)/2;for(const k in J)J[k]=v(J[k].x-hx,J[k].y+hy-h,J[k].z);return J}
+function TOE(p,y){const J=skel(p),tx=(J.toL.x+J.toR.x)/2,ty=Math.min(J.toL.y,J.toR.y);for(const k in J)J[k]=v(J[k].x-tx,J[k].y+y-ty,J[k].z);return J}
+function C_hip(u){const J={},sy=.42,hy=.17+u*.27,hpx=Math.sqrt(Math.max(.02,.25-Math.pow(hy-sy,2))),ax=hpx+.5;["L","R"].forEach(s=>{const z=s==="R"?1:-1;
+  J["sh"+s]=V(0,sy+.04,z*SEG.sh);J["el"+s]=V(-.24,sy+.02,z*(SEG.sh+.1));J["ha"+s]=V(-.06,sy+.04,z*(SEG.sh+.18));J["hp"+s]=V(hpx,hy,z*SEG.hip);
+  const an=V(ax,.07,z*.15);J["an"+s]=an;J["kn"+s]=ik2(J["hp"+s],an,SEG.th,SEG.sk,1);J["to"+s]=V(an.x+.16,.03,an.z);J["he"+s]=V(an.x-.04,.02,an.z)});
+  const d=V(-hpx/.5,(sy-hy)/.5,0);J.head=V(d.x*.2,sy+.08+d.y*.2,0);return fin(J,V(.45,.89,0))}
+function C_curl(u){const J={},hy=.42+u*.05,ax=1.1-u*.38,ay=.58,hpx=Math.sqrt(Math.max(.02,.25-Math.pow(hy-.09,2)));["L","R"].forEach(s=>{const z=s==="R"?1:-1;
+  J["sh"+s]=V(0,.09,z*SEG.sh);J["el"+s]=V(.28,.05,z*(SEG.sh+.08));J["ha"+s]=V(.55,.04,z*(SEG.sh+.12));J["hp"+s]=V(hpx,hy,z*SEG.hip);
+  const an=V(ax,ay,z*.1);J["an"+s]=an;J["kn"+s]=ik2(J["hp"+s],an,SEG.th,SEG.sk,1);J["he"+s]=V(an.x+.01,ay-.05,an.z);J["to"+s]=V(an.x+.05,ay+.13,an.z)});
+  J.head=V(-.2,.11,0);return fin(J,V(0,1,0))}
+function C_nord(u){const J={},th=u*60*D2R,d=V(Math.sin(th),Math.cos(th),0);["L","R"].forEach(s=>{const z=s==="R"?1:-1;
+  const kn=V(0,.06,z*.1);J["kn"+s]=kn;J["an"+s]=V(-SEG.sk,.07,z*.1);J["he"+s]=V(-SEG.sk-.02,.12,z*.1);J["to"+s]=V(-SEG.sk-.13,.03,z*.1);
+  J["hp"+s]=V(d.x*SEG.th,.06+d.y*SEG.th,z*SEG.hip);const sh=V(d.x*(SEG.th+.5),.06+d.y*(SEG.th+.5),z*SEG.sh);J["sh"+s]=sh;
+  J["el"+s]=V(sh.x+.1+.1*u,sh.y-.22,z*(SEG.sh+.04));J["ha"+s]=V(sh.x+.28+.12*u,sh.y-.24+.05*u,z*(SEG.sh-.02))});
+  J.head=V(d.x*(SEG.th+.68),.06+d.y*(SEG.th+.68),0);return fin(J,V(Math.cos(th)*.95,-Math.sin(th)*.95+.15,0))}
+function C_bug(t){const c=t%4,sd=c<2?"R":"L",u=wave(c%2,.7,.3,.7,.3),J={};["L","R"].forEach(s=>{const z=s==="R"?1:-1,lx=s===sd?u:0,ax=s!==sd?u:0;
+  J["sh"+s]=V(0,.09,z*SEG.sh);J["el"+s]=mixV(V(0,.37,z*SEG.sh),V(-.29,.12,z*SEG.sh),ax);J["ha"+s]=mixV(V(0,.64,z*SEG.sh),V(-.56,.14,z*SEG.sh),ax);J["hp"+s]=V(.5,.09,z*SEG.hip);
+  const kn=mixV(V(.5,.52,z*.12),V(.92,.16,z*.12),lx),an=mixV(V(.92,.52,z*.12),V(1.34,.14,z*.12),lx);J["kn"+s]=kn;J["an"+s]=an;J["to"+s]=V(an.x+.04,an.y+.16,an.z);J["he"+s]=V(an.x-.04,an.y-.02,an.z)});
+  J.head=V(-.2,.11,0);return fin(J,V(0,1,0))}
+function C_pball(t){const a=t*1.6,dx=Math.sin(a)*.05,dz=Math.cos(a)*.05,J={},sy=.8,An=V(1.08,.1,0);["L","R"].forEach(s=>{const z=s==="R"?1:-1;
+  J["sh"+s]=V(0,sy,z*SEG.sh);J["el"+s]=V(dx,.53,z*.12+dz);J["ha"+s]=V(-.25+dx,.53,z*.04+dz);const P2=mixV(V(0,sy,0),An,.38);J["hp"+s]=V(P2.x,P2.y,z*SEG.hip);
+  const an=V(An.x,An.y,z*.1);J["an"+s]=an;J["kn"+s]=mixV(J["hp"+s],an,.5);J["to"+s]=V(an.x+.02,.02,an.z);J["he"+s]=V(an.x+.05,.2,an.z)});
+  J.head=V(-.2,sy+.05,0);return fin(J,V(-.3,-.95,0))}
+function C_push(u){const J={},sy=.5-u*.3,An=V(1.24,.1,0),P2=mixV(V(0,sy,0),An,.38);["L","R"].forEach(s=>{const z=s==="R"?1:-1;
+  J["sh"+s]=V(0,sy,z*SEG.sh);const ha=V(0,.03,z*(SEG.sh+.08));J["ha"+s]=ha;const dd=sy-.03,off=Math.sqrt(Math.max(0,.28*.28-(dd/2)*(dd/2)));J["el"+s]=V(off*.5,(sy+.03)/2,z*(SEG.sh+.08+off*.8));
+  J["hp"+s]=V(P2.x,P2.y,z*SEG.hip);const an=V(An.x,An.y,z*.1);J["an"+s]=an;J["kn"+s]=mixV(J["hp"+s],an,.5);J["to"+s]=V(an.x+.02,.02,an.z);J["he"+s]=V(an.x+.05,.2,an.z)});
+  J.head=V(-.21,sy+.03,0);return fin(J,V(-.25,-.95,0))}
+function C_dip(u){const J={},sy=.9-u*.24,hip=V(.03,sy-.48,0),An=V(.82,.06,0);["L","R"].forEach(s=>{const z=s==="R"?1:-1;
+  const ha=V(-.1,.46,z*(SEG.sh+.02));J["ha"+s]=ha;J["sh"+s]=V(.03,sy,z*SEG.sh);const el=ik2(ha,J["sh"+s],SEG.fa,SEG.ua,1);el.z=z*(SEG.sh+.04);J["el"+s]=el;
+  J["hp"+s]=V(hip.x,hip.y,z*SEG.hip);const an=V(An.x,An.y,z*.12);J["an"+s]=an;J["kn"+s]=ik2(J["hp"+s],an,SEG.th,SEG.sk,1);J["to"+s]=V(an.x+.06,.16,an.z);J["he"+s]=V(an.x-.02,.02,an.z)});
+  J.head=V(.05,sy+.25,0);return fin(J,V(1,.08,0))}
 const exT=ex=>ex.custom?ex.T:ex.k.reduce((a,k)=>a+k[1]+k[2],0);
 const jAt=(ex,t)=>ex.custom?ex.custom(t):place(ex,poseAt(ex,t).p);
 const ghostT=ex=>ex.custom?ex.gT:ex.k[0][2]+ex.k[0][1]+Math.min(.01,ex.k[1][2]);
@@ -1764,7 +1867,7 @@ function fitFor(id,ex,yaw0,spin,c0){const key=id+"|"+yaw0+"|"+spin+"|"+c0.W+"x"+
   let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9,cx=0,n=0;const yaws=spin?[-.6,-.3,0,.3,.6]:[0];
   const poses=[],tot=exT(ex);for(let t=0;t<tot;t+=tot/24)poses.push(jAt(ex,t));
   poses.forEach(J=>{for(const k in J){cx+=J[k].x;n++}});cx/=n;
-  yaws.forEach(dy=>{const c={...c0,yaw:yaw0*Math.PI/180+dy,f:1,ox:0,oy:0,cx};poses.forEach(J=>{const pts=Object.values(J);pts.push(v(cx-.5,0,0),v(cx+.5,0,0));if(ex.props&&ex.props.includes("wall"))pts.push(v(J.pelvis.x-.16,1.5,0));
+  yaws.forEach(dy=>{const c={...c0,yaw:yaw0*Math.PI/180+dy,f:1,ox:0,oy:0,cx};poses.forEach(J=>{const pts=Object.values(J);pts.push(v(cx-.5,0,0),v(cx+.5,0,0));if(ex.props&&ex.props.includes("wall"))pts.push(v(J.pelvis.x-.16,1.5,0));if(ex.props&&ex.props.includes("bar"))pts.push(v(0,0,0),v(0,J.haL.y+.05,0));if(ex.ballAt){const B=ex.ballAt(J);pts.push(v(B.c.x-B.r,B.c.y,B.c.z),v(B.c.x+B.r,B.c.y+B.r,B.c.z),v(B.c.x,0,B.c.z))}if(ex.bench)pts.push(v(ex.bench[0],0,0),v(ex.bench[0],ex.bench[2],0));
     pts.forEach(P0=>{const q=proj(c,P0);x0=Math.min(x0,q.x);x1=Math.max(x1,q.x);y0=Math.min(y0,q.y);y1=Math.max(y1,q.y)})})});
   const pad=.16;const w=x1-x0+pad*2,h=y1-y0+pad*2;const f=Math.min(c0.W/w,c0.H/h);
   return FIT[key]={cx,f,ox:c0.W/2-((x0+x1)/2)*f,oy:c0.H/2-((y0+y1)/2)*f}}
@@ -1794,6 +1897,13 @@ function draw(cv,id,time,o={}){const ex=EX[id];if(!ex||!cv.getContext)return;con
   if(props.includes("box")){const f=J["to"+ex.boxFoot];const bx=ex.boxSupport?f.x-.2:f.x-.1;box(bx-.26,bx+(ex.boxSupport?.22:.26),ex.boxH,-.42,.42,["#3a3a40","#2c2c31","#34343a","#26262b"])}
   if(props.includes("chair")){const f=J["to"+ex.chairFoot];const bx=f.x;box(bx-.32,bx+.14,ex.chairH,-.26,.26,["#3a3a40","#2c2c31","#34343a","#26262b"]);quad([v(bx-.32,ex.chairH,-.26),v(bx-.32,ex.chairH+.42,-.26),v(bx-.32,ex.chairH+.42,.26),v(bx-.32,ex.chairH,.26)],"#303036","rgba(0,0,0,.35)")}
   if(props.includes("wall")){const wx=J.pelvis.x-.16;items.push({z:-98,fn:()=>{g.beginPath();[v(wx,0,-.6),v(wx,1.75,-.6),v(wx,1.75,.6),v(wx,0,.6)].forEach((q,i)=>{const P2=proj(c,q);i?g.lineTo(P2.x,P2.y):g.moveTo(P2.x,P2.y)});g.closePath();g.fillStyle="rgba(255,255,255,.07)";g.fill();g.strokeStyle="rgba(255,255,255,.18)";g.stroke()}})}
+  if(ex.bench){const[b0,b1,bh]=ex.bench;box(b0,b1,bh,-.34,.34,["#3a3a40","#2c2c31","#34343a","#26262b"])}
+  if(ex.step){const tx=(J.toL.x+J.toR.x)/2;box(tx-.07,tx+.42,.22,-.4,.4,["#3a3a40","#2c2c31","#34343a","#26262b"])}
+  if(ex.ballAt){const B=ex.ballAt(J),C=proj(c,B.c);items.push({z:C.z-(ex.ballBack||0)-.02,fn:()=>{const R=B.r*C.f;const gr=g.createRadialGradient(C.x-R*.35,C.y-R*.4,R*.1,C.x,C.y,R);gr.addColorStop(0,"#7fb2ff");gr.addColorStop(1,"#1f4f9c");g.fillStyle=gr;g.strokeStyle="rgba(0,0,0,.45)";g.lineWidth=1.5;g.beginPath();g.arc(C.x,C.y,R,0,7);g.fill();g.stroke()}})}
+  if(props.includes("bar")){const hx=(J.haL.x+J.haR.x)/2,hy=(J.haL.y+J.haR.y)/2+.02;const A=proj(c,v(hx,hy,-.75)),B=proj(c,v(hx,hy,.75)),A0=proj(c,v(hx,0,-.75)),B0=proj(c,v(hx,0,.75));
+    items.push({z:-97,fn:()=>{g.strokeStyle="#55555d";g.lineWidth=.035*A.f;g.lineCap="round";[[A,A0],[B,B0]].forEach(([p1,p2])=>{g.beginPath();g.moveTo(p1.x,p1.y);g.lineTo(p2.x,p2.y);g.stroke()})}});
+    items.push({z:Math.max(A.z,B.z)+.2,fn:()=>{g.strokeStyle="#b9b9c2";g.lineWidth=.03*A.f;g.lineCap="round";g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.stroke()}})}
+  if(ex.roller){const ax=(J.anL.x+J.anR.x)/2;const A=proj(c,v(ax,.2,-.32)),B=proj(c,v(ax,.2,.32));items.push({z:Math.max(A.z,B.z)+.05,fn:()=>{g.strokeStyle="#3d3d44";g.lineWidth=.09*A.f;g.lineCap="round";g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.stroke()}})}
   // corps : silhouette humaine (peau, vêtements, muscles), triée par profondeur
   const SK=o.skin||[224,168,128],SH=o.shirt||gold,SO=[40,40,47],SHOE=[238,238,242],HAIR=[52,36,28];
   const rgb=(c,k=1)=>`rgb(${Math.max(0,Math.min(255,c[0]*k))|0},${Math.max(0,Math.min(255,c[1]*k))|0},${Math.max(0,Math.min(255,c[2]*k))|0})`;
@@ -1863,9 +1973,17 @@ function draw(cv,id,time,o={}){const ex=EX[id];if(!ex||!cv.getContext)return;con
     const m1=S(add(add(fw,mul(rt,-.2)),mul(up,-.45))),m2=S(add(add(fw,mul(rt,.2)),mul(up,-.45))),m0=S(add(fw,mul(up,-.52)));if(vis(m0)){g.strokeStyle="rgba(125,48,38,.85)";g.lineWidth=Math.max(1,r*.045);g.beginPath();g.moveTo(m1.x,m1.y);g.quadraticCurveTo(m0.x,m0.y,m2.x,m2.y);g.stroke()}
     }});
   // haltères
-  const db=o.db&&!(ex.noDb);if(db)["L","R"].forEach(s=>{const h=J["ha"+s];const a=add(h,v(0,0,-.09)),b=add(h,v(0,0,.09));const A=proj(c,a),B=proj(c,b);items.push({z:(A.z+B.z)/2+.05,fn:()=>{g.lineCap="butt";g.strokeStyle="#8d8d95";g.lineWidth=.03*A.f;g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.stroke();[A,B].forEach(Q=>{g.fillStyle="#3b3b42";g.strokeStyle="#9a9aa2";g.lineWidth=1.2;g.beginPath();g.arc(Q.x,Q.y,.065*Q.f,0,7);g.fill();g.stroke()})}})});
+  const dbOn=(o.db||ex.alwaysDb)&&!ex.noDb&&!(o.bb&&ex.bbAt);
+  const dbAt=(P0,len,rr)=>{const a=add(P0,v(0,0,-len)),b=add(P0,v(0,0,len));const A=proj(c,a),B=proj(c,b);items.push({z:(A.z+B.z)/2+.06,fn:()=>{g.lineCap="butt";g.strokeStyle="#8d8d95";g.lineWidth=.03*A.f;g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.stroke();[A,B].forEach(Q=>{g.fillStyle="#3b3b42";g.strokeStyle="#9a9aa2";g.lineWidth=1.2;g.beginPath();g.arc(Q.x,Q.y,rr*Q.f,0,7);g.fill();g.stroke()})}})};
+  if(dbOn&&ex.dbAt==="mid"){const hm=mixV(J.haL,J.haR,.5),K=proj(c,add(hm,v(0,-.1,0))),Hh=proj(c,hm);items.push({z:K.z+.08,fn:()=>{g.strokeStyle="#9a9aa2";g.lineWidth=.025*K.f;g.beginPath();g.arc(Hh.x,Hh.y+.03*K.f,.05*K.f,Math.PI,0);g.stroke();g.fillStyle="#3b3b42";g.beginPath();g.arc(K.x,K.y,.09*K.f,0,7);g.fill();g.stroke()}})}
+  else if(dbOn&&ex.dbAt==="hip")dbAt(add(J.pelvis,v(0,.13,0)),.22,.085);
+  if(o.bb&&ex.bbAt||ex.alwaysBb){const C0=ex.bbAt==="sh"?add(mixV(J.shL,J.shR,.5),v(-.03,.04,0)):ex.bbAt==="hip"?add(J.pelvis,v(0,.14,0)):mixV(J.haL,J.haR,.5);
+    const A=proj(c,add(C0,v(0,0,-.8))),B=proj(c,add(C0,v(0,0,.8)));items.push({z:Math.max(A.z,B.z)+.06,fn:()=>{g.lineCap="round";g.strokeStyle="#a7a7b0";g.lineWidth=.03*A.f;g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.stroke();
+      [.6,.68].forEach(t=>[-1,1].forEach(k=>{const Q=proj(c,add(C0,v(0,0,k*.8*t/.8*.95)));g.fillStyle="#2c2c31";g.strokeStyle="#8d8d95";g.lineWidth=1.2;g.beginPath();g.ellipse(Q.x,Q.y,.05*Q.f,.2*Q.f,0,0,7);g.fill();g.stroke()}))}})}
+  const db=dbOn&&!ex.dbAt;if(db)["L","R"].forEach(s=>{const h=J["ha"+s];const a=add(h,v(0,0,-.09)),b=add(h,v(0,0,.09));const A=proj(c,a),B=proj(c,b);items.push({z:(A.z+B.z)/2+.05,fn:()=>{g.lineCap="butt";g.strokeStyle="#8d8d95";g.lineWidth=.03*A.f;g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.stroke();[A,B].forEach(Q=>{g.fillStyle="#3b3b42";g.strokeStyle="#9a9aa2";g.lineWidth=1.2;g.beginPath();g.arc(Q.x,Q.y,.065*Q.f,0,7);g.fill();g.stroke()})}})});
   // élastique
-  if(o.band&&(id==="squat"||id==="pont")){const A=proj(c,J.knL),B=proj(c,J.knR);items.push({z:Math.max(A.z,B.z)+.01,fn:()=>{g.strokeStyle="#e5484d";g.lineWidth=.035*A.f;g.lineCap="round";g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.stroke()}})}
+  if(o.band&&id==="rowing")["L","R"].forEach(s=>{const A=proj(c,J["to"+s]),B=proj(c,J["ha"+s]);items.push({z:Math.max(A.z,B.z)+.02,fn:()=>{g.strokeStyle="#e5484d";g.lineWidth=.02*A.f;g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.stroke()}})});
+  if((o.band||id==="lateralwalk")&&(id==="squat"||id==="pont"||id==="lateralwalk")){const A=proj(c,J.knL),B=proj(c,J.knR);items.push({z:Math.max(A.z,B.z)+.01,fn:()=>{g.strokeStyle="#e5484d";g.lineWidth=.035*A.f;g.lineCap="round";g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.stroke()}})}
   // corde à sauter
   if(props.includes("rope")){const {i}=poseAt(ex,time);const ph=(time%((ex.k[0][1]+ex.k[1][1])*1))/(ex.k[0][1]+ex.k[1][1])*Math.PI*2;const hl=J.haL,hr=J.haR;const mid=v((hl.x+hr.x)/2,(hl.y+hr.y)/2,0);
     const pts=[];for(let k=0;k<=24;k++){const u=k/24;const z=lerp(hl.z,hr.z,u),bow=Math.sin(u*Math.PI);const ang=ph;const rx=Math.cos(ang)*.32*bow,ry=-(Math.sin(ang)*.5+.52)*bow;pts.push(v(mid.x+rx,Math.max(.01,lerp(hl.y,hr.y,u)+ry*1.9),z))}
@@ -1875,7 +1993,7 @@ function draw(cv,id,time,o={}){const ex=EX[id];if(!ex||!cv.getContext)return;con
 // ---------- animation des vignettes visibles ----------
 const live=new Set();let raf=0;const t0=performance.now();
 const io=typeof IntersectionObserver!=="undefined"?new IntersectionObserver(es=>es.forEach(e=>{e.isIntersecting?live.add(e.target):live.delete(e.target)}),{rootMargin:"60px"}):null;
-function loop(){raf=requestAnimationFrame(loop);const t=(performance.now()-t0)/1000;live.forEach(cv=>{if(!cv.isConnected){live.delete(cv);return}const off=+cv.dataset.off||0;draw(cv,cv.dataset.mq,t+off,{db:cv.dataset.db==="1",band:cv.dataset.band==="1",yaw:cv.dataset.yaw?+cv.dataset.yaw:null,spin:cv.dataset.spin==="1"})})}
+function loop(){raf=requestAnimationFrame(loop);const t=(performance.now()-t0)/1000;live.forEach(cv=>{if(!cv.isConnected){live.delete(cv);return}const off=+cv.dataset.off||0;draw(cv,cv.dataset.mq,t+off,{db:cv.dataset.db==="1",bb:cv.dataset.bb==="1",band:cv.dataset.band==="1",yaw:cv.dataset.yaw?+cv.dataset.yaw:null,spin:cv.dataset.spin==="1"})})}
 function scan(root){(root||document).querySelectorAll("canvas[data-mq]:not([data-mqon])").forEach((cv,i)=>{cv.dataset.mqon="1";const r=window.devicePixelRatio||1;const w=cv.clientWidth||cv.width,h=cv.clientHeight||cv.height;cv.width=Math.round(w*r);cv.height=Math.round(h*r);cv.dataset.off=String(i*.37);io?io.observe(cv):live.add(cv)});if(!raf)loop()}
 return{draw,scan,EX,poseAt}})();
 const EXO_HOW={
@@ -1896,10 +2014,27 @@ const EXO_HOW={
  fentesautee:[["départ en fente","saute et inverse les jambes en l'air","amortis et repars aussitôt"],"le genou arrière qui tape le sol"],
  bonds:[["grandes foulées bondissantes","pousse loin derrière, monte le genou devant","cherche le temps de vol, bras actifs"],"faire de petits pas rapides au lieu de bondir"],
  stepdown:[["debout sur la marche, un pied dans le vide","fléchis la jambe d'appui en 3 secondes","effleure le sol du talon, puis remonte"],"le bassin qui penche ou le genou qui rentre"],
- gainage:[["en planche bras tendus, pieds écartés","une main vient toucher l'épaule opposée","alterne sans que le bassin tourne"],"se balancer d'un côté à l'autre"]};
+ gainage:[["en planche bras tendus, pieds écartés","une main vient toucher l'épaule opposée","alterne sans que le bassin tourne"],"se balancer d'un côté à l'autre"],
+ goblet:[["charge tenue à 2 mains contre le sternum","descends fesses en arrière, buste le plus droit possible","remonte en poussant le sol, genoux vers l'extérieur"],"arrondir le haut du dos sous la charge"],
+ squatb:[["barre sur les trapèzes, mains un peu plus larges que les épaules","descends jusqu'aux cuisses parallèles, dos gainé","remonte en poussant fort dans tout le pied"],"décoller les talons ou laisser les genoux rentrer"],
+ sdtr:[["debout, genoux à peine fléchis, charge devant les cuisses","pousse les fesses loin derrière, la charge descend sous les genoux","remonte en serrant les fessiers"],"arrondir le bas du dos"],
+ kbswing:[["pieds un peu plus larges que les épaules","fesses en arrière, la kettlebell passe entre les jambes","claque les hanches : la charge monte à hauteur d'épaules toute seule"],"lever la charge avec les bras ou faire un squat"],
+ hipthrust:[["omoplates sur le banc, pieds à plat, genoux à 90° en haut","monte le bassin jusqu'à l'horizontale","serre les fessiers 1 s, redescends lentement"],"cambrer le bas du dos en haut"],
+ legcurl:[["sur le dos, talons sur le ballon, bras au sol","monte le bassin, corps en ligne droite","ramène le ballon en pliant les genoux, puis repousse-le"],"laisser retomber le bassin pendant le mouvement"],
+ nordic:[["à genoux sur un tapis, chevilles bloquées","corps droit des genoux à la tête, bascule vers l'avant","freine le plus longtemps possible, puis rattrape-toi en pompe"],"casser au niveau des hanches (fesses en arrière)"],
+ lateralwalk:[["élastique au-dessus des genoux, demi-squat","un pas de côté, l'autre pied suit sans claquer","garde l'élastique tendu tout le temps"],"laisser les genoux rentrer vers l'intérieur"],
+ deadbug:[["sur le dos, bras vers le plafond, genoux à 90°","tends un bras derrière la tête et la jambe opposée","reviens et change de côté, souffle en tendant"],"décoller le bas du dos du sol"],
+ planchebal:[["avant-bras sur le ballon, pieds au sol","corps aligné, fessiers et abdos serrés","dessine de petits cercles avec les avant-bras"],"laisser tomber le bassin"],
+ kneeraise:[["suspendu à la barre, épaules actives","monte les genoux vers la poitrine en enroulant le bassin","redescends lentement, sans élan"],"se balancer pour monter les jambes"],
+ traction:[["mains un peu plus larges que les épaules","tire les coudes vers les hanches, menton au-dessus de la barre","redescends en 2-3 s jusqu'aux bras tendus"],"donner des coups de jambes pour monter"],
+ pompe:[["mains sous les épaules, corps en planche","descends la poitrine près du sol, coudes à 45°","repousse en gardant le corps droit"],"le bassin qui tombe ou les fesses en l'air"],
+ dips:[["mains au bord d'une chaise stable, doigts vers l'avant","plie les coudes vers l'arrière, épaules basses","pousse pour remonter bras tendus"],"descendre trop bas en avançant les épaules"],
+ rowing:[["buste penché à 45°, dos droit, genoux souples","tire les coudes vers l'arrière le long du corps","redescends lentement, bras tendus"],"arrondir le dos ou tirer avec élan"],
+ molletmarche:[["l'avant des pieds au bord d'une marche","monte sur la pointe en 1 s","redescends en 3 s, talons sous le niveau de la marche"],"rebondir en bas sans contrôler la descente"]};
 function exoHow(id){const h=EXO_HOW[id];return h?`<ol class="exhow">${h[0].map(x=>`<li>${x}</li>`).join("")}</ol><div class="exerr">⚠︎ à éviter : ${h[1]}</div><small class="exleg">silhouette claire = la position à atteindre</small>`:""}
-function mqCanvas(id,v,cls="pgmq"){const db=/haltère/.test(v||""),band=/élastique/.test(v||"");return `<canvas class="${cls}" data-mq="${id}" data-db="${db?1:0}" data-band="${band?1:0}" width="124" height="124"></canvas>`}
-function openExo(id,v,s){const P0=PRG()||{},cv=(P0.rfVar||{})[id];const vi=cv==null?1:cv;openSheet(`<div class="mqbig"><canvas class="mqfull" data-mq="${id}" data-db="${/haltère/.test(v||"")?1:0}" data-band="${/élastique/.test(v||"")?1:0}" data-spin="1"></canvas>
+const mqBB=v=>/à la barre/.test(v||"")?1:0,mqDB=v=>/haltère|kettlebell/.test(v||"")?1:0;
+function mqCanvas(id,v,cls="pgmq"){const band=/élastique/.test(v||"");return `<canvas class="${cls}" data-mq="${id}" data-db="${mqDB(v)}" data-bb="${mqBB(v)}" data-band="${band?1:0}" width="124" height="124"></canvas>`}
+function openExo(id,v,s){const P0=PRG()||{},cv=(P0.rfVar||{})[id];const vi=cv==null?1:cv;openSheet(`<div class="mqbig"><canvas class="mqfull" data-mq="${id}" data-db="${mqDB(v)}" data-bb="${mqBB(v)}" data-band="${/élastique/.test(v||"")?1:0}" data-spin="1"></canvas>
   <div class="mqctl"><button class="chip" data-mqyaw="48">3/4</button><button class="chip" data-mqyaw="90">face</button><button class="chip" data-mqyaw="0">profil</button><button class="chip on" data-mqyaw="spin">360°</button></div>
   <div class="pgtabs sm">${VARN.map((n,i)=>`<button class="${i===vi?"on":""}" data-exvar="${i}">${n}</button>`).join("")}</div><h2>${EXO[id][0]}</h2>${s?`<em class="mqs">${esc(s)}</em>`:""}<p id="exCue">${esc(exoCue(P0,id))}</p>${exoHow(id)}${v?`<small class="mqv">${esc(v)}</small>`:""}<div class="actions"><button class="btn ghost" id="mqX">fermer</button></div></div>`,()=>{
   $("#mqX").onclick=closeSheet;MQ.scan($("#sheet"));
@@ -1952,7 +2087,7 @@ function pgDp(p,e){if(!isTrail(p))return 0;const c=sessOf(e),t=pgSessType(e);if(
 const PGIC={easy:'<path d="M4 17c3-1 5-6 8-6s5 5 8 6"/>',long:'<path d="M3 18 9 9l4 5 3-4 5 8z"/>',hard:'<path d="M13 2 5 14h6l-1 8 8-12h-6z"/>',race:'<path d="M5 21V4h11l-2 4 2 4H5"/>',renfo:'<path d="M6 9v6M18 9v6M3 11v2M21 11v2M6 12h12"/>'};
 function pgIcon(t){return `<span class="pgic ${t}"><svg viewBox="0 0 24 24">${PGIC[t]||PGIC.easy}</svg></span>`}
 function pgCard(p,e,i,n,first){const c=sessOf(e),t=pgSessType(e),b=pgBadge(e),s=SESS[c]||RENFO[c]||["séance",""],dp=pgDp(p,e),L=p.logs||{},lg=L[ek(e)];
-  const kmTxt=RENFO[c]?renfoBlocks(p,c).reduce((a,x)=>a+x.items.length,0)+" exercices":(pgKm(p,e)?"≈ "+pgKm(p,e).toFixed(1).replace(".",",")+" km":"");
+  const kmTxt=RENFO[c]?renfoBlocks(p,c,e).reduce((a,x)=>a+x.items.length,0)+" exercices":(pgKm(p,e)?"≈ "+pgKm(p,e).toFixed(1).replace(".",",")+" km":"");
   return `<button class="pgcard ${lg?(lg.status==="none"?"miss":"done"):""} ${t}" data-pgopen="${esc(ek(e))}">
    <div class="pgch">${pgIcon(t)}<div><small>séance ${i}/${n}${b?` <em class="pgbdg ${b[1]}">${b[0]}</em>`:""}${lg?` <em class="pgbdg ok">${lg.status==="none"?"passée":"✓ faite"}</em>`:""}</small><b>${esc(pgSessName(e))}</b></div><i>›</i></div>
    <div class="pgcs"><div><small>durée</small><b>${esc(pgDur(p,e).replace(" max",""))}</b></div><div><small>${dp?"dénivelé":RENFO[c]?"contenu":"distance"}</small><b>${dp?dp+" à "+Math.round(dp*1.2/10)*10+" m":kmTxt||"–"}</b></div><div><small>difficulté</small>${pgDiff(c)}</div></div>
@@ -1964,7 +2099,7 @@ function pgDesc(p,e){const c=sessOf(e),s=SESS[c]||RENFO[c]||["",""],t=pgSessType
   if(e.rec)return"Récupération obligatoire après ta course. très lent, court, et zéro intensité : on reconstruit avant de recharger.";
   return (s[1]?s[1].charAt(0).toUpperCase()+s[1].slice(1)+". ":"")+base}
 function pgWeekStats(p,ws){const L=p.logs||{},wk=(p.plan||[]).filter(e=>e.date>=ws&&e.date<=addDays(ws,6));let dS=0,dK=0,pS=0,pK=0,n=0;
-  wk.forEach(e=>{const c=sessOf(e),sec=RENFO[c]?renfoMin(p,c)*60:sessTotals(p,e).sec,km=RENFO[c]?0:pgKm(p,e);pS+=sec;pK+=km;const lg=L[ek(e)];if(lg&&lg.status!=="none"){n++;const a=lg.act,f=lg.status==="part"?.5:1;dS+=a&&a.sec?a.sec:sec*f;dK+=a&&a.km!=null&&a.src?a.km:km*f}});
+  wk.forEach(e=>{const c=sessOf(e),sec=RENFO[c]?renfoMin(p,c,e)*60:sessTotals(p,e).sec,km=RENFO[c]?0:pgKm(p,e);pS+=sec;pK+=km;const lg=L[ek(e)];if(lg&&lg.status!=="none"){n++;const a=lg.act,f=lg.status==="part"?.5:1;dS+=a&&a.sec?a.sec:sec*f;dK+=a&&a.km!=null&&a.src?a.km:km*f}});
   return{wk,n,dS,dK,pS,pK}}
 function vProgWeek(p){const t=today(),plan=p.plan||[],L=p.logs||{};const ws=pgWS(pgWk),we=addDays(ws,6);
   const ws0=plan.length?ds(weekStart(parse(p.created||plan[0].date))):ws,W=p.weeks||1,wn=Math.round((parse(ws)-parse(ws0))/864e5/7)+1;
@@ -2015,15 +2150,15 @@ function pgExport(key){const p=PRG(),e=(p.plan||[]).find(x=>ek(x)===key);if(!e)r
    <div class="pgsrc dis"><i>⌚</i><span><b>envoyer à ma montre</b><small>Garmin, Coros, Suunto : bientôt</small></span></div><button class="pgx" id="exX">fermer</button></div>`,()=>{$("#exX").onclick=closeSheet;$("#exC").onclick=()=>{try{navigator.clipboard.writeText(txt);toast("séance copiée 📋")}catch(_){toast("copie impossible ici")}closeSheet()}})}
 /* ---------- renfo structuré en blocs ---------- */
 const RF_GOALS=[["decouverte","Découverte","1 séance, en douceur"],["prevention","Prévention","moins de blessures"],["performance","Performance","plus de puissance"],["equilibre","Équilibré","un peu de tout"]];
-function renfoBlocks(p,code){const l=renfoList(p,code),lv=p.level||"I",g=p.rfGoal||"equilibre";
+function renfoBlocks(p,code,e){const l=renfoList(p,code,e),lv=p.level||"I",g=p.rfGoal||"equilibre";
   const eff=g==="decouverte"?"modéré":g==="performance"&&lv!=="D"?"intense":lv==="C"?"intense":"modéré";
   const items=l.map(x=>{const m=x.s.match(/(\d+)\s*×\s*(\d+)\s*(s|m)?/);const sets=m?+m[1]:2,n=m?+m[2]:10,unit=m&&m[3]==="s"?"s":m&&m[3]==="m"?"m":"r";const side=/\/ (jambe|côté)/.test(x.s);
-    const hold=["planche","lateral","chaise","equilibre"].includes(x.id)||unit==="s";const explo=["sauts","squatsaute","fentesautee","bonds"].includes(x.id);
+    const hold=["planche","lateral","chaise","equilibre","planchebal"].includes(x.id)||unit==="s";const explo=["sauts","squatsaute","fentesautee","bonds","kbswing"].includes(x.id);
     return{...x,sets:g==="decouverte"?Math.min(2,sets):sets,n,unit,side,effort:hold?(eff==="intense"?"maximal":"intense"):explo?"intense":eff}});
-  const blocks=[];for(let i=0;i<items.length;i+=2){const it=items.slice(i,i+2);blocks.push({items:it,sets:Math.max(...it.map(x=>x.sets)),rest:it.some(x=>["sauts","squatsaute","fentesautee","bonds"].includes(x.id))?120:60})}return blocks}
-const rfQty=x=>x.unit==="s"?x.n+" s":x.unit==="m"?x.n+" m":x.n+" répétitions"+(x.side?" / côté":"");
-function pgRenfo(p,e){const c=sessOf(e),bl=renfoBlocks(p,c),eq=(p.equip||[]).filter(x=>x!=="none").map(k=>`<span class="eqtag">${eqIcon(k)}${(EQUIP.find(q=>q[0]===k)||[k,k])[1]}</span>`);
-  return `<div class="rfeq">🏋️ <b>matériel</b> · ${eq.length?esc(eq.join(" · ")):"aucun, poids du corps"}</div><p class="pglsub" style="margin:4px 0 10px">échauffement 5 min avant : jumping jacks, montées de genoux, rotations de hanches.</p>
+  const blocks=[];for(let i=0;i<items.length;i+=2){const it=items.slice(i,i+2);blocks.push({items:it,sets:Math.max(...it.map(x=>x.sets)),rest:it.some(x=>["sauts","squatsaute","fentesautee","bonds","kbswing"].includes(x.id)||/lourde/.test(x.v||""))?120:60})}return blocks}
+const rfQty=x=>x.unit==="s"?x.n+" s"+(x.side?" / côté":""):x.unit==="m"?x.n+" m":x.n+" répétitions"+(x.side?(/jambe/.test(x.s||"")?" / jambe":" / côté"):"");
+function pgRenfo(p,e){const c=sessOf(e),bl=renfoBlocks(p,c,e),eq=(p.equip||[]).filter(x=>x!=="none").map(k=>`<span class="eqtag">${eqIcon(k)}${(EQUIP.find(q=>q[0]===k)||[k,k])[1]}</span>`);
+  return `<div class="rfeq">🏋️ <b>matériel</b> · ${eq.length?eq.join(" "):"aucun, poids du corps"}</div><p class="pglsub" style="margin:4px 0 10px">échauffement 5 min avant : jumping jacks, montées de genoux, rotations de hanches.</p>${rfTaper(p,e)?`<p class="rfeq" style="margin:0 0 10px">🎯 <b>allégé avant ta course</b> · ${rfTaper(p,e)===2?"dernière ligne droite : 4 exercices, 2 séries, pas de charge lourde. juste entretenir.":"moins de séries et pas de charge lourde : tu gardes la force sans arriver fatigué."}</p>`:""}
   ${bl.map((b,i)=>`<div class="rfblk"><div class="rfbl"><div class="rfbh"><small>bloc ${i+1}</small></div>${b.items.map(x=>`<button class="rfit" data-exo="${x.id}" data-exs="${esc(rfQty(x))}" data-exv="${esc(x.v||"")}"><div class="pgmqw sm">${mqCanvas(x.id,x.v)}</div><div><b>${EXO[x.id][0]}${(p.rfVar||{})[x.id]!=null&&(p.rfVar||{})[x.id]!==1?` <em class="pgbdg">${VARN[p.rfVar[x.id]]}</em>`:""}</b><span>${rfQty(x)} · effort ${x.effort}</span>${x.v?`<small>${esc(x.v)}</small>`:""}</div><i>›</i></button>${x.unit==="s"?rfTimerBtn("e"+i+"_"+x.id,x.n*(x.side?2:1),x.side?"chrono · "+x.n+" s par côté":"chrono"):""}`).join("")}
    ${rfTimerBtn("r"+i,b.rest,"récupération")}</div><div class="rfser"><span>↻</span><b>${b.sets}</b><small>séries</small></div></div>`).join("")}`}
 /* ---------- minuteurs de renfo ---------- */
@@ -2048,13 +2183,13 @@ document.addEventListener("click",e=>{const q=s=>e.target.closest(s);let b;
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&rfT&&!rfT.paused&&!rfT.done){rfTick();rfLock(true)}});
 /* ---------- séance guidée ---------- */
 let gd=null;
-function pgGuide(key){const p=PRG(),e=(p.plan||[]).find(x=>ek(x)===key);if(!e)return;const bl=renfoBlocks(p,sessOf(e));const steps=[{k:"warm",sec:300,t:"échauffement",d:"jumping jacks, montées de genoux, rotations de bras et de hanches"}];
+function pgGuide(key){const p=PRG(),e=(p.plan||[]).find(x=>ek(x)===key);if(!e)return;const bl=renfoBlocks(p,sessOf(e),e);const steps=[{k:"warm",sec:300,t:"échauffement",d:"jumping jacks, montées de genoux, rotations de bras et de hanches"}];
   bl.forEach((b,bi)=>{for(let s=1;s<=b.sets;s++){b.items.forEach(x=>{const reps=x.unit==="r"?x.n*(x.side?2:1):0;steps.push({k:"ex",x,bi,s,ns:b.sets,sec:x.unit==="s"?x.n*(x.side?2:1):0,reps,dist:x.unit==="m"?x.n:0})});steps.push({k:"rest",sec:b.rest,bi,s,ns:b.sets})}});
   if(steps[steps.length-1].k==="rest")steps.pop();gd={key,steps,i:0,left:steps[0].sec,run:false,iv:null};gdShow()}
 function gdShow(){let o=document.getElementById("pgGuide");if(!o){o=document.createElement("div");o.id="pgGuide";document.body.appendChild(o)}const S=gd.steps[gd.i],nx=gd.steps.slice(gd.i+1).find(x=>x.k==="ex");
   const pct=Math.round(gd.i/gd.steps.length*100);const timed=S.sec>0;
   o.innerHTML=`<div class="gdtop"><button class="pgspx" data-gdx>✕</button><div class="gdbar"><i style="width:${pct}%"></i></div><span>${gd.i+1}/${gd.steps.length}</span></div>
-  <div class="gdmain ${S.k}">${S.k==="ex"?`<small>bloc ${S.bi+1} · série ${S.s}/${S.ns}</small><canvas class="gdcv" data-mq="${S.x.id}" data-db="${/haltère/.test(S.x.v||"")?1:0}" data-band="${/élastique/.test(S.x.v||"")?1:0}"></canvas><h2>${EXO[S.x.id][0]}</h2>`:S.k==="rest"?`<small>récupération</small><div class="gdrest">😮‍💨</div><h2>souffle</h2>`:`<small>pour commencer</small><div class="gdrest">🔥</div><h2>${S.t}</h2>`}
+  <div class="gdmain ${S.k}">${S.k==="ex"?`<small>bloc ${S.bi+1} · série ${S.s}/${S.ns}</small><canvas class="gdcv" data-mq="${S.x.id}" data-db="${mqDB(S.x.v)}" data-bb="${mqBB(S.x.v)}" data-band="${/élastique/.test(S.x.v||"")?1:0}"></canvas><h2>${EXO[S.x.id][0]}</h2>`:S.k==="rest"?`<small>récupération</small><div class="gdrest">😮‍💨</div><h2>souffle</h2>`:`<small>pour commencer</small><div class="gdrest">🔥</div><h2>${S.t}</h2>`}
    <div class="gdnum" id="gdN">${timed?fmtHMS(gd.left):S.reps?S.reps+"<small> répétitions</small>":S.dist+"<small> m</small>"}</div>
    <p>${S.k==="ex"?esc(exoCue(PRG(),S.x.id))+" · effort "+S.x.effort:S.k==="rest"?(nx?"ensuite : "+EXO[nx.x.id][0]:""):esc(S.d||"")}</p></div>
   <div class="gdctl"><button class="btn" data-gdp ${gd.i?"":"disabled"}>‹</button>${S.k==="rest"?`<button class="btn" data-gdadd>+15 s</button>`:""}${timed?`<button class="btn main" data-gdplay>${gd.run?"pause":"▶ go"}</button>`:`<button class="btn main" data-gdn>fait ✓</button>`}<button class="btn" data-gdn>›</button></div>`;
@@ -2251,7 +2386,7 @@ function openPgSet(k){const p=PRG();if(!p)return;const chips=(id,arr,cur,multi)=
     $("#sOk").onclick=()=>{pgApply(q=>{q.inj={pain:pf,n};return true},"prudence blessures");if(pf==="continu")setTimeout(()=>toast("douleur continue : consulte un pro avant d'enchaîner les séances"),1800)}})}
   else if(k==="hill"){const t=p.terrain||{};let h=t.hill||"mid",tr=!!t.tread;sheet("ton terrain de côte","durée de ta montée la plus longue, à effort soutenu. moins de 2 min : on ajoute de la pré-fatigue avant tes côtes.",chips("o1",HILLS,h)+chips("o2",[["1","🏃 j'ai accès à un tapis","pour remplacer les côtes"]],tr?"1":""),()=>{pick("o1",x=>h=x);pick("o2",(x,b)=>{tr=!tr;b.classList.toggle("on",tr)},true);
     $("#sOk").onclick=()=>pgApply(q=>{q.terrain={...(q.terrain||{}),hill:h,tread:tr,pfm:h==="none"||h==="short"};return true},"terrain de côte")})}
-  else if(k==="renfo"){let n=p.renfo||0,g=p.rfGoal||"equilibre",eq=(p.equip||[]).slice();let dur=+p.rfDur||30;sheet("renforcement","1 ou 2 séances par semaine, de 15 à 45 min.",chips("o1",[[0,"désactivé"],[1,"1 séance / sem."],[2,"2 séances / sem."]],n)+`<small class="pglab">durée d'une séance</small>`+chips("o4",RF_DUR,dur)+`<small class="pglab">objectif</small>`+chips("o2",RF_GOALS,g)+`<small class="pglab">ton matériel</small>`+chips("o3",EQUIP.filter(x=>x[0]!=="none").map(x=>[x[0],eqIcon(x[0])+x[1]]),eq,true),()=>{pick("o1",x=>n=+x);pick("o4",x=>dur=+x);pick("o2",x=>g=x);pick("o3",(x,b)=>{eq=eq.includes(x)?eq.filter(y=>y!==x):[...eq,x];b.classList.toggle("on",eq.includes(x))},true);
+  else if(k==="renfo"){let n=p.renfo||0,g=p.rfGoal||"equilibre",eq=(p.equip||[]).slice();let dur=+p.rfDur||30;sheet("renforcement","1 ou 2 séances par semaine, de 15 à 45 min.",chips("o1",[[0,"désactivé"],[1,"1 séance / sem."],[2,"2 séances / sem."]],n)+`<small class="pglab">durée d'une séance</small>`+chips("o4",RF_DUR,dur)+`<small class="pglab">objectif</small>`+chips("o2",RF_GOALS,g)+`<small class="pglab">ton matériel · plus tu en coches, plus les séances sont variées</small>`+chips("o3",EQUIP.filter(x=>x[0]!=="none").map(x=>[x[0],eqIcon(x[0])+x[1]]),eq,true),()=>{pick("o1",x=>n=+x);pick("o4",x=>dur=+x);pick("o2",x=>g=x);pick("o3",(x,b)=>{eq=eq.includes(x)?eq.filter(y=>y!==x):[...eq,x];b.classList.toggle("on",eq.includes(x))},true);
     $("#sOk").onclick=()=>pgApply(q=>{q.renfo=n;q.rfGoal=g;q.equip=eq;q.rfDur=dur;return true},"renfo modifié")})}
   else if(k==="nutri")openGut()}
 let gutBandSel="m";
@@ -2274,7 +2409,15 @@ const EXO_VAR={squat:["squat sur une chaise : tu t'assois puis tu te relèves","
  equilibre:["une main près d'un mur","yeux fermés, ou sur un coussin"],chaise:["cuisses moins basses (angle 120°)","sur 1 jambe 10 s à tour de rôle"],
  sauts:["sans corde, petits sauts sur place","sur 1 pied, 10 s à tour de rôle"],squatsaute:["squat + montée sur la pointe des pieds, sans saut","saut le plus haut possible avec réception stabilisée 2 s"],
  fentesautee:["fente + petite impulsion, sans changer de jambe","fentes sautées enchaînées vite, réception silencieuse"],bonds:["foulées bondissantes courtes sur 15 m","bonds sur 1 jambe sur 10 m"],
- stepdown:["marche basse, main sur la rampe","marche haute, descente en 4 s"],gainage:["planche sur les genoux, touche d'épaule lente","pieds écartés réduits, ou avec un pied levé"]};
+ stepdown:["marche basse, main sur la rampe","marche haute, descente en 4 s"],gainage:["planche sur les genoux, touche d'épaule lente","pieds écartés réduits, ou avec un pied levé"],
+ goblet:["sans charge, ou charge légère","charge plus lourde, pause 2 s en bas"],squatb:["barre seule, à vide","descente en 3 s, ou charge plus lourde"],
+ sdtr:["charge légère, amplitude jusqu'aux genoux","sur 1 jambe avec la charge"],kbswing:["petite charge, amplitude jusqu'à la taille","charge plus lourde, ou à 1 main"],
+ hipthrust:["sans charge, sur 2 pieds","sur 1 jambe, ou charge lourde"],legcurl:["juste le pont sur le ballon, sans plier les genoux","sur 1 jambe"],
+ nordic:["petite amplitude, mains devant pour te rattraper tôt","descente complète, la plus lente possible"],lateralwalk:["élastique léger, pas courts","élastique aux chevilles, plus résistant"],
+ deadbug:["bouge seulement les jambes","bras et jambes ensemble, très lentement"],planchebal:["genoux au sol","pieds rapprochés, cercles plus grands"],
+ kneeraise:["une jambe à la fois, ou allongé au sol","jambes tendues jusqu'à l'horizontale"],traction:["négatives : saute en haut, redescends en 4 s","pause 1 s en haut, ou lesté"],
+ pompe:["mains sur une table ou à genoux","pieds surélevés, ou descente en 3 s"],dips:["pieds proches, genoux pliés","jambes tendues, pieds surélevés"],
+ rowing:["élastique léger ou haltère léger","1 bras à la fois, charge plus lourde"],molletmarche:["sur 2 pieds, en te tenant","sur 1 pied, avec une charge"]};
 const VARN=["simplifiée","standard","avancée"];
 function exoCue(p,id){const v=(p&&p.rfVar||{})[id]||1;return v===1?EXO[id][1]:EXO_VAR[id]?EXO_VAR[id][v===0?0:1]:EXO[id][1]}
 
@@ -2329,7 +2472,7 @@ function vProgGoal(p){const r=p.race,t=today(),j=Math.max(0,Math.round((parse(r.
   ${pgSetCard(p)}<div class="pgcardx"><div class="actions pgact">${md!=="forme"?`<button class="btn small" data-pgresult>${md==="perf"?"saisir mon temps au test":"saisir mon temps de course"}</button>`:`<button class="btn small main" data-pgcycle>nouveau cycle</button>`}${md==="course"?`<button class="btn small" data-pgsecadd>+ objectif secondaire</button>`:""}<button class="btn small" data-pgedit>modifier le plan</button><button class="btn small ghost" data-pgdel>supprimer</button></div></div></div></div>`}
 /* ---------- onglet stats ---------- */
 function vProgStats(p){const L=p.logs||{},plan=p.plan||[];const keys=Object.keys(L).filter(k=>L[k].status!=="none").sort((a,b)=>a<b?1:-1);let km=0,sec=0,dp=0;
-  keys.forEach(k=>{const e=plan.find(x=>ek(x)===k);const a=L[k].act,f=L[k].status==="part"?.5:1;if(a&&a.src){km+=a.km||0;sec+=a.sec||0;dp+=a.dplus||0}else if(e){const c=sessOf(e);sec+=(RENFO[c]?renfoMin(p,c)*60:sessTotals(p,e).sec)*f;km+=(RENFO[c]?0:pgKm(p,e))*f}});
+  keys.forEach(k=>{const e=plan.find(x=>ek(x)===k);const a=L[k].act,f=L[k].status==="part"?.5:1;if(a&&a.src){km+=a.km||0;sec+=a.sec||0;dp+=a.dplus||0}else if(e){const c=sessOf(e);sec+=(RENFO[c]?renfoMin(p,c,e)*60:sessTotals(p,e).sec)*f;km+=(RENFO[c]?0:pgKm(p,e))*f}});
   const v=prgVma(p),est=[["5 km",5],["10 km",10],["semi",21.1],["marathon",42.195]].map(([n,d])=>{const s=d/(v*pctFor(d))*3600;return[n,s,d]});
   const byM={};keys.forEach(k=>{const m=k.slice(0,7);(byM[m]=byM[m]||[]).push(k)});
   const row=k=>{const e=plan.find(x=>ek(x)===k);if(!e)return"";const lg=L[k],a=lg.act;return `<button class="pgdrow" data-pgopen="${esc(k)}">${pgIcon(pgSessType(e))}<div><b>${esc(pgSessName(e))}</b><small>${fdate(e.date,{day:"numeric",month:"long"})}${a&&a.km?" · "+String(+(+a.km).toFixed(1)).replace(".",",")+" km":""}${lg.feel!=null?" · "+feelTxt(e,lg.feel):""}</small></div>${a&&a.src==="strava"?'<span class="pgsrcb">strava</span>':""}<em>›</em></button>`};
@@ -2491,7 +2634,7 @@ const paceOf=(sec,km)=>km>0&&sec>0?fmtPace(km/(sec/3600)):"–";
 function linkedActs(p,except){const s=new Set();Object.entries(p.logs||{}).forEach(([k,l])=>{if(k!==except&&l.act&&l.act.id)s.add(l.act.id)});return s}
 function openProgLog(key,edit,pre){const p=PRG();if(!p)return;const date=String(key).slice(0,10);const e=(p.plan||[]).find(x=>ek(x)===key)||{code:"C1"};const code=sessOf(e),s=SESS[code],ty=RENFO[code]?"renfo":s[3];
   const old=edit?(p.logs||{})[key]:null;
-  const plan={sec:RENFO[code]?renfoMin(p,code)*60:sessTotals(p,e).sec,km:RENFO[code]?0:+sessTotals(p,e).km.toFixed(2)};
+  const plan={sec:RENFO[code]?renfoMin(p,code,e)*60:sessTotals(p,e).sec,km:RENFO[code]?0:+sessTotals(p,e).km.toFixed(2)};
   const W={st:old?old.status:"full",src:old?old.src||"rapide":"",act:old?old.act||null:null,feel:old&&old.feel!=null?old.feel:null,tags:old?old.tags||[]:[],notes:old?old.notes||"":"",tdist:1500};
   const sh=()=>$("#sheet");
   // 1. comment valider
@@ -2567,7 +2710,7 @@ function undoLog(q,key,keepMsgs){const lg=(q.logs||{})[key];if(!lg)return;const 
   const L={...q.logs};delete L[key];q.logs=L}
 function pgUndo(key){const q=JSON.parse(JSON.stringify(PRG()));if(!q.logs||!q.logs[key])return;const later=Object.entries(q.logs).some(([k,l])=>k!==key&&l.ts>q.logs[key].ts);
   undoLog(q,key);closeSheet();savePrg(q);pgSel=key;render();toast(later?"validation annulée (les suivantes restent)":"validation annulée ✓")}
-function pgDoneCard(p,se,lg){const code=sessOf(se),ty=RENFO[code]?"renfo":SESS[code][3],a=lg.act||null,plan={sec:RENFO[code]?renfoMin(p,code)*60:sessTotals(p,se).sec,km:RENFO[code]?0:sessTotals(p,se).km};
+function pgDoneCard(p,se,lg){const code=sessOf(se),ty=RENFO[code]?"renfo":SESS[code][3],a=lg.act||null,plan={sec:RENFO[code]?renfoMin(p,code,se)*60:sessTotals(p,se).sec,km:RENFO[code]?0:sessTotals(p,se).km};
   const lb=FEEL_LB[ty]||FEEL_LB.easy,tg=(lg.tags||[]).map(t=>(PG_TAGS.find(x=>x[0]===t)||[0,t])[1]);
   const st=a?[["durée",fmtDur(a.sec)],...(a.km?[["distance",String(+a.km.toFixed(2)).replace(".",",")+" km"],["allure moy.",paceOf(a.sec,a.km)+" /km"]]:[]),...(a.dplus?[["dénivelé",a.dplus+" m D+"]]:[]),...(a.hr?[["cardio moy.",a.hr+" bpm"]]:[]),...(a.cad?[["cadence",a.cad+" ppm"]]:[])]:[];
   const dk=a&&a.km&&plan.km?a.km-plan.km:0;
@@ -4240,7 +4383,7 @@ document.addEventListener("input",e=>{const t=e.target;if(!t||!t.id)return;
 TILE_IC.news='<path d="M12 3l2.5 5.5L20 9.5l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1z"/>';TILE_IC.admin='<path d="M12 3 4 7v5c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V7z"/><path d="m9 12 2 2 4-4"/>';
 
 /* ---------- NOUVEAUTÉS ---------- */
-const NEWS=[{v:"2026-11-13",t:"Le programme ouvert à tous, et un tracker GPS",items:[["🏃","Ton plan de course","onglet Programme en bas : 10 km, semi, trail, ou juste progresser"],["🎯","Il s'adapte à toi","ressenti, douleurs, séances ratées : le plan se recalcule"],["🧪","Bêta gratuite","gratuit pendant la bêta. un bug ? DM @la.fleche_01 ou le groupe whatsapp"],["🛌","Récup obligatoire après ton objectif","de 4 jours après un 5 km à 4 semaines après un ultra : la durée suit la distance et le dénivelé. les courses secondaires ont une consigne d'effort"],["📍","Courir avec l'appli","plus besoin de montre : GPS, allure et séance guidée à la voix (Performance › courir maintenant, ou ▶ lancer sur une séance)"],["📅","Nouvelle habitude = lundi","une habitude ajoutée en cours de semaine démarre le lundi suivant (sauf ta 1re semaine)"]]},{v:"2026-11-12",t:"Habitudes plus libres, renfo sur mesure",items:[["↕️","Déplace tes habitudes","appui long sur le nom d'une habitude, puis glisse-la"],["📆","x fois par semaine","une habitude peut se faire 3 fois par semaine, les jours que tu veux"],["⏱","Renfo de 15, 30 ou 45 min","choisis la durée dans les réglages du programme"],["🧰","Le matériel en dessin","plus besoin de connaître les noms"],["🌗","Thème automatique","l'appli suit le mode clair ou sombre de ton téléphone"]]},
+const NEWS=[{v:"2026-11-13",t:"Le programme ouvert à tous, et un tracker GPS",items:[["🏃","Ton plan de course","onglet Programme en bas : 10 km, semi, trail, ou juste progresser"],["🎯","Il s'adapte à toi","ressenti, douleurs, séances ratées : le plan se recalcule"],["🧪","Bêta gratuite","gratuit pendant la bêta. un bug ? DM @la.fleche_01 ou le groupe whatsapp"],["🏋️","Renfo qui utilise ton matériel","haltères, kettlebell, élastiques, swiss ball, barre de traction, chaise ou salle : 16 nouveaux exercices animés, choisis selon ce que tu as"],["🛌","Récup obligatoire après ton objectif","de 4 jours après un 5 km à 4 semaines après un ultra : la durée suit la distance et le dénivelé. les courses secondaires ont une consigne d'effort"],["📍","Courir avec l'appli","plus besoin de montre : GPS, allure et séance guidée à la voix (Performance › courir maintenant, ou ▶ lancer sur une séance)"],["📅","Nouvelle habitude = lundi","une habitude ajoutée en cours de semaine démarre le lundi suivant (sauf ta 1re semaine)"]]},{v:"2026-11-12",t:"Habitudes plus libres, renfo sur mesure",items:[["↕️","Déplace tes habitudes","appui long sur le nom d'une habitude, puis glisse-la"],["📆","x fois par semaine","une habitude peut se faire 3 fois par semaine, les jours que tu veux"],["⏱","Renfo de 15, 30 ou 45 min","choisis la durée dans les réglages du programme"],["🧰","Le matériel en dessin","plus besoin de connaître les noms"],["🌗","Thème automatique","l'appli suit le mode clair ou sombre de ton téléphone"]]},
  {v:"2026-11-11d",t:"Tes données, sous ton contrôle",items:[["🔒","Page confidentialité complète","qui voit quoi, où c'est stocké, pourquoi : tout est écrit noir sur blanc dans les paramètres"],["📦","Télécharge tes données","un bouton pour récupérer une copie de tout ce que l'appli sait de toi"],["🗑","Supprime ton compte","en un geste, sans rien demander à personne : tout est effacé"]]},
  {v:"2026-11-11c",t:"Allures plus justes et courbe de progression",items:[["🧍","Un vrai coach en 3D","les exercices de renfo sont montrés par un personnage réaliste, sous tous les angles"],["🐢","Allures recalées","endurance plus lente, seuil long, seuil vif, VO2max : 8 allures au lieu de 4"],["📉","Courbe de chrono","ton temps au départ, aujourd'hui et la projection en fin de prépa"],["⏱","Tes records à la main","entre tes chronos 5 km, 10 km, semi ou marathon pour caler tes allures"],["🧍","Mannequin 3D amélioré","des gestes plus clairs, avec des flèches sur le mouvement"]]},
  {v:"2026-11-11b",t:"Des plans construits par cycles",items:[["🎯","Note de confiance sur 10","avant de lancer un plan, le coach te dit si le délai et ta base suffisent. tu peux toujours le lancer"],["🧱","Un cycle = une qualité","seuil long, VO2max, seuil vif, spécifique, affûtage : chaque bloc de 3 à 5 semaines travaille une chose à fond"],["📈","La séance clé monte chaque semaine","plus de répétitions ou des répétitions plus longues, puis une semaine d'assimilation"],["⏱","Des intervalles plus longs","2 à 4 min à la place de certains 30/30 : c'est ce qui fait le plus progresser"],["🏋️","Renfo lourd","avec haltères ou salle et l'objectif performance : moins de répétitions, plus de charge"]]},
