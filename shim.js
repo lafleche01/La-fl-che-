@@ -19,10 +19,10 @@ function showLogin(){
   if(!document.body){document.addEventListener("DOMContentLoaded",showLogin,{once:true});return}
   const d=document.createElement("div");d.id="lfLogin";
   d.innerHTML=`<style>#lfLogin{position:fixed;inset:0;z-index:999;background:radial-gradient(ellipse at 50% 30%,#1b1910,#08080A 70%);display:flex;flex-direction:column;justify-content:center;padding:32px;color:#F5F5F3;font-family:Barlow,sans-serif}
-  #lfLogin img{width:220px;margin:0 auto 34px;display:block}#lfLogin h1{font-family:'Barlow Condensed';font-style:italic;font-weight:900;text-transform:uppercase;font-size:46px;line-height:.95;margin:0 0 12px}
-  #lfLogin h1 b{color:#FFC107}#lfLogin{overflow-y:auto;justify-content:flex-start;padding-top:max(32px,6vh)}#lfLogin .lfb{list-style:none;margin:0 0 18px;padding:0;display:flex;flex-direction:column;gap:10px}#lfLogin .lfb li{padding:10px 12px;background:#141417;border-left:3px solid #FFC107;color:#b9b9bf;font-size:14px;line-height:1.4}#lfLogin .lfb b{display:block;color:#F5F5F3;font-size:15px}#lfLogin img{width:170px;margin-bottom:22px}#lfLogin p{color:#9a9aa0;margin:0 0 22px;line-height:1.5}#lfLogin input{width:100%;padding:14px;background:#141417;border:1px solid #333;color:#fff;font-size:16px;margin-bottom:12px;box-sizing:border-box}
-  #lfLogin button{width:100%;padding:15px;background:#FFC107;border:0;color:#000;font-family:'Barlow Condensed';font-style:italic;font-weight:900;font-size:20px;text-transform:uppercase}#lfLogin .m{margin-top:14px;color:#FFC107;min-height:20px}</style>
-  <img src="logo_la_fleche.png" alt="La Flèche"><h1>Deviens<br><b>régulier.</b></h1>
+  #lfLogin img{width:220px;margin:0 auto 34px;display:block}#lfLogin h1{font-family:'Barlow Condensed'!important;font-style:italic;font-weight:900!important;text-transform:none!important;font-size:44px!important;line-height:1!important;margin:0 0 16px!important}
+  #lfLogin h1 b{color:#FFC107}#lfLogin{overflow-y:auto;justify-content:flex-start;padding-top:max(32px,6vh)}#lfLogin .lfb{list-style:none;margin:0 0 18px;padding:0;display:flex;flex-direction:column;gap:10px}#lfLogin .lfb li{padding:12px 14px;background:#141417;border-left:3px solid #FFC107;border-radius:14px;color:#b9b9bf;font-size:14px;line-height:1.4}#lfLogin .lfb b{display:block;color:#F5F5F3;font-size:15px}#lfLogin img{width:170px;margin-bottom:22px}#lfLogin p{color:#9a9aa0;margin:0 0 22px;line-height:1.5}#lfLogin input{width:100%;padding:14px;background:#141417;border:1px solid #333;border-radius:14px;color:#fff;font-size:16px;margin-bottom:12px;box-sizing:border-box}
+  #lfLogin button{width:100%;padding:15px;background:#FFC107;border:0;border-radius:14px;color:#000;font-family:'Barlow Condensed';font-style:italic;font-weight:900;font-size:20px;text-transform:uppercase}#lfLogin .m{margin-top:14px;color:#FFC107;min-height:20px}</style>
+  <img src="logo_la_fleche.png" alt="La Flèche"><h1>Deviens <b>régulier.</b></h1>
   <ul class="lfb"><li><b>🔥 Coche tes habitudes</b>chaque case te fait gagner de l'XP et monter de niveau, du bitume aux Alpes.</li><li><b>🪢 Monte en cordée</b>une équipe de potes, une série commune : si un seul lâche, tout le monde retombe à zéro.</li><li><b>🏃 Ton plan de course</b>route ou trail, séances détaillées, renfo animé en 3D.</li></ul>
   <p><b style="color:#FFC107">gratuit</b> · 30 secondes · pas de mot de passe : ton e-mail, et on t'envoie un lien.</p>
   <input id="lfMail" type="email" autocomplete="email" placeholder="ton@email.com"><label id="lfOkL" style="display:flex;gap:10px;align-items:flex-start;margin:0 0 14px;color:#b9b9bf;font-size:13.5px;line-height:1.45"><input id="lfOk" type="checkbox" style="width:22px;height:22px;flex:none;margin:1px 0 0;padding:0;accent-color:#FFC107"><span>j'ai 15 ans ou plus et j'accepte que mes données servent à faire marcher l'appli. <a id="lfPriv" href="#" style="color:#FFC107;text-decoration:underline">lire la page confidentialité</a></span></label><button id="lfGo">recevoir mon lien</button><div class="m" id="lfMsg"></div>
@@ -81,6 +81,14 @@ function colRef(col){return{
     const re=async()=>{if(document.hidden)return;const {data}=await sb.from("docs").select("path,data").eq("parent",col).limit(5000);if(data){map.clear();data.forEach(r=>map.set(r.path,r.data));emit()}};
     document.addEventListener("visibilitychange",re);
     return()=>{stopped=true;sb.removeChannel(ch);document.removeEventListener("visibilitychange",re)}}}}
+
+/* temps réel (arène) : broadcast + presence Supabase */
+window.LF_rt=function(name){const me=session&&session.user?session.user.id:"anon";const ch=sb.channel(name,{config:{broadcast:{self:false},presence:{key:me}}});const h={};let pres=null,joined=false,m0=null;
+  ch.on("broadcast",{event:"m"},({payload:x})=>{if(!x||x.f===me)return;(h[x.t]||[]).forEach(f=>f(x.d,x.f))});
+  ch.on("presence",{event:"sync"},()=>{if(!pres)return;const st=ch.presenceState(),out=[];Object.values(st).forEach(a=>a.forEach(m=>out.push(m)));pres(out.filter(m=>m&&m.uid!==me))});
+  return{on(t,f){(h[t]=h[t]||[]).push(f);return this},onPresence(f){pres=f;return this},
+    join(m){m0=m||null;return new Promise(r=>ch.subscribe(async st=>{if(st==="SUBSCRIBED"&&!joined){joined=true;if(m0)await ch.track(m0);r(true)}}))},
+    retrack(m){m0=m;if(joined)ch.track(m)},send(t,d){return ch.send({type:"broadcast",event:"m",payload:{t,d,f:me}})},close(){try{ch.untrack()}catch(_){}sb.removeChannel(ch)}}};
 const db={doc:docRef,collection:colRef};
 
 /* ---------- compte ---------- */
