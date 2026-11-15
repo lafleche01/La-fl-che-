@@ -24,20 +24,22 @@ function showLogin(){
   #lfLogin button{width:100%;padding:15px;background:#FFC107;border:0;border-radius:14px;color:#000;font-family:'Barlow Condensed';font-style:italic;font-weight:900;font-size:20px;text-transform:uppercase}#lfLogin .m{margin-top:14px;color:#FFC107;min-height:20px}</style>
   <img src="logo_la_fleche.png" alt="La Flèche"><h1>Deviens <b>régulier.</b></h1>
   <ul class="lfb"><li><b>🔥 Coche tes habitudes</b>chaque case te fait gagner de l'XP et monter de niveau, du bitume aux Alpes.</li><li><b>🪢 Monte en cordée</b>une équipe de potes, une série commune : si un seul lâche, tout le monde retombe à zéro.</li><li><b>🏃 Ton plan de course</b>route ou trail, séances détaillées, renfo animé en 3D.</li></ul>
-  <p><b style="color:#FFC107">gratuit</b> · 30 secondes · pas de mot de passe : ton e-mail, et on t'envoie un lien.</p>
+  <p><b style="color:#FFC107">gratuit</b> · 30 secondes · pas de mot de passe : ton e-mail, et on t'envoie un code.</p>
   <input id="lfMail" type="email" autocomplete="email" placeholder="ton@email.com"><label id="lfOkL" style="display:flex;gap:10px;align-items:flex-start;margin:0 0 14px;color:#b9b9bf;font-size:13.5px;line-height:1.45"><input id="lfOk" type="checkbox" style="width:22px;height:22px;flex:none;margin:1px 0 0;padding:0;accent-color:#FFC107"><span>j'ai 15 ans ou plus et j'accepte que mes données servent à faire marcher l'appli. <a id="lfPriv" href="#" style="color:#FFC107;text-decoration:underline">lire la page confidentialité</a></span></label><button id="lfGo">recevoir mon lien</button><div class="m" id="lfMsg"></div>
-  <div id="lfCodeBox" style="display:none;margin-top:6px"><p style="margin:0 0 10px">📲 sur iphone, dans l'appli installée : tape ici le <b style="color:#FFC107">code</b> reçu dans le mail (au lieu de cliquer sur le lien).</p><input id="lfCode" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="code à 6 chiffres"><button id="lfCodeGo">valider le code</button></div>
+  <div id="lfCodeBox" style="display:none;margin-top:6px"><p style="margin:0 0 10px">📲 sur iphone, dans l'appli installée : tape ici le <b style="color:#FFC107">code</b> reçu dans le mail (au lieu de cliquer sur le lien).</p><input id="lfCode" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="code reçu par mail"><button id="lfCodeGo">valider le code</button></div>
   <a id="lfInst" href="#" style="display:block;margin-top:22px;text-align:center;color:#FFC107;font-size:15px;text-decoration:underline">📲 comment installer l'appli sur mon téléphone ?</a>`;
   document.body.appendChild(d);
+  const SA=(navigator.standalone===true)||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches);
+  if(SA){document.getElementById("lfGo").textContent="recevoir mon code";const cb=document.getElementById("lfCodeBox");cb.querySelector("p").innerHTML='📲 tape ici le <b style="color:#FFC107">code</b> reçu par mail. ne clique pas sur le lien du mail : il s\'ouvrirait dans le navigateur, pas dans l\'appli.'}
   const go=async()=>{const email=(document.getElementById("lfMail").value||"").trim();const m=document.getElementById("lfMsg");
     if(!/^\S+@\S+\.\S+$/.test(email)){m.textContent="e-mail invalide.";return}
     if(!document.getElementById("lfOk").checked){m.textContent="coche la case juste au-dessus pour continuer.";return}
     try{localStorage.setItem("lf_consent",new Date().toISOString())}catch(e){}
     m.textContent="envoi…";const {error}=await sb.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname,data:{consent:new Date().toISOString().slice(0,10),age15:true}}});
-    m.textContent=error?(/sending|smtp|rate|limit/i.test(error.message)?"l'e-mail n'a pas pu partir (trop de demandes en même temps). réessaie dans quelques minutes, ou écris à @la.fleche_01 sur instagram.":/invalid|valid/i.test(error.message)?"cette adresse e-mail n'a pas l'air valide. vérifie-la.":"erreur : "+error.message):"📩 regarde tes mails (et les spams) : clique sur le lien, ou tape le code ci-dessous.";
-    if(!error){document.getElementById("lfCodeBox").style.display="block"}};
+    m.textContent=error?(/sending|smtp|rate|limit/i.test(error.message)?"l'e-mail n'a pas pu partir (trop de demandes en même temps). réessaie dans quelques minutes, ou écris à @la.fleche_01 sur instagram.":/invalid|valid/i.test(error.message)?"cette adresse e-mail n'a pas l'air valide. vérifie-la.":"erreur : "+error.message):(SA?"📩 regarde tes mails (et les spams) et tape le code ci-dessous.":"📩 regarde tes mails (et les spams) : clique sur le lien, ou tape le code ci-dessous.");
+    if(!error){document.getElementById("lfCodeBox").style.display="block";try{document.getElementById("lfCode").focus()}catch(_){}}};
   const goCode=async()=>{const email=(document.getElementById("lfMail").value||"").trim(),token=(document.getElementById("lfCode").value||"").replace(/\D/g,""),m=document.getElementById("lfMsg");
-    if(token.length<6){m.textContent="le code fait 6 chiffres.";return}
+    if(token.length<6){m.textContent="Il manque des chiffres : le code reçu par mail en fait 8.";return}
     m.textContent="vérification…";let {error}=await sb.auth.verifyOtp({email,token,type:"email"});
     if(error){const r=await sb.auth.verifyOtp({email,token,type:"signup"});error=r.error}
     m.textContent=error?"code incorrect ou expiré. redemande un lien.":"✅ connecté !"};
