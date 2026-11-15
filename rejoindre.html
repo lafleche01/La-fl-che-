@@ -195,6 +195,12 @@ html:not(.anim) .intro{height:auto}
 html:not(.anim) .intro .fr{position:relative;min-height:auto;padding:14vh 8vw 0}
 html:not(.anim) .intro .fr:not(.hero){display:none}
 html:not(.anim) .cue{display:none}
+
+/* correctifs affichage 14/11 */
+@media (max-width:860px){.swap{min-height:4.6em!important}}
+.steps div{padding-top:108px!important}
+.top{background:linear-gradient(180deg,rgba(8,8,10,.94) 0%,rgba(8,8,10,.75) 65%,rgba(8,8,10,0) 100%)}
+.r3d{margin-bottom:84px!important}.r3d .lbl{bottom:-78px!important}
 </style>
 </head>
 <body>
@@ -253,7 +259,7 @@ html:not(.anim) .cue{display:none}
    <g class="node" data-n="3" transform="translate(470 110)"><circle r="32"/><text y="10" fill="#9be15d">N</text><text class="lb" y="58">Nina</text></g>
   </svg></div>
  <div><p class="small">La cordée</p><div class="serie" id="serie">1</div><p class="small" id="serieL" style="margin-top:10px">jours de série commune</p>
-  <div class="swap" style="margin-top:26px"><p class="big k3" id="cTxtA">2 à 4 coureurs,<br><span class="g">une seule série.</span></p><p class="big k3" id="cTxtB" style="opacity:0">Max oublie sa séance.<br><span style="color:var(--alerte)">Tout le monde retombe à zéro.</span></p></div>
+  <div class="swap" style="margin-top:26px"><p class="big k3" id="cTxtA">2 à 10 coureurs,<br><span class="g">une seule série.</span></p><p class="big k3" id="cTxtB" style="opacity:0">Max oublie sa séance.<br><span style="color:var(--alerte)">Tout le monde retombe à zéro.</span></p></div>
   <p class="lead" id="cTxtC">Elle avance quand tout le monde a tenu sa journée. Si un seul lâche, toute la cordée perd sa série. Tu ne cours plus seulement pour toi.</p></div>
 </div></div></section>
 
