@@ -4202,7 +4202,7 @@ function vMenu(){
   if(owner)T.unshift(["admin","Tour de contrôle",`${players().length} membres · ${teams.filter(x=>board.some(b=>b.teamId===x.id)).length} cordées${inboxNew()?" · 📬 "+inboxNew():""}`]);
   const T2=T.filter(([k])=>ulView(k)&&(k!=="avatar"||ulOk("avatar"))&&(k!=="course"||ulOk("perfs")));const nx=ulNext();
   return `<h1>Menu</h1><button class="bugbig" data-bugopen><span>🐞</span><span><b>signaler un problème</b><small>un bug, une idée : ça m'arrive directement</small></span><em>›</em></button>
-  <div class="tiles ${T2.length<7?"few":""}">${T2.map(([k,n,sub])=>`<button class="tile ${k==="mhab"||k==="reglages"||k==="admin"?"hi":""} ${k==="tutos"||k==="admin"||k==="news"||k==="duels"?"wide":""}" data-nav="${k}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${TILE_IC[k]}</svg><b>${n}</b><span>${sub}</span></button>`).join("")}</div>${nx?`<div class="ulteaser">🔒 prochaine fonction : <b>${esc(nx.n)}</b><br><small>elle s'ouvre ${nx.d-ulN()<=1?"au prochain jour où tu reviens":`dans ${nx.d-ulN()} jours d'utilisation`}</small></div>`:""}${installBtn()}${commuBtn()}`;
+  <div class="tiles ${T2.length<7?"few":""}">${T2.map(([k,n,sub])=>`<button class="tile ${k==="mhab"||k==="reglages"||k==="admin"?"hi":""} ${k==="tutos"||k==="admin"||k==="news"||k==="duels"?"wide":""}" data-nav="${k}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${TILE_IC[k]}</svg><b>${n}</b><span>${sub}</span></button>`).join("")}</div>${nx?`<div class="ulteaser">🔒 prochaine fonction : <b>${esc(nx.n)}</b><br><small>elle s'ouvre ${ulWhen(nx)}</small></div>`:""}${installBtn()}${commuBtn()}`;
 }
 /* ---------- MES HABITUDES ---------- */
 function vMesHab(){
@@ -4317,9 +4317,10 @@ window.addEventListener("popstate",()=>{if(TM&&TM.mode==="bloque"){try{history.p
 function resumeTimer(){try{const t=JSON.parse(localStorage.getItem("lf_timer")||"null");if(!t)return;if(t.mode==="bloque"){localStorage.removeItem("lf_timer");toast("minuteur interrompu : séance ratée");return}startTimer(t.id,t)}catch(_){}}
 
 /* ---------- RAPPEL : max de départ pas notés ---------- */
-function maxReminder(evening){const m=missingMax();if(!m.length||!trialPerfs().length)return "";const L=m.map(p=>esc(p.name.toLowerCase())).join(", ");
-  return evening?`<button class="alert maxr" data-nav="renfo">🌙 fin de journée : tu n'as toujours pas noté ton max sur <b>${L}</b>. 2 minutes, et tu débloques les défis de la semaine et les épreuves de palier ›</button>`
-   :`<button class="alert gold" data-nav="renfo">📏 note ton max sur <b>${L}</b> dans perfs : sans ça, pas de défi de la semaine ni d'épreuve de palier ›</button>`}
+function maxToday(){const m=missingMax();if(!m.length||!trialPerfs().length)return null;if(trialPerfs().some(p=>{const l=logs(p);return l.length&&l[0].d===today()}))return null;return m[0]}
+function maxReminder(evening){if(typeof ulOk==="function"&&!ulOk("perfs"))return "";const p=maxToday();if(!p)return "";const L=esc(p.name.toLowerCase()),left=missingMax().length;
+  return evening?`<button class="alert maxr" data-nav="renfo">🌙 fin de journée : ton max du jour n'est pas encore noté : <b>${L}</b>. 2 minutes, c'est tout ›</button>`
+   :`<button class="alert gold" data-nav="renfo">📏 max du jour : <b>${L}</b>. 2 minutes dans perfs${left>1?` (encore ${left} max, un par jour)`:` : c'est le dernier, les défis s'ouvrent lundi prochain`} ›</button>`}
 /* ---------- RAPPELS & BILAN DU SOIR (horaires choisis par chacun) ---------- */
 const NOTIF_DEF={remind:{on:true,time:"20:00"},bilan:{on:true,time:"21:30"}};
 const notifCfg=()=>{const n=(meDoc&&meDoc.notif)||{};return{...n,remind:{...NOTIF_DEF.remind,...(n.remind||{})},bilan:{...NOTIF_DEF.bilan,...(n.bilan||{})}}};
@@ -4352,7 +4353,7 @@ function notifLoop(){clearInterval(notifTimer);notifTimer=setInterval(()=>{try{
   if(!("Notification" in window)||Notification.permission!=="granted")return;const c=notifCfg(),t=today(),hm=nowHM();
   const sent=JSON.parse(localStorage.getItem("lf_notif")||"{}");
   if(c.remind.on&&hm>=c.remind.time&&sent.r!==t&&habitsFor(t).some(x=>!dayDoc(t).done[x.id])){new Notification("La Flèche",{body:"il te reste des habitudes à cocher aujourd'hui 🏔️",icon:"icon_180.png"});sent.r=t}
-  if(hm>=(c.remind.on?c.remind.time:"20:00")&&sent.m!==t&&missingMax().length&&trialPerfs().length){new Notification("La Flèche",{body:"tu n'as pas encore noté tes max : 2 min dans perfs 📏",icon:"icon_180.png"});sent.m=t}
+  if(hm>=(c.remind.on?c.remind.time:"20:00")&&sent.m!==t&&(typeof ulOk!=="function"||ulOk("perfs"))&&maxToday()){new Notification("La Flèche",{body:"ton max du jour : "+maxToday().name.toLowerCase()+", 2 min dans perfs 📏",icon:"icon_180.png"});sent.m=t}
   if(c.bilan.on&&hm>=c.bilan.time&&sent.b!==t&&!eveningDone(t)){new Notification("La Flèche",{body:"ton bilan du soir t'attend · 30 s 🌙",icon:"icon_180.png"});sent.b=t}
   localStorage.setItem("lf_notif",JSON.stringify(sent))}catch(_){}},30000)}
 notifLoop();
@@ -4874,26 +4875,30 @@ const ETAPES=[
  {k:"base",d:1,n:"Habitudes et programme",t:"Pour commencer, juste l'essentiel : coche tes habitudes chaque jour et suis ton programme. Chaque jour où tu reviens, une nouvelle fonction s'ouvre.",tu:[1,8]},
  {k:"avatar",d:2,n:"Ton coureur",t:"Personnalise ton coureur : tenue, couleurs, paysage. Il évolue avec ton niveau.",tu:[6],v:["avatar"]},
  {k:"equipe",d:3,n:"L'équipe",t:"Crée ta cordée ou rejoins celle d'un pote avec son code. Vous voyez vos séries et vous avancez ensemble.",tu:[3],v:["equipe","saison","tchat"]},
- {k:"defi",d:4,n:"Défis et duels",t:"Chaque semaine, un défi à choisir à l'avance. Et tu peux défier un pote sur 3 jours.",tu:[3],v:["duels","arene","collection","troph","boutique","classement"]},
- {k:"perfs",d:5,n:"Performance",t:"Tes kilomètres, Strava et tes records, au même endroit.",tu:[5],v:["perfs","course","renfo"]},
- {k:"orga",d:6,n:"Agenda, tâches et idées",t:"Organise ta journée : tes cours, tes tâches et tes idées, à côté de tes habitudes.",tu:[4],v:["agenda","taches","idees"]},
- {k:"badges",d:7,n:"Badges, route et bilan",t:"Tes médailles, la carte du voyage vers les Alpes et ton bilan de la semaine à partager en story.",tu:[6],v:["badges","route"]}
+ {k:"perfs",d:4,n:"Performance",t:"Tes kilomètres, Strava et tes records, au même endroit. Cette semaine, un max par jour : pompes, squats, burpees, gainage. 2 minutes chacun.",tu:[5],v:["perfs","course","renfo"]},
+ {k:"orga",d:5,n:"Agenda, tâches et idées",t:"Organise ta journée : tes cours, tes tâches et tes idées, à côté de tes habitudes.",tu:[4],v:["agenda","taches","idees"]},
+ {k:"badges",d:6,n:"Badges, route et bilan",t:"Tes médailles, la carte du voyage vers les Alpes et ton bilan de la semaine à partager en story.",tu:[6],v:["badges","route"]},
+ {k:"defi",d:99,n:"Défis et duels",t:"Tes max sont notés : place aux défis. Chaque lundi, un défi à choisir pour la semaine. Et tu peux défier un pote sur 3 jours.",tu:[3],v:["duels","arene","collection","troph","boutique","classement"]}
 ];
+/* défis : ouverts le lundi qui suit le jour où le dernier max est noté */
+function maxDoneAt(){const ps=trialPerfs();if(!ps.length)return "0000-00-00";let m="";for(const p of ps){const l=logs(p);if(!l.length)return null;if(l[0].d>m)m=l[0].d}return m}
+function defiOpenAt(){const m=maxDoneAt();if(!m)return null;return addDays(ds(weekStart(parse(m))),7)}
+function ulWhen(e){if(e.k==="defi"){const o=defiOpenAt();if(!o||!ulOk("perfs"))return T("dès que tes 4 max sont notés, le lundi suivant");return o<=addDays(today(),1)?T("lundi"):T("lundi "+o.slice(8,10)+"/"+o.slice(5,7))}const n=e.d-ulN();return n<=1?T("au prochain jour où tu reviens"):T(`dans ${n} jours d'utilisation`)}
 function ulN(){return meDoc?Math.max(1,meDoc.ulN||1):1}
-function ulOk(k){if(typeof readOnly!=="undefined"&&readOnly)return true;try{if(localStorage.getItem("lf_ulall"))return true}catch(_){}const e=ETAPES.find(x=>x.k===k);return !e||ulN()>=e.d}
+function ulOk(k){if(typeof readOnly!=="undefined"&&readOnly)return true;try{if(localStorage.getItem("lf_ulall"))return true}catch(_){}const e=ETAPES.find(x=>x.k===k);if(!e)return true;if(k==="defi"){if(!ulOk("perfs"))return false;const o=defiOpenAt();return !!o&&today()>=o}return ulN()>=e.d}
 function ulView(v){const e=ETAPES.find(x=>x.v&&x.v.includes(v));return e?ulOk(e.k):true}
-function ulNext(){return ETAPES.find(x=>x.d>ulN())}
-function ulLock(v){const e=ETAPES.find(x=>x.k===v)||ETAPES.find(x=>x.v&&x.v.includes(v));if(!e)return;const n=e.d-ulN();toast(`🔒 « ${T(e.n)} » `+(n<=1?T("s'ouvre au prochain jour où tu reviens"):T(`s'ouvre dans ${n} jours d'utilisation`)))}
+function ulNext(){return ETAPES.find(x=>!ulOk(x.k))}
+function ulLock(v){const e=ETAPES.find(x=>x.k===v)||ETAPES.find(x=>x.v&&x.v.includes(v));if(!e)return;const n=e.d-ulN();toast(`🔒 « ${T(e.n)} » `+T("s'ouvre")+" "+ulWhen(e))}
 function ulTick(){if(!meDoc||(typeof readOnly!=="undefined"&&readOnly))return;const t=today();if(meDoc.ulLast===t){if(!ulTick._p){ulTick._p=1;setTimeout(ulPop,2200)}return}
   meDoc={...meDoc,ulN:meDoc.ulLast?(meDoc.ulN||1)+1:1,ulLast:t};dset(ROOT()+"profile/me",meDoc);ulTick._p=1;setTimeout(ulPop,2200)}
-function ulPop(){if(!meDoc)return;try{if(localStorage.getItem("lf_ulall"))return}catch(_){}const seen=meDoc.ulSeen||[];const e=ETAPES.find(x=>ulN()>=x.d&&!seen.includes(x.k));if(!e)return;
+function ulPop(){if(!meDoc)return;try{if(localStorage.getItem("lf_ulall"))return}catch(_){}const seen=meDoc.ulSeen||[];const e=ETAPES.find(x=>ulOk(x.k)&&!seen.includes(x.k));if(!e)return;
   const busy=$("#veil").classList.contains("show")||(document.getElementById("tutoPlayer")||{classList:{contains:()=>false}}).classList.contains("show")||(!owner&&!meDoc.onboarded)||!meDoc.tuto&&!owner;
   if(busy){setTimeout(ulPop,5000);return}
   meDoc={...meDoc,ulSeen:[...seen,e.k]};dset(ROOT()+"profile/me",meDoc);
   const nx=ulNext(),tu=e.tu.filter(i=>TUTOS[i]);
-  openSheet(`<div class="ulpop"><div class="ulnew">${e.d===1?T("Mode simple"):T("Nouveau · jour "+e.d)}</div><h2>${esc(T(e.n))}</h2><p>${esc(T(e.t))}</p>
+  openSheet(`<div class="ulpop"><div class="ulnew">${e.d===1?T("Mode simple"):e.k==="defi"?T("Nouveau"):T("Nouveau · jour "+e.d)}</div><h2>${esc(T(e.n))}</h2><p>${esc(T(e.t))}</p>
    <div class="ulacts"><button class="btn main" data-ulgo="${e.v?e.v[0]:"habitudes"}">${e.v?T("Découvrir"):T("C'est parti")}</button>${tu.map(i=>`<button class="btn ghost" data-ultuto="${i}">▶ ${T("Tuto vidéo")} : ${esc(T(TUTOS[i][1]))}</button>`).join("")}</div>
-   ${nx?`<small class="ulnx">${T("Prochaine étape")} : ${esc(T(nx.n))}, ${nx.d-ulN()<=1?T("au prochain jour où tu reviens"):T(`dans ${nx.d-ulN()} jours`)}.</small>`:`<small class="ulnx">${T("Tout est débloqué. Bonne route vers les Alpes !")}</small>`}</div>`,()=>{
+   ${nx?`<small class="ulnx">${T("Prochaine étape")} : ${esc(T(nx.n))}, ${ulWhen(nx)}.</small>`:`<small class="ulnx">${T("Tout est débloqué. Bonne route vers les Alpes !")}</small>`}</div>`,()=>{
     $("#sheet").querySelectorAll("[data-ulgo]").forEach(b=>b.onclick=ev=>{ev.stopPropagation();closeSheet();go(b.dataset.ulgo)});
     $("#sheet").querySelectorAll("[data-ultuto]").forEach(b=>b.onclick=ev=>{ev.stopPropagation();closeSheet();openTuto(+b.dataset.ultuto)})});
 }
